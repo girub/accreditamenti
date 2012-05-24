@@ -73,3 +73,32 @@
 [DoctrineMigrationsBundle]
     git=git://github.com/symfony/DoctrineMigrationsBundle.git
     target=/bundles/Symfony/Bundle/DoctrineMigrationsBundle
+
+[gherkin]
+    git=git://github.com/Behat/Gherkin.git
+    target=/behat/gherkin
+    version=v2.1.1
+
+[behat]
+    git=git://github.com/Behat/Behat.git
+    target=/behat/behat
+    version=v2.3.5
+
+[BehatBundle]
+    git=git://github.com/Behat/BehatBundle.git
+    target=/bundles/Behat/BehatBundle
+    version=v1.0.0
+
+[BehatCommonContexts]
+    git=git://github.com/Behat/CommonContexts.git
+    target=/behat/CommonContexts
+    version=v1.1.0
+
+[mink]
+    git=git://github.com/Behat/Mink.git
+    target=/behat/mink
+    version=v1.3.3
+
+[MinkBundle]
+    git=git://github.com/Behat/MinkBundle.git
+    target=/bundles/Behat/MinkBundle

@@ -10,3 +10,6 @@ web/bundles/*
 
 # Configuration files
 app/config/parameters.ini
+
+# Generated files
+src/**/**/Resources/doc/index.pdf
