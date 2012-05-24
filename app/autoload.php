@@ -16,6 +16,12 @@ $loader->registerNamespaces(array(
     'Doctrine\\Common'              => __DIR__.'/../vendor/doctrine-common/lib',
     'Doctrine\\DBAL'                => __DIR__.'/../vendor/doctrine-dbal/lib',
     'Doctrine\\DBAL\\Migrations'    => __DIR__.'/../vendor/doctrine-migrations/lib',
+    'Behat\Gherkin'                 => __DIR__.'/../vendor/behat/gherkin/src',
+    'Behat\Behat'                   => __DIR__.'/../vendor/behat/behat/src',
+    'Behat\BehatBundle'             => __DIR__.'/../vendor/bundles',
+    'Behat\Mink'                    => __DIR__.'/../vendor/behat/mink/src',
+    'Behat\MinkBundle'              => __DIR__.'/../vendor/bundles',
+    'Behat\CommonContext'           => __DIR__.'/../vendor/behat/CommonContexts',
 ));
 $loader->registerPrefixes(array(
     'Twig_Extensions_' => __DIR__.'/../vendor/twig-extensions/lib',
