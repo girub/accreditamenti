@@ -1,0 +1,48 @@
+security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface: sha512
+        
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: ROLE_ADMIN
+        #ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    providers:
+        fos_userbundle:
+            id: fos_user.user_manager
+
+    firewalls:
+        main:
+            # Questo pattern indica che il firewall opera su tutte le richieste
+            # che vengono effettuate.
+            pattern: ^/
+            form_login:
+                provider: fos_userbundle
+                csrf_provider: form.csrf_provider
+            logout:       true
+            
+            # Se rimuoviamo questa configurazione, l'utente anonimo non sarebbe
+            # consentito, e verrebbe mostrata sempre richiesta l'autenticazione
+            # all'utente.
+            anonymous:    true
+            
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+    access_control:
+      
+        # Gli utenti possono accedere all'area amministrativa se e solo se
+        # possiedono il ruolo di amministratore
+        - { path: ^/admin/, role: ROLE_ADMIN }
+        
+        # Chi accede alla rotta play, deve essere un utente registrato.
+        # In tutti gli altri casi, si rimanda al firewalls.main.form_login
+        # per autenticare l'utente.
+        - { path: ^/play$, role: ROLE_USER }
+        
+        # Gli utenti anonimi possono accedere alle pagine seguenti, senza
+        # la necessità che siano registrati
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
