@@ -8,18 +8,19 @@ class AppKernel extends Kernel
     public function registerBundles()
     {
         $bundles = array(
-            new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
-            new Symfony\Bundle\SecurityBundle\SecurityBundle(),
-            new Symfony\Bundle\TwigBundle\TwigBundle(),
-            new Symfony\Bundle\MonologBundle\MonologBundle(),
-            new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
-            new Symfony\Bundle\DoctrineBundle\DoctrineBundle(),
-            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
-            new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
-            new FOS\UserBundle\FOSUserBundle(),
             new Accreditamenti\UserBundle\AccreditamentiUserBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
+            new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
+            new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
+            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
+            new Symfony\Bundle\DoctrineBundle\DoctrineBundle(),
             new Symfony\Bundle\DoctrineMigrationsBundle\DoctrineMigrationsBundle(),
+            new Symfony\Bundle\DoctrineFixturesBundle\DoctrineFixturesBundle(),
+            new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
+            new Symfony\Bundle\MonologBundle\MonologBundle(),
+            new Symfony\Bundle\SecurityBundle\SecurityBundle(),
+            new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
+            new Symfony\Bundle\TwigBundle\TwigBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
