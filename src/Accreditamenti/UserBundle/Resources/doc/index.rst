@@ -46,3 +46,35 @@ ovvero:
     $manager->persist($userAdmin);
 
     $manager->flush();
+
+User roles
+==========
+
+E' possibile promuovere un utente ad un determinato ruolo con il comando:
+
+    $ php app/console fos:user:promote
+
+Ci verrà chiesto il nome dell'utente da promuovere ed il nome del ruolo al quale
+deve essere promosso.
+
+Twig e FOSUserBundle
+====================
+
+Per integrare il FOSUser alla nostra applicazione dobbiamo modificare il
+template del FOSUser. Per prima cosa, dibbiamo ricordarci di dire al nostro
+UserBundle che il suo "padre" è FOSUserBundle.
+
+    <?php
+
+    namespace Accreditamenti\UserBundle;
+
+    use Symfony\Component\HttpKernel\Bundle\Bundle;
+
+    class AccreditamentiUserBundle extends Bundle
+    {
+        public function getParent()
+        {
+            return 'FOSUserBundle';
+        }
+
+    }
