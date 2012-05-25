@@ -78,3 +78,18 @@ UserBundle che il suo "padre" è FOSUserBundle.
         }
 
     }
+
+A questo punto possiamo sovrascrivere i template del padre. In particolare
+possiamo dovrascrivere immediatamente
+
+    src/Accreditamenti/Resoureces/views/layout.html.twig
+
+ed al suo interno immettere questo codice:
+
+    {% extends '::base.html.twig' %}
+
+    {% block body %}
+
+        {{ block('fos_user_content') }}
+
+    {% endblock %}
