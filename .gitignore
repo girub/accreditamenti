@@ -13,3 +13,4 @@ app/config/parameters.ini
 
 # Generated files
 src/**/**/Resources/doc/index.pdf
+app/Resources/doc/*.pdf

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="accreditamenti" default="help">
+    
+    <target name="docs">
+        <exec command="rst2pdf src/Accreditamenti/UserBundle/Resources/doc/index.rst -o app/Resources/doc/docs.pdf" />
+    </target>
+    
+    <target name="test">
+        <exec command="./app/console --env=test behat @AccreditamentiUserBundle" />
+    </target>
+    
+    <target name="help">
+	<echo>
+            Accreditamenti:
+
+            $ phing help - lancia questo help
+            $ phing test - lancia i test con behat
+            $ phing docs - genera la documentazione in app/Resources/doc/docs.pdf
+	</echo>
+    </target>
+    
+</project>
