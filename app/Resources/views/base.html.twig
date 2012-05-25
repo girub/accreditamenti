@@ -7,7 +7,12 @@
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
+        Questo è il template generale
+        <div style="text-align: center;">
+            <div style="width: 900px;">
+                {% block body %}{% endblock %}
+            </div>
+        </div>
         {% block javascripts %}{% endblock %}
     </body>
 </html>
