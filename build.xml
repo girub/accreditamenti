@@ -14,14 +14,19 @@
         <exec command="./app/console doctrine:fixtures:load" />
     </target>
     
+    <target name="cache:clear">
+        <exec command="./app/console cache:clear" />
+    </target>
+    
     <target name="help">
 	<echo>
             Accreditamenti:
 
-            $ phing help     - lancia questo help
-            $ phing test     - lancia i test con behat
-            $ phing docs     - genera la documentazione in app/Resources/doc/docs.pdf
-            $ phing fixtures - caricare dei dati di default
+            $ phing help        - lancia questo help
+            $ phing test        - lancia i test con behat
+            $ phing docs        - genera la documentazione in app/Resources/doc/docs.pdf
+            $ phing fixtures    - caricare dei dati di default
+            $ phing cache:clear - caricare dei dati di default
 	</echo>
     </target>
     
