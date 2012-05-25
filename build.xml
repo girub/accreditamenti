@@ -10,13 +10,18 @@
         <exec command="./app/console --env=test behat @AccreditamentiUserBundle" />
     </target>
     
+    <target name="fixtures">
+        <exec command="./app/console doctrine:fixtures:load" />
+    </target>
+    
     <target name="help">
 	<echo>
             Accreditamenti:
 
-            $ phing help - lancia questo help
-            $ phing test - lancia i test con behat
-            $ phing docs - genera la documentazione in app/Resources/doc/docs.pdf
+            $ phing help     - lancia questo help
+            $ phing test     - lancia i test con behat
+            $ phing docs     - genera la documentazione in app/Resources/doc/docs.pdf
+            $ phing fixtures - caricare dei dati di default
 	</echo>
     </target>
     
