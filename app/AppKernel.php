@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
             new Accreditamenti\CongressiBundle\AccreditamentiCongressiBundle(),
+            new Ruian\TwitterBootstrapBundle\RuianTwitterBootstrapBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

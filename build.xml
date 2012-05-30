@@ -22,6 +22,14 @@
         <exec command="./bin/vendors install" />
     </target>
     
+    
+    <target name="bootstrap">
+        <exec command="php app/console twitter-bootstrap:clear" />
+        <exec command="php app/console twitter-bootstrap:compile v2" />
+        <exec command="php app/console assets:install web/" />
+    </target>
+    
+
     <target name="help">
 	<echo>
             Accreditamenti:

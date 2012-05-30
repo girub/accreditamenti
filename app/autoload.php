@@ -23,6 +23,7 @@ $loader->registerNamespaces(array(
     'Doctrine\\DBAL\\Migrations'        => __DIR__.'/../vendor/doctrine-migrations/lib',
     'Sensio'                            => __DIR__.'/../vendor/bundles',
     'Symfony'                           => array(__DIR__.'/../vendor/symfony/src', __DIR__.'/../vendor/bundles'),
+    'Ruian' => __DIR__.'/../vendor/bundles',
 ));
 $loader->registerPrefixes(array(
     'Twig_Extensions_' => __DIR__.'/../vendor/twig-extensions/lib',
@@ -51,4 +52,6 @@ AnnotationRegistry::registerFile(__DIR__.'/../vendor/doctrine/lib/Doctrine/ORM/M
 // the lazy loading of the init file (which is expensive)
 require_once __DIR__.'/../vendor/swiftmailer/lib/classes/Swift.php';
 Swift::registerAutoload(__DIR__.'/../vendor/swiftmailer/lib/swift_init.php');
+require  __DIR__.'/../vendor/lessphp/lessc.inc.php';
+
 

@@ -5,14 +5,53 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/ruiantwitterbootstrap/css/bootstrapv2.css') }}">
+
     </head>
     <body>
-        Questo è il template generale
-        <div style="text-align: center;">
-            <div style="width: 900px;">
-                {% block body %}{% endblock %}
+
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="container">
+                    <ul class="nav">
+                        <li>
+                            <a href="{{ path('congresso_new') }}">
+                                <span class="icon-plus icon-white"></span> nuovo congresso!
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
+
+        <div class="container">
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span2">
+                        <h3>Sidebar</h3>
+                        <div class="well">
+                            Ciao mondo!
+                        </div>
+                    </div>
+                    <div class="span10">
+                        {% block body %}{% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+  
+
+
+
+
+
         {% block javascripts %}{% endblock %}
+
+        <!-- Some code -->
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script type="text/javascript" src="{{ asset('bundles/ruiantwitterbootstrap/js/bootstrapv2.js') }}"></script>
+
     </body>
 </html>
