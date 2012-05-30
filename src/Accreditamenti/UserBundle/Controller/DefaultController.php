@@ -8,20 +8,5 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class DefaultController extends Controller
 {
-    /**
-     * @Route("/hello/{name}")
-     * @Template()
-     */
-    public function indexAction($name)
-    {
-        return array('name' => $name);
-    }
-    /**
-     * @Route("/eee")
-     * @Template()
-     */
-    public function ioSonoIndipendenteAction()
-    {
-        die('Ajalamiseria');
-    }
+
 }

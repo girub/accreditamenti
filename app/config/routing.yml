@@ -8,12 +8,6 @@ AccreditamentiUserBundle:
     type:     annotation
     prefix:   /
 
-# Internal routing configuration to handle ESI
-#_internal:
-#   resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
-#   prefix:   /_internal
-# app/config/routing.yml
-
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 
