@@ -9,6 +9,16 @@
     {% endif %}
 {% endblock %}
 
+{% block menu %}
+    {% if app.user %}
+        <li>
+            <a href="{{ path('congresso_new') }}" id="link-crea-nuovo-congresso">
+                <span class="icon-plus icon-white"></span> nuovo congresso!
+            </a>
+        </li>
+    {% endif %}
+{% endblock %}
+
 {% block sidebar %}
     Puoi creare un congresso.
 {% endblock %}

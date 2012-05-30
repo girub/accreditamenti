@@ -3,6 +3,7 @@ Feature: Come Admin voglio gestire i congressi
 Scenario: As Guest I want to login
     Given I go to "/"
     Then the response should not contain "crea congresso"
+    Then the response should not contain "link-crea-nuovo-congresso"
     And I follow "login"
     When I fill in "_username" with "giuseppe"
     And I fill in "_password" with "giuseppe"
@@ -11,3 +12,4 @@ Scenario: As Guest I want to login
     And the response should contain "giuseppe@giuseppe.com"
     Given I go to "/"
     Then the response should contain "Puoi creare un congresso."
+    Then the response should contain "link-crea-nuovo-congresso"

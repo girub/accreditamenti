@@ -14,11 +14,7 @@
             <div class="navbar-inner">
                 <div class="container">
                     <ul class="nav">
-                        <li>
-                            <a href="{{ path('congresso_new') }}">
-                                <span class="icon-plus icon-white"></span> nuovo congresso!
-                            </a>
-                        </li>
+                        {% block menu %}{% endblock %}
                     </ul>
                 </div>
             </div>
