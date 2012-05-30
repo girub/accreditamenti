@@ -13,3 +13,5 @@ Scenario: As Guest I want to login
     Given I go to "/"
     Then the response should contain "Puoi creare un congresso."
     Then the response should contain "link-crea-nuovo-congresso"
+
+Scenario: Se 

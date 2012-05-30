@@ -6,8 +6,49 @@ la puoi ritrovare sempre qui dentro. Questo vale anche per il futuro.
 
 Git
 ===
+In questo caso progetto stiamo lavorando con un repository creato su github,
+quindi la prima cosa da fare appena apriamo il progetto è posizionarsi 
+nella cartella del progetto e lanciare il comando:
 
-...
+    $ git pull origin master
+
+se ci sono dei file modificati il sistema mi avvisa 
+sia quali sono i file e sia quante righe sono state modifcate.
+A questo punto siamo allineati con github e possiamo fare 
+le nostre opportune modifiche al proetto. 
+Finito di lavorare aggiugiamo i file modificati lanciando 
+
+    $ git add .
+
+poi facciamo il commit con
+  
+  $ git commit -m 'mio commento'
+
+
+
+a questo punto prima di buttare tutto su github è buona norma rilanciare
+
+    $ git pull origin master 
+
+ per vedere se nel frattempo qualcuno ha cambiato qualcosa, e poi lancio 
+
+     $ git push origin master
+
+ok lavoro finito
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
 
 
 
@@ -47,7 +88,7 @@ ovvero:
 
     $userAdmin->setUsername('admin');
 
-    $userAdmin->setPassword('admin');
+    $userAdmin->setPlainPassword('admin');
 
     $userAdmin->setEmail('giuseppe.rubino@gmail.com');
 
