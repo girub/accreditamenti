@@ -1,1 +1,14 @@
-<a href="{{ path('fos_user_security_login') }}">login</a>
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    {% if app.user %}
+        <a href="{{ path('fos_user_security_logout') }}">logout ({{ app.user }})</a>
+        {{ app.user.email }}
+    {% else %}
+        <a href="{{ path('fos_user_security_login') }}">login</a>
+    {% endif %}
+{% endblock %}
+
+{% block sidebar %}
+    Puoi creare un congresso.
+{% endblock %}

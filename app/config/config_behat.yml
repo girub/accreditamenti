@@ -1,0 +1,9 @@
+#imports:
+#    - { resource: config_test.yml }
+
+#mink:
+    #base_url: http://abmundi/app_behat.php
+
+#doctrine:
+#    dbal:
+#        dbname: accreditamenti

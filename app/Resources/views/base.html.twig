@@ -28,10 +28,12 @@
             <div class="container-fluid">
                 <div class="row-fluid">
                     <div class="span2">
-                        <h3>Sidebar</h3>
-                        <div class="well">
-                            Ciao mondo!
-                        </div>
+                        {% block sidebar %}
+                            <h3>Sidebar</h3>
+                            <div class="well">
+                                Ciao mondo!
+                            </div>
+                        {% endblock %}
                     </div>
                     <div class="span10">
                         {% block body %}{% endblock %}
