@@ -34,7 +34,7 @@ a questo punto prima di buttare tutto su github è buona norma rilanciare
 
      $ git push origin master
 
-ok lavoro finito
+ok ora lavoro finito
 
 
 
