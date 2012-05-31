@@ -128,6 +128,7 @@ Vengono ricercare le fixtures di tutti i bundle. Nel nostro caso le fixtures cre
 l'utente admin:
 
 ::
+
     Accreditamenti\UserBundle\DataFixtures\ORM\LoadUserData::load(ObjectManager $manager);
 
 ovvero:
