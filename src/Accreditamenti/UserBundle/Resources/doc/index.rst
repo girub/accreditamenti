@@ -6,52 +6,91 @@ la puoi ritrovare sempre qui dentro. Questo vale anche per il futuro.
 
 Git
 ===
-In questo caso progetto stiamo lavorando con un repository creato su github,
-quindi la prima cosa da fare appena apriamo il progetto è posizionarsi 
+
+In questo progetto, stiamo lavorando con un repository creato su **github**.
+Quindi la prima cosa da fare, è posizionarsi 
 nella cartella del progetto e lanciare il comando:
 
+::
+
+    $ cd /var/www/accreditamenti
     $ git pull origin master
 
-se ci sono dei file modificati il sistema mi avvisa 
-sia quali sono i file e sia quante righe sono state modifcate.
-A questo punto siamo allineati con github e possiamo fare 
-le nostre opportune modifiche al proetto. 
-Finito di lavorare aggiugiamo i file modificati lanciando 
+Se ci sono dei file modificati, il sistema mi comunica quali sono i file ed
+anche quante righe sono state modifcate. Ecco un esempio:
+
+::
+
+    $ cd /var/www/accreditamenti/
+    $ git pull origin master 
+    remote: Counting objects: 91, done.
+    remote: Compressing objects: 100% (35/35), done.
+    remote: Total 66 (delta 28), reused 58 (delta 20)
+    Unpacking objects: 100% (66/66), done.
+    From github.com:girub/accreditamenti
+    * branch            master     -> FETCH_HEAD
+    Updating 1305b3c..a95907f
+    Fast-forward
+    app/Resources/views/base.html.twig                 |   16 +++----
+    app/config/config_behat.yml                        |    9 ++++
+    app/config/config_test.yml                         |    4 ++
+    .../Features/Context/FeatureContext.php            |   25 +++++++++++
+    .../CongressiBundle/Features/Gestione.feature      |   47 ++++++++++++++++++++
+    .../Resources/views/Default/index.html.twig        |   25 ++++++++++-
+    .../UserBundle/DataFixtures/ORM/LoadUserData.php   |    3 +-
+    .../UserBundle/Resources/doc/index.rst             |   45 ++++++++++++++++++-
+    8 files changed, 161 insertions(+), 13 deletions(-)
+    create mode 100644 app/config/config_behat.yml
+    create mode 100644 src/Accreditamenti/CongressiBundle/Features/Context/FeatureContext.php
+    create mode 100644 src/Accreditamenti/CongressiBundle/Features/Gestione.feature
+
+A questo punto siamo allineati con il **master** e possiamo fare le nostre 
+modifiche al progetto. Finito di lavorare aggiugiamo i file modificati lanciando 
+
+::
 
     $ git add .
 
-poi facciamo il commit con
-  
-  $ git commit -m 'mio commento'
+Poi facciamo commit.
 
+::
 
+    $ git commit -m 'mio commento'
 
-a questo punto prima di buttare tutto su github è buona norma rilanciare
+Prima di buttare tutto su github, è buona norma rilanciare la **pull** per 
+caricare eventuali commit fatti da altri collaboratori.
+
+::
 
     $ git pull origin master 
 
- per vedere se nel frattempo qualcuno ha cambiato qualcosa, e poi lancio 
+Successivamente, possiamo lanciare la push per caricare online i nostri commit
 
-     $ git push origin master
+::
 
-ok ora lavoro finito
+    $ git push origin master
 
+Ricapitolando:
+--------------
 
+::
 
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
+    $ cd /var/www/accreditamenti
+    $ git pull origin master
+    ....
+    $ git add .
+    $ git commit -m 'messaggio'
+    ....
+    $ git add .
+    $ git commit -m 'messaggio'
+    ....
+    $ git add .
+    $ git commit -m 'messaggio'
+    ....
+    $ git add .
+    $ git commit -m 'messaggio'
+    $ git pull origin master
+    $ git push origin master
 
 Inizializzare behat per testare un bundle
 =========================================
