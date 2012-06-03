@@ -15,6 +15,11 @@ Scenario: As Guest I want to login
     Then the response should contain "link-crea-nuovo-congresso"
 
 Scenario: As User Create a new Congress
+    Given I go to "/"
+    And I follow "login"
+    When I fill in "_username" with "giuseppe"
+    And I fill in "_password" with "giuseppe"
+    Given I press "Login"
     When I am on "/congresso/new"
     When I fill in "Codice congresso" with "TEST89"
     When I fill in "Url" with "http://www.google.com"
@@ -40,6 +45,11 @@ Scenario: As User Create a new Congress
     Then the response should contain "Congresso creato con successo"
 
 Scenario: Email referente non deve essere obbligatoria
+    Given I go to "/"
+    And I follow "login"
+    When I fill in "_username" with "giuseppe"
+    And I fill in "_password" with "giuseppe"
+    Given I press "Login"
     When I am on "/congresso/new"
     When I fill in "Codice congresso" with "TEST89"
     When I fill in "Url" with "http://www.google.com"
@@ -63,6 +73,8 @@ Scenario: Email referente non deve essere obbligatoria
     Then the response should contain "Congresso creato con successo"
 
 Scenario: Un Guest non può crere un congresso
+    When I am on "/congresso/new"
+    Then I should be on "/login"
 
 Scenario: Un Guest non può editare un congresso
 

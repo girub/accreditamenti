@@ -159,3 +159,10 @@ Rendere non obbligatorio il campo nel form
     ->add('email_referente', 'text', array(
                 'required' => false
             ))
+
+
+
+
+behat risparmiare tempo
+-----------------------
+php app/console --env=test behat @AccreditamentiCongressiBundle/Gestione.feature:65

@@ -35,6 +35,7 @@ security:
         # Gli utenti possono accedere all'area amministrativa se e solo se
         # possiedono il ruolo di amministratore
         - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/congresso/new, role: ROLE_USER }
         
         # Chi accede alla rotta play, deve essere un utente registrato.
         # In tutti gli altri casi, si rimanda al firewalls.main.form_login
