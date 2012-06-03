@@ -21,7 +21,9 @@ class CongressoType extends AbstractType
             ->add('path_pdf_programma')
             ->add('path_pdf_iscrizione')
             ->add('path_pdf_prenotazione')
-            ->add('email_referente')
+            ->add('email_referente', 'text', array(
+                'required' => false
+            ))
             ->add('ricezione_abstract')
             ->add('pagina_sponsor')
             ->add('abilitato')

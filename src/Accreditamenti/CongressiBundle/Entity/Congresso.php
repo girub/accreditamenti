@@ -101,7 +101,7 @@ class Congresso
     /**
      * @var string $email_referente
      *
-     * @ORM\Column(name="email_referente", type="string", length=255)
+     * @ORM\Column(name="email_referente", nullable=true, type="string", length=255)
      */
     private $email_referente;
 

@@ -39,7 +39,31 @@ Scenario: As User Create a new Congress
     Given I press "Create"
     Then the response should contain "Congresso creato con successo"
 
-#Scenario: As User I can Delete a Congress
-    #When I am on "/congresso/mostra/10"
-    #Given I press "Delete"
-    #Then the response should contain "Congresso eliminato con successo"
+Scenario: Email referente non deve essere obbligatoria
+    When I am on "/congresso/new"
+    When I fill in "Codice congresso" with "TEST89"
+    When I fill in "Url" with "http://www.google.com"
+    When I fill in "Titolo" with "titolo test"
+    When I fill in "Descrizione" with "mia descrizione"
+    When I fill in "accreditamenti_congressibundle_congressotype_data_inizio_date_year" with "2012"
+    When I fill in "accreditamenti_congressibundle_congressotype_data_inizio_date_month" with "09"
+    When I fill in "accreditamenti_congressibundle_congressotype_data_inizio_date_day" with "01"
+    When I fill in "accreditamenti_congressibundle_congressotype_data_fine_date_year" with "2012"
+    When I fill in "accreditamenti_congressibundle_congressotype_data_fine_date_month" with "09"
+    When I fill in "accreditamenti_congressibundle_congressotype_data_fine_date_day" with "01"
+    When I fill in "Luogo" with "Roma"
+    When I fill in "Manifesto" with "/manifeso.jpg"
+    When I fill in "Path pdf programma" with "/home/programma.pdf"
+    When I fill in "Path pdf iscrizione" with "/home/iscrizione.pdf"
+    When I fill in "Path pdf prenotazione" with "/home/prenotazione.pdf"
+    When I check "Ricezione abstract"
+    When I check "Pagina sponsor"
+    When I check "Abilitato"
+    Given I press "Create"
+    Then the response should contain "Congresso creato con successo"
+
+Scenario: Un Guest non può crere un congresso
+
+Scenario: Un Guest non può editare un congresso
+
+Scenario: Un Guest non può cancellare un congresso
