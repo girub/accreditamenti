@@ -1,0 +1,41 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+<h1>Congresso list</h1>
+
+<table class="records_list">
+    <thead>
+        <tr>
+            <th>Titolo</th>
+            <th>Descrizione</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td>{{ entity.titolo }}</td>
+            <td>{{ entity.descrizione }}</td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('congresso_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('congresso_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<ul>
+    <li>
+        <a href="{{ path('congresso_new') }}">
+            Create a new entry
+        </a>
+    </li>
+</ul>
+{% endblock %}

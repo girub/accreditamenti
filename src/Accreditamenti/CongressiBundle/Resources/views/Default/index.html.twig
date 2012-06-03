@@ -1,24 +1,5 @@
 {% extends '::base.html.twig' %}
 
-{% block body %}
-    {% if app.user %}
-        <a href="{{ path('fos_user_security_logout') }}">logout ({{ app.user }})</a>
-        {{ app.user.email }}
-    {% else %}
-        <a href="{{ path('fos_user_security_login') }}">login</a>
-    {% endif %}
-{% endblock %}
-
-{% block menu %}
-    {% if app.user %}
-        <li>
-            <a href="{{ path('congresso_new') }}" id="link-crea-nuovo-congresso">
-                <span class="icon-plus icon-white"></span> nuovo congresso!
-            </a>
-        </li>
-    {% endif %}
-{% endblock %}
-
 {% block sidebar %}
     Puoi creare un congresso.
 {% endblock %}

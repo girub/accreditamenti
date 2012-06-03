@@ -18,11 +18,25 @@ class CongressoController extends Controller {
 
     /**
      * Lists all Congresso entities.
-     *
+     * 
      * @Route("/", name="congresso")
      * @Template()
      */
     public function indexAction() {
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $entities = $em->getRepository('AccreditamentiCongressiBundle:Congresso')->findAll();
+
+        return array('entities' => $entities);
+    }
+
+    /**
+     * Lists all Congresso entities.
+     * 
+     * @Route("/mostraTutti", name="congresso_mostra_tutti")
+     * @Template()
+     */
+    public function mostraTuttiAction() {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entities = $em->getRepository('AccreditamentiCongressiBundle:Congresso')->findAll();

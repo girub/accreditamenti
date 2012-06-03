@@ -22,7 +22,6 @@
             <th>Ricezione_abstract</th>
             <th>Pagina_sponsor</th>
             <th>Abilitato</th>
-            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -44,16 +43,6 @@
             <td>{{ entity.ricezioneabstract }}</td>
             <td>{{ entity.paginasponsor }}</td>
             <td>{{ entity.abilitato }}</td>
-            <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('congresso_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('congresso_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
-            </td>
         </tr>
     {% endfor %}
     </tbody>

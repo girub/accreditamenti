@@ -166,3 +166,13 @@ Rendere non obbligatorio il campo nel form
 behat risparmiare tempo
 -----------------------
 php app/console --env=test behat @AccreditamentiCongressiBundle/Gestione.feature:65
+
+
+Proteggere una rotta
+--------------------
+
+::
+
+    security:
+        access_control:
+            - { path: ^/congresso/new, role: ROLE_USER }

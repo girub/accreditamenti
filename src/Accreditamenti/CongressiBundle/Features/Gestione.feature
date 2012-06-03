@@ -76,6 +76,6 @@ Scenario: Un Guest non può crere un congresso
     When I am on "/congresso/new"
     Then I should be on "/login"
 
-Scenario: Un Guest non può editare un congresso
+
 
 Scenario: Un Guest non può cancellare un congresso

@@ -34,8 +34,12 @@ security:
       
         # Gli utenti possono accedere all'area amministrativa se e solo se
         # possiedono il ruolo di amministratore
+        - { path: ^/congresso/mostraTutti, role: ROLE_USER }
+        - { path: ^/congresso, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
         - { path: ^/congresso/new, role: ROLE_USER }
+        - { path: ^/congresso/mostra/([0-9]+), role: ROLE_USER }
+        - { path: ^/congresso/([0-9]+)/edit, role: ROLE_USER }
         
         # Chi accede alla rotta play, deve essere un utente registrato.
         # In tutti gli altri casi, si rimanda al firewalls.main.form_login
@@ -47,3 +51,4 @@ security:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        

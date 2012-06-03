@@ -15,6 +15,23 @@
                 <div class="container">
                     <ul class="nav">
                         {% block menu %}{% endblock %}
+                        {% if app.user %}
+                            <li>
+                                <a href="{{ path('congresso_new') }}" id="link-crea-nuovo-congresso">
+                                    <span class="icon-plus icon-white"></span> nuovo congresso!
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('congresso') }}">Congressi</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('fos_user_security_logout') }}">logout ({{ app.user }})</a>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a href="{{ path('fos_user_security_login') }}">login</a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
