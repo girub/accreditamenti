@@ -22,7 +22,8 @@
 
         <div class="container">
             {% if app.session.hasFlash('notice') %}
-                <div class="flash-notice">
+                <div class="alert">
+                    <button class="close" data-dismiss="alert">×</button>
                     {{ app.session.flash('notice') }}
                 </div>
             {% endif %}
