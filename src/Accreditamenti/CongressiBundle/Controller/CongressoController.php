@@ -166,7 +166,22 @@ class CongressoController extends Controller {
         if ($editForm->isValid()) {
             $em->persist($entity);
             $em->flush();
+            // Upload del manifesto del congresso
+            $dir = $_SERVER['DOCUMENT_ROOT'] . "/uploads";
 
+            
+            $extension = $editForm['manifesto']->getData()->guessExtension();
+            if (!$extension) {
+                // l'estensione non può essere indovinata
+                $extension = 'bin';
+            }
+         
+            $ma= rand(1, 99999) . '.' . $extension;
+            $editForm['manifesto']->getData()->move($dir,$ma);
+
+             //$editForm['manifesto']->add($ma);
+            $editForm->setManifesto=2121212;
+            
             return $this->redirect($this->generateUrl('congresso_edit', array('id' => $id)));
         }
 
