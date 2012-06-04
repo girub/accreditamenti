@@ -3,7 +3,7 @@
 <project name="accreditamenti" default="help">
     
     <target name="docs">
-        <exec command="rst2pdf src/Accreditamenti/UserBundle/Resources/doc/index.rst -o app/Resources/doc/docs.pdf" />
+        <exec command="rst2pdf app/Resources/doc/index.rst -o app/Resources/doc/docs.pdf" />
     </target>
     
     <target name="test">
