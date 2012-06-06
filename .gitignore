@@ -8,9 +8,14 @@ vendor/*
 web/uploads/*
 web/bundles/*
 
+
+
 # Configuration files
 app/config/parameters.ini
 
 # Generated files
 src/**/**/Resources/doc/index.pdf
 app/Resources/doc/*.pdf
+
+# upload files
+web/resource/*

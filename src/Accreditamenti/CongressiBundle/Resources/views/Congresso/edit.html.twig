@@ -2,14 +2,115 @@
 
 {% block body %}
 <h1>Congresso modifica</h1>
-<img src="/resource/img/{{ entity.id }}/{{ entity.manifesto }}" width="200" style="border:1px solid #333333;">
-
-
-<a href="{{ path('congresso_delete_manifesto', { 'id': entity.id }) }}">Cancella manifesto</a>
 
 
 <form action="{{ path('congresso_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
-    {{ form_widget(edit_form) }}
+
+                   
+    
+                    {{ form_errors(edit_form) }}
+
+
+
+<div>
+    {{ form_label(edit_form.codice_congresso) }}
+    {{ form_errors(edit_form.codice_congresso) }}
+    {{ form_widget(edit_form.codice_congresso) }}
+</div>
+
+<div>
+    {{ form_label(edit_form.url) }}
+    {{ form_errors(edit_form.url) }}
+    {{ form_widget(edit_form.url) }}
+</div>
+
+<div>
+    {{ form_label(edit_form.titolo) }}
+    {{ form_errors(edit_form.titolo) }}
+    {{ form_widget(edit_form.titolo) }}
+</div>
+
+<div>
+    {{ form_label(edit_form.descrizione) }}
+    {{ form_errors(edit_form.descrizione) }}
+    {{ form_widget(edit_form.descrizione) }}
+</div>
+
+<div>
+    {{ form_label(edit_form.data_inizio) }}
+    {{ form_errors(edit_form.data_inizio) }}
+    {{ form_widget(edit_form.data_inizio) }}
+</div>
+
+<div>
+    {{ form_label(edit_form.data_fine) }}
+    {{ form_errors(edit_form.data_fine) }}
+    {{ form_widget(edit_form.data_fine) }}
+</div>
+
+<div>
+    {{ form_label(edit_form.luogo) }}
+    {{ form_errors(edit_form.luogo) }}
+    {{ form_widget(edit_form.luogo) }}
+</div>
+
+{% if entity.manifesto|length > 0 %}
+    <div>
+        <img src="/resource/img/{{ entity.id }}/{{ entity.manifesto }}" width="200" style="border:1px solid #333333;">
+            <a href="{{ path('congresso_delete_manifesto', { 'id': entity.id }) }}">Cancella manifesto</a>
+    </div>                 
+{% endif %}
+
+<div>
+    {{ form_label(edit_form.manifesto) }}
+    {{ form_errors(edit_form.manifesto) }}
+    {{ form_widget(edit_form.manifesto) }}
+</div>
+
+<div>
+    {{ form_label(edit_form.path_pdf_programma) }}
+    {{ form_errors(edit_form.path_pdf_programma) }}
+    {{ form_widget(edit_form.path_pdf_programma) }}
+</div>
+
+<div>
+    {{ form_label(edit_form.path_pdf_iscrizione) }}
+    {{ form_errors(edit_form.path_pdf_iscrizione) }}
+    {{ form_widget(edit_form.path_pdf_iscrizione) }}
+</div>
+
+<div>
+    {{ form_label(edit_form.path_pdf_prenotazione) }}
+    {{ form_errors(edit_form.path_pdf_prenotazione) }}
+    {{ form_widget(edit_form.path_pdf_prenotazione) }}
+</div>
+
+<div>
+    {{ form_label(edit_form.email_referente) }}
+    {{ form_errors(edit_form.email_referente) }}
+    {{ form_widget(edit_form.email_referente) }}
+</div>
+
+<div>
+    {{ form_label(edit_form.ricezione_abstract) }}
+    {{ form_errors(edit_form.ricezione_abstract) }}
+    {{ form_widget(edit_form.ricezione_abstract) }}
+</div>
+
+
+<div>
+    {{ form_label(edit_form.pagina_sponsor) }}
+    {{ form_errors(edit_form.pagina_sponsor) }}
+    {{ form_widget(edit_form.pagina_sponsor) }}
+</div>
+<div>
+    {{ form_label(edit_form.abilitato) }}
+    {{ form_errors(edit_form.abilitato) }}
+    {{ form_widget(edit_form.abilitato) }}
+</div>
+
+{{ form_rest(edit_form) }}
+
     <p>
         <button type="submit">Edit</button>
     </p>

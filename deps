@@ -130,3 +130,8 @@
     git=git://github.com/leafo/lessphp.git
     target=/lessphp/
     version=origin/master
+
+[GenemuFormBundle]
+    git=git://github.com/genemu/GenemuFormBundle.git
+    target=bundles/Genemu/Bundle/FormBundle
+    version=origin/2.0

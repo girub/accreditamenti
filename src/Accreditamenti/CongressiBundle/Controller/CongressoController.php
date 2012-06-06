@@ -139,6 +139,10 @@ class CongressoController extends Controller {
         );
     }
 
+    private function getCongressoUploadDir(Congresso $congresso) {
+        return $_SERVER['DOCUMENT_ROOT'] . "/resource/img/" . $congresso->getId();
+    }
+
     /**
      * Edits an existing Congresso entity.
      *
@@ -149,13 +153,13 @@ class CongressoController extends Controller {
     public function updateAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('AccreditamentiCongressiBundle:Congresso')->find($id);
+        $congresso = $em->getRepository('AccreditamentiCongressiBundle:Congresso')->find($id);
 
-        if (!$entity) {
+        if (!$congresso) {
             throw $this->createNotFoundException('Unable to find Congresso entity.');
         }
 
-        $editForm = $this->createForm(new CongressoType(), $entity);
+        $editForm = $this->createForm(new CongressoType(), $congresso);
         $deleteForm = $this->createDeleteForm($id);
 
         $request = $this->getRequest();
@@ -171,7 +175,7 @@ class CongressoController extends Controller {
             }
             //cambiare
             $manifesto = rand(1, 99999) . '.' . $extension;
-            $dir = $_SERVER['DOCUMENT_ROOT'] . "/resource/img/" . $id;
+            $dir = $this->getCongressoUploadDir($congresso);
             @mkdir($dir, 0775);
 
             $filename = $manifesto;
@@ -179,16 +183,16 @@ class CongressoController extends Controller {
             //$dir = $_SERVER['DOCUMENT_ROOT'] . "/resource/img";
 
             $editForm['manifesto']->getData()->move($dir, $filename);
-            $entity->setManifesto($filename);
+            $congresso->setManifesto($filename);
 
-            $em->persist($entity);
+            $em->persist($congresso);
             $em->flush();
 
             return $this->redirect($this->generateUrl('congresso_edit', array('id' => $id)));
         }
 
         return array(
-            'entity' => $entity,
+            'entity' => $congresso,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
@@ -198,42 +202,25 @@ class CongressoController extends Controller {
      * Displays a form to edit an existing Congresso entity.
      *
      * @Route("/{id}/deletemanifesto", name="congresso_delete_manifesto")
-     * @Template("AccreditamentiCongressiBundle:Congresso:edit.html.twig")
      */
     public function removeManifestoAction($id) {
-
-//        if ($file = $this->getAbsolutePath()) {
-//            unlink($file);
-//        }
-//       
-//       
-
-        $dir = "/resource/img";
-
-
-        $mycongress = $this->getDoctrine()
+        
+        $em = $this->getDoctrine()->getEntityManager();
+        
+        $congresso = $this->getDoctrine()
                 ->getRepository('AccreditamentiCongressiBundle:Congresso')
                 ->find($id);
 
-        if (!$mycongress) {
+        if (!$congresso) {
             throw $this->createNotFoundException('Nessun prodotto trovato per l\'id ' . $id);
-        } else {
-
-            // die($mycongress->getManifesto() . '-------------------------');
-            //unlink($dir . "/" . $mycongress->getManifesto());   
-//            if(){
-//              
-//              die('ok');
-//              $mycongress->setManifesto('');
-//              
-//          }else{
-//              die('nononon');
-//              
-//          }
         }
 
+       
+        unlink($this->getCongressoUploadDir($congresso) .'/'. $congresso->getManifesto());
+        $congresso->setManifesto('');
+        
 
-        $em->persist($entity);
+        $em->persist($congresso);
         $em->flush();
 
         return $this->redirect($this->generateUrl('congresso_edit', array('id' => $id)));

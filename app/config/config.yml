@@ -63,3 +63,6 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: Accreditamenti\UserBundle\Entity\User
+    
+genemu_form:
+    date: ~

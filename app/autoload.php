@@ -21,6 +21,7 @@ $loader->registerNamespaces(array(
     'Doctrine\\Common\\DataFixtures'    => __DIR__.'/../vendor/doctrine-fixtures/lib',
     'Doctrine\\DBAL'                    => __DIR__.'/../vendor/doctrine-dbal/lib',
     'Doctrine\\DBAL\\Migrations'        => __DIR__.'/../vendor/doctrine-migrations/lib',
+    'Genemu'                            => __DIR__.'/../vendor/bundles',
     'Sensio'                            => __DIR__.'/../vendor/bundles',
     'Symfony'                           => array(__DIR__.'/../vendor/symfony/src', __DIR__.'/../vendor/bundles'),
     'Ruian' => __DIR__.'/../vendor/bundles',
