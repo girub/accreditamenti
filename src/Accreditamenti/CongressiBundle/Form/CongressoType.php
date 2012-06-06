@@ -18,13 +18,12 @@ class CongressoType extends AbstractType
             ->add('data_fine')
             ->add('luogo')
             //->add('manifesto')
-            ->add('manifesto', 'file') 
+            //->add('manifesto', 'file') 
+             ->add('manifesto', 'file', array('label' => 'Locandina del Congresso')) 
             ->add('path_pdf_programma')
             ->add('path_pdf_iscrizione')
             ->add('path_pdf_prenotazione')
-            ->add('email_referente', 'text', array(
-                'required' => false
-            ))
+            ->add('email_referente', 'text', array('required' => false))
             ->add('ricezione_abstract')
             ->add('pagina_sponsor')
             ->add('abilitato')

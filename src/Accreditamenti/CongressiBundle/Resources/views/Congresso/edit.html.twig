@@ -2,6 +2,11 @@
 
 {% block body %}
 <h1>Congresso modifica</h1>
+<img src="/resource/img/{{ entity.id }}/{{ entity.manifesto }}" width="200" style="border:1px solid #333333;">
+
+
+<a href="{{ path('congresso_delete_manifesto', { 'id': entity.id }) }}">Cancella manifesto</a>
+
 
 <form action="{{ path('congresso_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
     {{ form_widget(edit_form) }}

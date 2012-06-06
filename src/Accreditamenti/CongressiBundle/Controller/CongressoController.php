@@ -40,7 +40,6 @@ class CongressoController extends Controller {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entities = $em->getRepository('AccreditamentiCongressiBundle:Congresso')->findAll();
-
         return array('entities' => $entities);
     }
 
@@ -164,24 +163,27 @@ class CongressoController extends Controller {
         $editForm->bindRequest($request);
 
         if ($editForm->isValid()) {
-            $em->persist($entity);
-            $em->flush();
-            // Upload del manifesto del congresso
-            $dir = $_SERVER['DOCUMENT_ROOT'] . "/uploads";
 
-            
             $extension = $editForm['manifesto']->getData()->guessExtension();
             if (!$extension) {
                 // l'estensione non può essere indovinata
                 $extension = 'bin';
             }
-         
-            $ma= rand(1, 99999) . '.' . $extension;
-            $editForm['manifesto']->getData()->move($dir,$ma);
+            //cambiare
+            $manifesto = rand(1, 99999) . '.' . $extension;
+            $dir = $_SERVER['DOCUMENT_ROOT'] . "/resource/img/" . $id;
+            @mkdir($dir, 0775);
 
-             //$editForm['manifesto']->add($ma);
-            $editForm->setManifesto=2121212;
-            
+            $filename = $manifesto;
+
+            //$dir = $_SERVER['DOCUMENT_ROOT'] . "/resource/img";
+
+            $editForm['manifesto']->getData()->move($dir, $filename);
+            $entity->setManifesto($filename);
+
+            $em->persist($entity);
+            $em->flush();
+
             return $this->redirect($this->generateUrl('congresso_edit', array('id' => $id)));
         }
 
@@ -190,6 +192,54 @@ class CongressoController extends Controller {
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
+    }
+
+    /**
+     * Displays a form to edit an existing Congresso entity.
+     *
+     * @Route("/{id}/deletemanifesto", name="congresso_delete_manifesto")
+     * @Template("AccreditamentiCongressiBundle:Congresso:edit.html.twig")
+     */
+    public function removeManifestoAction($id) {
+
+//        if ($file = $this->getAbsolutePath()) {
+//            unlink($file);
+//        }
+//       
+//       
+
+        $dir = "/resource/img";
+
+
+        $mycongress = $this->getDoctrine()
+                ->getRepository('AccreditamentiCongressiBundle:Congresso')
+                ->find($id);
+
+        if (!$mycongress) {
+            throw $this->createNotFoundException('Nessun prodotto trovato per l\'id ' . $id);
+        } else {
+
+            // die($mycongress->getManifesto() . '-------------------------');
+            //unlink($dir . "/" . $mycongress->getManifesto());   
+//            if(){
+//              
+//              die('ok');
+//              $mycongress->setManifesto('');
+//              
+//          }else{
+//              die('nononon');
+//              
+//          }
+        }
+
+
+        $em->persist($entity);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('congresso_edit', array('id' => $id)));
+
+
+        //die('arrivasZZccccccccZZ');
     }
 
     /**

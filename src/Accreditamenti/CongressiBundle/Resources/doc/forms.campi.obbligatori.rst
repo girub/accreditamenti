@@ -68,3 +68,36 @@ Rendere non obbligatorio il campo nel form
     ->add('email_referente', 'text', array(
                 'required' => false
             ))
+
+
+
+Upload di un file
+-----------------
+Per prima cosa ho trasformato il campo del form da input text a input file
+in   namespace Accreditamenti\CongressiBundle\Form;
+nel file CongressoType.php
+
+::
+
+    //->add('manifesto')
+    ->add('manifesto', 'file')
+
+dopo vado nel controller interessato ed aggiungo questo codice subito dopo il flush:
+
+::
+    
+    // Upload del manifesto del congresso
+    $dir = $_SERVER['DOCUMENT_ROOT'] . "/uploads";
+
+    $extension = $editForm['manifesto']->getData()->guessExtension();
+    if (!$extension) {
+        // l'estensione non può essere indovinata
+        $extension = 'bin';
+    }
+
+    $ma= rand(1, 99999) . '.' . $extension;
+    $editForm['manifesto']->getData()->move($dir,$ma);
+            
+
+
+
