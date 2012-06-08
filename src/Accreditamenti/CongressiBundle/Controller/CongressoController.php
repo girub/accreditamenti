@@ -145,9 +145,14 @@ class CongressoController extends Controller
         );
     }
 
-    private function getCongressoUploadDir(Congresso $congresso)
+    private function getCongressoUploadDirImmagini(Congresso $congresso)
     {
         return $_SERVER['DOCUMENT_ROOT'] . "/resource/img/" . $congresso->getId();
+    }
+
+    private function getCongressoUploadDirProgramma(Congresso $congresso)
+    {
+        return $_SERVER['DOCUMENT_ROOT'] . "/resource/prog/" . $congresso->getId();
     }
 
     /**
@@ -174,17 +179,46 @@ class CongressoController extends Controller
 
         if ($editForm->isValid()) {
 
-            $extension = $editForm['manifesto']->getData()->guessExtension();
-            if (!$extension) {
-                // l'estensione non può essere indovinata
-                $extension = 'bin';
+            if (!($editForm['manifesto']->getData() === NULL)) {
+
+                // Upload manifesto
+                $extension = $editForm['manifesto']->getData()->guessExtension();
+                if (!$extension) {
+                    // l'estensione non può essere indovinata
+                    $extension = 'bin';
+                }
+                //cambiare
+                $manifesto = rand(1, 99999) . '.' . $extension;
+                $dir = $this->getCongressoUploadDirImmagini($congresso);
+                @mkdir($dir, 0775);
+
+                $filename = $manifesto;
+                $editForm['manifesto']->getData()->move($dir, $filename);
+                $congresso->setManifesto($filename);
             }
 
-            $manifesto = md5(rand(1, 99999) . mktime()) . '.' . $extension;
-            $dir = $this->getCongressoUploadDir($congresso);
-            @mkdir($dir, 0775);
 
-            $filename = $manifesto;
+
+            if (!($editForm['path_pdf_programma']->getData() === NULL)) {
+                // Upload Programma pdf
+                $ext_programma = $editForm['path_pdf_programma']->getData()->guessExtension();
+                if (!$ext_programma) {
+                    // l'estensione non può essere indovinata
+                    $ext_programma = 'txt';
+                }
+
+                $manifesto = md5(rand(1, 99999) . mktime()) . '.' . $extension;
+                $dir = $this->getCongressoUploadDir($congresso);
+                @mkdir($dir, 0775);
+
+                $filename_prog = $programma;
+
+                $editForm['path_pdf_programma']->getData()->move($dir, $filename_prog);
+
+                $congresso->setPathPdfProgramma($filename_prog);
+            }
+            //die($programma);
+
 
             $editForm['manifesto']->getData()->move($dir, $filename);
             $congresso->setManifesto($filename);
@@ -222,10 +256,7 @@ class CongressoController extends Controller
             throw $this->createNotFoundException('Nessun prodotto trovato per l\'id ' . $id);
         }
 
-        $uploadDir = $this->getCongressoUploadDir($congresso);
-        $manifesto = $congresso->getManifesto();
-        unlink($uploadDir . '/' . $manifesto);
-        
+        unlink($this->getCongressoUploadDirImmagini($congresso) . '/' . $congresso->getManifesto());
         $congresso->setManifesto('');
 
         $em->persist($congresso);
