@@ -145,13 +145,11 @@ class CongressoController extends Controller
         );
     }
 
-    private function getCongressoUploadDirImmagini(Congresso $congresso)
-    {
+    private function getCongressoUploadDirImmagini(Congresso $congresso) {
         return $_SERVER['DOCUMENT_ROOT'] . "/resource/img/" . $congresso->getId();
     }
 
-    private function getCongressoUploadDirProgramma(Congresso $congresso)
-    {
+    private function getCongressoUploadDirProgramma(Congresso $congresso) {
         return $_SERVER['DOCUMENT_ROOT'] . "/resource/prog/" . $congresso->getId();
     }
 
@@ -199,29 +197,34 @@ class CongressoController extends Controller
 
 
 
-            if (!($editForm['path_pdf_programma']->getData() === NULL)) {
-                // Upload Programma pdf
-                $ext_programma = $editForm['path_pdf_programma']->getData()->guessExtension();
-                if (!$ext_programma) {
-                    // l'estensione non può essere indovinata
-                    $ext_programma = 'txt';
-                }
-
-                $manifesto = md5(rand(1, 99999) . mktime()) . '.' . $extension;
-                $dir = $this->getCongressoUploadDir($congresso);
-                @mkdir($dir, 0775);
-
-                $filename_prog = $programma;
-
-                $editForm['path_pdf_programma']->getData()->move($dir, $filename_prog);
-
-                $congresso->setPathPdfProgramma($filename_prog);
+ if (!($editForm['path_pdf_programma']->getData() === NULL)) {
+            // Upload Programma pdf
+            $ext_programma = $editForm['path_pdf_programma']->getData()->guessExtension();
+            if (!$ext_programma) {
+                // l'estensione non può essere indovinata
+                $ext_programma = 'txt';
             }
+
+            //cambiare
+            $programma = rand(1, 99999) . '.' . $ext_programma;
+            //die($programma);
+            $dir = $this->getCongressoUploadDirProgramma($congresso);
+
+            @mkdir($dir, 0775);
+
+            $filename_prog = $programma;
+
+            $editForm['path_pdf_programma']->getData()->move($dir, $filename_prog);
+
+            $congresso->setPathPdfProgramma($filename_prog);
+
+ }
             //die($programma);
 
 
-            $editForm['manifesto']->getData()->move($dir, $filename);
-            $congresso->setManifesto($filename);
+
+
+
 
             $em->persist($congresso);
             $em->flush();
@@ -243,8 +246,9 @@ class CongressoController extends Controller
      *
      * @Route("/{id}/deletemanifesto", name="congresso_delete_manifesto")
      */
-    public function removeManifestoAction($id)
-    {
+
+    public function removeManifestoAction($id) {
+
 
         $em = $this->getDoctrine()->getEntityManager();
 
@@ -256,8 +260,12 @@ class CongressoController extends Controller
             throw $this->createNotFoundException('Nessun prodotto trovato per l\'id ' . $id);
         }
 
+
+
         unlink($this->getCongressoUploadDirImmagini($congresso) . '/' . $congresso->getManifesto());
         $congresso->setManifesto('');
+
+
 
         $em->persist($congresso);
         $em->flush();
