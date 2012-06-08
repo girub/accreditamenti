@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Accreditamenti\CongressiBundle\Entity\Accreditamento
  *
- * @ORM\Table()
+ * @ORM\Table(name="ideacpa_accreditamento")
  * @ORM\Entity(repositoryClass="Accreditamenti\CongressiBundle\Entity\AccreditamentoRepository")
  */
 class Accreditamento {
