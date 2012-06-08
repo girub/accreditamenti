@@ -11,8 +11,8 @@ use Doctrine\ORM\Mapping\OneToMany;
  * @ORM\Table(name="ideacpa_congresso")
  * @ORM\Entity(repositoryClass="Accreditamenti\CongressiBundle\Entity\CongressoRepository")
  */
-class Congresso {
-
+class Congresso
+{
     /**
      * @var integer $id
      *
@@ -126,18 +126,20 @@ class Congresso {
      * @ORM\Column(name="abilitato", type="boolean")
      */
     private $abilitato;
-
+    
     /**
-     * @OneToMany(targetEntity="Accreditamento", mappedBy="congresso")
+     * @OneToMany(targetEntity="Accreditamenti", mappedBy="congresso")
      */
     private $accreditamenti;
+
 
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
@@ -146,7 +148,8 @@ class Congresso {
      *
      * @param string $codiceCongresso
      */
-    public function setCodiceCongresso($codiceCongresso) {
+    public function setCodiceCongresso($codiceCongresso)
+    {
         $this->codice_congresso = $codiceCongresso;
     }
 
@@ -155,7 +158,8 @@ class Congresso {
      *
      * @return string 
      */
-    public function getCodiceCongresso() {
+    public function getCodiceCongresso()
+    {
         return $this->codice_congresso;
     }
 
@@ -164,7 +168,8 @@ class Congresso {
      *
      * @param string $url
      */
-    public function setUrl($url) {
+    public function setUrl($url)
+    {
         $this->url = $url;
     }
 
@@ -173,7 +178,8 @@ class Congresso {
      *
      * @return string 
      */
-    public function getUrl() {
+    public function getUrl()
+    {
         return $this->url;
     }
 
@@ -182,7 +188,8 @@ class Congresso {
      *
      * @param string $titolo
      */
-    public function setTitolo($titolo) {
+    public function setTitolo($titolo)
+    {
         $this->titolo = $titolo;
     }
 
@@ -191,7 +198,8 @@ class Congresso {
      *
      * @return string 
      */
-    public function getTitolo() {
+    public function getTitolo()
+    {
         return $this->titolo;
     }
 
@@ -200,7 +208,8 @@ class Congresso {
      *
      * @param text $descrizione
      */
-    public function setDescrizione($descrizione) {
+    public function setDescrizione($descrizione)
+    {
         $this->descrizione = $descrizione;
     }
 
@@ -209,7 +218,8 @@ class Congresso {
      *
      * @return text 
      */
-    public function getDescrizione() {
+    public function getDescrizione()
+    {
         return $this->descrizione;
     }
 
@@ -218,7 +228,8 @@ class Congresso {
      *
      * @param datetime $dataInizio
      */
-    public function setDataInizio($dataInizio) {
+    public function setDataInizio($dataInizio)
+    {
         $this->data_inizio = $dataInizio;
     }
 
@@ -227,7 +238,8 @@ class Congresso {
      *
      * @return datetime 
      */
-    public function getDataInizio() {
+    public function getDataInizio()
+    {
         return $this->data_inizio;
     }
 
@@ -236,7 +248,8 @@ class Congresso {
      *
      * @param datetime $dataFine
      */
-    public function setDataFine($dataFine) {
+    public function setDataFine($dataFine)
+    {
         $this->data_fine = $dataFine;
     }
 
@@ -245,7 +258,8 @@ class Congresso {
      *
      * @return datetime 
      */
-    public function getDataFine() {
+    public function getDataFine()
+    {
         return $this->data_fine;
     }
 
@@ -254,7 +268,8 @@ class Congresso {
      *
      * @param string $luogo
      */
-    public function setLuogo($luogo) {
+    public function setLuogo($luogo)
+    {
         $this->luogo = $luogo;
     }
 
@@ -263,7 +278,8 @@ class Congresso {
      *
      * @return string 
      */
-    public function getLuogo() {
+    public function getLuogo()
+    {
         return $this->luogo;
     }
 
@@ -272,7 +288,8 @@ class Congresso {
      *
      * @param string $manifesto
      */
-    public function setManifesto($manifesto) {
+    public function setManifesto($manifesto)
+    {
         $this->manifesto = $manifesto;
     }
 
@@ -281,7 +298,8 @@ class Congresso {
      *
      * @return string 
      */
-    public function getManifesto() {
+    public function getManifesto()
+    {
         return $this->manifesto;
     }
 
@@ -290,7 +308,8 @@ class Congresso {
      *
      * @param string $pathPdfProgramma
      */
-    public function setPathPdfProgramma($pathPdfProgramma) {
+    public function setPathPdfProgramma($pathPdfProgramma)
+    {
         $this->path_pdf_programma = $pathPdfProgramma;
     }
 
@@ -299,7 +318,8 @@ class Congresso {
      *
      * @return string 
      */
-    public function getPathPdfProgramma() {
+    public function getPathPdfProgramma()
+    {
         return $this->path_pdf_programma;
     }
 
@@ -308,7 +328,8 @@ class Congresso {
      *
      * @param string $pathPdfIscrizione
      */
-    public function setPathPdfIscrizione($pathPdfIscrizione) {
+    public function setPathPdfIscrizione($pathPdfIscrizione)
+    {
         $this->path_pdf_iscrizione = $pathPdfIscrizione;
     }
 
@@ -317,7 +338,8 @@ class Congresso {
      *
      * @return string 
      */
-    public function getPathPdfIscrizione() {
+    public function getPathPdfIscrizione()
+    {
         return $this->path_pdf_iscrizione;
     }
 
@@ -326,7 +348,8 @@ class Congresso {
      *
      * @param string $pathPdfPrenotazione
      */
-    public function setPathPdfPrenotazione($pathPdfPrenotazione) {
+    public function setPathPdfPrenotazione($pathPdfPrenotazione)
+    {
         $this->path_pdf_prenotazione = $pathPdfPrenotazione;
     }
 
@@ -335,7 +358,8 @@ class Congresso {
      *
      * @return string 
      */
-    public function getPathPdfPrenotazione() {
+    public function getPathPdfPrenotazione()
+    {
         return $this->path_pdf_prenotazione;
     }
 
@@ -344,7 +368,8 @@ class Congresso {
      *
      * @param string $emailReferente
      */
-    public function setEmailReferente($emailReferente) {
+    public function setEmailReferente($emailReferente)
+    {
         $this->email_referente = $emailReferente;
     }
 
@@ -353,7 +378,8 @@ class Congresso {
      *
      * @return string 
      */
-    public function getEmailReferente() {
+    public function getEmailReferente()
+    {
         return $this->email_referente;
     }
 
@@ -362,7 +388,8 @@ class Congresso {
      *
      * @param boolean $ricezioneAbstract
      */
-    public function setRicezioneAbstract($ricezioneAbstract) {
+    public function setRicezioneAbstract($ricezioneAbstract)
+    {
         $this->ricezione_abstract = $ricezioneAbstract;
     }
 
@@ -371,7 +398,8 @@ class Congresso {
      *
      * @return boolean 
      */
-    public function getRicezioneAbstract() {
+    public function getRicezioneAbstract()
+    {
         return $this->ricezione_abstract;
     }
 
@@ -380,7 +408,8 @@ class Congresso {
      *
      * @param boolean $paginaSponsor
      */
-    public function setPaginaSponsor($paginaSponsor) {
+    public function setPaginaSponsor($paginaSponsor)
+    {
         $this->pagina_sponsor = $paginaSponsor;
     }
 
@@ -389,7 +418,8 @@ class Congresso {
      *
      * @return boolean 
      */
-    public function getPaginaSponsor() {
+    public function getPaginaSponsor()
+    {
         return $this->pagina_sponsor;
     }
 
@@ -398,7 +428,8 @@ class Congresso {
      *
      * @param boolean $abilitato
      */
-    public function setAbilitato($abilitato) {
+    public function setAbilitato($abilitato)
+    {
         $this->abilitato = $abilitato;
     }
 
@@ -407,30 +438,8 @@ class Congresso {
      *
      * @return boolean 
      */
-    public function getAbilitato() {
+    public function getAbilitato()
+    {
         return $this->abilitato;
     }
-
-    public function __construct() {
-        $this->accreditamenti = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add accreditamenti
-     *
-     * @param Accreditamenti\CongressiBundle\Entity\Accreditamenti $accreditamenti
-     */
-    public function addAccreditamenti(\Accreditamenti\CongressiBundle\Entity\Accreditamento $accreditamenti) {
-        $this->accreditamenti[] = $accreditamenti;
-    }
-
-    /**
-     * Get accreditamenti
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getAccreditamenti() {
-        return $this->accreditamenti;
-    }
-
 }

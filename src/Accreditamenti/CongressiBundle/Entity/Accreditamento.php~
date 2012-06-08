@@ -238,24 +238,4 @@ class Accreditamento {
         return $this->numero_accreditamento;
     }
 
-
-    /**
-     * Set congresso
-     *
-     * @param Accreditamenti\CongressiBundle\Entity\Congresso $congresso
-     */
-    public function setCongresso(\Accreditamenti\CongressiBundle\Entity\Congresso $congresso)
-    {
-        $this->congresso = $congresso;
-    }
-
-    /**
-     * Get congresso
-     *
-     * @return Accreditamenti\CongressiBundle\Entity\Congresso 
-     */
-    public function getCongresso()
-    {
-        return $this->congresso;
-    }
 }
