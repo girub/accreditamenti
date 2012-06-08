@@ -80,21 +80,21 @@ class Congresso
     /**
      * @var string $path_pdf_programma
      *
-     * @ORM\Column(name="path_pdf_programma", type="string", length=255)
+     * @ORM\Column(name="path_pdf_programma", nullable=true, type="string", length=255)
      */
     private $path_pdf_programma;
 
     /**
      * @var string $path_pdf_iscrizione
      *
-     * @ORM\Column(name="path_pdf_iscrizione", type="string", length=255)
+     * @ORM\Column(name="path_pdf_iscrizione", nullable=true, type="string", length=255)
      */
     private $path_pdf_iscrizione;
 
     /**
      * @var string $path_pdf_prenotazione
      *
-     * @ORM\Column(name="path_pdf_prenotazione", type="string", length=255)
+     * @ORM\Column(name="path_pdf_prenotazione", nullable=true, type="string", length=255)
      */
     private $path_pdf_prenotazione;
 
