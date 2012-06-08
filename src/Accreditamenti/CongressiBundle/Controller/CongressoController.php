@@ -14,15 +14,16 @@ use Accreditamenti\CongressiBundle\Form\CongressoType;
  *
  * @Route("/congresso")
  */
-class CongressoController extends Controller {
-
+class CongressoController extends Controller
+{
     /**
      * Lists all Congresso entities.
      * 
      * @Route("/", name="congresso")
      * @Template()
      */
-    public function indexAction() {
+    public function indexAction()
+    {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entities = $em->getRepository('AccreditamentiCongressiBundle:Congresso')->findAll();
@@ -36,7 +37,8 @@ class CongressoController extends Controller {
      * @Route("/mostraTutti", name="congresso_mostra_tutti")
      * @Template()
      */
-    public function mostraTuttiAction() {
+    public function mostraTuttiAction()
+    {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entities = $em->getRepository('AccreditamentiCongressiBundle:Congresso')->findAll();
@@ -49,7 +51,8 @@ class CongressoController extends Controller {
      * @Route("/mostra/{id}", name="congresso_show")
      * @Template()
      */
-    public function showAction($id) {
+    public function showAction($id)
+    {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('AccreditamentiCongressiBundle:Congresso')->find($id);
@@ -71,7 +74,8 @@ class CongressoController extends Controller {
      * @Route("/new", name="congresso_new")
      * @Template()
      */
-    public function newAction() {
+    public function newAction()
+    {
         $entity = new Congresso();
         $form = $this->createForm(new CongressoType(), $entity);
 
@@ -88,7 +92,8 @@ class CongressoController extends Controller {
      * @Method("post")
      * @Template("AccreditamentiCongressiBundle:Congresso:new.html.twig")
      */
-    public function createAction() {
+    public function createAction()
+    {
         $entity = new Congresso();
         $request = $this->getRequest();
         $form = $this->createForm(new CongressoType(), $entity);
@@ -120,7 +125,8 @@ class CongressoController extends Controller {
      * @Route("/{id}/edit", name="congresso_edit")
      * @Template()
      */
-    public function editAction($id) {
+    public function editAction($id)
+    {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('AccreditamentiCongressiBundle:Congresso')->find($id);
@@ -148,13 +154,15 @@ class CongressoController extends Controller {
     }
 
     /**
-     * Edits an existing Congresso entity.
+     * Modifica una entità Congresso esistente
      *
      * @Route("/{id}/update", name="congresso_update")
      * @Method("post")
      * @Template("AccreditamentiCongressiBundle:Congresso:edit.html.twig")
      */
-    public function updateAction($id) {
+    public function updateAction($id)
+    {
+
         $em = $this->getDoctrine()->getEntityManager();
 
         $congresso = $em->getRepository('AccreditamentiCongressiBundle:Congresso')->find($id);
@@ -165,10 +173,7 @@ class CongressoController extends Controller {
 
         $editForm = $this->createForm(new CongressoType(), $congresso);
         $deleteForm = $this->createDeleteForm($id);
-
-        $request = $this->getRequest();
-
-        $editForm->bindRequest($request);
+        $editForm->bindRequest($this->getRequest());
 
         if ($editForm->isValid()) {
 
@@ -199,10 +204,12 @@ class CongressoController extends Controller {
                 // l'estensione non può essere indovinata
                 $ext_programma = 'txt';
             }
+
             //cambiare
             $programma = rand(1, 99999) . '.' . $ext_programma;
             //die($programma);
             $dir = $this->getCongressoUploadDirProgramma($congresso);
+
             @mkdir($dir, 0775);
 
             $filename_prog = $programma;
@@ -217,10 +224,14 @@ class CongressoController extends Controller {
 
 
 
+
+
             $em->persist($congresso);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('congresso_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('congresso_edit', array(
+                                'id' => $id
+                            )));
         }
 
         return array(
@@ -235,7 +246,9 @@ class CongressoController extends Controller {
      *
      * @Route("/{id}/deletemanifesto", name="congresso_delete_manifesto")
      */
+
     public function removeManifestoAction($id) {
+
 
         $em = $this->getDoctrine()->getEntityManager();
 
@@ -248,17 +261,18 @@ class CongressoController extends Controller {
         }
 
 
+
         unlink($this->getCongressoUploadDirImmagini($congresso) . '/' . $congresso->getManifesto());
         $congresso->setManifesto('');
+
 
 
         $em->persist($congresso);
         $em->flush();
 
-        return $this->redirect($this->generateUrl('congresso_edit', array('id' => $id)));
-
-
-        //die('arrivasZZccccccccZZ');
+        return $this->redirect($this->generateUrl('congresso_edit', array(
+                            'id' => $id
+                        )));
     }
 
     /**
@@ -267,7 +281,8 @@ class CongressoController extends Controller {
      * @Route("/{id}/delete", name="congresso_delete")
      * @Method("post")
      */
-    public function deleteAction($id) {
+    public function deleteAction($id)
+    {
         $form = $this->createDeleteForm($id);
         $request = $this->getRequest();
 
@@ -288,7 +303,8 @@ class CongressoController extends Controller {
         return $this->redirect($this->generateUrl('congresso'));
     }
 
-    private function createDeleteForm($id) {
+    private function createDeleteForm($id)
+    {
         return $this->createFormBuilder(array('id' => $id))
                         ->add('id', 'hidden')
                         ->getForm()

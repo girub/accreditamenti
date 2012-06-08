@@ -1,30 +1,34 @@
 Flash Messages
 ==============
 
-In createAction() dopo avere salvato i dati imposto il mio messaggio che voglio vedere
+Alcune azioni, potrebbero richiedere di visualizzare un messaggio nella pagina
+per comunicarne l'esito all'utente. Per fare degli esempi:
 
-:: 
+#. quando si cancella un record.
+#. quando si modifica un record.
+#. quando si crea un nuovo record.
+#. e così via ...
 
-             // Salvo i dati nel db
-            $em = $this->getDoctrine()->getEntityManager();
-            $em->persist($entity);
-            $em->flush();
+Questo genere di cose si chiama "flash message". La prima cosa da fare per
+creare un flash message, è salvare il messaggio in sessione. Symfony2 ci
+permette di usare setFlash in questo modo.
 
-            // Imposto il flash message
-            $this->get('session')->setFlash('notice', 'Congresso creato con successo');
+::
 
-a questo punto mi bastera andare nel template twig e mettere questo codice 
+    $this->get('session')->setFlash('notice', 'Record creato con successo');
+
+A questo punto mi basterà andare nel template twig e mettere questo codice 
 dove vogliamo visualizzare il messaggio
 
 :: 
 
-        {% if app.session.hasFlash('notice') %}
-            <div class="flash-notice">
-                {{ app.session.flash('notice') }}
-            </div>
-        {% endif %}
+    {% if app.session.hasFlash('notice') %}
+        <div class="flash-notice">
+            {{ app.session.flash('notice') }}
+        </div>
+    {% endif %}
 
 
-PS.
-Ricordiamo che è meglio inserire il codice dentro il template base 
-in questo tutti i template si estendo da quello.
+Se stiamo usando Twig, molto presumibilmente abbiamo un template di base dal
+quale estendono tutti gli altri template. Quindi quello è anche il luogo più
+adatto ad ospitare il nostro snippet di codice.
