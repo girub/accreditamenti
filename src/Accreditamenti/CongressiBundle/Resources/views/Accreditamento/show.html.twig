@@ -1,0 +1,61 @@
+<h1>Accreditamento</h1>
+
+<table class="record_properties">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>Numero_accreditamento</th>
+            <td>{{ entity.numeroaccreditamento }}</td>
+        </tr>
+        <tr>
+            <th>Titolo</th>
+            <td>{{ entity.titolo }}</td>
+        </tr>
+        <tr>
+            <th>Luogo</th>
+            <td>{{ entity.luogo }}</td>
+        </tr>
+        <tr>
+            <th>Data_inizio</th>
+            <td>{{ entity.datainizio|date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr>
+            <th>Data_fine</th>
+            <td>{{ entity.datafine|date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr>
+            <th>Ore_formative</th>
+            <td>{{ entity.oreformative }}</td>
+        </tr>
+        <tr>
+            <th>Obiettivo_formativo</th>
+            <td>{{ entity.obiettivoformativo }}</td>
+        </tr>
+        <tr>
+            <th>Numero_crediti</th>
+            <td>{{ entity.numerocrediti }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('accreditamento') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('accreditamento_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('accreditamento_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+</ul>
