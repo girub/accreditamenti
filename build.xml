@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project name="accreditamenti" default="help">
-    
+
     <target name="docs">
         <exec command="rst2pdf app/Resources/doc/index.rst -o app/Resources/doc/docs.pdf" />
     </target>
@@ -19,19 +19,20 @@
     </target>
     
     <target name="vendors">
-        <exec command="./bin/vendors install" />
+        <exec command="./bin/vendors update" />
     </target>
     
+    <target name="buongiorno" depends="vendors">
+    </target>
     
     <target name="bootstrap">
         <exec command="php app/console twitter-bootstrap:clear" />
         <exec command="php app/console twitter-bootstrap:compile v2" />
         <exec command="php app/console assets:install web/" />
     </target>
-    
 
     <target name="help">
-	<echo>
+        <echo>
             Accreditamenti:
 
             $ phing help        - lancia questo help
@@ -40,7 +41,8 @@
             $ phing fixtures    - caricare dei dati di default
             $ phing cache:clear - pulisce la cache
             $ phing vendors     - installa i vendors
-	</echo>
+            $ phing buongiorno  - installa i vendors
+        </echo>
     </target>
     
 </project>
