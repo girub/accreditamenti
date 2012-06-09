@@ -1,17 +1,19 @@
+=========================
 Creare una chiave esterna
 =========================
 
+--------
 Premessa
--------------------------
+--------
 
 Nel database di Accreditamenti abbiamo due grandi entità. Una è Congresso e
 l'altra si chiama Accreditamento. Queste due entità sono legate tra loro. In 
 particolare un congresso può avere molti accreditamenti, ed un accreditamento
 appartiene ad un solo congresso.
 
-=======================================
+---------------------------------------
 Cosa fare per relazionare le due entità
-=======================================
+---------------------------------------
 
 Per relazionare le due entità dovremo seguire una serie di passaggi.
 

@@ -74,7 +74,7 @@ class Congresso {
     /**
      * @var string $manifesto
      *
-     * @ORM\Column(name="manifesto", type="string", length=255)
+     * @ORM\Column(name="manifesto", type="string", length=255, nullable=true)
      */
     private $manifesto;
 
