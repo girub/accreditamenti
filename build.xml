@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project name="accreditamenti" default="help">
+    
+    <target name="buongiorno" depends="vendors,bootstrap,docs,cache:clear,migrations,fixtures">
+        <echo msg="Buon lavoro =)!!!" />
+    </target>
 
     <target name="docs">
         <exec command="rst2pdf app/Resources/doc/index.rst -o app/Resources/doc/docs.pdf" />
@@ -22,7 +26,8 @@
         <exec command="./bin/vendors update" />
     </target>
     
-    <target name="buongiorno" depends="vendors">
+    <target name="migrations">
+        <exec command="./app/console doctrine:migrations:migrate --no-interaction" />
     </target>
     
     <target name="bootstrap">
@@ -35,13 +40,14 @@
         <echo>
             Accreditamenti:
 
-            $ phing help        - lancia questo help
-            $ phing test        - lancia i test con behat
-            $ phing docs        - genera la documentazione in app/Resources/doc/docs.pdf
-            $ phing fixtures    - caricare dei dati di default
-            $ phing cache:clear - pulisce la cache
-            $ phing vendors     - installa i vendors
-            $ phing buongiorno  - installa i vendors
+            $ phing help        - Lancia questo help.
+            $ phing test        - Lancia i test con behat.
+            $ phing docs        - Genera la documentazione.
+            $ phing fixtures    - Caricare dei dati di default.
+            $ phing cache:clear - Pulisce la cache.
+            $ phing vendors     - Installa i vendors.
+            $ phing buongiorno  - Imposta tutto per partire.
+            $ phing migrations  - Esegue tutte le migrations.
         </echo>
     </target>
     

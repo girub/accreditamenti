@@ -98,9 +98,9 @@ class CongressoController extends Controller
         $request = $this->getRequest();
         $form = $this->createForm(new CongressoType(), $entity);
         $form->bindRequest($request);
-
+        
         if ($form->isValid()) {
-
+            
             // Salvo i dati nel db
             $em = $this->getDoctrine()->getEntityManager();
             $em->persist($entity);

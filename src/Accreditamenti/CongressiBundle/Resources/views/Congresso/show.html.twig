@@ -1,93 +1,110 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-<h1>Congresso</h1>
 
-<table class="table table-striped table-bordered table-condensed">
-    <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ entity.id }}</td>
-        </tr>
-        <tr>
-            <th>Codice_congresso</th>
-            <td>{{ entity.codicecongresso }}</td>
-        </tr>
-        <tr>
-            <th>Url</th>
-            <td>{{ entity.url }}</td>
-        </tr>
-        <tr>
-            <th>Titolo</th>
-            <td>{{ entity.titolo }}</td>
-        </tr>
-        <tr>
-            <th>Descrizione</th>
-            <td>{{ entity.descrizione }}</td>
-        </tr>
-        <tr>
-            <th>Data_inizio</th>
-            <td>{{ entity.datainizio|date('Y-m-d H:i:s') }}</td>
-        </tr>
-        <tr>
-            <th>Data_fine</th>
-            <td>{{ entity.datafine|date('Y-m-d H:i:s') }}</td>
-        </tr>
-        <tr>
-            <th>Luogo</th>
-            <td>{{ entity.luogo }}</td>
-        </tr>
-        <tr>
-            <th>Manifesto</th>
-            <td>{{ entity.manifesto }}</td>
-        </tr>
-        <tr>
-            <th>Path_pdf_programma</th>
-            <td>{{ entity.pathpdfprogramma }}</td>
-        </tr>
-        <tr>
-            <th>Path_pdf_iscrizione</th>
-            <td>{{ entity.pathpdfiscrizione }}</td>
-        </tr>
-        <tr>
-            <th>Path_pdf_prenotazione</th>
-            <td>{{ entity.pathpdfprenotazione }}</td>
-        </tr>
-        <tr>
-            <th>Email_referente</th>
-            <td>{{ entity.emailreferente }}</td>
-        </tr>
-        <tr>
-            <th>Ricezione_abstract</th>
-            <td>{{ entity.ricezioneabstract }}</td>
-        </tr>
-        <tr>
-            <th>Pagina_sponsor</th>
-            <td>{{ entity.paginasponsor }}</td>
-        </tr>
-        <tr>
-            <th>Abilitato</th>
-            <td>{{ entity.abilitato }}</td>
-        </tr>
-    </tbody>
-</table>
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="container">
+                <ul class="nav">
+                    <li>
+                        <a href="{{ path('congresso') }}">
+                            <span class="icon-backward icon-white"></span> Back to the list
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('congresso_edit', { 'id': entity.id }) }}">
+                            <span class="icon-edit icon-white"></span> Edit
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" id="cancella_congresso">
+                            <span class="icon-trash icon-white"></span> Cancella
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <form action="{{ path('congresso_delete', { 'id': entity.id }) }}" id="form_cancella_congresso" method="post" {{ form_enctype(delete_form) }}>
+        {{ form_widget(delete_form) }}
+    </form>
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('congresso') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('congresso_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('congresso_delete', { 'id': entity.id }) }}" method="post">
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
+    <script type="text/javascript">/*<![CDATA[*/    (function () { 
+        $('#cancella_congresso').click(function(){
+            $('#form_cancella_congresso').submit();
+            $(this).preventDefault();
+        });
+    })(); /*]]>*/</script>
+
+    <h1>Congresso</h1>
+
+    <table class="table table-striped table-bordered table-condensed">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Codice_congresso</th>
+                <td>{{ entity.codicecongresso }}</td>
+            </tr>
+            <tr>
+                <th>Url</th>
+                <td>{{ entity.url }}</td>
+            </tr>
+            <tr>
+                <th>Titolo</th>
+                <td>{{ entity.titolo }}</td>
+            </tr>
+            <tr>
+                <th>Descrizione</th>
+                <td>{{ entity.descrizione }}</td>
+            </tr>
+            <tr>
+                <th>Data_inizio</th>
+                <td>{{ entity.datainizio|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Data_fine</th>
+                <td>{{ entity.datafine|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Luogo</th>
+                <td>{{ entity.luogo }}</td>
+            </tr>
+            <tr>
+                <th>Manifesto</th>
+                <td>{{ entity.manifesto }}</td>
+            </tr>
+            <tr>
+                <th>Path_pdf_programma</th>
+                <td>{{ entity.pathpdfprogramma }}</td>
+            </tr>
+            <tr>
+                <th>Path_pdf_iscrizione</th>
+                <td>{{ entity.pathpdfiscrizione }}</td>
+            </tr>
+            <tr>
+                <th>Path_pdf_prenotazione</th>
+                <td>{{ entity.pathpdfprenotazione }}</td>
+            </tr>
+            <tr>
+                <th>Email_referente</th>
+                <td>{{ entity.emailreferente }}</td>
+            </tr>
+            <tr>
+                <th>Ricezione_abstract</th>
+                <td>{{ entity.ricezioneabstract }}</td>
+            </tr>
+            <tr>
+                <th>Pagina_sponsor</th>
+                <td>{{ entity.paginasponsor }}</td>
+            </tr>
+            <tr>
+                <th>Abilitato</th>
+                <td>{{ entity.abilitato }}</td>
+            </tr>
+        </tbody>
+    </table>
 {% endblock %}

@@ -1,20 +1,27 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-<h1>Congresso creation</h1>
 
-<form action="{{ path('congresso_create') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
-    <p>
-        <button type="submit">Create</button>
-    </p>
-</form>
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="container">
+                <ul class="nav">
+                    <li>
+                        <a href="{{ path('congresso') }}">
+                            <span class="icon-backward icon-white"></span> Back to the list
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+        
+    <h1>Congresso creation</h1>
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('congresso') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+    <form action="{{ path('congresso_create') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
+        <p>
+            <button type="submit">Create</button>
+        </p>
+    </form>
 {% endblock %}
