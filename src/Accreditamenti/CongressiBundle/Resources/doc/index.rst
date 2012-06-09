@@ -3,3 +3,4 @@
 .. include:: sicurezza.proteggere.una.rotta.rst
 .. include:: entita.forms.campi.obbligatori.rst
 .. include:: entita.creare.rst
+.. include:: entita.chiavi.esterne.rst
