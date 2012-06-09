@@ -82,6 +82,10 @@
         <a href="{{ path('congresso_edit', { 'id': entity.id }) }}">
             Edit
         </a>
+         <a href="{{ path('accreditamento_new', { 'congresso_id': entity.id }) }}">
+            Crea accreditamento
+        </a>
+
     </li>
     <li>
         <form action="{{ path('congresso_delete', { 'id': entity.id }) }}" method="post">

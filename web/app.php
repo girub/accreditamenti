@@ -1,4 +1,5 @@
 <?php
+umask(0000); // Imposta i permessi a 0777
 
 require_once __DIR__.'/../app/bootstrap.php.cache';
 require_once __DIR__.'/../app/AppKernel.php';

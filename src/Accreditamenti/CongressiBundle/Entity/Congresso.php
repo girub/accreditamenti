@@ -433,4 +433,8 @@ class Congresso {
         return $this->accreditamenti;
     }
 
+    public function __toString() {
+        return $this->titolo;
+    }
+
 }
