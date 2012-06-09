@@ -4,13 +4,27 @@ Creare una nuova entita
 Premessa
 --------
 
-Partendo da zero creeremo una nuova entità.
-Questo ci permetterà di creare il codice e sql relativo
-Lancio questo comando
+In Symfony2, per creare il databse, non si passa da MySQL o da un altro DBMS. In
+Symfony2, si creano e modificano le entità. Le entità fanno parte del Model.
+
+=========================
+Elenco delle cose da fare
+=========================
+
+#. Generare una nuova entità da console
+#. Creare la migration per il database
+
+------------------------------------
+Generare una nuova entità da console
+------------------------------------
 
 ::
 
     php app/console generate:doctrine:entity
+
+output:
+
+::
 
     Welcome to the Doctrine2 entity generator  
 
@@ -80,13 +94,15 @@ Lancio questo comando
     Generating the entity code: OK
 
 
-    You can now start using the generated code!  
-                                               
+    You can now start using the generated code!
 
+-----------------------------------
+Creare la migration per il database
+-----------------------------------
 
-Ora posso andare nell'entita e modificare quello che voglio, prima di creare la tabella
-Se magari ho sbagliato la tipologia del campo o la posizione, la modifico nella relativa classe dell'entita.
-Quindi posso lanciare la migration diff che mi genera un file 
+Prima di creare la tabella con la migration è possibile, eventualmente, 
+modificare il codige generato da Symfony2. Per esempio è possibile modificare
+l'ordine degli attributi o dei metodi.
 
 
 :: 
@@ -96,9 +112,7 @@ Quindi posso lanciare la migration diff che mi genera un file
     giuseppe@giuseppe-notebook:/var/www/accreditamenti$ php app/console doctrine:migrations:diff
     Generated new migration class to "/var/www/accreditamenti/app/DoctrineMigrations/Version20120608212739.php" from schema differences.
 
-
-
-ora posso lanciare
+e quindi ...
 
 ::  
         php app/console doctrine:migrations:migrate
