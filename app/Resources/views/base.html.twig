@@ -21,6 +21,8 @@
     </head>
     <body>
 
+
+
         <div class="navbar">
             <div class="navbar-inner">
                 <div class="container">
@@ -29,11 +31,15 @@
                         {% if app.user %}
                             <li>
                                 <a href="{{ path('congresso_new') }}" id="link-crea-nuovo-congresso">
-                                    <span class="icon-plus icon-white"></span> nuovo congresso!
+                                    <span class="icon-plus icon-white"></span>nuovo congresso!
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ path('congresso') }}">Congressi</a>
+                            </li>
+
+                            <li>
+                                <a href="{{ path('accreditamento') }}">Accreditamenti</a>
                             </li>
                             <li>
                                 <a href="{{ path('fos_user_security_logout') }}">logout ({{ app.user }})</a>
