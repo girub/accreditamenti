@@ -23,11 +23,50 @@
 
 
 
-        <div class="navbar">
-            <div class="navbar-inner">
-                <div class="container">
-                    <ul class="nav">
-                        {% block menu %}{% endblock %}
+
+
+
+
+<div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/">Admin</a>
+          
+
+           <div class="btn-group pull-right">
+            
+
+
+     {% if app.user %}
+            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+              <i class="icon-user"></i> {{ app.user }}
+              <span class="caret"></span>
+            </a>
+    {% else %}
+            <a class="btn dropdown-toggle" href="{{ path('fos_user_security_login') }}">
+              <i class="icon-user"></i> Login
+             
+            </a>
+    {% endif %}
+
+
+
+            <ul class="dropdown-menu">
+              <li><a href="#">Profile</a></li>
+              <li class="divider"></li>
+              <li><a href="{{ path('fos_user_security_logout') }}">Sign Out</a></li>
+            </ul>
+          </div>
+
+
+          <div class="nav-collapse">
+            <ul class="nav">
+               {% block menu %}{% endblock %}
                         {% if app.user %}
                             <li>
                                 <a href="{{ path('congresso_new') }}" id="link-crea-nuovo-congresso">
@@ -41,18 +80,29 @@
                             <li>
                                 <a href="{{ path('accreditamento') }}">Accreditamenti</a>
                             </li>
-                            <li>
-                                <a href="{{ path('fos_user_security_logout') }}">logout ({{ app.user }})</a>
-                            </li>
-                        {% else %}
-                            <li>
-                                <a href="{{ path('fos_user_security_login') }}">login</a>
-                            </li>
+                          
+                     
                         {% endif %}
-                    </ul>
-                </div>
-            </div>
+            </ul>
+          </div>
+            <!--/.nav-collapse -->
         </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <div class="container">
             {% if app.session.hasFlash('notice') %}
@@ -62,6 +112,8 @@
                 </div>
             {% endif %}
         </div>
+
+<br>><br><br>
 
         <div class="container">
             <div class="container-fluid">
