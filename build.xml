@@ -2,7 +2,7 @@
 
 <project name="accreditamenti" default="help">
     
-    <target name="buongiorno" depends="vendors,bootstrap,docs,cache:clear,migrations,fixtures">
+    <target name="buongiorno" depends="vendors,bootstrap,docs,cache:clear,migrations,fixtures,test">
         <echo msg="Buon lavoro =)!!!" />
     </target>
 
@@ -11,7 +11,7 @@
     </target>
     
     <target name="test">
-        <exec command="./app/console --env=test behat @AccreditamentiUserBundle" />
+        <exec command="sh behat" />
     </target>
     
     <target name="fixtures">
