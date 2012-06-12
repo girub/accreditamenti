@@ -11,7 +11,8 @@
     </target>
     
     <target name="test">
-        <exec command="./app/console --env=test behat @AccreditamentiUserBundle" />
+        <exec command="./app/console --env=test behat --format=progress @AccreditamentiUserBundle" />
+        <exec command="./app/console --env=test behat --format=progress @AccreditamentiCongressiBundle" />
     </target>
     
     <target name="fixtures">

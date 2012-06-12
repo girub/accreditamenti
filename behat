@@ -1,0 +1,6 @@
+#!bin/bash
+clear
+
+echo "Inizio dei tests"
+./app/console --env=test behat --format=progress @AccreditamentiUserBundle
+./app/console --env=test behat --format=progress @AccreditamentiCongressiBundle
