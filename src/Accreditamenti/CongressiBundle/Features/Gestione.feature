@@ -15,7 +15,7 @@ Scenario: As Guest I want to login
 
 Scenario: As User Create a new Congress
     Given I go to "/"
-    And I follow "login"
+    And I follow "Login"
     When I fill in "_username" with "giuseppe"
     And I fill in "_password" with "giuseppe"
     Given I press "Login"
@@ -45,7 +45,7 @@ Scenario: As User Create a new Congress
 
 Scenario: Email referente non deve essere obbligatoria
     Given I go to "/"
-    And I follow "login"
+    And I follow "Login"
     When I fill in "_username" with "giuseppe"
     And I fill in "_password" with "giuseppe"
     Given I press "Login"
@@ -74,7 +74,5 @@ Scenario: Email referente non deve essere obbligatoria
 Scenario: Un Guest non può crere un congresso
     When I am on "/congresso/new"
     Then I should be on "/login"
-
-
 
 Scenario: Un Guest non può cancellare un congresso
