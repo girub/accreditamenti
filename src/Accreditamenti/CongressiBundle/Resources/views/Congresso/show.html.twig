@@ -17,13 +17,11 @@
                         </a>
                     </li>
                     <li>
-                    <a href="{{ path('accreditamento_new', { 'congresso_id': entity.id }) }}">
-                              <span class="icon-plus-sign icon-white"></span>   Crea accreditamento
-                            </a>
-
+                        <a href="{{ path('accreditamento_new', { 'congresso_id': entity.id }) }}"
+                           id="link_accreditamento_new">
+                            <span class="icon-plus-sign icon-white"></span>   Crea accreditamento
+                        </a>
                     </li>
-
-
                     <li>
                         <a href="#" id="cancella_congresso">
                             <span class="icon-trash icon-white"></span> Cancella
@@ -34,10 +32,11 @@
         </div>
     </div>
     
-    <form action="{{ path('congresso_delete', { 'id': entity.id }) }}" id="form_cancella_congresso" method="post" {{ form_enctype(delete_form) }}>
+    <form action="{{ path('congresso_delete', { 'id': entity.id }) }}"
+          id="form_cancella_congresso"
+          method="post" {{ form_enctype(delete_form) }}>
         {{ form_widget(delete_form) }}
     </form>
-
 
     <script type="text/javascript">/*<![CDATA[*/    (function () { 
         $('#cancella_congresso').click(function(){

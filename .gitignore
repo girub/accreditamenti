@@ -8,8 +8,6 @@ vendor/*
 web/uploads/*
 web/bundles/*
 
-
-
 # Configuration files
 app/config/parameters.ini
 
@@ -19,3 +17,6 @@ app/Resources/doc/*.pdf
 
 # upload files
 web/resource/**
+
+# editors files
+nbproject*

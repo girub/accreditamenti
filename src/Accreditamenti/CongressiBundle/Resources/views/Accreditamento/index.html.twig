@@ -1,62 +1,62 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-<h1>Accreditamento list</h1>
-<table class="records_list">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Numero_accreditamento</th>
-            <th>Titolo</th>
-            <th>Luogo</th>
-            <th>Data_inizio</th>
-            <th>Data_fine</th>
-            <th>Ore_formative</th>
-            <th>Obiettivo_formativo</th>
-            <th>Numero_crediti</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-    {% for entity in entities %}
-        <tr>
-            <td><a href="{{ path('accreditamento_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-            <td>{{ entity.numeroaccreditamento }}</td>
-            <td>{{ entity.titolo }}</td>
-            <td>{{ entity.luogo }}</td>
-            <td>{% if entity.datainizio %}{{ entity.datainizio|date('Y-m-d H:i:s') }}{% endif %}</td>
-            <td>{% if entity.datafine %}{{ entity.datafine|date('Y-m-d H:i:s') }}{% endif %}</td>
-            <td>{{ entity.oreformative }}</td>
-            <td>{{ entity.obiettivoformativo }}</td>
-            <td>{{ entity.numerocrediti }}</td>
-            <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('accreditamento_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('accreditamento_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
-            </td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
+    <h1>Accreditamento list</h1>
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Numero_accreditamento</th>
+                <th>Titolo</th>
+                <th>Luogo</th>
+                <th>Data_inizio</th>
+                <th>Data_fine</th>
+                <th>Ore_formative</th>
+                <th>Obiettivo_formativo</th>
+                <th>Numero_crediti</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('accreditamento_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.numeroaccreditamento }}</td>
+                <td>{{ entity.titolo }}</td>
+                <td>{{ entity.luogo }}</td>
+                <td>{% if entity.datainizio %}{{ entity.datainizio|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.datafine %}{{ entity.datafine|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.oreformative }}</td>
+                <td>{{ entity.obiettivoformativo }}</td>
+                <td>{{ entity.numerocrediti }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('accreditamento_show', { 'id': entity.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('accreditamento_edit', { 'id': entity.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
 
 
 
 
-<ul>
-accreditamento_new
-    <li>
-        <a href="">
-            Create a new entry
-        </a>
-    </li>
+    <ul>
+    accreditamento_new
+        <li>
+            <a href="">
+                Create a new entry
+            </a>
+        </li>
 
-</ul>
+    </ul>
 
 
 {% endblock %}
