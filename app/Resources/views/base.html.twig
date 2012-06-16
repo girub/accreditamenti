@@ -44,7 +44,7 @@
                     {% endif %}
 
                     <ul class="dropdown-menu">
-                        <li><a href="#">Profile</a></li>
+                        <li><a href="{{ path('fos_user_profile_edit') }}">Profile</a></li>
                         <li class="divider"></li>
                         <li><a href="{{ path('fos_user_security_logout') }}">logout ({{ app.user }})</a></li>
                     </ul>
