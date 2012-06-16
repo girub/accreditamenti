@@ -30,8 +30,6 @@ output:
 
     Welcome to the Doctrine2 entity generator  
 
-
-
     This command helps you generate Doctrine2 entities.
 
     First, you need to give the entity name you want to generate.

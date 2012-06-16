@@ -13,10 +13,8 @@ class CongressoType extends AbstractType {
                 ->add('url')
                 ->add('titolo')
                 ->add('descrizione')
-                ->add('data_inizio', 'genemu_jquerydate')
-                ->add('data_fine', 'genemu_jquerydate', array(
-                    'widget' => 'single_text'
-                ))
+                ->add('data_inizio')
+                ->add('data_fine')
                 ->add('luogo')
                 ->add('manifesto', 'file', array('required' => false, 'label' => 'Locandina del Congresso'))
                 ->add('path_pdf_programma', 'file', array('required' => false, 'label' => 'Programma PDF'))
