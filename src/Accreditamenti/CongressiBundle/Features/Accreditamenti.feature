@@ -1,6 +1,6 @@
 Feature: Gestione degli accreditamenti
 
-Scenario: Se un congresso ha un accreditamento, voglio vederlo nella sua show
+Scenario: Voglio vedere il titolo del congresso associato ad un accreditamento
     Given I go to "/"
     And I follow "Login"
     When I fill in "_username" with "giuseppe"
@@ -9,7 +9,7 @@ Scenario: Se un congresso ha un accreditamento, voglio vederlo nella sua show
     When I am on "/congresso/new"
     And I fill in "Codice congresso" with "TEST89"
     And I fill in "Url" with "http://www.google.com"
-    And I fill in "Titolo" with "titolo test"
+    And I fill in "Titolo" with "Questo è il titolo dell'accreditamento"
     And I fill in "Descrizione" with "mia descrizione"
     And I fill in "accreditamenti_congressibundle_congressotype_data_inizio_year" with "2012"
     And I fill in "accreditamenti_congressibundle_congressotype_data_inizio_month" with "09"
@@ -40,4 +40,4 @@ Scenario: Se un congresso ha un accreditamento, voglio vederlo nella sua show
     And I fill in "accreditamenti_congressibundle_accreditamentotype_numero_crediti" with "2012"
     Given I press "Create"
     Then the response should contain "Accreditamento creato con successo"
-    Then show last response
+    Then the response should contain "Questo è il titolo dell&#039;accreditamento"
