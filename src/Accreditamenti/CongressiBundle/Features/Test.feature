@@ -28,4 +28,3 @@ Scenario: As User Create a new Test
     And I check "Abilitato"
     Given I press "Create"
     Then the response should contain "Congresso creato con successo"
-    Then show last response
