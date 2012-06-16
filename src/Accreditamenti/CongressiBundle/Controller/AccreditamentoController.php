@@ -95,6 +95,9 @@ class AccreditamentoController extends Controller {
             $em->persist($entity);
             $em->flush();
 
+            // Imposto il flash message
+            $this->get('session')->setFlash('notice', 'Accreditamento creato con successo');
+
             return $this->redirect($this->generateUrl('accreditamento_show', array('id' => $entity->getId())));
         }
 
