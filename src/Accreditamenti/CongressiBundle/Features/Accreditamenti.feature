@@ -11,7 +11,6 @@ Scenario: Voglio vedere il titolo del congresso associato ad un accreditamento
     And I fill in "Url" with "http://www.google.com"
     And I fill in "Titolo" with "Questo è il titolo dell'accreditamento"
     And I fill in "Descrizione" with "mia descrizione"
-    Then show last response
     And I fill in "accreditamenti_congressibundle_congressotype_data_inizio_date_day" with "01"
     And I fill in "accreditamenti_congressibundle_congressotype_data_inizio_date_month" with "01"
     And I fill in "accreditamenti_congressibundle_congressotype_data_inizio_date_year" with "2012"
