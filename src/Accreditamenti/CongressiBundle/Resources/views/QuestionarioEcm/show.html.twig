@@ -1,0 +1,53 @@
+<h1>QuestionarioEcm</h1>
+
+<table class="record_properties">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>Descrizione</th>
+            <td>{{ entity.descrizione }}</td>
+        </tr>
+        <tr>
+            <th>Data_inizio_compilazione</th>
+            <td>{{ entity.datainiziocompilazione|date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr>
+            <th>Data_fine_compilazione</th>
+            <td>{{ entity.datafinecompilazione|date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr>
+            <th>Percentuale_risposte_esatte</th>
+            <td>{{ entity.percentualerisposteesatte }}</td>
+        </tr>
+        <tr>
+            <th>Numero_tentativi_compilazione</th>
+            <td>{{ entity.numerotentativicompilazione }}</td>
+        </tr>
+        <tr>
+            <th>Accreditamento_id</th>
+            <td>{{ entity.accreditamentoid }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('questionarioecm') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('questionarioecm_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('questionarioecm_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+</ul>

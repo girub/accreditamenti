@@ -1,4 +1,4 @@
-Feature: Come Admin dentro la pagina show accreditamento voglio gestire i il test
+Feature: Come Admin dentro la pagina show accreditamento voglio creare un questionario ecm
 
 Scenario: As User Create a new Test
     Given I go to "/"
@@ -29,7 +29,7 @@ Scenario: As User Create a new Test
     Given I press "Create"
     #Then the response should contain "Congresso creato con successo"
     And I follow "Crea accreditamento"
-    And I fill in "Numero accreditamento" with "ACCRE-TEST"
+    And I fill in "Numero accreditamento" with "55555"
     And I fill in "Titolo" with "ACCRE-TITOLO"
     And I fill in "Luogo" with "ACCRE-ROMA"
     And I fill in "accreditamenti_congressibundle_accreditamentotype_data_inizio_year" with "2012"
@@ -42,3 +42,6 @@ Scenario: As User Create a new Test
     And I fill in "Obiettivo formativo" with "ACCRE-OBIETTIVOOOO"
     And I fill in "Numero crediti" with "11"
     Given I press "Create"
+    #Then show last response                                                                                       
+    Then the response should contain "Accreditamento creato con successo"
+    And I follow "Crea questionario ecm"

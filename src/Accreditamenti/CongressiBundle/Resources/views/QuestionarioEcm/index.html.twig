@@ -1,0 +1,47 @@
+<h1>QuestionarioEcm list</h1>
+
+<table class="records_list">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Descrizione</th>
+            <th>Data_inizio_compilazione</th>
+            <th>Data_fine_compilazione</th>
+            <th>Percentuale_risposte_esatte</th>
+            <th>Numero_tentativi_compilazione</th>
+            <th>Accreditamento_id</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('questionarioecm_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td>{{ entity.descrizione }}</td>
+            <td>{% if entity.datainiziocompilazione %}{{ entity.datainiziocompilazione|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>{% if entity.datafinecompilazione %}{{ entity.datafinecompilazione|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>{{ entity.percentualerisposteesatte }}</td>
+            <td>{{ entity.numerotentativicompilazione }}</td>
+            <td>{{ entity.accreditamentoid }}</td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('questionarioecm_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('questionarioecm_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<ul>
+    <li>
+        <a href="{{ path('questionarioecm_new') }}">
+            Create a new entry
+        </a>
+    </li>
+</ul>
