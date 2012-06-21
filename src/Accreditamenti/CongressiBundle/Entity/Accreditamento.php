@@ -5,6 +5,7 @@ namespace Accreditamenti\CongressiBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\OneToMany;
 
 /**
  * Accreditamenti\CongressiBundle\Entity\Accreditamento
@@ -78,12 +79,17 @@ class Accreditamento {
      * @ORM\Column(name="numero_crediti", type="float")
      */
     private $numero_crediti;
-    
+
     /**
      * @ManyToOne(targetEntity="Congresso", inversedBy="accreditamenti")
      * @JoinColumn(name="congresso_id", referencedColumnName="id")
      */
     private $congresso;
+
+    /**
+     * @OneToMany(targetEntity="QuestionarioEcm", mappedBy="accreditamento")
+     */
+    private $questionarioecm;
 
     /**
      * Get id
@@ -238,14 +244,12 @@ class Accreditamento {
         return $this->numero_accreditamento;
     }
 
-
     /**
      * Set congresso
      *
      * @param Accreditamenti\CongressiBundle\Entity\Congresso $congresso
      */
-    public function setCongresso(\Accreditamenti\CongressiBundle\Entity\Congresso $congresso)
-    {
+    public function setCongresso(\Accreditamenti\CongressiBundle\Entity\Congresso $congresso) {
         $this->congresso = $congresso;
     }
 
@@ -254,8 +258,34 @@ class Accreditamento {
      *
      * @return Accreditamenti\CongressiBundle\Entity\Congresso 
      */
-    public function getCongresso()
-    {
+    public function getCongresso() {
         return $this->congresso;
     }
+
+    public function __construct() {
+        $this->questionarioecm = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add questionarioecm
+     *
+     * @param Accreditamenti\CongressiBundle\Entity\QuestionarioEcm $questionarioecm
+     */
+    public function addQuestionarioEcm(\Accreditamenti\CongressiBundle\Entity\QuestionarioEcm $questionarioecm) {
+        $this->questionarioecm[] = $questionarioecm;
+    }
+
+    /**
+     * Get questionarioecm
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getQuestionarioecm() {
+        return $this->questionarioecm;
+    }
+
+    public function __toString() {
+        return $this->getTitolo();
+    }
+
 }

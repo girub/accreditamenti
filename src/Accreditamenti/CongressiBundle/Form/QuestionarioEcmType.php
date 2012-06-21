@@ -15,7 +15,7 @@ class QuestionarioEcmType extends AbstractType
             ->add('data_fine_compilazione')
             ->add('percentuale_risposte_esatte')
             ->add('numero_tentativi_compilazione')
-            ->add('accreditamento_id')
+            ->add('accreditamento')
         ;
     }
 

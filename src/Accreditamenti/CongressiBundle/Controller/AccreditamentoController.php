@@ -65,7 +65,7 @@ class AccreditamentoController extends Controller {
 
 
         $accreditamento = new Accreditamento();
-
+        
         //In questa riga 
         $accreditamento->setCongresso($congresso);
 

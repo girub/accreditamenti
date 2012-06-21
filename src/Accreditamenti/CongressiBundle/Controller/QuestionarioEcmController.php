@@ -57,11 +57,35 @@ class QuestionarioEcmController extends Controller
     /**
      * Displays a form to create a new QuestionarioEcm entity.
      *
-     * @Route("/new", name="questionarioecm_new")
+     * @Route("/new/{accreditamento_id}", name="questionarioecm_new")
      * @Template()
-     */
-    public function newAction()
+    */
+    public function newAction($accreditamento_id)
     {
+         
+        //die('dddd');
+        
+         //ricevo id dalla rotta e mi carico il congresso
+        $em = $this->getDoctrine()->getEntityManager();
+        $accreditamento = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($accreditamento_id);
+
+
+        $questionarioecm = new QuestionarioEcm();
+        
+        
+        //In questa riga 
+        $questionarioecm->setAccreditamento($accreditamento);
+        
+
+        $form = $this->createForm(new QuestionarioEcmType(), $questionarioecm);
+
+        return array(
+            'entity' => $questionarioecm,
+            'form' => $form->createView()
+        );
+        
+        
+        /*
         $entity = new QuestionarioEcm();
         $form   = $this->createForm(new QuestionarioEcmType(), $entity);
 
@@ -69,6 +93,12 @@ class QuestionarioEcmController extends Controller
             'entity' => $entity,
             'form'   => $form->createView()
         );
+        */
+        
+        
+        
+        
+        
     }
 
     /**

@@ -45,3 +45,13 @@ Scenario: As User Create a new Test
     #Then show last response                                                                                       
     Then the response should contain "Accreditamento creato con successo"
     And I follow "Crea questionario ecm"
+    And I fill in "Descrizione" with "Mia Descrizione questionario"
+    And I fill in "accreditamenti_congressibundle_questionarioecmtype_data_inizio_compilazione_year" with "2012"
+    And I fill in "accreditamenti_congressibundle_questionarioecmtype_data_inizio_compilazione_month" with "07"
+    And I fill in "accreditamenti_congressibundle_questionarioecmtype_data_inizio_compilazione_day" with "07"
+    And I fill in "accreditamenti_congressibundle_questionarioecmtype_data_fine_compilazione_year" with "2012"
+    And I fill in "accreditamenti_congressibundle_questionarioecmtype_data_fine_compilazione_month" with "07"
+    And I fill in "accreditamenti_congressibundle_questionarioecmtype_data_fine_compilazione_day" with "09"
+    And I fill in "Percentuale risposte esatte" with "75"
+    And I fill in "Numero tentativi compilazione" with "12"
+    Given I press "Create"

@@ -132,6 +132,14 @@ class Congresso {
      */
     private $accreditamenti;
 
+    public function __toString() {
+        return $this->titolo;
+    }
+
+    public function __construct() {
+        $this->accreditamenti = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
     /**
      * Get id
      *
@@ -411,16 +419,12 @@ class Congresso {
         return $this->abilitato;
     }
 
-    public function __construct() {
-        $this->accreditamenti = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
     /**
      * Add accreditamenti
      *
-     * @param Accreditamenti\CongressiBundle\Entity\Accreditamenti $accreditamenti
+     * @param Accreditamenti\CongressiBundle\Entity\Accreditamento $accreditamenti
      */
-    public function addAccreditamenti(\Accreditamenti\CongressiBundle\Entity\Accreditamento $accreditamenti) {
+    public function addAccreditamento(\Accreditamenti\CongressiBundle\Entity\Accreditamento $accreditamenti) {
         $this->accreditamenti[] = $accreditamenti;
     }
 
@@ -431,10 +435,6 @@ class Congresso {
      */
     public function getAccreditamenti() {
         return $this->accreditamenti;
-    }
-
-    public function __toString() {
-        return $this->titolo;
     }
 
 }

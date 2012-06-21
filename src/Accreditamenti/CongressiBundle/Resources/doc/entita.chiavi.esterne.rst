@@ -17,8 +17,8 @@ Cosa fare per relazionare le due entità
 
 Per relazionare le due entità dovremo seguire una serie di passaggi.
 
-#. Modificare l'entità Accreditamento
-#. Modificare l'entità Congresso
+#. Modificare l'entità Accreditamento (in questo caso figlio)
+#. Modificare l'entità Congresso (in questo caso padre)
 #. Completare le entità
 #. Creare la nuova migration
 
@@ -71,6 +71,29 @@ sopratutto __toString. Quando visualizzeremo un form per gli Accreditamenti
 il campo congresso_id generato, mostrerà automaticamente una select con tutti i
 congressi inseriti. Ma per funzionare correttamente, Congresso necessita di un 
 metodo __toString.
+
+-----------------------------------------
+Creare gli accessori (getter ed i setter)
+-----------------------------------------
+
+    $ php app/console doctrine:generate:entities AccreditamentiCongressiBundle:NOME_ENTITA
+
+    $ php app/console doctrine:generate:entities AccreditamentiCongressiBundle:Congresso
+    $ php app/console doctrine:generate:entities AccreditamentiCongressiBundle:Accreditamento
+    $ php app/console doctrine:generate:entities AccreditamentiCongressiBundle:QuestionarioEcm
+
+----------
+__toString
+----------
+
+L'entità "padre" deve contenere un __toString perchè verrà visualizzato nelle
+<option /> della  <select />.
+
+::
+
+    public function __toString() {
+        return $this->getTitolo();
+    }
 
 -------------------------
 Creare la nuova migration
