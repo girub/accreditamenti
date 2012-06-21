@@ -1,75 +1,71 @@
 {% extends '::base.html.twig' %}
 
 {% block sidebar %}
-    <div class="well">
-        Tot congressi: {{ entities|length }}
-    </div>
+<div class="well">
+    Tot congressi: {{ entities|length }}
+</div>
 {% endblock %}
 
 {% block body %}
 
-    <div class="navbar">
-        <div class="navbar-inner">
-            <div class="container">
-                <ul class="nav">
-                    <li>
-                        <a href="{{ path('congresso_new') }}">
-                            <span class="icon-plus-sign icon-white"></span> Crea congresso
-                        </a>
-                    </li>
-                </ul>
-            </div>
+<div class="navbar">
+    <div class="navbar-inner">
+        <div class="container">
+            <ul class="nav">
+                <li>
+                    <a href="{{ path('congresso_new') }}">
+                        <span class="icon-plus-sign icon-white"></span> Crea congresso
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
+</div>
 
-    <h1>Elenco dei congressi</h1>
+<h1>Elenco dei congressi</h1>
 
     {% if entities|length == 0 %}
-    
-        <em>Non ci sono congressi</em>
-    
+
+<em>Non ci sono congressi</em>
+
     {% else %}
-    
-        <table class="records_list">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Codice_congresso</th>
-                    <th>Url</th>
-                    <th>Titolo</th>
-                    <th>Descrizione</th>
-                    <th>Data_inizio</th>
-                    <th>Data_fine</th>
-                    <th>Luogo</th>
-                    <th>Manifesto</th>
-                    <th>Path_pdf_programma</th>
-                    <th>Path_pdf_iscrizione</th>
-                    <th>Path_pdf_prenotazione</th>
-                    <th>Email_referente</th>
-                    <th>Ricezione_abstract</th>
-                    <th>Pagina_sponsor</th>
-                    <th>Abilitato</th>
-                </tr>
-            </thead>
-            <tbody>
+
+<table class="table-bordered table-condensed table-striped table">
+    <thead>
+        <tr>
+            <th>Congresso</th>
+            <th>Data_inizio</th>
+            <th>Data_fine</th>
+            <th>Info</th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
             {% for entity in entities %}
-                <tr>
-                    <td><a href="{{ path('congresso_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                    <td>{{ entity.codicecongresso }}</td>
-                    <td>{{ entity.url }}</td>
-                    <td>{{ entity.titolo }}</td>
-                    <td>{{ entity.descrizione }}</td>
-                    <td>{% if entity.datainizio %}{{ entity.datainizio|date('Y-m-d H:i:s') }}{% endif %}</td>
-                    <td>{% if entity.datafine %}{{ entity.datafine|date('Y-m-d H:i:s') }}{% endif %}</td>
-                    <td>{{ entity.luogo }}</td>
-                    <td>{{ entity.manifesto }}</td>
-                    <td>{{ entity.pathpdfprogramma }}</td>
-                    <td>{{ entity.pathpdfiscrizione }}</td>
-                    <td>{{ entity.pathpdfprenotazione }}</td>
-                    <td>{{ entity.emailreferente }}</td>
-                    <td>{{ entity.ricezioneabstract }}</td>
-                    <td>{{ entity.paginasponsor }}</td>
-                    <td>{{ entity.abilitato }}</td>
+            <tr>
+                <td>
+                    <strong>{{ entity.titolo }}</strong><br />
+                    <em>{{ entity.descrizione }}</em><br />
+                    <span class="icon-road"></span> {{ entity.luogo }}<br />
+                    {% if entity.emailreferente %}
+                        <span class="icon-envelope"></span> {{ entity.emailreferente }}<br />
+                    {% endif %}
+                    <span class="icon-bookmark"></span> <a href="{{ path('congresso_show', { 'id': entity.id }) }}">{{ entity.codicecongresso }}</a></a>
+                </td>
+                <td>{% if entity.datainizio %}{{ entity.datainizio|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.datafine %}{{ entity.datafine|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                        {% if entity.ricezioneabstract %}
+                        <span class="icon-file"></span> ricezione abstract<br />
+                        {% endif %}
+                        {% if entity.paginasponsor %}
+                        <span class="icon-file"></span> pagina sponsor<br />
+                        {% endif %}
+                        {% if entity.abilitato %}
+                        <span class="icon-check"></span> abilitato<br />
+                        {% endif %}
+                    </td>
+                    <td><a href="{{ path('congresso_edit', {'id': entity.id}) }}" class="icon-edit"></a></td>
                 </tr>
             {% endfor %}
             </tbody>
