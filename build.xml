@@ -2,8 +2,9 @@
 
 <project name="accreditamenti" default="help">
     
-    <target name="buongiorno" depends="vendors,bootstrap,docs,cache:clear,migrations,fixtures,test">
+    <target name="buongiorno" depends="vendors,bootstrap,docs,cache:clear,migrations,fixtures">
         <echo msg="Buon lavoro =)!!!" />
+        <echo msg="Adesso lancia 'sh behat' per lanciare i tests" />
     </target>
 
     <target name="docs">
