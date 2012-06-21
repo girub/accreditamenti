@@ -42,27 +42,27 @@
     </thead>
     <tbody>
             {% for entity in entities %}
-            <tr>
-                <td>
-                    <strong>{{ entity.titolo }}</strong><br />
-                    <em>{{ entity.descrizione }}</em><br />
-                    <span class="icon-road"></span> {{ entity.luogo }}<br />
-                    {% if entity.emailreferente %}
-                        <span class="icon-envelope"></span> {{ entity.emailreferente }}<br />
-                    {% endif %}
-                    <span class="icon-bookmark"></span> <a href="{{ path('congresso_show', { 'id': entity.id }) }}">{{ entity.codicecongresso }}</a></a>
-                </td>
-                <td>{% if entity.datainizio %}{{ entity.datainizio|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if entity.datafine %}{{ entity.datafine|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>
+                <tr>
+                    <td>
+                        <strong>{{ entity.titolo }}</strong><br />
+                        <em>{{ entity.descrizione }}</em><br />
+                        <span class="icon-road"></span> {{ entity.luogo }}<br />
+                        {% if entity.emailreferente %}
+                            <span class="icon-envelope"></span> {{ entity.emailreferente }}<br />
+                        {% endif %}
+                        <span class="icon-bookmark"></span> <a href="{{ path('congresso_show', { 'id': entity.id }) }}">{{ entity.codicecongresso }}</a></a>
+                    </td>
+                    <td>{% if entity.datainizio %}{{ entity.datainizio|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>{% if entity.datafine %}{{ entity.datafine|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>
                         {% if entity.ricezioneabstract %}
-                        <span class="icon-file"></span> ricezione abstract<br />
+                            <span class="icon-file"></span> ricezione abstract<br />
                         {% endif %}
                         {% if entity.paginasponsor %}
-                        <span class="icon-file"></span> pagina sponsor<br />
+                            <span class="icon-file"></span> pagina sponsor<br />
                         {% endif %}
                         {% if entity.abilitato %}
-                        <span class="icon-check"></span> abilitato<br />
+                            <span class="icon-check"></span> abilitato<br />
                         {% endif %}
                     </td>
                     <td><a href="{{ path('congresso_edit', {'id': entity.id}) }}" class="icon-edit"></a></td>
