@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping\JoinColumn;
 /**
  * Accreditamenti\CongressiBundle\Entity\Risposta
  *
- * @ORM\Table(name="ideacpa_risposta")
+ * @ORM\Table()
  * @ORM\Entity(repositoryClass="Accreditamenti\CongressiBundle\Entity\RispostaRepository")
  */
 class Risposta {
@@ -88,24 +88,4 @@ class Risposta {
         return $this->vero;
     }
 
-
-    /**
-     * Set domanda
-     *
-     * @param Accreditamenti\CongressiBundle\Entity\Domanda $domanda
-     */
-    public function setDomanda(\Accreditamenti\CongressiBundle\Entity\Domanda $domanda)
-    {
-        $this->domanda = $domanda;
-    }
-
-    /**
-     * Get domanda
-     *
-     * @return Accreditamenti\CongressiBundle\Entity\Domanda 
-     */
-    public function getDomanda()
-    {
-        return $this->domanda;
-    }
 }

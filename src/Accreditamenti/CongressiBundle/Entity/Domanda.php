@@ -3,9 +3,9 @@
 namespace Accreditamenti\CongressiBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\OneToMany;
 
 /**
  * Accreditamenti\CongressiBundle\Entity\Domanda
@@ -38,6 +38,11 @@ class Domanda {
     private $questionarioecm;
 
     /**
+     * @OneToMany(targetEntity="Risposta", mappedBy="domanda")
+     */
+    private $risposta;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -64,14 +69,12 @@ class Domanda {
         return $this->descrizione;
     }
 
-
     /**
      * Set questionarioecm
      *
      * @param Accreditamenti\CongressiBundle\Entity\QuestionarioEcm $questionarioecm
      */
-    public function setQuestionarioecm(\Accreditamenti\CongressiBundle\Entity\QuestionarioEcm $questionarioecm)
-    {
+    public function setQuestionarioecm(\Accreditamenti\CongressiBundle\Entity\QuestionarioEcm $questionarioecm) {
         $this->questionarioecm = $questionarioecm;
     }
 
@@ -80,8 +83,14 @@ class Domanda {
      *
      * @return Accreditamenti\CongressiBundle\Entity\QuestionarioEcm 
      */
-    public function getQuestionarioecm()
-    {
+    public function getQuestionarioecm() {
         return $this->questionarioecm;
     }
+
+    
+    
+    public function __toString() {
+        return $this->getDescrizione();
+    }
+
 }
