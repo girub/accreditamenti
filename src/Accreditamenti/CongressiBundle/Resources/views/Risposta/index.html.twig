@@ -1,0 +1,39 @@
+<h1>Risposta list</h1>
+
+<table class="records_list">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Descrizione</th>
+            <th>Vero</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('risposta_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td>{{ entity.descrizione }}</td>
+            <td>{{ entity.vero }}</td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('risposta_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('risposta_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<ul>
+    <li>
+        <a href="{{ path('risposta_new') }}">
+            Create a new entry
+        </a>
+    </li>
+</ul>
