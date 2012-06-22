@@ -65,7 +65,7 @@ class QuestionarioEcmController extends Controller
          
         //die('dddd');
         
-         //ricevo id dalla rotta e mi carico il congresso
+         //ricevo id dalla rotta e mi carico l'accreditamento
         $em = $this->getDoctrine()->getEntityManager();
         $accreditamento = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($accreditamento_id);
 
@@ -120,6 +120,10 @@ class QuestionarioEcmController extends Controller
             $em->persist($entity);
             $em->flush();
 
+            // Imposto il flash message
+            $this->get('session')->setFlash('notice', 'Questionario creato con successo');
+            
+            
             return $this->redirect($this->generateUrl('questionarioecm_show', array('id' => $entity->getId())));
             
         }

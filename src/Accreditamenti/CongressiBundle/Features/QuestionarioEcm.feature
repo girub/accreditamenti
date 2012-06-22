@@ -55,3 +55,7 @@ Scenario: As User Create a new Test
     And I fill in "Percentuale risposte esatte" with "75"
     And I fill in "Numero tentativi compilazione" with "12"
     Given I press "Create"
+    Then the response should contain "Questionario creato con successo"
+    And I follow "Crea domanda"
+    And I fill in "Descrizione" with "Mia Descrizione questionario"
+    Given I press "Create"

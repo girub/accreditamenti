@@ -1,0 +1,87 @@
+<?php
+
+namespace Accreditamenti\CongressiBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\JoinColumn;
+
+/**
+ * Accreditamenti\CongressiBundle\Entity\Domanda
+ *
+ * @ORM\Table(name="ideacpa_domanda")
+ * @ORM\Entity(repositoryClass="Accreditamenti\CongressiBundle\Entity\DomandaRepository")
+ */
+class Domanda {
+
+    /**
+     * @var integer $id
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string $descrizione
+     *
+     * @ORM\Column(name="descrizione", type="string", length=255)
+     */
+    private $descrizione;
+
+    /**
+     * @ManyToOne(targetEntity="QuestionarioEcm", inversedBy="domanda")
+     * @JoinColumn(name="questionarioecm_id", referencedColumnName="id")
+     */
+    private $questionarioecm;
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId() {
+        return $this->id;
+    }
+
+    /**
+     * Set descrizione
+     *
+     * @param string $descrizione
+     */
+    public function setDescrizione($descrizione) {
+        $this->descrizione = $descrizione;
+    }
+
+    /**
+     * Get descrizione
+     *
+     * @return string 
+     */
+    public function getDescrizione() {
+        return $this->descrizione;
+    }
+
+
+    /**
+     * Set questionarioecm
+     *
+     * @param Accreditamenti\CongressiBundle\Entity\QuestionarioEcm $questionarioecm
+     */
+    public function setQuestionarioecm(\Accreditamenti\CongressiBundle\Entity\QuestionarioEcm $questionarioecm)
+    {
+        $this->questionarioecm = $questionarioecm;
+    }
+
+    /**
+     * Get questionarioecm
+     *
+     * @return Accreditamenti\CongressiBundle\Entity\QuestionarioEcm 
+     */
+    public function getQuestionarioecm()
+    {
+        return $this->questionarioecm;
+    }
+}

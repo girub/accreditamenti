@@ -5,6 +5,7 @@ namespace Accreditamenti\CongressiBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\OneToMany;
 
 /**
  * Accreditamenti\CongressiBundle\Entity\QuestionarioEcm
@@ -70,6 +71,11 @@ class QuestionarioEcm {
      * @JoinColumn(name="accreditamento_id", referencedColumnName="id")
      */
     private $accreditamento;
+
+    /**
+     * @OneToMany(targetEntity="Domanda", mappedBy="questionarioecm")
+     */
+    private $domanda;
 
     /**
      * Get id
@@ -188,14 +194,12 @@ class QuestionarioEcm {
         return $this->accreditamento_id;
     }
 
-
     /**
      * Set accreditamento
      *
      * @param Accreditamenti\CongressiBundle\Entity\Accreditamento $accreditamento
      */
-    public function setAccreditamento(\Accreditamenti\CongressiBundle\Entity\Accreditamento $accreditamento)
-    {
+    public function setAccreditamento(\Accreditamenti\CongressiBundle\Entity\Accreditamento $accreditamento) {
         $this->accreditamento = $accreditamento;
     }
 
@@ -204,8 +208,13 @@ class QuestionarioEcm {
      *
      * @return Accreditamenti\CongressiBundle\Entity\Accreditamento 
      */
-    public function getAccreditamento()
-    {
+    public function getAccreditamento() {
         return $this->accreditamento;
     }
+    
+    public function __toString(){
+        return $this->getDescrizione();
+    }
+    
+
 }
