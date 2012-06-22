@@ -62,10 +62,8 @@ class QuestionarioEcmController extends Controller
     */
     public function newAction($accreditamento_id)
     {
-         
-        //die('dddd');
-        
-         //ricevo id dalla rotta e mi carico l'accreditamento
+               
+        //ricevo id dalla rotta e mi carico l'accreditamento
         $em = $this->getDoctrine()->getEntityManager();
         $accreditamento = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($accreditamento_id);
 

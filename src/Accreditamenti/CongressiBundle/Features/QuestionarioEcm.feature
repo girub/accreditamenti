@@ -57,5 +57,11 @@ Scenario: As User Create a new Test
     Given I press "Create"
     Then the response should contain "Questionario creato con successo"
     And I follow "Crea domanda"
-    And I fill in "Descrizione" with "Mia Descrizione questionario"
+    And I fill in "Descrizione" with "quanto erano i porcellini?"
     Given I press "Create"
+    And I follow "Crea risposta"
+    Then show last response  
+    And I fill in "Descrizione" with "erano 3"
+    And I check "Vero"
+    Given I press "Create"
+
