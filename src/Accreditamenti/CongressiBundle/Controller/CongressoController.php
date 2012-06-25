@@ -33,8 +33,6 @@ class CongressoController extends Controller {
                 ->getQuery()
                 ->getResult();
 
-
-
         return array('entities' => $entities);
     }
 
@@ -45,14 +43,7 @@ class CongressoController extends Controller {
      * @Template()
      */
     public function mostraTuttiAction() {
-//        $em = $this->getDoctrine()->getEntityManager();
-//
-//        $entities = $em->getRepository('AccreditamentiCongressiBundle:Congresso')->findAll();
-//
-//        return array('entities' => $entities);
-        
-        
-        
+
         $data_corrente = new \DateTime('now');
         $entities = $this->getDoctrine()->getRepository('AccreditamentiCongressiBundle:Congresso');
         $entities = $entities->createQueryBuilder('c')
@@ -62,11 +53,7 @@ class CongressoController extends Controller {
                 ->getQuery()
                 ->getResult();
 
-
-
         return array('entities' => $entities);
-        
-        
     }
 
     /**

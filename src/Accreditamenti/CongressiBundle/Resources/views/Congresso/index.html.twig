@@ -52,8 +52,8 @@
                         {% endif %}
                         <span class="icon-bookmark"></span> <a href="{{ path('congresso_show', { 'id': entity.id }) }}">{{ entity.codicecongresso }}</a></a>
                     </td>
-                    <td>{% if entity.datainizio %}{{ entity.datainizio|date('Y-m-d H:i:s') }}{% endif %}</td>
-                    <td>{% if entity.datafine %}{{ entity.datafine|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>{% if entity.datainizio %}{{ entity.datainizio|date('d/m/Y') }}{% endif %}</td>
+                    <td>{% if entity.datafine %}{{ entity.datafine|date('d/m/Y') }}{% endif %}</td>
                     <td>
                         {% if entity.ricezioneabstract %}
                             <span class="icon-file"></span> ricezione abstract<br />
