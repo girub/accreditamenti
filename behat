@@ -3,6 +3,18 @@ clear
 
 echo @AccreditamentiUserBundle
 ./app/console --env=test behat --format=progress @AccreditamentiUserBundle
+echo @End
 
+echo 
 echo @AccreditamentiCongressiBundle
 ./app/console --env=test behat --format=progress @AccreditamentiCongressiBundle
+echo @End
+
+echo
+echo @Fixtures
+./app/console doctrine:fixtures:load
+echo @End
+
+echo
+echo Sei pronto per ripartire
+echo

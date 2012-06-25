@@ -65,16 +65,19 @@ class CongressoController extends Controller {
     public function showAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('AccreditamentiCongressiBundle:Congresso')->find($id);
+        $congresso = $em->getRepository('AccreditamentiCongressiBundle:Congresso')->find($id);
+        $accreditamenti = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')
+                ->findAllByCongresso($congresso);
 
-        if (!$entity) {
+        if (!$congresso) {
             throw $this->createNotFoundException('Unable to find Congresso entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity' => $entity,
+            'accreditamenti' => $accreditamenti,
+            'entity' => $congresso,
             'delete_form' => $deleteForm->createView(),);
     }
 
@@ -152,11 +155,13 @@ class CongressoController extends Controller {
         );
     }
 
-    private function getCongressoUploadDirImmagini(Congresso $congresso) {
+    private function getCongressoUploadDirImmagini(Congresso $congresso)
+    {
         return $_SERVER['DOCUMENT_ROOT'] . "/resource/img/" . $congresso->getId();
     }
 
-    private function getCongressoUploadDirProgramma(Congresso $congresso) {
+    private function getCongressoUploadDirProgramma(Congresso $congresso)
+    {
         return $_SERVER['DOCUMENT_ROOT'] . "/resource/prog/" . $congresso->getId();
     }
 
@@ -251,7 +256,9 @@ class CongressoController extends Controller {
      *
      * @Route("/{id}/deletemanifesto", name="congresso_delete_manifesto")
      */
-    public function removeManifestoAction($id) {
+
+    public function removeManifestoAction($id)
+    {
 
 
         $em = $this->getDoctrine()->getEntityManager();

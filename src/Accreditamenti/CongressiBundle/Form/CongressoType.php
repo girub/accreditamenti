@@ -13,17 +13,18 @@ class CongressoType extends AbstractType {
                 ->add('url')
                 ->add('titolo')
                 ->add('descrizione')
-                ->add('data_inizio', 'date', array(
-                    'label' => 'Data Inizio',
-                    'widget' => 'single_text',
-                    'format' => 'dd-MM-yyyy')
-                )
-                
-                ->add('data_fine', 'date', array(
-                    'label' => 'Data Inizio',
-                    'widget' => 'single_text',
-                    'format' => 'dd-MM-yyyy')
-                )
+//                ->add('data_inizio', 'date', array(
+//                    'label' => 'Data Inizio',
+//                    'widget' => 'single_text',
+//                    'format' => 'dd-MM-yyyy')
+//                )
+                ->add('data_inizio')
+                ->add('data_fine')
+//                ->add('data_fine', 'date', array(
+//                    'label' => 'Data Inizio',
+//                    'widget' => 'single_text',
+//                    'format' => 'dd-MM-yyyy')
+//                )
                 ->add('luogo')
                 ->add('manifesto', 'file', array('required' => false, 'label' => 'Locandina del Congresso'))
                 ->add('path_pdf_programma', 'file', array('required' => false, 'label' => 'Programma PDF'))

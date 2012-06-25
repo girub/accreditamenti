@@ -3,6 +3,7 @@
 namespace Accreditamenti\CongressiBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Accreditamenti\CongressiBundle\Entity\Congresso;
 
 /**
  * AccreditamentoRepository
@@ -12,4 +13,12 @@ use Doctrine\ORM\EntityRepository;
  */
 class AccreditamentoRepository extends EntityRepository
 {
+    public function findAllByCongresso(Congresso $congresso)
+    {
+        return $this->createQueryBuilder('a')
+                        ->where('a.congresso = ' . $congresso->getId())
+                        ->getQuery()
+                        ->getResult();
+    }
+
 }

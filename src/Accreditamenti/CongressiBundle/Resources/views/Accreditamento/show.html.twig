@@ -44,9 +44,8 @@
             </form>
         </div>
     </div>
-
-    <h2>Congresso</h2>
     
+    <h2>Congresso</h2>
     <table class="table table-striped table-bordered table-condensed">
         <thead>
             <tr>
@@ -55,7 +54,7 @@
         </thead>
         <tbody>
             <tr>
-                <td>{{ entity.congresso }}</td>
+                <td><a href="{{ path('congresso_show', {'id': entity.congresso.id }) }}">{{ entity.congresso }}</a></td>
             </tr>
         </tbody>
     </table>
@@ -73,7 +72,7 @@
                 {% for questionario in entity.getQuestionarioecm() %}
                     <tr>
                         <td>{{ questionario.descrizione }}</td>
-                        <td><span class="icon-bookmark"></span> <a href="{{ path('questionarioecm_show', {'id': questionario.id }) }}">a pri questionario</a></td>
+                        <td><span class="icon-bookmark"></span> <a href="{{ path('questionarioecm_show', {'id': questionario.id }) }}">apri questionario</a></td>
                     </tr>
                 {% endfor %}
             </tbody>

@@ -4,42 +4,31 @@
 
     <h1>Accreditamento list</h1>
     
-    <table class="records_list">
+    <table class="table table-bordered table-condensed table-striped">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Numero_accreditamento</th>
-                <th>Titolo</th>
-                <th>Luogo</th>
-                <th>Data_inizio</th>
-                <th>Data_fine</th>
-                <th>Ore_formative</th>
-                <th>Obiettivo_formativo</th>
-                <th>Numero_crediti</th>
-                <th>Actions</th>
+                <th>Accreditamento</th>
+                <th>Info</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('accreditamento_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.numeroaccreditamento }}</td>
-                <td>{{ entity.titolo }}</td>
-                <td>{{ entity.luogo }}</td>
-                <td>{% if entity.datainizio %}{{ entity.datainizio|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if entity.datafine %}{{ entity.datafine|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ entity.oreformative }}</td>
-                <td>{{ entity.obiettivoformativo }}</td>
-                <td>{{ entity.numerocrediti }}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('accreditamento_show', { 'id': entity.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('accreditamento_edit', { 'id': entity.id }) }}">edit</a>
-                        </li>
-                    </ul>
+                    <h2>{{ entity.titolo }}</h2>
+                    <span class="icon-book"></span> <a href="{{ path('accreditamento_show', { 'id': entity.id }) }}">{{ entity.numeroaccreditamento }}</a><br />
+                    <span class="icon-road"></span> {{ entity.luogo }}<br />
+                    {% if entity.datainizio %}<span class="icon-calendar"></span> {{ entity.datainizio|date('Y-m-d H:i:s') }}{% endif %}<br />
+                    {% if entity.datafine %}<span class="icon-calendar"></span> {{ entity.datafine|date('Y-m-d H:i:s') }}{% endif %}<br />
+                </td>
+                <td>
+                    <strong>Obiettivo formativo:</strong> {{ entity.obiettivoformativo }}<br />
+                    <strong>Ore formative:</strong> {{ entity.oreformative }}<br />
+                    <strong>Numero crediti:</strong> {{ entity.numerocrediti }}<br />
+                </td>
+                <td>
+                    <a href="{{ path('accreditamento_show', { 'id': entity.id }) }}"><span class="icon-eye-open"></span></a><br />
+                    <a href="{{ path('accreditamento_edit', { 'id': entity.id }) }}"><span class="icon-edit"></span></a><br />
                 </td>
             </tr>
         {% endfor %}
