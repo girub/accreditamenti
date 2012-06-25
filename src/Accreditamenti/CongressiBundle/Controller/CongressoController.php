@@ -55,16 +55,19 @@ class CongressoController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('AccreditamentiCongressiBundle:Congresso')->find($id);
+        $congresso = $em->getRepository('AccreditamentiCongressiBundle:Congresso')->find($id);
+        $accreditamenti = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')
+                ->findAllByCongresso($congresso);
 
-        if (!$entity) {
+        if (!$congresso) {
             throw $this->createNotFoundException('Unable to find Congresso entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity' => $entity,
+            'accreditamenti' => $accreditamenti,
+            'entity' => $congresso,
             'delete_form' => $deleteForm->createView(),);
     }
 
@@ -98,9 +101,9 @@ class CongressoController extends Controller
         $request = $this->getRequest();
         $form = $this->createForm(new CongressoType(), $entity);
         $form->bindRequest($request);
-        
+
         if ($form->isValid()) {
-            
+
             // Salvo i dati nel db
             $em = $this->getDoctrine()->getEntityManager();
             $em->persist($entity);
@@ -145,11 +148,13 @@ class CongressoController extends Controller
         );
     }
 
-    private function getCongressoUploadDirImmagini(Congresso $congresso) {
+    private function getCongressoUploadDirImmagini(Congresso $congresso)
+    {
         return $_SERVER['DOCUMENT_ROOT'] . "/resource/img/" . $congresso->getId();
     }
 
-    private function getCongressoUploadDirProgramma(Congresso $congresso) {
+    private function getCongressoUploadDirProgramma(Congresso $congresso)
+    {
         return $_SERVER['DOCUMENT_ROOT'] . "/resource/prog/" . $congresso->getId();
     }
 
@@ -197,28 +202,27 @@ class CongressoController extends Controller
 
 
 
- if (!($editForm['path_pdf_programma']->getData() === NULL)) {
-            // Upload Programma pdf
-            $ext_programma = $editForm['path_pdf_programma']->getData()->guessExtension();
-            if (!$ext_programma) {
-                // l'estensione non può essere indovinata
-                $ext_programma = 'txt';
+            if (!($editForm['path_pdf_programma']->getData() === NULL)) {
+                // Upload Programma pdf
+                $ext_programma = $editForm['path_pdf_programma']->getData()->guessExtension();
+                if (!$ext_programma) {
+                    // l'estensione non può essere indovinata
+                    $ext_programma = 'txt';
+                }
+
+                //cambiare
+                $programma = rand(1, 99999) . '.' . $ext_programma;
+                //die($programma);
+                $dir = $this->getCongressoUploadDirProgramma($congresso);
+
+                @mkdir($dir, 0775);
+
+                $filename_prog = $programma;
+
+                $editForm['path_pdf_programma']->getData()->move($dir, $filename_prog);
+
+                $congresso->setPathPdfProgramma($filename_prog);
             }
-
-            //cambiare
-            $programma = rand(1, 99999) . '.' . $ext_programma;
-            //die($programma);
-            $dir = $this->getCongressoUploadDirProgramma($congresso);
-
-            @mkdir($dir, 0775);
-
-            $filename_prog = $programma;
-
-            $editForm['path_pdf_programma']->getData()->move($dir, $filename_prog);
-
-            $congresso->setPathPdfProgramma($filename_prog);
-
- }
             //die($programma);
 
 
@@ -246,8 +250,8 @@ class CongressoController extends Controller
      *
      * @Route("/{id}/deletemanifesto", name="congresso_delete_manifesto")
      */
-
-    public function removeManifestoAction($id) {
+    public function removeManifestoAction($id)
+    {
 
 
         $em = $this->getDoctrine()->getEntityManager();

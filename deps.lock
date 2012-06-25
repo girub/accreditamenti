@@ -22,7 +22,7 @@ BehatBundle v1.0.0
 BehatCommonContexts v1.1.0
 mink v1.3.3
 MinkBundle 144c8cbc08e386e70029edae7a73611079e2dca1
-doctrine-fixtures d233d05437c1a10034867f22069b4bb0f7dc96b6
+doctrine-fixtures 1f0b8be5db0b53681f80c99324c94e21e1efe39a
 DoctrineFixturesBundle a66be2f077f3a4e5c3801b356b42b8782f1abbd6
 RuianTwitterBootstrapBundle 1594b84da7450f5740eb225bf3bde0e6792a0800
 TwitterBootstrap1 v1.4.0

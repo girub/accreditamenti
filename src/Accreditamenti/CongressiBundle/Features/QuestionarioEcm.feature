@@ -60,7 +60,6 @@ Scenario: As User Create a new Test
     And I fill in "Descrizione" with "quanto erano i porcellini?"
     Given I press "Create"
     And I follow "Crea risposta"
-    Then show last response  
     And I fill in "Descrizione" with "erano 3"
     And I check "Vero"
     Given I press "Create"

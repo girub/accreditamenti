@@ -27,7 +27,6 @@ Scenario: As User Create a new Test
     And I check "Pagina sponsor"
     And I check "Abilitato"
     Given I press "Create"
-    #Then the response should contain "Congresso creato con successo"
     And I follow "Crea accreditamento"
     And I fill in "Numero accreditamento" with "ACCRE-TEST"
     And I fill in "Titolo" with "ACCRE-TITOLO"
