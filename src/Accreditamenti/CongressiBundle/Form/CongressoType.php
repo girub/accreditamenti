@@ -14,6 +14,10 @@ class CongressoType extends AbstractType {
                 ->add('titolo')
                 ->add('descrizione')
                 ->add('data_inizio')
+//              ->add('data_inizio', 'date', array(
+//                        'input'  => 'datetime',
+//                        'widget' => 'choice',
+//                    ))
                 ->add('data_fine')
                 ->add('luogo')
                 ->add('manifesto', 'file', array('required' => false, 'label' => 'Locandina del Congresso'))
