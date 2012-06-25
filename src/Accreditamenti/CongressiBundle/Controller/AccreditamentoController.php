@@ -14,15 +14,16 @@ use Accreditamenti\CongressiBundle\Form\AccreditamentoType;
  *
  * @Route("/accreditamento")
  */
-class AccreditamentoController extends Controller {
-
+class AccreditamentoController extends Controller
+{
     /**
      * Lists all Accreditamento entities.
      *
      * @Route("/", name="accreditamento")
      * @Template()
      */
-    public function indexAction() {
+    public function indexAction()
+    {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entities = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')->findAll();
@@ -36,7 +37,8 @@ class AccreditamentoController extends Controller {
      * @Route("/{id}/show", name="accreditamento_show")
      * @Template()
      */
-    public function showAction($id) {
+    public function showAction($id)
+    {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($id);
@@ -58,14 +60,15 @@ class AccreditamentoController extends Controller {
      * @Route("/new/{congresso_id}", name="accreditamento_new")
      * @Template()
      */
-    public function newAction($congresso_id) {
+    public function newAction($congresso_id)
+    {
         //ricevo id dalla rotta e mi carico il congresso
         $em = $this->getDoctrine()->getEntityManager();
         $congresso = $em->getRepository('AccreditamentiCongressiBundle:Congresso')->find($congresso_id);
 
 
         $accreditamento = new Accreditamento();
-        
+
         //In questa riga 
         $accreditamento->setCongresso($congresso);
 
@@ -84,7 +87,8 @@ class AccreditamentoController extends Controller {
      * @Method("post")
      * @Template("AccreditamentiCongressiBundle:Accreditamento:new.html.twig")
      */
-    public function createAction() {
+    public function createAction()
+    {
         $entity = new Accreditamento();
         $request = $this->getRequest();
         $form = $this->createForm(new AccreditamentoType(), $entity);
@@ -113,7 +117,8 @@ class AccreditamentoController extends Controller {
      * @Route("/{id}/edit", name="accreditamento_edit")
      * @Template()
      */
-    public function editAction($id) {
+    public function editAction($id)
+    {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($id);
@@ -139,7 +144,8 @@ class AccreditamentoController extends Controller {
      * @Method("post")
      * @Template("AccreditamentiCongressiBundle:Accreditamento:edit.html.twig")
      */
-    public function updateAction($id) {
+    public function updateAction($id)
+    {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($id);
@@ -175,7 +181,8 @@ class AccreditamentoController extends Controller {
      * @Route("/{id}/delete", name="accreditamento_delete")
      * @Method("post")
      */
-    public function deleteAction($id) {
+    public function deleteAction($id)
+    {
         $form = $this->createDeleteForm($id);
         $request = $this->getRequest();
 
@@ -196,7 +203,8 @@ class AccreditamentoController extends Controller {
         return $this->redirect($this->generateUrl('accreditamento'));
     }
 
-    private function createDeleteForm($id) {
+    private function createDeleteForm($id)
+    {
         return $this->createFormBuilder(array('id' => $id))
                         ->add('id', 'hidden')
                         ->getForm()

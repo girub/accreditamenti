@@ -6,36 +6,43 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Accreditamenti\CongressiBundle\Entity\Accreditamento;
 use Accreditamenti\CongressiBundle\Entity\Congresso;
+use Accreditamenti\CongressiBundle\Entity\Domanda;
+use Accreditamenti\CongressiBundle\Entity\QuestionarioEcm;
 
 class LoadAccreditamenti implements FixtureInterface
 {
     public function load(ObjectManager $manager)
     {
 
-        $congresso = new Congresso();
-        $congresso->setTitolo('Congresso sulla pigna');
-        $congresso->setCodiceCongresso('CONG-PIGN');
-        $congresso->setUrl('http://www.yiinotes.com');
-        $congresso->setDescrizione('Questo congresso sulla pigna parla di pigna');
-        $congresso->setDataInizio(new \DateTime);
-        $congresso->setDataFine(new \DateTime);
-        $congresso->setLuogo('Cesena');
-        $congresso->setRicezioneAbstract(false);
-        $congresso->setPaginaSponsor('true');
-        $congresso->setAbilitato(true);
-        $manager->persist($congresso);
+        $cong = new Congresso();
+        $cong->setTitolo('Congresso sulla pigna');
+        $cong->setCodiceCongresso('CONG-PIGN');
+        $cong->setUrl('http://www.yiinotes.com');
+        $cong->setDescrizione('Questo congresso sulla pigna parla di pigna');
+        $cong->setDataInizio(new \DateTime);
+        $cong->setDataFine(new \DateTime);
+        $cong->setLuogo('Cesena');
+        $cong->setRicezioneAbstract(false);
+        $cong->setPaginaSponsor('true');
+        $cong->setAbilitato(true);
+        $manager->persist($cong);
 
-        $accrediamento = new Accreditamento();
-        $accrediamento->setCongresso($congresso);
-        $accrediamento->setTitolo('Accreditamento della pigna');
-        $accrediamento->setNumeroAccreditamento('1241231');
-        $accrediamento->setLuogo('Cesena');
-        $accrediamento->setDataInizio(new \DateTime); // ???
-        $accrediamento->setDataFine(new \DateTime);
-        $accrediamento->setOreFormative(123);
-        $accrediamento->setObiettivoFormativo('Obiettivo formativo');
-        $accrediamento->setNumeroCrediti(33);
-        $manager->persist($accrediamento);
+        $acc = new Accreditamento();
+        $acc->setCongresso($cong);
+        $acc->setTitolo('Accreditamento della pigna');
+        $acc->setNumeroAccreditamento('1241231');
+        $acc->setLuogo('Cesena');
+        $acc->setDataInizio(new \DateTime); // ???
+        $acc->setDataFine(new \DateTime);
+        $acc->setOreFormative(123);
+        $acc->setObiettivoFormativo('Obiettivo formativo');
+        $acc->setNumeroCrediti(33);
+        $manager->persist($acc);
+        
+        $quest = new QuestionarioEcm();
+        $quest->setAccreditamento($acc);
+        $quest->setAccreditamentoId($acc->getId());
+        $manager->persist($quest);
 
         $manager->flush();
     }

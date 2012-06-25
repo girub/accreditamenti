@@ -217,4 +217,28 @@ class QuestionarioEcm {
     }
     
 
+    public function __construct()
+    {
+        $this->domanda = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add domanda
+     *
+     * @param Accreditamenti\CongressiBundle\Entity\Domanda $domanda
+     */
+    public function addDomanda(\Accreditamenti\CongressiBundle\Entity\Domanda $domanda)
+    {
+        $this->domanda[] = $domanda;
+    }
+
+    /**
+     * Get domanda
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getDomanda()
+    {
+        return $this->domanda;
+    }
 }
