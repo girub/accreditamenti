@@ -25,14 +25,14 @@ class Congresso {
     /**
      * @var string $codice_congresso
      *
-     * @ORM\Column(name="codice_congresso", type="string", length=255)
+     * @ORM\Column(name="codice_congresso", nullable=true, type="string", length=255)
      */
     private $codice_congresso;
 
     /**
      * @var string $url
      *
-     * @ORM\Column(name="url", type="string", length=255)
+     * @ORM\Column(name="url", nullable=true, type="string", length=255)
      */
     private $url;
 
@@ -46,7 +46,7 @@ class Congresso {
     /**
      * @var text $descrizione
      *
-     * @ORM\Column(name="descrizione", type="text")
+     * @ORM\Column(name="descrizione", nullable=true, type="text")
      */
     private $descrizione;
 
@@ -109,21 +109,21 @@ class Congresso {
     /**
      * @var boolean $ricezione_abstract
      *
-     * @ORM\Column(name="ricezione_abstract", type="boolean")
+     * @ORM\Column(name="ricezione_abstract", nullable=true, type="boolean")
      */
     private $ricezione_abstract;
 
     /**
      * @var boolean $pagina_sponsor
      *
-     * @ORM\Column(name="pagina_sponsor", type="boolean")
+     * @ORM\Column(name="pagina_sponsor", nullable=true, type="boolean")
      */
     private $pagina_sponsor;
 
     /**
      * @var boolean $abilitato
      *
-     * @ORM\Column(name="abilitato", type="boolean")
+     * @ORM\Column(name="abilitato", nullable=true, type="boolean")
      */
     private $abilitato;
 

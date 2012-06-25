@@ -9,10 +9,10 @@ class CongressoType extends AbstractType {
 
     public function buildForm(FormBuilder $builder, array $options) {
         $builder
-                ->add('codice_congresso')
-                ->add('url')
+                ->add('codice_congresso', 'text', array('required' => false))
+                ->add('url', 'text', array('required' => false))
                 ->add('titolo')
-                ->add('descrizione')
+                ->add('descrizione','text', array('required' => false))
 //                ->add('data_inizio', 'date', array(
 //                    'label' => 'Data Inizio',
 //                    'widget' => 'single_text',
