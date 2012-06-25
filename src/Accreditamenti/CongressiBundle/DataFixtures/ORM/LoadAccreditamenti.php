@@ -32,7 +32,7 @@ class LoadAccreditamenti implements FixtureInterface
         $acc->setTitolo('Accreditamento della pigna');
         $acc->setNumeroAccreditamento('1241231');
         $acc->setLuogo('Cesena');
-        $acc->setDataInizio(new \DateTime); // ???
+        $acc->setDataInizio(new \DateTime);
         $acc->setDataFine(new \DateTime);
         $acc->setOreFormative(123);
         $acc->setObiettivoFormativo('Obiettivo formativo');
@@ -42,6 +42,21 @@ class LoadAccreditamenti implements FixtureInterface
         $quest = new QuestionarioEcm();
         $quest->setAccreditamento($acc);
         $quest->setAccreditamentoId($acc->getId());
+        $quest->setDescrizione('Descrizione del primo questionario ECM');
+        $quest->setDataInizioCompilazione(new \DateTime);
+        $quest->setDataFineCompilazione(new \DateTime);
+        $quest->setPercentualeRisposteEsatte(33);
+        $quest->setNumeroTentativiCompilazione(3);
+        $manager->persist($quest);
+        
+        $quest = new QuestionarioEcm();
+        $quest->setAccreditamento($acc);
+        $quest->setAccreditamentoId($acc->getId());
+        $quest->setDescrizione('Descrizione del secondo questionario ECM');
+        $quest->setDataInizioCompilazione(new \DateTime);
+        $quest->setDataFineCompilazione(new \DateTime);
+        $quest->setPercentualeRisposteEsatte(33);
+        $quest->setNumeroTentativiCompilazione(3);
         $manager->persist($quest);
 
         $manager->flush();
