@@ -7,6 +7,10 @@
             <div class="container">
                 <ul class="nav">
                     <li>
+                        <a href="{{ path('questionarioecm_show', { 'id': entity.getQuestionarioecm.id }) }}">
+                        <span class="icon-backward icon-white"></span> Crea risposta </a>
+                    </li>
+                    <li>
                         <a href="{{ path('risposta_new', { 'domanda_id': entity.id }) }}">
                         <span class="icon-plus-sign icon-white"></span> Crea risposta </a>
                     </li>

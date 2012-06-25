@@ -1,5 +1,26 @@
 {% extends '::base.html.twig' %}
 
+{% block sidebar %}
+
+    <h1>Congresso</h1>
+
+    <div class="well">
+        <strong>nome:</strong> {{ entity.accreditamento.getCongresso }}<br />
+        <strong>accreditamento:</strong> {{ entity.accreditamento }}<br />
+    </div>
+
+    <h1>Questionario ECM</h1>
+
+    <div class="well">
+        <strong>descrizione:</strong> {{ entity.descrizione }}<br />
+        <strong>inizio:</strong> {{ entity.datainiziocompilazione|date('Y-m-d H:i:s') }}<br />
+        <strong>fine:</strong> {{ entity.datafinecompilazione|date('Y-m-d H:i:s') }}<br />
+        <strong>percentuale:</strong> {{ entity.percentualerisposteesatte }}<br />
+        <strong>tentativi:</strong> {{ entity.numerotentativicompilazione }}<br />
+    </div>
+
+{% endblock %}
+
 {% block body %}
 
      <div class="navbar">
@@ -44,62 +65,21 @@
         </div>
     </div>
 
-
-
-    <h2>Congresso</h2>
-    <table class="table table-striped table-bordered table-condensed">
-        <thead>
-            <tr>
-                <th>Congresso</th>
-                <th>Accreditamento</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{{ entity.accreditamento.getCongresso }}</td>
-                <td>{{ entity.accreditamento }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-
-    <h1>QuestionarioEcm</h1>
-
-    <table class="table table-bordered table-condensed table-striped">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Descrizione</th>
-                <td>{{ entity.descrizione }}</td>
-            </tr>
-            <tr>
-                <th>Data_inizio_compilazione</th>
-                <td>{{ entity.datainiziocompilazione|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Data_fine_compilazione</th>
-                <td>{{ entity.datafinecompilazione|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Percentuale_risposte_esatte</th>
-                <td>{{ entity.percentualerisposteesatte }}</td>
-            </tr>
-            <tr>
-                <th>Numero_tentativi_compilazione</th>
-                <td>{{ entity.numerotentativicompilazione }}</td>
-            </tr>
-            <tr>
-                <th>Accreditamento_id</th>
-                <td>{{ entity.accreditamentoid }}</td>
-            </tr>
-        </tbody>
-    </table>
-
+    <ul>
     {% for domanda in domande %}
-        <li>{{ domanda.questionarioecm.id }} - {{ domanda.descrizione }}</li>
+        <li><a href="{{ path('domanda_edit', {'id': domanda.id }) }}"><span class="icon-edit"></span></a> {{ domanda.descrizione }}
+        <ul>
+            {% for risposta in domanda.getRisposta %}
+                <li>{{ risposta.descrizione }}</li>
+            {% endfor %}
+            <li>
+                <a href="{{ path('risposta_new', {'domanda_id': domanda.id}) }}">
+                    <span class="icon-plus-sign"></span> <em>aggiungi risposta</em>
+                </a>
+            </li>
+        </ul>
+        </li>
     {% endfor %}
+    </ul>
 
 {%endblock%}

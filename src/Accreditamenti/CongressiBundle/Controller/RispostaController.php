@@ -19,21 +19,18 @@ class RispostaController extends Controller {
     /**
      * Lists all Risposta entities.
      *
-     * @Route("/{domanda_id}", name="risposta")
+     * @Route("/", name="risposta")
      * @Template()
      */
     public function indexAction($domanda_id) {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $domanda = $em->getRepository('AccreditamentiCongressiBundle:Domanda')
-                ->find($domanda_id);
-
         $entities = $em->getRepository('AccreditamentiCongressiBundle:Risposta')
-                ->findRisposteDellaDomanda($domanda);
+                ->findAll();
 
         return array(
             'entities' => $entities,
-            'domanda' => $domanda
+            'domanda' => null
         );
     }
 
@@ -56,7 +53,8 @@ class RispostaController extends Controller {
 
         return array(
             'entity' => $entity,
-            'delete_form' => $deleteForm->createView(),);
+            'delete_form' => $deleteForm->createView(),
+        );
     }
 
     /**
@@ -91,21 +89,21 @@ class RispostaController extends Controller {
      * @Template("AccreditamentiCongressiBundle:Risposta:new.html.twig")
      */
     public function createAction() {
-        $entity = new Risposta();
+        $risposta = new Risposta();
         $request = $this->getRequest();
-        $form = $this->createForm(new RispostaType(), $entity);
+        $form = $this->createForm(new RispostaType(), $risposta);
         $form->bindRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
-            $em->persist($entity);
+            $em->persist($risposta);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('risposta_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('questionarioecm_show', array('id' => $risposta->getDomanda()->getQuestionarioecm()->getId())));
         }
 
         return array(
-            'entity' => $entity,
+            'entity' => $risposta,
             'form' => $form->createView()
         );
     }

@@ -93,4 +93,28 @@ class Domanda {
         return $this->getDescrizione();
     }
 
+    public function __construct()
+    {
+        $this->risposta = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add risposta
+     *
+     * @param Accreditamenti\CongressiBundle\Entity\Risposta $risposta
+     */
+    public function addRisposta(\Accreditamenti\CongressiBundle\Entity\Risposta $risposta)
+    {
+        $this->risposta[] = $risposta;
+    }
+
+    /**
+     * Get risposta
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getRisposta()
+    {
+        return $this->risposta;
+    }
 }

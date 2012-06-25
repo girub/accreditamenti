@@ -88,21 +88,21 @@ class DomandaController extends Controller {
      * @Template("AccreditamentiCongressiBundle:Domanda:new.html.twig")
      */
     public function createAction() {
-        $entity = new Domanda();
+        $domanda = new Domanda();
         $request = $this->getRequest();
-        $form = $this->createForm(new DomandaType(), $entity);
+        $form = $this->createForm(new DomandaType(), $domanda);
         $form->bindRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
-            $em->persist($entity);
+            $em->persist($domanda);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('domanda_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('questionarioecm_show', array('id' => $domanda->getQuestionarioecm()->getId())));
         }
 
         return array(
-            'entity' => $entity,
+            'entity' => $domanda,
             'form' => $form->createView()
         );
     }
@@ -159,7 +159,9 @@ class DomandaController extends Controller {
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('domanda_edit', array('id' => $id)));
+            $id = $entity->getQuestionarioecm()->getId();
+            
+            return $this->redirect($this->generateUrl('questionarioecm_show', array('id' => $id)));
         }
 
         return array(

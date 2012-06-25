@@ -19,8 +19,8 @@ class LoadAccreditamenti implements FixtureInterface
         $cong->setCodiceCongresso('CONG-PIGN');
         $cong->setUrl('http://www.yiinotes.com');
         $cong->setDescrizione('Questo congresso sulla pigna parla di pigna');
-        $cong->setDataInizio(new \DateTime);
-        $cong->setDataFine(new \DateTime);
+        $cong->setDataInizio(new \DateTime("+3 day"));
+        $cong->setDataFine(new \DateTime("+4 day"));
         $cong->setLuogo('Cesena');
         $cong->setRicezioneAbstract(false);
         $cong->setPaginaSponsor('true');
