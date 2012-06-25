@@ -73,7 +73,7 @@
                 {% for questionario in entity.getQuestionarioecm() %}
                     <tr>
                         <td>{{ questionario.descrizione }}</td>
-                        <td><span class="icon-bookmark"></span> <a href="{{ path('questionarioecm_show', {'id': questionario.id }) }}">a pri questionario</a></td>
+                        <td><span class="icon-bookmark"></span> <a href="{{ path('questionarioecm_show', {'id': questionario.id }) }}">apri questionario</a></td>
                     </tr>
                 {% endfor %}
             </tbody>
