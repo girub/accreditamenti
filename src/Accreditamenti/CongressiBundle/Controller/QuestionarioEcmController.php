@@ -14,16 +14,15 @@ use Accreditamenti\CongressiBundle\Form\QuestionarioEcmType;
  *
  * @Route("/questionarioecm")
  */
-class QuestionarioEcmController extends Controller
-{
+class QuestionarioEcmController extends Controller {
+
     /**
      * Lists all QuestionarioEcm entities.
      *
      * @Route("/", name="questionarioecm")
      * @Template()
      */
-    public function indexAction()
-    {
+    public function indexAction() {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entities = $em->getRepository('AccreditamentiCongressiBundle:QuestionarioEcm')->findAll();
@@ -37,21 +36,25 @@ class QuestionarioEcmController extends Controller
      * @Route("/{id}/show", name="questionarioecm_show")
      * @Template()
      */
-    public function showAction($id)
-    {
+    public function showAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('AccreditamentiCongressiBundle:QuestionarioEcm')->find($id);
+        $questionario = $em->getRepository('AccreditamentiCongressiBundle:QuestionarioEcm')->find($id);
+        
+        $domande = $em->getRepository('AccreditamentiCongressiBundle:Domanda')
+                ->findDomandeDelQuestionario($questionario);
 
-        if (!$entity) {
+        if (!$questionario) {
             throw $this->createNotFoundException('Unable to find QuestionarioEcm entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        );
+            'entity' => $questionario,
+            'domande' => $domande,
+            'delete_form' => $deleteForm->createView(),
+        );
     }
 
     /**
@@ -59,21 +62,20 @@ class QuestionarioEcmController extends Controller
      *
      * @Route("/new/{accreditamento_id}", name="questionarioecm_new")
      * @Template()
-    */
-    public function newAction($accreditamento_id)
-    {
-               
+     */
+    public function newAction($accreditamento_id) {
+
         //ricevo id dalla rotta e mi carico l'accreditamento
         $em = $this->getDoctrine()->getEntityManager();
         $accreditamento = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($accreditamento_id);
 
 
         $questionarioecm = new QuestionarioEcm();
-        
-        
+
+
         //In questa riga 
         $questionarioecm->setAccreditamento($accreditamento);
-        
+
 
         $form = $this->createForm(new QuestionarioEcmType(), $questionarioecm);
 
@@ -81,22 +83,17 @@ class QuestionarioEcmController extends Controller
             'entity' => $questionarioecm,
             'form' => $form->createView()
         );
-        
-        
-        /*
-        $entity = new QuestionarioEcm();
-        $form   = $this->createForm(new QuestionarioEcmType(), $entity);
 
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView()
-        );
-        */
-        
-        
-        
-        
-        
+
+        /*
+          $entity = new QuestionarioEcm();
+          $form   = $this->createForm(new QuestionarioEcmType(), $entity);
+
+          return array(
+          'entity' => $entity,
+          'form'   => $form->createView()
+          );
+         */
     }
 
     /**
@@ -106,11 +103,10 @@ class QuestionarioEcmController extends Controller
      * @Method("post")
      * @Template("AccreditamentiCongressiBundle:QuestionarioEcm:new.html.twig")
      */
-    public function createAction()
-    {
-        $entity  = new QuestionarioEcm();
+    public function createAction() {
+        $entity = new QuestionarioEcm();
         $request = $this->getRequest();
-        $form    = $this->createForm(new QuestionarioEcmType(), $entity);
+        $form = $this->createForm(new QuestionarioEcmType(), $entity);
         $form->bindRequest($request);
 
         if ($form->isValid()) {
@@ -120,15 +116,14 @@ class QuestionarioEcmController extends Controller
 
             // Imposto il flash message
             $this->get('session')->setFlash('notice', 'Questionario creato con successo');
-            
-            
+
+
             return $this->redirect($this->generateUrl('questionarioecm_show', array('id' => $entity->getId())));
-            
         }
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView()
+            'form' => $form->createView()
         );
     }
 
@@ -138,8 +133,7 @@ class QuestionarioEcmController extends Controller
      * @Route("/{id}/edit", name="questionarioecm_edit")
      * @Template()
      */
-    public function editAction($id)
-    {
+    public function editAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('AccreditamentiCongressiBundle:QuestionarioEcm')->find($id);
@@ -152,8 +146,8 @@ class QuestionarioEcmController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -165,8 +159,7 @@ class QuestionarioEcmController extends Controller
      * @Method("post")
      * @Template("AccreditamentiCongressiBundle:QuestionarioEcm:edit.html.twig")
      */
-    public function updateAction($id)
-    {
+    public function updateAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('AccreditamentiCongressiBundle:QuestionarioEcm')->find($id);
@@ -175,7 +168,7 @@ class QuestionarioEcmController extends Controller
             throw $this->createNotFoundException('Unable to find QuestionarioEcm entity.');
         }
 
-        $editForm   = $this->createForm(new QuestionarioEcmType(), $entity);
+        $editForm = $this->createForm(new QuestionarioEcmType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         $request = $this->getRequest();
@@ -190,8 +183,8 @@ class QuestionarioEcmController extends Controller
         }
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -202,8 +195,7 @@ class QuestionarioEcmController extends Controller
      * @Route("/{id}/delete", name="questionarioecm_delete")
      * @Method("post")
      */
-    public function deleteAction($id)
-    {
+    public function deleteAction($id) {
         $form = $this->createDeleteForm($id);
         $request = $this->getRequest();
 
@@ -224,11 +216,11 @@ class QuestionarioEcmController extends Controller
         return $this->redirect($this->generateUrl('questionarioecm'));
     }
 
-    private function createDeleteForm($id)
-    {
+    private function createDeleteForm($id) {
         return $this->createFormBuilder(array('id' => $id))
-            ->add('id', 'hidden')
-            ->getForm()
+                        ->add('id', 'hidden')
+                        ->getForm()
         ;
     }
+
 }

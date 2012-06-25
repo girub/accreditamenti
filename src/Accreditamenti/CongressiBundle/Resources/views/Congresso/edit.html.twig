@@ -1,7 +1,6 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-
     <div class="navbar">
         <div class="navbar-inner">
             <div class="container">
@@ -92,6 +91,14 @@
             {{ form_errors(edit_form.manifesto) }}
             {{ form_widget(edit_form.manifesto) }}
         </div>
+
+
+        {% if entity.PathPdfProgramma|length > 0 %}
+            <div>
+               <a href="/resource/prog/{{ entity.id }}/{{ entity.PathPdfProgramma }}" target="_blank">{{ entity.PathPdfProgramma }}</a>
+            </div>      
+        {% endif %}
+
 
         <div>
             {{ form_label(edit_form.path_pdf_programma) }}

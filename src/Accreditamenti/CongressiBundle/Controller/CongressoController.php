@@ -24,16 +24,12 @@ class CongressoController extends Controller {
      */
     public function indexAction() {
 
-        $data_corrente = new \DateTime('now');
-        $entities = $this->getDoctrine()->getRepository('AccreditamentiCongressiBundle:Congresso');
-        $entities = $entities->createQueryBuilder('c')
-                ->where('c.abilitato = :abilitato')->setParameter('abilitato', true)
-                ->andWhere('c.data_inizio >= :data_inizio')->setParameter('data_inizio', $data_corrente)
-                ->orderBy('c.data_inizio', 'asc')
-                ->getQuery()
-                ->getResult();
+        $congresso = $this->getDoctrine()
+                ->getRepository('AccreditamentiCongressiBundle:Congresso');
 
-        return array('entities' => $entities);
+        return array(
+            'entities' => $congresso->getCongressiFuturiTutti()
+        );
     }
 
     /**
@@ -44,16 +40,12 @@ class CongressoController extends Controller {
      */
     public function mostraTuttiAction() {
 
-        $data_corrente = new \DateTime('now');
-        $entities = $this->getDoctrine()->getRepository('AccreditamentiCongressiBundle:Congresso');
-        $entities = $entities->createQueryBuilder('c')
-                ->where('c.abilitato = :abilitato')->setParameter('abilitato', true)
-                ->andWhere('c.data_inizio >= :data_inizio')->setParameter('data_inizio', $data_corrente)
-                ->orderBy('c.data_inizio', 'asc')
-                ->getQuery()
-                ->getResult();
+        $congresso = $this->getDoctrine()
+                ->getRepository('AccreditamentiCongressiBundle:Congresso');
 
-        return array('entities' => $entities);
+        return array(
+            'entities' => $congresso->getCongressiFuturiAbilitati()
+        );
     }
 
     /**
@@ -64,7 +56,6 @@ class CongressoController extends Controller {
      */
     public function showAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
-
         $congresso = $em->getRepository('AccreditamentiCongressiBundle:Congresso')->find($id);
         $accreditamenti = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')
                 ->findAllByCongresso($congresso);
@@ -155,13 +146,11 @@ class CongressoController extends Controller {
         );
     }
 
-    private function getCongressoUploadDirImmagini(Congresso $congresso)
-    {
+    private function getCongressoUploadDirImmagini(Congresso $congresso) {
         return $_SERVER['DOCUMENT_ROOT'] . "/resource/img/" . $congresso->getId();
     }
 
-    private function getCongressoUploadDirProgramma(Congresso $congresso)
-    {
+    private function getCongressoUploadDirProgramma(Congresso $congresso) {
         return $_SERVER['DOCUMENT_ROOT'] . "/resource/prog/" . $congresso->getId();
     }
 
@@ -173,7 +162,6 @@ class CongressoController extends Controller {
      * @Template("AccreditamentiCongressiBundle:Congresso:edit.html.twig")
      */
     public function updateAction($id) {
-
         $em = $this->getDoctrine()->getEntityManager();
 
         $congresso = $em->getRepository('AccreditamentiCongressiBundle:Congresso')->find($id);
@@ -202,6 +190,7 @@ class CongressoController extends Controller {
                 @mkdir($dir, 0775);
 
                 $filename = $manifesto;
+
                 $editForm['manifesto']->getData()->move($dir, $filename);
                 $congresso->setManifesto($filename);
             }
@@ -229,13 +218,9 @@ class CongressoController extends Controller {
 
                 $congresso->setPathPdfProgramma($filename_prog);
             }
+
+
             //die($programma);
-
-
-
-
-
-
             $em->persist($congresso);
             $em->flush();
 
@@ -256,9 +241,7 @@ class CongressoController extends Controller {
      *
      * @Route("/{id}/deletemanifesto", name="congresso_delete_manifesto")
      */
-
-    public function removeManifestoAction($id)
-    {
+    public function removeManifestoAction($id) {
 
 
         $em = $this->getDoctrine()->getEntityManager();

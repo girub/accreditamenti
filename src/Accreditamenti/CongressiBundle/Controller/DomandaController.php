@@ -63,16 +63,18 @@ class DomandaController extends Controller {
 
         //ricevo id dalla rotta e mi carico il questionario
         $em = $this->getDoctrine()->getEntityManager();
-        
-        $questionarioEcm = $em->getRepository('AccreditamentiCongressiBundle:QuestionarioEcm')->find($questionarioecm_id);
+
+        $questionarioEcm = $em->getRepository('AccreditamentiCongressiBundle:QuestionarioEcm')
+                ->find($questionarioecm_id);
 
         $domanda = new Domanda();
 
-        //$domanda->setQuestionarioEcm($questionarioEcm);
+        $domanda->setQuestionarioEcm($questionarioEcm);
 
         $form = $this->createForm(new DomandaType(), $domanda);
 
         return array(
+            'questionarioecm_id' => $questionarioecm_id,
             'entity' => $domanda,
             'form' => $form->createView()
         );

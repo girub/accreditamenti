@@ -1,20 +1,28 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-<h1>Domanda creation</h1>
 
-<form action="{{ path('domanda_create') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
-    <p>
-        <button type="submit">Create</button>
-    </p>
-</form>
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="container">
+                <ul class="nav">
+                    <li>
+                        <a href="{{ path('questionarioecm_show', {'id': questionarioecm_id}) }}">
+                            <span class="icon-backward icon-white"></span> Back to Questionario ECM
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('domanda') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+    <h1>Domanda creation</h1>
+
+    <form action="{{ path('domanda_create') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
+        <p>
+            <button type="submit">Create</button>
+        </p>
+    </form>
+
 {% endblock %}

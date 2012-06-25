@@ -14,21 +14,27 @@ use Accreditamenti\CongressiBundle\Form\RispostaType;
  *
  * @Route("/risposta")
  */
-class RispostaController extends Controller
-{
+class RispostaController extends Controller {
+
     /**
      * Lists all Risposta entities.
      *
-     * @Route("/", name="risposta")
+     * @Route("/{domanda_id}", name="risposta")
      * @Template()
      */
-    public function indexAction()
-    {
+    public function indexAction($domanda_id) {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entities = $em->getRepository('AccreditamentiCongressiBundle:Risposta')->findAll();
+        $domanda = $em->getRepository('AccreditamentiCongressiBundle:Domanda')
+                ->find($domanda_id);
 
-        return array('entities' => $entities);
+        $entities = $em->getRepository('AccreditamentiCongressiBundle:Risposta')
+                ->findRisposteDellaDomanda($domanda);
+
+        return array(
+            'entities' => $entities,
+            'domanda' => $domanda
+        );
     }
 
     /**
@@ -37,8 +43,7 @@ class RispostaController extends Controller
      * @Route("/{id}/show", name="risposta_show")
      * @Template()
      */
-    public function showAction($id)
-    {
+    public function showAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('AccreditamentiCongressiBundle:Risposta')->find($id);
@@ -50,24 +55,31 @@ class RispostaController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        );
+            'entity' => $entity,
+            'delete_form' => $deleteForm->createView(),);
     }
 
     /**
      * Displays a form to create a new Risposta entity.
      *
-     * @Route("/new", name="risposta_new")
+     * @Route("/new/{domanda_id}", name="risposta_new")
      * @Template()
      */
-    public function newAction()
-    {
-        $entity = new Risposta();
-        $form   = $this->createForm(new RispostaType(), $entity);
+    public function newAction($domanda_id) {
+        $risposta = new Risposta();
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $domanda = $em->getRepository('AccreditamentiCongressiBundle:Domanda')
+                ->find($domanda_id);
+
+        $risposta->setDomanda($domanda);
+
+        $form = $this->createForm(new RispostaType(), $risposta);
 
         return array(
-            'entity' => $entity,
-            'form'   => $form->createView()
+            'domanda_id' => $domanda_id,
+            'entity' => $risposta,
+            'form' => $form->createView()
         );
     }
 
@@ -78,11 +90,10 @@ class RispostaController extends Controller
      * @Method("post")
      * @Template("AccreditamentiCongressiBundle:Risposta:new.html.twig")
      */
-    public function createAction()
-    {
-        $entity  = new Risposta();
+    public function createAction() {
+        $entity = new Risposta();
         $request = $this->getRequest();
-        $form    = $this->createForm(new RispostaType(), $entity);
+        $form = $this->createForm(new RispostaType(), $entity);
         $form->bindRequest($request);
 
         if ($form->isValid()) {
@@ -91,12 +102,11 @@ class RispostaController extends Controller
             $em->flush();
 
             return $this->redirect($this->generateUrl('risposta_show', array('id' => $entity->getId())));
-            
         }
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView()
+            'form' => $form->createView()
         );
     }
 
@@ -106,8 +116,7 @@ class RispostaController extends Controller
      * @Route("/{id}/edit", name="risposta_edit")
      * @Template()
      */
-    public function editAction($id)
-    {
+    public function editAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('AccreditamentiCongressiBundle:Risposta')->find($id);
@@ -120,8 +129,8 @@ class RispostaController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -133,8 +142,7 @@ class RispostaController extends Controller
      * @Method("post")
      * @Template("AccreditamentiCongressiBundle:Risposta:edit.html.twig")
      */
-    public function updateAction($id)
-    {
+    public function updateAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('AccreditamentiCongressiBundle:Risposta')->find($id);
@@ -143,7 +151,7 @@ class RispostaController extends Controller
             throw $this->createNotFoundException('Unable to find Risposta entity.');
         }
 
-        $editForm   = $this->createForm(new RispostaType(), $entity);
+        $editForm = $this->createForm(new RispostaType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         $request = $this->getRequest();
@@ -158,8 +166,8 @@ class RispostaController extends Controller
         }
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -170,8 +178,7 @@ class RispostaController extends Controller
      * @Route("/{id}/delete", name="risposta_delete")
      * @Method("post")
      */
-    public function deleteAction($id)
-    {
+    public function deleteAction($id) {
         $form = $this->createDeleteForm($id);
         $request = $this->getRequest();
 
@@ -192,11 +199,11 @@ class RispostaController extends Controller
         return $this->redirect($this->generateUrl('risposta'));
     }
 
-    private function createDeleteForm($id)
-    {
+    private function createDeleteForm($id) {
         return $this->createFormBuilder(array('id' => $id))
-            ->add('id', 'hidden')
-            ->getForm()
+                        ->add('id', 'hidden')
+                        ->getForm()
         ;
     }
+
 }
