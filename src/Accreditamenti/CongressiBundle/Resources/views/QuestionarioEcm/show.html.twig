@@ -70,7 +70,11 @@
         <li><a href="{{ path('domanda_edit', {'id': domanda.id }) }}"><span class="icon-edit"></span></a> {{ domanda.descrizione }}
         <ul>
             {% for risposta in domanda.getRisposta %}
-                <li>{{ risposta.descrizione }}</li>
+                <li>
+                   <a href="{{ path('risposta_edit', {'id': risposta.id }) }}">
+                    <span class="icon-edit"></span></a>
+                {{ risposta.descrizione }}
+                </li>
             {% endfor %}
             <li>
                 <a href="{{ path('risposta_new', {'domanda_id': domanda.id}) }}">
@@ -78,7 +82,7 @@
                 </a>
             </li>
         </ul>
-        </li>
+        </li><br>
     {% endfor %}
     </ul>
 

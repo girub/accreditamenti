@@ -141,15 +141,15 @@ class RispostaController extends Controller {
      * @Template("AccreditamentiCongressiBundle:Risposta:edit.html.twig")
      */
     public function updateAction($id) {
+        //$risposta = new Risposta();
+        
         $em = $this->getDoctrine()->getEntityManager();
+        $risposta = $em->getRepository('AccreditamentiCongressiBundle:Risposta')->find($id);
 
-        $entity = $em->getRepository('AccreditamentiCongressiBundle:Risposta')->find($id);
-
-        if (!$entity) {
+        if (!$risposta) {
             throw $this->createNotFoundException('Unable to find Risposta entity.');
         }
-
-        $editForm = $this->createForm(new RispostaType(), $entity);
+        $editForm = $this->createForm(new RispostaType(), $risposta);
         $deleteForm = $this->createDeleteForm($id);
 
         $request = $this->getRequest();
@@ -157,17 +157,20 @@ class RispostaController extends Controller {
         $editForm->bindRequest($request);
 
         if ($editForm->isValid()) {
-            $em->persist($entity);
+            $em->persist($risposta);
             $em->flush();
-
-            return $this->redirect($this->generateUrl('risposta_edit', array('id' => $id)));
+            
+             return $this->redirect($this->generateUrl('questionarioecm_show', array('id' => $risposta->getDomanda()->getQuestionarioecm()->getId())));
+            //return $this->redirect($this->generateUrl('risposta_edit', array('id' => $id)));
         }
 
         return array(
-            'entity' => $entity,
+            'entity' => $risposta,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
+      
+        
     }
 
     /**

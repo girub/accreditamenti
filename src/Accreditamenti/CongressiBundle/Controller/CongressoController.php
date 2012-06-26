@@ -135,7 +135,8 @@ class CongressoController extends Controller {
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Congresso entity.');
         }
-
+        
+        
         $editForm = $this->createForm(new CongressoType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 

@@ -22,4 +22,5 @@ class DomandaRepository extends EntityRepository {
                         ->getResult();
     }
 
+    
 }
