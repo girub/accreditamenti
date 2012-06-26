@@ -65,6 +65,13 @@
         </div>
     </div>
 
+
+
+
+<div class="row">
+  <div class="span6 offset6"><span class="label label-warning">risposta vera</span></div>
+</div>
+
     <ul>
     {% for domanda in domande %}
         <li><a href="{{ path('domanda_edit', {'id': domanda.id }) }}"><span class="icon-edit"></span></a> {{ domanda.descrizione }}
@@ -73,8 +80,13 @@
                 <li>
                    <a href="{{ path('risposta_edit', {'id': risposta.id }) }}">
                     <span class="icon-edit"></span></a>
-                {{ risposta.descrizione }}
-                </li>
+                   
+                       {% if risposta.vero|length > 0 %}
+                            <span class="label label-warning"> {{ risposta.descrizione }} </span>
+                       {%else%}
+                            {{ risposta.descrizione }} 
+                       {% endif %}
+                   </li>
             {% endfor %}
             <li>
                 <a href="{{ path('risposta_new', {'domanda_id': domanda.id}) }}">

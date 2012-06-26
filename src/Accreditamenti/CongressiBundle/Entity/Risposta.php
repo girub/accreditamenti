@@ -33,7 +33,7 @@ class Risposta {
     /**
      * @var boolean $vero
      *
-     * @ORM\Column(name="vero", type="boolean")
+     * @ORM\Column(name="vero", nullable=true, type="boolean")
      */
     private $vero;
 
