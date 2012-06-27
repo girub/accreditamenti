@@ -6,46 +6,46 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Accreditamenti\CongressiBundle\Entity\QuestionarioEcm;
-use Accreditamenti\CongressiBundle\Form\QuestionarioEcmType;
+use Accreditamenti\CongressiBundle\Entity\QuestionarioCustomerSatisfaction;
+use Accreditamenti\CongressiBundle\Form\QuestionarioCustomerSatisfactionType;
 
 /**
  * QuestionarioEcm controller.
  *
- * @Route("/questionarioecm")
+ * @Route("/questionario/customer/satisfaction")
  */
-class QuestionarioEcmController extends Controller {
+class QuestionarioCustomerSatisfactionController extends Controller {
 
     /**
      * Lists all QuestionarioEcm entities.
      *
-     * @Route("/", name="questionarioecm")
+     * @Route("/", name="questionario_customer_satisfaction")
      * @Template()
      */
     public function indexAction() {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entities = $em->getRepository('AccreditamentiCongressiBundle:QuestionarioEcm')->findAll();
+        $entities = $em->getRepository('AccreditamentiCongressiBundle:QuestionarioCustomerSatisfaction')->findAll();
 
         return array('entities' => $entities);
     }
 
     /**
-     * Finds and displays a QuestionarioEcm entity.
+     * Finds and displays a QuestionarioCustomerSatisfaction entity.
      *
-     * @Route("/{id}/show", name="questionarioecm_show")
+     * @Route("/{id}/show", name="questionario_customer_satisfaction_show")
      * @Template()
      */
     public function showAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $questionario = $em->getRepository('AccreditamentiCongressiBundle:QuestionarioEcm')->find($id);
+        $questionario = $em->getRepository('AccreditamentiCongressiBundle:QuestionarioCustomerSatisfaction')->find($id);
 
         $domande = $em->getRepository('AccreditamentiCongressiBundle:Domanda')
                 ->findDomandeDelQuestionario($questionario);
 
         if (!$questionario) {
-            throw $this->createNotFoundException('Unable to find QuestionarioEcm entity.');
+            throw $this->createNotFoundException('Unable to find QuestionarioCustomerSatisfaction entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -58,9 +58,9 @@ class QuestionarioEcmController extends Controller {
     }
 
     /**
-     * Displays a form to create a new QuestionarioEcm entity.
+     * Displays a form to create a new QuestionarioCustomerSatisfaction entity.
      *
-     * @Route("/new/{accreditamento_id}", name="questionarioecm_new")
+     * @Route("/new/{accreditamento_id}", name="questionario_customer_satisfaction_new")
      * @Template()
      */
     public function newAction($accreditamento_id) {
@@ -69,9 +69,9 @@ class QuestionarioEcmController extends Controller {
         $em = $this->getDoctrine()->getEntityManager();
         $accreditamento = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($accreditamento_id);
 
-        $questionario = new QuestionarioEcm();
+        $questionario = new QuestionarioCustomerSatisfaction();
         $questionario->setAccreditamento($accreditamento);
-        $QuestionarioType = new QuestionarioEcmType();
+        $QuestionarioType = $QuestionarioType = new QuestionarioCustomerSatisfactionType();
         $form = $this->createForm($QuestionarioType, $questionario);
 
         return array(
@@ -81,17 +81,17 @@ class QuestionarioEcmController extends Controller {
     }
 
     /**
-     * Creates a new QuestionarioEcm entity.
+     * Creates a new QuestionarioCustomerSatisfaction entity.
      *
-     * @Route("/create", name="questionarioecm_create")
+     * @Route("/create", name="questionario_customer_satisfaction_create")
      * @Method("post")
-     * @Template("AccreditamentiCongressiBundle:QuestionarioEcm:new.html.twig")
+     * @Template("AccreditamentiCongressiBundle:QuestionarioCustomerSatisfaction:new.html.twig")
      */
     public function createAction() {
-        $entity = new QuestionarioEcm();
+        $entity = new QuestionarioCustomerSatisfaction();
         $request = $this->getRequest();
 
-        $form = $this->createForm(new QuestionarioEcmType(), $entity);
+        $form = $this->createForm(new QuestionarioCustomerSatisfactionType(), $entity);
         $form->bindRequest($request);
 
         if ($form->isValid()) {
@@ -103,7 +103,7 @@ class QuestionarioEcmController extends Controller {
             $this->get('session')->setFlash('notice', 'Questionario creato con successo');
 
 
-            return $this->redirect($this->generateUrl('questionarioecm_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('questionario_customer_satisfaction_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -113,21 +113,21 @@ class QuestionarioEcmController extends Controller {
     }
 
     /**
-     * Displays a form to edit an existing QuestionarioEcm entity.
+     * Displays a form to edit an existing QuestionarioCustomerSatisfaction entity.
      *
-     * @Route("/{id}/edit", name="questionarioecm_edit")
+     * @Route("/{id}/edit", name="questionario_customer_satisfaction_edit")
      * @Template()
      */
     public function editAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('AccreditamentiCongressiBundle:QuestionarioEcm')->find($id);
+        $entity = $em->getRepository('AccreditamentiCongressiBundle:QuestionarioCustomerSatisfaction')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find QuestionarioEcm entity.');
+            throw $this->createNotFoundException('Unable to find QuestionarioCustomerSatisfaction entity.');
         }
 
-        $editForm = $this->createForm(new QuestionarioEcmType(), $entity);
+        $editForm = $this->createForm(new QuestionarioCustomerSatisfactionType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
@@ -138,22 +138,22 @@ class QuestionarioEcmController extends Controller {
     }
 
     /**
-     * Edits an existing QuestionarioEcm entity.
+     * Edits an existing QuestionarioCustomerSatisfaction entity.
      *
-     * @Route("/{id}/update", name="questionarioecm_update")
+     * @Route("/{id}/update", name="questionario_customer_satisfaction_update")
      * @Method("post")
-     * @Template("AccreditamentiCongressiBundle:QuestionarioEcm:edit.html.twig")
+     * @Template("AccreditamentiCongressiBundle:QuestionarioCustomerSatisfaction:edit.html.twig")
      */
     public function updateAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('AccreditamentiCongressiBundle:QuestionarioEcm')->find($id);
+        $entity = $em->getRepository('AccreditamentiCongressiBundle:QuestionarioCustomerSatisfaction')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find QuestionarioEcm entity.');
+            throw $this->createNotFoundException('Unable to find QuestionarioCustomerSatisfaction entity.');
         }
 
-        $editForm = $this->createForm(new QuestionarioEcmType(), $entity);
+        $editForm = $this->createForm(new QuestionarioCustomerSatisfactionType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         $request = $this->getRequest();
@@ -164,7 +164,7 @@ class QuestionarioEcmController extends Controller {
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('questionarioecm_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('questionario_customer_satisfaction_edit', array('id' => $id)));
         }
 
         return array(
@@ -175,9 +175,9 @@ class QuestionarioEcmController extends Controller {
     }
 
     /**
-     * Deletes a QuestionarioEcm entity.
+     * Deletes a QuestionarioCustomerSatisfaction entity.
      *
-     * @Route("/{id}/delete", name="questionarioecm_delete")
+     * @Route("/{id}/delete", name="questionario_customer_satisfaction_delete")
      * @Method("post")
      */
     public function deleteAction($id) {
@@ -188,17 +188,17 @@ class QuestionarioEcmController extends Controller {
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
-            $entity = $em->getRepository('AccreditamentiCongressiBundle:QuestionarioEcm')->find($id);
+            $entity = $em->getRepository('AccreditamentiCongressiBundle:QuestionarioCustomerSatisfaction')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find QuestionarioEcm entity.');
+                throw $this->createNotFoundException('Unable to find QuestionarioCustomerSatisfaction entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('questionarioecm'));
+        return $this->redirect($this->generateUrl('questionario_customer_satisfaction'));
     }
 
     private function createDeleteForm($id) {

@@ -13,7 +13,7 @@ use Accreditamenti\CongressiBundle\Entity\QuestionarioEcm;
  */
 class DomandaRepository extends EntityRepository {
 
-    public function findDomandeDelQuestionario(QuestionarioEcm $questionario) {
+    public function findDomandeDelQuestionario(Questionario $questionario) {
         return $this->createQueryBuilder('d')
                         ->join('d.questionarioecm', 'questionario')
                         ->where('d.questionarioecm = :questionario')
