@@ -44,7 +44,7 @@ class QuestionarioEcmController extends Controller {
         $domande = $em->getRepository('AccreditamentiCongressiBundle:Domanda')
                 ->findDomandeDelQuestionario($questionario);
 
-        if (!$questionario) {
+        if (!$questionario) {   
             throw $this->createNotFoundException('Unable to find QuestionarioEcm entity.');
         }
 
@@ -56,6 +56,41 @@ class QuestionarioEcmController extends Controller {
             'delete_form' => $deleteForm->createView(),
         );
     }
+    
+    
+    
+        /**
+     * Finds and displays a QuestionarioEcm entity.
+     *
+     * @Route("/{id}/showpublic", name="questionarioecm_show_public")
+     * @Template()
+     */
+    public function showPublicAction($id) {
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $questionario = $em->getRepository('AccreditamentiCongressiBundle:QuestionarioEcm')->find($id);
+        
+        $domande = $em->getRepository('AccreditamentiCongressiBundle:Domanda')
+                ->findDomandeDelQuestionario($questionario);
+
+        if (!$questionario) {   
+            throw $this->createNotFoundException('Unable to find QuestionarioEcm entity.');
+        }
+        
+        $deleteForm = $this->createDeleteForm($id);
+        
+        return array(
+            'entity' => $questionario,
+            'domande' => $domande,
+            'delete_form' => $deleteForm->createView(),
+        );
+    }
+    
+    
+    
+    
+    
+    
 
     /**
      * Displays a form to create a new QuestionarioEcm entity.
