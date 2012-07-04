@@ -80,10 +80,14 @@
                 <li>
                    <a href="{{ path('risposta_edit', {'id': risposta.id }) }}">
                     <span class="icon-edit"></span></a>
-                   
+                       {% if risposta.aperta %}
+                           <span class="icon-folder-open"></span>
+                       {% else %}
+                           <span class="icon-folder-close"></span>
+                       {% endif %}
                        {% if risposta.vero|length > 0 %}
                             <span class="label label-warning"> {{ risposta.descrizione }} </span>
-                       {%else%}
+                       {% else %}
                             {{ risposta.descrizione }} 
                        {% endif %}
                    </li>
