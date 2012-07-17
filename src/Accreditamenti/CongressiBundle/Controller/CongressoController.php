@@ -174,6 +174,8 @@ class CongressoController extends Controller {
         $editForm = $this->createForm(new CongressoType(), $congresso);
         $deleteForm = $this->createDeleteForm($id);
         $editForm->bindRequest($this->getRequest());
+        
+       
 
         if ($editForm->isValid()) {
 

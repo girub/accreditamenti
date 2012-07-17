@@ -35,7 +35,7 @@ security:
         # Gli utenti possono accedere all'area amministrativa se e solo se
         # possiedono il ruolo di amministratore
         - { path: ^/congresso/new, role: ROLE_USER }
-        - { path: ^/congresso/mostraTutti, role: ROLE_USER }
+        - { path: ^/congresso/mostraTutti, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/congresso/mostra/([0-9]+), role: ROLE_USER }
         - { path: ^/admin/, role: ROLE_ADMIN }
         - { path: ^/congresso/([0-9]+)/edit, role: ROLE_USER }

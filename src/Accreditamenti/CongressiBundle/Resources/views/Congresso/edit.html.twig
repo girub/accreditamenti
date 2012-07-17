@@ -84,13 +84,13 @@
                 <img src="/resource/img/{{ entity.id }}/{{ entity.manifesto }}" width="200" style="border:1px solid #333333;">
                     <a href="{{ path('congresso_delete_manifesto', { 'id': entity.id }) }}">Cancella manifesto</a>
             </div>                 
+        {% else %}
+            <div>
+                {{ form_label(edit_form.manifesto) }}
+                {{ form_errors(edit_form.manifesto) }}
+                {{ form_widget(edit_form.manifesto) }}
+            </div>
         {% endif %}
-
-        <div>
-            {{ form_label(edit_form.manifesto) }}
-            {{ form_errors(edit_form.manifesto) }}
-            {{ form_widget(edit_form.manifesto) }}
-        </div>
 
 
         {% if entity.PathPdfProgramma|length > 0 %}

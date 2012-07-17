@@ -91,6 +91,15 @@ class Accreditamento
      */
     private $questionarioecm;
 
+    
+    /**
+     * @var boolean $attiva_questionario
+     *
+     * @ORM\Column(name="attiva_questionario", nullable=true, type="boolean")
+     */
+    private $attiva_questionario; 
+    
+   
     /**
      * Get id
      *
