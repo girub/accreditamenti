@@ -5,7 +5,7 @@ namespace Accreditamenti\CongressiBundle\Entity;
 use Doctrine\ORM\EntityRepository;
 use Accreditamenti\CongressiBundle\Entity\QuestionarioEcm;
 use Accreditamenti\CongressiBundle\Entity\QuestionarioCustomerSatisfaction;
-
+use Accreditamenti\CongressiBundle\Entity\QuestionarioValutazione;
 /**
  * DomandaRepository
  *
@@ -27,6 +27,15 @@ class DomandaRepository extends EntityRepository {
         return $this->createQueryBuilder('d')
                         ->join('d.questionarioCustomerSatisfaction', 'questionario')
                         ->where('d.questionarioCustomerSatisfaction = :questionario')
+                        ->setParameter('questionario', $questionario)
+                        ->getQuery()
+                        ->getResult();
+    }
+    
+     public function findDomandeDelQuestionarioValutazione(QuestionarioValutazione $questionario) {
+        return $this->createQueryBuilder('d')
+                        ->join('d.questionarioValutazione', 'questionario')
+                        ->where('d.questionarioValutazione = :questionario')
                         ->setParameter('questionario', $questionario)
                         ->getQuery()
                         ->getResult();

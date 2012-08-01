@@ -43,6 +43,17 @@ class Domanda {
      */
     private $questionarioCustomerSatisfaction;
 
+    
+    /**
+     * @ManyToOne(targetEntity="QuestionarioValutazione", inversedBy="domanda")
+     * @JoinColumn(name="questionario_valutazione_id", referencedColumnName="id")
+     */
+    private $questionarioValutazione;
+
+    
+    
+    
+    
     /**
      * @OneToMany(targetEntity="Risposta", mappedBy="domanda")
      */
@@ -122,5 +133,25 @@ class Domanda {
     public function getRisposta()
     {
         return $this->risposta;
+    }
+
+    /**
+     * Set questionarioCustomerSatisfaction
+     *
+     * @param Accreditamenti\CongressiBundle\Entity\QuestionarioCustomerSatisfaction $questionarioCustomerSatisfaction
+     */
+    public function setQuestionarioCustomerSatisfaction(\Accreditamenti\CongressiBundle\Entity\QuestionarioCustomerSatisfaction $questionarioCustomerSatisfaction)
+    {
+        $this->questionarioCustomerSatisfaction = $questionarioCustomerSatisfaction;
+    }
+
+    /**
+     * Get questionarioCustomerSatisfaction
+     *
+     * @return Accreditamenti\CongressiBundle\Entity\QuestionarioCustomerSatisfaction 
+     */
+    public function getQuestionarioCustomerSatisfaction()
+    {
+        return $this->questionarioCustomerSatisfaction;
     }
 }

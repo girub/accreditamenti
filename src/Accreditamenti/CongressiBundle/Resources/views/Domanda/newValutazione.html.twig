@@ -1,0 +1,30 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="container">
+                <ul class="nav">
+                    <li>
+                        <a href="{{ path('questionario_valutazione_show', {'id': questionario_valutazione_id}) }}">
+                            <span class="icon-backward icon-white"></span> Back to Questionario ECM
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <h1>Domanda creation</h1>
+
+  ccccccccccc
+    
+    <form action="{{ path('domanda_valutazione_create') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
+        <p>
+            <button type="submit">Create</button>
+        </p>
+    </form>
+
+{% endblock %}

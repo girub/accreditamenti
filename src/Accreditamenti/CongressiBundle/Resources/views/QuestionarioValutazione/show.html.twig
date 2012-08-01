@@ -1,0 +1,99 @@
+{% extends '::base.html.twig' %}
+
+{% block sidebar %}
+
+    <h1>Congresso</h1>
+
+    <div class="well">
+        <strong>nome:</strong> {{ entity.accreditamento.getCongresso }}<br />
+        <strong>accreditamento:</strong> {{ entity.accreditamento }}<br />
+    </div>
+
+    <h1>Questionario Valutazione</h1>
+
+    <div class="well">
+        <strong>descrizione:</strong> {{ entity.descrizione }}<br />
+        <strong>inizio:</strong> {{ entity.datainiziocompilazione|date('Y-m-d H:i:s') }}<br />
+        <strong>fine:</strong> {{ entity.datafinecompilazione|date('Y-m-d H:i:s') }}<br />
+    </div>
+
+{% endblock %}
+
+{% block body %}
+
+     <div class="navbar">
+        <div class="navbar-inner">
+            <div class="container">
+                <ul class="nav">
+                    <li>
+                        <a href="{{ path('accreditamento_show', {'id': entity.accreditamento.id }) }}">
+                            <span class="icon-backward icon-white"></span> Back to Accreditamento
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('questionario_valutazione_edit', { 'id': entity.id }) }}">
+                            <span class="icon-edit icon-white"></span> Edit
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('domanda_valutazione_new', { 'questionario_valutazione_id': entity.id }) }}">
+                            <span class="icon-plus-sign icon-white"></span> Crea domanda valutazione
+                        </a>
+                    </li>
+                    <li>
+                        <a data-toggle="modal" href="#myModal"> <span class="icon-trash icon-white"></span> Cancella</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal hide" id="myModal">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">×</button>
+            <h3>Attenzione stai eliminando un questionario</h3>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn" data-dismiss="modal">Annulla</a>
+            
+          <form action="{{ path('questionario_valutazione_delete', { 'id': entity.id }) }}" method="post">
+                {{ form_widget(delete_form) }}
+                <button type="submit" class="btn btn-primary">Elimina</button>
+            </form>
+        </div>
+    </div>
+
+
+
+
+<div class="row">
+  <div class="span6 offset6"><span class="label label-warning">risposta vera</span></div>
+</div>
+
+    <ul>
+    {% for domanda in domande %}
+        <li><a href="{{ path('domanda_edit', {'id': domanda.id }) }}"><span class="icon-edit"></span></a> {{ domanda.descrizione }}
+        <ul>
+            {% for risposta in domanda.getRisposta %}
+                <li>
+                   <a href="{{ path('risposta_edit', {'id': risposta.id }) }}">
+                    <span class="icon-edit"></span></a>
+                   
+                       {% if risposta.vero|length > 0 %}
+                            <span class="label label-warning"> {{ risposta.descrizione }} </span>
+                       {%else%}
+                            {{ risposta.descrizione }} 
+                       {% endif %}
+                   </li>
+            {% endfor %}
+            <li>
+                <a href="{{ path('risposta_cs_new', {'domanda_id': domanda.id}) }}">
+                    <span class="icon-plus-sign"></span> <em>aggiungi risposta</em>
+                </a>
+            </li>
+        </ul>
+        </li><br>
+    {% endfor %}
+    </ul>
+
+{%endblock%}

@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Accreditamenti\CongressiBundle\Entity\Domanda;
 use Accreditamenti\CongressiBundle\Form\DomandaType;
 use Accreditamenti\CongressiBundle\Form\DomandaCustomerSatisfactionType;
-
+use Accreditamenti\CongressiBundle\Form\DomandaValutazioneType;
 /**
  * Domanda controller.
  *
@@ -108,6 +108,39 @@ class DomandaController extends Controller {
             'form' => $form->createView()
         );
     }
+    
+    
+     //cosa
+    /**
+     * Displays a form to create a new Domanda entity.
+     *
+     * @Route("/new/valutazione/{questionario_valutazione_id}", name="domanda_valutazione_new")
+     * @Template()
+     */
+    public function newValutazioneAction($questionario_valutazione_id) {
+
+        //ricevo id dalla rotta e mi carico il questionario
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $questionarioValutazione = $em->getRepository('AccreditamentiCongressiBundle:QuestionarioValutazione')
+                ->find($questionario_valutazione_id);
+
+        $domanda = new Domanda();
+
+        $domanda->setQuestionarioValutazione($questionarioValutazione);
+
+        $form = $this->createForm(new DomandaValutazioneType(), $domanda);
+
+        return array(
+            'questionario_valutazione_id' => $questionario_valutazione_id,
+            'entity' => $domanda,
+            'form' => $form->createView()
+        );
+    }
+    
+    
+    
+    
 
     /**
      * Creates a new Domanda entity.
@@ -163,6 +196,35 @@ class DomandaController extends Controller {
         );
     }
 
+    
+     /**
+     * Creates a new Domanda entity.
+     *
+     * @Route("/create/valutazione", name="domanda_valutazione_create")
+     * @Method("post")
+     * @Template("AccreditamentiCongressiBundle:Domanda:newValutazione.html.twig")
+     */
+    public function createValutazioneAction() {
+        $domanda = new Domanda();
+        $request = $this->getRequest();
+        $form = $this->createForm(new DomandaValutazioneType(), $domanda);
+        $form->bindRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($domanda);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('questionario_valutazione_show', array('id' => $domanda->getQuestionarioValutazione()->getId())));
+        }
+
+        return array(
+            'entity' => $domanda,
+            'form' => $form->createView()
+        );
+    }
+    
+    
     /**
      * Displays a form to edit an existing Domanda entity.
      *

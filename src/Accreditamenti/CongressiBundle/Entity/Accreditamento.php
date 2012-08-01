@@ -97,6 +97,14 @@ class Accreditamento
     private $questionarioCustomerSatisfaction;
 
     
+      /**
+     * @OneToMany(targetEntity="QuestionarioValutazione", mappedBy="accreditamento")
+     */
+    private $questionarioValutazione;
+
+    
+    
+    
     /**
      * @var boolean $attiva_questionario
      *
@@ -364,5 +372,25 @@ class Accreditamento
     public function getQuestionarioCustomerSatisfaction()
     {
         return $this->questionarioCustomerSatisfaction;
+    }
+
+    /**
+     * Add questionarioValutazione
+     *
+     * @param Accreditamenti\CongressiBundle\Entity\QuestionarioValutazione $questionarioValutazione
+     */
+    public function addQuestionarioValutazione(\Accreditamenti\CongressiBundle\Entity\QuestionarioValutazione $questionarioValutazione)
+    {
+        $this->questionarioValutazione[] = $questionarioValutazione;
+    }
+
+    /**
+     * Get questionarioValutazione
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getQuestionarioValutazione()
+    {
+        return $this->questionarioValutazione;
     }
 }
