@@ -91,6 +91,11 @@ class Accreditamento
      */
     private $questionarioecm;
 
+    /**
+     * @OneToMany(targetEntity="QuestionarioCustomerSatisfaction", mappedBy="accreditamento")
+     */
+    private $questionarioCustomerSatisfaction;
+
     
     /**
      * @var boolean $attiva_questionario
@@ -320,4 +325,44 @@ class Accreditamento
         return $this->getTitolo();
     }
 
+
+    /**
+     * Set attiva_questionario
+     *
+     * @param boolean $attivaQuestionario
+     */
+    public function setAttivaQuestionario($attivaQuestionario)
+    {
+        $this->attiva_questionario = $attivaQuestionario;
+    }
+
+    /**
+     * Get attiva_questionario
+     *
+     * @return boolean 
+     */
+    public function getAttivaQuestionario()
+    {
+        return $this->attiva_questionario;
+    }
+
+    /**
+     * Add questionarioCustomerSatisfaction
+     *
+     * @param Accreditamenti\CongressiBundle\Entity\QuestionarioCustomerSatisfaction $questionarioCustomerSatisfaction
+     */
+    public function addQuestionarioCustomerSatisfaction(\Accreditamenti\CongressiBundle\Entity\QuestionarioCustomerSatisfaction $questionarioCustomerSatisfaction)
+    {
+        $this->questionarioCustomerSatisfaction[] = $questionarioCustomerSatisfaction;
+    }
+
+    /**
+     * Get questionarioCustomerSatisfaction
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getQuestionarioCustomerSatisfaction()
+    {
+        return $this->questionarioCustomerSatisfaction;
+    }
 }
