@@ -42,7 +42,7 @@ class QuestionarioCustomerSatisfactionController extends Controller {
         $questionario = $em->getRepository('AccreditamentiCongressiBundle:QuestionarioCustomerSatisfaction')->find($id);
 
         $domande = $em->getRepository('AccreditamentiCongressiBundle:Domanda')
-                ->findDomandeDelQuestionario($questionario);
+                ->findDomandeDelQuestionarioCustomerSatisfaction($questionario);
 
         if (!$questionario) {
             throw $this->createNotFoundException('Unable to find QuestionarioCustomerSatisfaction entity.');

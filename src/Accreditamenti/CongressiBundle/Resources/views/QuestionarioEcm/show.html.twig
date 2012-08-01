@@ -38,7 +38,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ path('domanda_new', { 'questionarioecm_id': entity.id }) }}">
+                        <a href="{{ path('domanda_ecm_new', { 'questionarioecm_id': entity.id }) }}">
                             <span class="icon-plus-sign icon-white"></span> Crea domanda
                         </a>
                     </li>
@@ -93,7 +93,7 @@
                    </li>
             {% endfor %}
             <li>
-                <a href="{{ path('risposta_new', {'domanda_id': domanda.id}) }}">
+                <a href="{{ path('risposta_ecm_new', {'domanda_id': domanda.id}) }}">
                     <span class="icon-plus-sign"></span> <em>aggiungi risposta</em>
                 </a>
             </li>

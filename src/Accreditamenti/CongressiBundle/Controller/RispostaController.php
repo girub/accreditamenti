@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Accreditamenti\CongressiBundle\Entity\Risposta;
 use Accreditamenti\CongressiBundle\Form\RispostaType;
+use Accreditamenti\CongressiBundle\Form\RispostaCustomerSatisfactionType;
 
 /**
  * Risposta controller.
@@ -60,10 +61,10 @@ class RispostaController extends Controller {
     /**
      * Displays a form to create a new Risposta entity.
      *
-     * @Route("/new/{domanda_id}", name="risposta_new")
+     * @Route("/new/ecm/{domanda_id}", name="risposta_ecm_new")
      * @Template()
      */
-    public function newAction($domanda_id) {
+    public function newEcmAction($domanda_id) {
         $risposta = new Risposta();
 
         $em = $this->getDoctrine()->getEntityManager();
@@ -82,13 +83,37 @@ class RispostaController extends Controller {
     }
 
     /**
+     * Displays a form to create a new Risposta entity.
+     *
+     * @Route("/new/cs/{domanda_id}", name="risposta_cs_new")
+     * @Template()
+     */
+    public function newCustomerSatisfactionAction($domanda_id) {
+        $risposta = new Risposta();
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $domanda = $em->getRepository('AccreditamentiCongressiBundle:Domanda')
+                ->find($domanda_id);
+
+        $risposta->setDomanda($domanda);
+
+        $form = $this->createForm(new RispostaCustomerSatisfactionType(), $risposta);
+
+        return array(
+            'domanda_id' => $domanda_id,
+            'entity' => $risposta,
+            'form' => $form->createView()
+        );
+    }
+
+    /**
      * Creates a new Risposta entity.
      *
-     * @Route("/create", name="risposta_create")
+     * @Route("/create/ecm", name="risposta_ecm_create")
      * @Method("post")
-     * @Template("AccreditamentiCongressiBundle:Risposta:new.html.twig")
+     * @Template("AccreditamentiCongressiBundle:Risposta:newEcm.html.twig")
      */
-    public function createAction() {
+    public function createEcmAction() {
         $risposta = new Risposta();
         $request = $this->getRequest();
         $form = $this->createForm(new RispostaType(), $risposta);
@@ -100,6 +125,33 @@ class RispostaController extends Controller {
             $em->flush();
 
             return $this->redirect($this->generateUrl('questionarioecm_show', array('id' => $risposta->getDomanda()->getQuestionarioecm()->getId())));
+        }
+
+        return array(
+            'entity' => $risposta,
+            'form' => $form->createView()
+        );
+    }
+
+    /**
+     * Creates a new Risposta entity.
+     *
+     * @Route("/create/cs", name="risposta_cs_create")
+     * @Method("post")
+     * @Template("AccreditamentiCongressiBundle:Risposta:newCustomerSatisfaction.html.twig")
+     */
+    public function createCustomerSatisfactionAction() {
+        $risposta = new Risposta();
+        $request = $this->getRequest();
+        $form = $this->createForm(new RispostaCustomerSatisfactionType(), $risposta);
+        $form->bindRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($risposta);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('questionario_customer_satisfaction_show', array('id' => $risposta->getDomanda()->getQuestionarioCustomerSatisfaction()->getId())));
         }
 
         return array(

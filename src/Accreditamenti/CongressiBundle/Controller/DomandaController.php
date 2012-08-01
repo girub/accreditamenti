@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Accreditamenti\CongressiBundle\Entity\Domanda;
 use Accreditamenti\CongressiBundle\Form\DomandaType;
+use Accreditamenti\CongressiBundle\Form\DomandaCustomerSatisfactionType;
 
 /**
  * Domanda controller.
@@ -56,10 +57,10 @@ class DomandaController extends Controller {
     /**
      * Displays a form to create a new Domanda entity.
      *
-     * @Route("/new/{questionarioecm_id}", name="domanda_new")
+     * @Route("/new/ecm/{questionarioecm_id}", name="domanda_ecm_new")
      * @Template()
      */
-    public function newAction($questionarioecm_id) {
+    public function newEcmAction($questionarioecm_id) {
 
         //ricevo id dalla rotta e mi carico il questionario
         $em = $this->getDoctrine()->getEntityManager();
@@ -80,10 +81,38 @@ class DomandaController extends Controller {
         );
     }
 
+    //cosa
+    /**
+     * Displays a form to create a new Domanda entity.
+     *
+     * @Route("/new/cs/{questionario_cs_id}", name="domanda_cs_new")
+     * @Template()
+     */
+    public function newCustomerSatisfactionAction($questionario_cs_id) {
+
+        //ricevo id dalla rotta e mi carico il questionario
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $questionarioCustomerSatisfaction = $em->getRepository('AccreditamentiCongressiBundle:QuestionarioCustomerSatisfaction')
+                ->find($questionario_cs_id);
+
+        $domanda = new Domanda();
+
+        $domanda->setQuestionarioCustomerSatisfaction($questionarioCustomerSatisfaction);
+
+        $form = $this->createForm(new DomandaCustomerSatisfactionType(), $domanda);
+
+        return array(
+            'questionario_cs_id' => $questionario_cs_id,
+            'entity' => $domanda,
+            'form' => $form->createView()
+        );
+    }
+
     /**
      * Creates a new Domanda entity.
      *
-     * @Route("/create", name="domanda_create")
+     * @Route("/create/ecm", name="domanda_ecm_create")
      * @Method("post")
      * @Template("AccreditamentiCongressiBundle:Domanda:new.html.twig")
      */
@@ -99,6 +128,33 @@ class DomandaController extends Controller {
             $em->flush();
 
             return $this->redirect($this->generateUrl('questionarioecm_show', array('id' => $domanda->getQuestionarioecm()->getId())));
+        }
+
+        return array(
+            'entity' => $domanda,
+            'form' => $form->createView()
+        );
+    }
+
+    /**
+     * Creates a new Domanda entity.
+     *
+     * @Route("/create/customer/satisfaction", name="domanda_cs_create")
+     * @Method("post")
+     * @Template("AccreditamentiCongressiBundle:Domanda:newCustomerSatisfacion.html.twig")
+     */
+    public function createCustomerSatisfactionAction() {
+        $domanda = new Domanda();
+        $request = $this->getRequest();
+        $form = $this->createForm(new DomandaCustomerSatisfactionType(), $domanda);
+        $form->bindRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($domanda);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('questionario_customer_satisfaction_show', array('id' => $domanda->getQuestionarioCustomerSatisfaction()->getId())));
         }
 
         return array(

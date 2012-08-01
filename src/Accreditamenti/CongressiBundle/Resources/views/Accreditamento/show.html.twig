@@ -97,7 +97,7 @@
                 {% for questionario in entity.getQuestionarioCustomerSatisfaction() %}
                     <tr>
                         <td>{{ questionario.descrizione }}</td>
-                        <td><span class="icon-bookmark"></span> <a href="{{ path('questionarioecm_show', {'id': questionario.id }) }}">apri questionario</a></td>
+                        <td><span class="icon-bookmark"></span> <a href="{{ path('questionario_customer_satisfaction_show', {'id': questionario.id }) }}">apri questionario</a></td>
                     </tr>
                 {% endfor %}
             </tbody>
