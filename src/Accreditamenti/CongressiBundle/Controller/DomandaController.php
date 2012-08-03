@@ -10,6 +10,7 @@ use Accreditamenti\CongressiBundle\Entity\Domanda;
 use Accreditamenti\CongressiBundle\Form\DomandaType;
 use Accreditamenti\CongressiBundle\Form\DomandaCustomerSatisfactionType;
 use Accreditamenti\CongressiBundle\Form\DomandaValutazioneType;
+
 /**
  * Domanda controller.
  *
@@ -85,16 +86,16 @@ class DomandaController extends Controller {
     /**
      * Displays a form to create a new Domanda entity.
      *
-     * @Route("/new/cs/{questionario_cs_id}", name="domanda_cs_new")
+     * @Route("/new/customer/satisfaction/{questionario_id}", name="domanda_customer_satisfaction_new")
      * @Template()
      */
-    public function newCustomerSatisfactionAction($questionario_cs_id) {
+    public function newCustomerSatisfactionAction($questionario_id) {
 
         //ricevo id dalla rotta e mi carico il questionario
         $em = $this->getDoctrine()->getEntityManager();
 
         $questionarioCustomerSatisfaction = $em->getRepository('AccreditamentiCongressiBundle:QuestionarioCustomerSatisfaction')
-                ->find($questionario_cs_id);
+                ->find($questionario_id);
 
         $domanda = new Domanda();
 
@@ -103,14 +104,13 @@ class DomandaController extends Controller {
         $form = $this->createForm(new DomandaCustomerSatisfactionType(), $domanda);
 
         return array(
-            'questionario_cs_id' => $questionario_cs_id,
+            'questionario_customer_satisfaction_id' => $questionario_id,
             'entity' => $domanda,
             'form' => $form->createView()
         );
     }
-    
-    
-     //cosa
+
+    //cosa
     /**
      * Displays a form to create a new Domanda entity.
      *
@@ -137,10 +137,6 @@ class DomandaController extends Controller {
             'form' => $form->createView()
         );
     }
-    
-    
-    
-    
 
     /**
      * Creates a new Domanda entity.
@@ -172,7 +168,7 @@ class DomandaController extends Controller {
     /**
      * Creates a new Domanda entity.
      *
-     * @Route("/create/customer/satisfaction", name="domanda_cs_create")
+     * @Route("/create/customer/satisfaction", name="domanda_customer_satisfaction_create")
      * @Method("post")
      * @Template("AccreditamentiCongressiBundle:Domanda:newCustomerSatisfacion.html.twig")
      */
@@ -196,8 +192,7 @@ class DomandaController extends Controller {
         );
     }
 
-    
-     /**
+    /**
      * Creates a new Domanda entity.
      *
      * @Route("/create/valutazione", name="domanda_valutazione_create")
@@ -223,15 +218,14 @@ class DomandaController extends Controller {
             'form' => $form->createView()
         );
     }
-    
-    
+
     /**
      * Displays a form to edit an existing Domanda entity.
      *
-     * @Route("/{id}/edit", name="domanda_edit")
+     * @Route("/{id}/edit/customer/satisfaction", name="domanda_customer_satisfaction_edit")
      * @Template()
      */
-    public function editAction($id) {
+    public function editCustomerSatisfactionAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('AccreditamentiCongressiBundle:Domanda')->find($id);
@@ -253,11 +247,11 @@ class DomandaController extends Controller {
     /**
      * Edits an existing Domanda entity.
      *
-     * @Route("/{id}/update", name="domanda_update")
+     * @Route("/{id}/update/ecm", name="domanda_ecm_update")
      * @Method("post")
-     * @Template("AccreditamentiCongressiBundle:Domanda:edit.html.twig")
+     * @Template("AccreditamentiCongressiBundle:Domanda:editEcm.html.twig")
      */
-    public function updateAction($id) {
+    public function updateEcmAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('AccreditamentiCongressiBundle:Domanda')->find($id);
@@ -278,8 +272,47 @@ class DomandaController extends Controller {
             $em->flush();
 
             $id = $entity->getQuestionarioecm()->getId();
-            
+
             return $this->redirect($this->generateUrl('questionarioecm_show', array('id' => $id)));
+        }
+
+        return array(
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        );
+    }
+
+    /**
+     * Edits an existing Domanda entity.
+     *
+     * @Route("/{id}/update/customer/satisfation", name="domanda_customer_satisfaction_update")
+     * @Method("post")
+     * @Template("AccreditamentiCongressiBundle:Domanda:edit.html.twig")
+     */
+    public function updateCustomerSatisfactionAction($id) {
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $entity = $em->getRepository('AccreditamentiCongressiBundle:Domanda')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Domanda entity.');
+        }
+
+        $editForm = $this->createForm(new DomandaType(), $entity);
+        $deleteForm = $this->createDeleteForm($id);
+
+        $request = $this->getRequest();
+
+        $editForm->bindRequest($request);
+
+        if ($editForm->isValid()) {
+            $em->persist($entity);
+            $em->flush();
+
+            $id = $entity->getQuestionarioCustomerSatisfaction()->getId();
+
+            return $this->redirect($this->generateUrl('questionario_customer_satisfaction_show', array('id' => $id)));
         }
 
         return array(
@@ -295,7 +328,7 @@ class DomandaController extends Controller {
      * @Route("/{id}/delete", name="domanda_delete")
      * @Method("post")
      */
-    public function deleteAction($id) {
+    public function deleteEcmAction($id) {
         $form = $this->createDeleteForm($id);
         $request = $this->getRequest();
 
@@ -303,17 +336,46 @@ class DomandaController extends Controller {
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
-            $entity = $em->getRepository('AccreditamentiCongressiBundle:Domanda')->find($id);
+            $domanda = $em->getRepository('AccreditamentiCongressiBundle:Domanda')->find($id);
 
-            if (!$entity) {
+            if (!$domanda) {
                 throw $this->createNotFoundException('Unable to find Domanda entity.');
             }
 
-            $em->remove($entity);
+            $em->remove($domanda);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('domanda'));
+        return $this->redirect($this->generateUrl('questionario_ecm_show', array(
+                            'id' => $domanda->getQuestionarioEcm()->getId())));
+    }
+
+    /**
+     * Deletes a Domanda entity.
+     *
+     * @Route("/{id}/delete/customer/satisfaction", name="domanda_customer_satisfaction_delete")
+     * @Method("post")
+     */
+    public function deleteCustomerSatisfactionAction($id) {
+        $form = $this->createDeleteForm($id);
+        $request = $this->getRequest();
+
+        $form->bindRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getEntityManager();
+            $domanda = $em->getRepository('AccreditamentiCongressiBundle:Domanda')->find($id);
+
+            if (!$domanda) {
+                throw $this->createNotFoundException('Unable to find Domanda entity.');
+            }
+
+            $em->remove($domanda);
+            $em->flush();
+        }
+
+        return $this->redirect($this->generateUrl('questionario_customer_satisfaction_show', array(
+                            'id' => $domanda->getQuestionarioCustomerSatisfaction()->getId())));
     }
 
     private function createDeleteForm($id) {

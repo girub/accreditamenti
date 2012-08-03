@@ -78,7 +78,7 @@
         <ul>
             {% for risposta in domanda.getRisposta %}
                 <li>
-                   <a href="{{ path('risposta_edit', {'id': risposta.id }) }}">
+                   <a href="{{ path('risposta_ecm_edit', {'id': risposta.id }) }}">
                     <span class="icon-edit"></span></a>
                        {% if risposta.aperta %}
                            <span class="icon-folder-open"></span>

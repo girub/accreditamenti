@@ -19,7 +19,7 @@ class QuestionarioValutazioneController extends Controller {
     /**
      * Lists all Questionario valutazinoe entities.
      *
-     * @Route("/", name="questionario_customer_satisfaction")
+     * @Route("/", name="questionario_valutazione")
      * @Template()
      */
     public function indexAction() {
@@ -136,7 +136,7 @@ class QuestionarioValutazioneController extends Controller {
     }
 
     /**
-     * Edits an existing QuestionarioQuestionarioValutazione entity.
+     * Edits an existing QuestionarioValutazione entity.
      *
      * @Route("/{id}/update/valutazione", name="questionario_valutazione_update")
      * @Method("post")
@@ -145,13 +145,13 @@ class QuestionarioValutazioneController extends Controller {
     public function updateAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('AccreditamentiCongressiBundle:QuestionarioQuestionarioValutazione')->find($id);
+        $entity = $em->getRepository('AccreditamentiCongressiBundle:QuestionarioValutazione')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find QuestionarioQuestionarioValutazione entity.');
+            throw $this->createNotFoundException('Unable to find QuestionarioValutazione entity.');
         }
 
-        $editForm = $this->createForm(new QuestionarioQuestionarioValutazioneType(), $entity);
+        $editForm = $this->createForm(new QuestionarioValutazioneType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         $request = $this->getRequest();

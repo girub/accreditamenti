@@ -5,7 +5,7 @@
 
 <h1>Risposta edit</h1>
 
-<form action="{{ path('risposta_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+<form action="{{ path('risposta_customer_satisfaction_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
     {{ form_widget(edit_form) }}
     <p>
         <button type="submit">Edit</button>
@@ -13,13 +13,9 @@
 </form>
 
 <ul class="record_actions">
+    
     <li>
-        <a href="{{ path('risposta') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('risposta_delete', { 'id': entity.id }) }}" method="post">
+        <form action="{{ path('risposta_customer_satisfaction_delete', { 'id': entity.id }) }}" method="post">
             {{ form_widget(delete_form) }}
             <button type="submit">Delete</button>
         </form>

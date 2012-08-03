@@ -1,0 +1,40 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+<div class="navbar">
+    <div class="navbar-inner">
+        <div class="container">
+            <ul class="nav">
+                <li>
+                    <a href="{{ path('questionario_customer_satisfaction_show', { 'id': entity.getQuestionarioCustomerSatisfaction.id }) }}">
+                        <span class="icon-list icon-white"></span> Torna al questionario </a>
+                </li>
+                <li>
+                    <a href="{{ path('risposta_customer_satisfaction_new', { 'domanda_id': entity.id }) }}">
+                        <span class="icon-plus-sign icon-white"></span> Crea risposta </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<h1>Domanda edit</h1>
+
+<form action="{{ path('domanda_customer_satisfaction_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+        {{ form_widget(edit_form) }}
+        <p>
+            <button type="submit">Edit</button>
+        </p>
+    </form>
+
+    <ul class="record_actions">
+        <li>
+            <form action="{{ path('domanda_customer_satisfaction_delete', { 'id': entity.id }) }}" method="post">
+                {{ form_widget(delete_form) }}
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        </ul>
+
+{% endblock %}

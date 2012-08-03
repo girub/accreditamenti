@@ -36,7 +36,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ path('domanda_cs_new', { 'questionario_cs_id': entity.id }) }}">
+                        <a href="{{ path('domanda_customer_satisfaction_new', { 'questionario_id': entity.id }) }}">
                             <span class="icon-plus-sign icon-white"></span> Crea domanda
                         </a>
                     </li>
@@ -72,11 +72,11 @@
 
     <ul>
     {% for domanda in domande %}
-        <li><a href="{{ path('domanda_edit', {'id': domanda.id }) }}"><span class="icon-edit"></span></a> {{ domanda.descrizione }}
+        <li><a href="{{ path('domanda_customer_satisfaction_edit', {'id': domanda.id }) }}"><span class="icon-edit"></span></a> {{ domanda.descrizione }}
         <ul>
             {% for risposta in domanda.getRisposta %}
                 <li>
-                   <a href="{{ path('risposta_edit', {'id': risposta.id }) }}">
+                   <a href="{{ path('risposta_customer_satisfaction_edit', {'id': risposta.id }) }}">
                     <span class="icon-edit"></span></a>
                    
                        {% if risposta.vero|length > 0 %}
