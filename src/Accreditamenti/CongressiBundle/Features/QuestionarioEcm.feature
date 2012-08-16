@@ -43,9 +43,8 @@ Scenario: As User Create a new Test
     And I fill in "Obiettivo formativo" with "ACCRE-OBIETTIVOOOO"
     And I fill in "Numero crediti" with "11"
     Given I press "Create"
-    #Then show last response                                                                                       
-    Then the response should contain "Accreditamento creato con successo"
-    And I follow "Crea questionario ecm"
+    Then the response should contain "Accreditamento creato con successo"                                                                                      
+    And I follow "Quest. ecm"
     And I fill in "Descrizione" with "Mia Descrizione questionario"
     And I fill in "accreditamenti_congressibundle_questionarioecmtype_data_inizio_compilazione_year" with "2012"
     And I fill in "accreditamenti_congressibundle_questionarioecmtype_data_inizio_compilazione_month" with "07"
@@ -59,9 +58,9 @@ Scenario: As User Create a new Test
     Then the response should contain "Questionario creato con successo"
     And I follow "Crea domanda"
     And I fill in "Descrizione" with "quanto erano i porcellini?"
-    Given I press "Create"Questionario
-    And I follow "Crea risposta"
+    Given I press "Create"
+    And I follow "aggiungi risposta"
     And I fill in "Descrizione" with "erano 3"
     And I check "Vero"
     Given I press "Create"
-
+    Then show last response
