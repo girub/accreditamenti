@@ -104,7 +104,7 @@ class DomandaController extends Controller {
         $form = $this->createForm(new DomandaCustomerSatisfactionType(), $domanda);
 
         return array(
-            'questionario_customer_satisfaction_id' => $questionario_id,
+            'questionario_cs_id' => $questionario_id,
             'entity' => $domanda,
             'form' => $form->createView()
         );
@@ -219,6 +219,33 @@ class DomandaController extends Controller {
         );
     }
 
+    /**
+     * Displays a form to edit an existing Domanda entity.
+     *
+     * @Route("/{id}/edit/ecm", name="domanda_ecm_edit")
+     * @Template()
+     */
+    public function editEcmAction($id) {
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $entity = $em->getRepository('AccreditamentiCongressiBundle:Domanda')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Domanda entity.');
+        }
+
+        $editForm = $this->createForm(new DomandaType(), $entity);
+        $deleteForm = $this->createDeleteForm($id);
+
+        return array(
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        );
+    }
+    
+    
+    
     /**
      * Displays a form to edit an existing Domanda entity.
      *
@@ -346,7 +373,7 @@ class DomandaController extends Controller {
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('questionario_ecm_show', array(
+        return $this->redirect($this->generateUrl('questionarioecm_show', array(
                             'id' => $domanda->getQuestionarioEcm()->getId())));
     }
 

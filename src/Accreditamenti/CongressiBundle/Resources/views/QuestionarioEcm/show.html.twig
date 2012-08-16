@@ -53,7 +53,8 @@
     <div class="modal hide" id="myModal">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">×</button>
-            <h3>Attenzione stai eliminando un questionario</h3>
+            <h3>Attenzione stai eliminando:</h3>
+            <br><b>{{ entity.descrizione }}</b>
         </div>
         <div class="modal-footer">
             <a href="#" class="btn" data-dismiss="modal">Annulla</a>
@@ -74,7 +75,7 @@
 
     <ul>
     {% for domanda in domande %}
-        <li><a href="{{ path('domanda_edit', {'id': domanda.id }) }}"><span class="icon-edit"></span></a> {{ domanda.descrizione }}
+        <li><a href="{{ path('domanda_ecm_edit', {'id': domanda.id }) }}"><span class="icon-edit"></span></a> {{ domanda.descrizione }}
         <ul>
             {% for risposta in domanda.getRisposta %}
                 <li>

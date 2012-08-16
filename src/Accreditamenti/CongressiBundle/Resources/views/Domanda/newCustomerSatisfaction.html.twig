@@ -18,9 +18,9 @@
 
     <h1>Domanda creation</h1>
 
-    {{ path('domanda_cs_create') }}
+ 
     
-    <form action="{{ path('domanda_cs_create') }}" method="post" {{ form_enctype(form) }}>
+    <form action="{{ path('domanda_customer_satisfaction_create') }}" method="post" {{ form_enctype(form) }}>
         {{ form_widget(form) }}
         <p>
             <button type="submit">Create</button>

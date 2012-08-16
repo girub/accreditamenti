@@ -190,6 +190,11 @@ class QuestionarioEcmController extends Controller {
             $em = $this->getDoctrine()->getEntityManager();
             $entity = $em->getRepository('AccreditamentiCongressiBundle:QuestionarioEcm')->find($id);
 
+            //$id = $entity->$id = $entity->getQuestionarioCustomerSatisfaction()->getId();
+            $id = $entity->getAccreditamentoId();
+            
+            
+            
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find QuestionarioEcm entity.');
             }
@@ -198,7 +203,8 @@ class QuestionarioEcmController extends Controller {
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('questionarioecm'));
+       // return $this->redirect($this->generateUrl('accreditamento_show'));
+        return $this->redirect($this->generateUrl('accreditamento_show', array('id' => $id)));
     }
 
     private function createDeleteForm($id) {
