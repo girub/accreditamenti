@@ -8,22 +8,22 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Accreditamenti\CongressiBundle\Entity\Accreditamento;
 use Accreditamenti\CongressiBundle\Form\AccreditamentoType;
+use Accreditamenti\CongressiBundle\Entity\Iscritti;
 
 /**
  * Accreditamento controller.
  *
  * @Route("/accreditamento")
  */
-class AccreditamentoController extends Controller
-{
+class AccreditamentoController extends Controller {
+
     /**
      * Lists all Accreditamento entities.
      *
      * @Route("/", name="accreditamento")
      * @Template()
      */
-    public function indexAction()
-    {
+    public function indexAction() {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entities = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')->findAll();
@@ -32,13 +32,71 @@ class AccreditamentoController extends Controller
     }
 
     /**
+     * Lists all Accreditamento entities.
+     *
+     * @Route("/{id}/carica/iscritti", name="carica_iscritti")
+     * @Template()
+     */
+    public function caricaIscrittiAction($id) {
+
+        $form = $this->createFormBuilder(null)
+                ->add('file_iscritti', 'file')
+                ->getForm()
+                ->createView();
+
+        return array('form' => $form, 'id' => $id);
+    }
+
+    /**
+     * Upload iscritti dal csv.
+     *
+     * @Route("/{id}/uoload/iscritti", name="upload_iscritti")
+     */
+    public function uploadIscrittiAction($id) {
+
+        $form = $this->createFormBuilder(null)
+                ->add('file_iscritti', 'file')
+                ->getForm();
+
+        $form->bindRequest($this->getRequest());
+
+        if ($form->isValid()) {
+            if (!($form['file_iscritti']->getData() === NULL)) {
+                $fileName = $form['file_iscritti']->getData()->guessExtension();
+                $fileIscritti = date('YmdHis') . '.csv';
+                $dir = $_SERVER['DOCUMENT_ROOT'] . "/resource/csv/" . $id;
+                @mkdir($dir, 0775);
+                $nomeFileCompleto = $dir . '/' . $fileIscritti;
+                $form['file_iscritti']->getData()->move($dir, $fileIscritti);
+
+                // Controllo se c'è il file
+                if (file_exists($nomeFileCompleto)) {
+                    if ($file = file($nomeFileCompleto)) {
+                        foreach ($file as $riga){
+                            echo $riga[1] . '<br />';
+                        }
+                        die();
+                    } else {
+                        throw new \Exception("Non riesco ad aprire il file");
+                    }
+                    // Lo apro ...
+                    // Carico nell'entità
+                } else {
+                    throw new \Exception("Il File {$nomeFileCompleto} non esiste");
+                }
+            }
+        }
+
+        return $this->redirect($this->generateUrl('carica_iscritti', array('id' => $id)));
+    }
+
+    /**
      * Finds and displays a Accreditamento entity.
      *
      * @Route("/{id}/show", name="accreditamento_show")
      * @Template()
      */
-    public function showAction($id)
-    {
+    public function showAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($id);
@@ -60,16 +118,15 @@ class AccreditamentoController extends Controller
      * @Route("/new/{congresso_id}", name="accreditamento_new")
      * @Template()
      */
-    public function newAction($congresso_id)
-    {
-        //ricevo id dalla rotta e mi carico il congresso
+    public function newAction($congresso_id) {
+//ricevo id dalla rotta e mi carico il congresso
         $em = $this->getDoctrine()->getEntityManager();
         $congresso = $em->getRepository('AccreditamentiCongressiBundle:Congresso')->find($congresso_id);
 
 
         $accreditamento = new Accreditamento();
 
-        //In questa riga 
+//In questa riga 
         $accreditamento->setCongresso($congresso);
 
         $form = $this->createForm(new AccreditamentoType(), $accreditamento);
@@ -87,8 +144,7 @@ class AccreditamentoController extends Controller
      * @Method("post")
      * @Template("AccreditamentiCongressiBundle:Accreditamento:new.html.twig")
      */
-    public function createAction()
-    {
+    public function createAction() {
         $entity = new Accreditamento();
         $request = $this->getRequest();
         $form = $this->createForm(new AccreditamentoType(), $entity);
@@ -99,7 +155,7 @@ class AccreditamentoController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            // Imposto il flash message
+// Imposto il flash message
             $this->get('session')->setFlash('notice', 'Accreditamento creato con successo');
 
             return $this->redirect($this->generateUrl('accreditamento_show', array('id' => $entity->getId())));
@@ -117,8 +173,7 @@ class AccreditamentoController extends Controller
      * @Route("/{id}/edit", name="accreditamento_edit")
      * @Template()
      */
-    public function editAction($id)
-    {
+    public function editAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($id);
@@ -144,8 +199,7 @@ class AccreditamentoController extends Controller
      * @Method("post")
      * @Template("AccreditamentiCongressiBundle:Accreditamento:edit.html.twig")
      */
-    public function updateAction($id)
-    {
+    public function updateAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($id);
@@ -181,8 +235,7 @@ class AccreditamentoController extends Controller
      * @Route("/{id}/delete", name="accreditamento_delete")
      * @Method("post")
      */
-    public function deleteAction($id)
-    {
+    public function deleteAction($id) {
         $form = $this->createDeleteForm($id);
         $request = $this->getRequest();
 
@@ -203,8 +256,7 @@ class AccreditamentoController extends Controller
         return $this->redirect($this->generateUrl('accreditamento'));
     }
 
-    private function createDeleteForm($id)
-    {
+    private function createDeleteForm($id) {
         return $this->createFormBuilder(array('id' => $id))
                         ->add('id', 'hidden')
                         ->getForm()

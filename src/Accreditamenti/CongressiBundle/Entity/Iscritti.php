@@ -1,0 +1,142 @@
+<?php
+
+namespace Accreditamenti\CongressiBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Accreditamenti\CongressiBundle\Entity\Iscritti
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Accreditamenti\CongressiBundle\Entity\IscrittiRepository")
+ */
+class Iscritti
+{
+    /**
+     * @var integer $id
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string $cognome
+     *
+     * @ORM\Column(name="cognome", type="string", length=255)
+     */
+    private $cognome;
+
+    /**
+     * @var string $nome
+     *
+     * @ORM\Column(name="nome", type="string", length=255)
+     */
+    private $nome;
+
+    /**
+     * @var string $codice_fiscale
+     *
+     * @ORM\Column(name="codice_fiscale", type="string", length=255)
+     */
+    private $codice_fiscale;
+
+    /**
+     * @var string $tipologia_iscritto
+     *
+     * @ORM\Column(name="tipologia_iscritto", type="string", length=255)
+     */
+    private $tipologia_iscritto;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set cognome
+     *
+     * @param string $cognome
+     */
+    public function setCognome($cognome)
+    {
+        $this->cognome = $cognome;
+    }
+
+    /**
+     * Get cognome
+     *
+     * @return string 
+     */
+    public function getCognome()
+    {
+        return $this->cognome;
+    }
+
+    /**
+     * Set nome
+     *
+     * @param string $nome
+     */
+    public function setNome($nome)
+    {
+        $this->nome = $nome;
+    }
+
+    /**
+     * Get nome
+     *
+     * @return string 
+     */
+    public function getNome()
+    {
+        return $this->nome;
+    }
+
+    /**
+     * Set codice_fiscale
+     *
+     * @param string $codiceFiscale
+     */
+    public function setCodiceFiscale($codiceFiscale)
+    {
+        $this->codice_fiscale = $codiceFiscale;
+    }
+
+    /**
+     * Get codice_fiscale
+     *
+     * @return string 
+     */
+    public function getCodiceFiscale()
+    {
+        return $this->codice_fiscale;
+    }
+
+    /**
+     * Set tipologia_iscritto
+     *
+     * @param string $tipologiaIscritto
+     */
+    public function setTipologiaIscritto($tipologiaIscritto)
+    {
+        $this->tipologia_iscritto = $tipologiaIscritto;
+    }
+
+    /**
+     * Get tipologia_iscritto
+     *
+     * @return string 
+     */
+    public function getTipologiaIscritto()
+    {
+        return $this->tipologia_iscritto;
+    }
+}
