@@ -1,3 +1,6 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
 <h1>Accreditamento -- carica iscritti</h1>
 
 <form action="{{ path('upload_iscritti',{'id':id}) }}" method="post" {{ form_enctype(form) }}>
@@ -6,3 +9,4 @@
     <input type="submit" />
 </form>
 
+{% endblock %}

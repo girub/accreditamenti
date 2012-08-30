@@ -53,6 +53,8 @@ class AccreditamentoController extends Controller {
      * @Route("/{id}/uoload/iscritti", name="upload_iscritti")
      */
     public function uploadIscrittiAction($id) {
+        $em = $this->getDoctrine()->getEntityManager();
+        $accreditamento = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($id);
 
         $form = $this->createFormBuilder(null)
                 ->add('file_iscritti', 'file')
@@ -62,7 +64,6 @@ class AccreditamentoController extends Controller {
 
         if ($form->isValid()) {
             if (!($form['file_iscritti']->getData() === NULL)) {
-                $fileName = $form['file_iscritti']->getData()->guessExtension();
                 $fileIscritti = date('YmdHis') . '.csv';
                 $dir = $_SERVER['DOCUMENT_ROOT'] . "/resource/csv/" . $id;
                 @mkdir($dir, 0775);
@@ -72,10 +73,21 @@ class AccreditamentoController extends Controller {
                 // Controllo se c'è il file
                 if (file_exists($nomeFileCompleto)) {
                     if ($file = file($nomeFileCompleto)) {
-                        foreach ($file as $riga){
-                            echo $riga[1] . '<br />';
+                        foreach ($file as $riga) {
+
+                            $riga = explode(';', $riga);
+                            //echo $riga[0] . " -- " . $riga[1] . "<BR>";
+
+
+                            $iscritti = new Iscritti();
+                            $iscritti->setNome($riga[0]);
+                            $iscritti->setCognome($riga[1]);
+                            $iscritti->setCodiceFiscale($riga[2]);
+                            $iscritti->setTipologiaIscritto($riga[3]);
+                            $iscritti->setAccreditamento($accreditamento);
+                            $em->persist($iscritti);
                         }
-                        die();
+                        $em->flush();
                     } else {
                         throw new \Exception("Non riesco ad aprire il file");
                     }
@@ -86,6 +98,8 @@ class AccreditamentoController extends Controller {
                 }
             }
         }
+
+        $this->get('session')->setFlash('notice', 'Iscritti caricati correttamente');
 
         return $this->redirect($this->generateUrl('carica_iscritti', array('id' => $id)));
     }
