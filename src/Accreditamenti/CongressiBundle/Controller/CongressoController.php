@@ -35,6 +35,25 @@ class CongressoController extends Controller {
     /**
      * Lists all Congresso entities.
      * 
+     * @Route("/elenco", name="elenco_congresso")
+     * @Template()
+     */
+    public function elencoCongressiAction() {
+
+        $entityManager = $this->getDoctrine()->getEntityManager();
+        
+        $congressi = $entityManager
+                ->getRepository('AccreditamentiCongressiBundle:Congresso')
+                ->findAll();
+
+        return array(
+            'congressi' => $congressi
+        );
+    }
+
+    /**
+     * Lists all Congresso entities.
+     * 
      * @Route("/mostraTutti", name="congresso_mostra_tutti")
      * @Template()
      */
@@ -135,8 +154,8 @@ class CongressoController extends Controller {
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Congresso entity.');
         }
-        
-        
+
+
         $editForm = $this->createForm(new CongressoType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
@@ -174,8 +193,8 @@ class CongressoController extends Controller {
         $editForm = $this->createForm(new CongressoType(), $congresso);
         $deleteForm = $this->createDeleteForm($id);
         $editForm->bindRequest($this->getRequest());
-        
-       
+
+
 
         if ($editForm->isValid()) {
 

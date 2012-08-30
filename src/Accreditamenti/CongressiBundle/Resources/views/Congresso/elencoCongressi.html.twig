@@ -1,0 +1,9 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    {% for congresso in congressi %}
+        {{ congresso.titolo }}<BR>
+        {{ congresso.descrizione }}
+        <hr />
+    {% endfor %}
+{% endblock %}
