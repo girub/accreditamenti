@@ -50,8 +50,29 @@ class CongressoController extends Controller {
             'congressi' => $congressi
         );
     }
-
+    
     /**
+     * Finds and displays a Congresso entity.
+     *
+     * @Route("/mostra/accreditamenti/{id}", name="accreditamenti_congresso")
+     * @Template()
+     */
+    public function accreditamentiCongressoAction($id) {
+        $em = $this->getDoctrine()->getEntityManager();
+        $congresso = $em->getRepository('AccreditamentiCongressiBundle:Congresso')->find($id);
+        $accreditamenti = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')
+                ->findAllByCongresso($congresso);
+
+        if (!$congresso) {
+            throw $this->createNotFoundException('Unable to find Congresso entity.');
+        }
+        
+        return array(
+            'accreditamenti' => $accreditamenti,
+            'entity' => $congresso);
+    }
+    
+     /**
      * Lists all Congresso entities.
      * 
      * @Route("/mostraTutti", name="congresso_mostra_tutti")

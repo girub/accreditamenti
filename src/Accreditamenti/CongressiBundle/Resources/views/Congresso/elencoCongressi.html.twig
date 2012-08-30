@@ -2,8 +2,14 @@
 
 {% block body %}
     {% for congresso in congressi %}
-        {{ congresso.titolo }}<BR>
+
+     {#<a href="{{ path('accreditamenti_congresso', { 'id': congresso.id }) }}" id="link_accreditamenti_congresso">#}
+<a href="{{ path('accreditamenti_congresso', { 'id': congresso.id }) }}" id="link_accreditamenti_congresso{{congresso.id}}">
+{{ congresso.titolo }}
+    </a>
+    <BR>
         {{ congresso.descrizione }}
-        <hr />
+    <hr/>
+
     {% endfor %}
 {% endblock %}

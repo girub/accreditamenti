@@ -47,6 +47,95 @@ class AccreditamentoController extends Controller {
         return array('form' => $form, 'id' => $id);
     }
 
+    
+     /**
+     * login Accreditamento.
+     *
+     * @Route("/{id}/form/iscritto", name="form_login_iscritto")
+     * @Template()
+     */
+    public function formLoginIscrittoAction($id) {
+
+        $form = $this->createFormBuilder(null)
+                ->add('codice_fiscale', 'text')
+                ->getForm()
+                ->createView();
+
+        return array('form' => $form, 'id' => $id);
+    }
+    
+    
+    
+    /**
+     * login iscritto con codice fiscale.
+     *
+     * @Route("/{id}/login/iscritto", name="login_iscritto")
+     */
+    public function loginIscrittoAction($id) {
+        $em = $this->getDoctrine()->getEntityManager();
+        $accreditamento = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($id);
+
+        $form = $this->createFormBuilder(null)
+                ->add('codice_fiscale', 'text')
+                ->getForm();
+
+        $form->bindRequest($this->getRequest());
+
+        if ($form->isValid()) {
+            if (!($form['codice_fiscale']->getData() === NULL)) {
+               
+//                $fileIscritti = date('YmdHis') . '.csv';
+//                $dir = $_SERVER['DOCUMENT_ROOT'] . "/resource/csv/" . $id;
+//                @mkdir($dir, 0775);
+//                $nomeFileCompleto = $dir . '/' . $fileIscritti;
+//                $form['file_iscritti']->getData()->move($dir, $fileIscritti);
+//
+//                // Controllo se c'è il file
+//                if (file_exists($nomeFileCompleto)) {
+//                    if ($file = file($nomeFileCompleto)) {
+//                        foreach ($file as $riga) {
+//
+//                            $riga = explode(';', $riga);
+//                            //echo $riga[0] . " -- " . $riga[1] . "<BR>";
+//
+//
+//                            $iscritti = new Iscritti();
+//                            $iscritti->setNome($riga[0]);
+//                            $iscritti->setCognome($riga[1]);
+//                            $iscritti->setCodiceFiscale($riga[2]);
+//                            $iscritti->setTipologiaIscritto($riga[3]);
+//                            $iscritti->setAccreditamento($accreditamento);
+//                            $em->persist($iscritti);
+//                        }
+//                        $em->flush();
+//                    } else {
+//                        throw new \Exception("Non riesco ad aprire il file");
+//                    }
+//                    // Lo apro ...
+//                    // Carico nell'entità
+//                } else {
+//                    throw new \Exception("Il File {$nomeFileCompleto} non esiste");
+//                }
+            }
+        }
+
+        $this->get('session')->setFlash('notice', 'Login effettuato senza controllare codice fiscale');
+
+        return $this->redirect($this->generateUrl('compila_anagrafica', array('id' => $id)));
+    }
+
+    /**
+     * Pagina dove iscritto una volta entrato compila angrafica.
+     *
+     * @Route("/{id}/compila/anagrafica", name="compila_anagrafica")
+     * @Template()
+     */
+    public function compilaAnagraficaAction($id) {
+
+        return array();
+    } 
+    
+    
     /**
      * Upload iscritti dal csv.
      *

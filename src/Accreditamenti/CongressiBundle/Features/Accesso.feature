@@ -7,7 +7,7 @@ Scenario: Voglio scegliere un congresso da un elenco e un relativo suo accredita
     And I fill in "_password" with "giuseppe"
     Given I press "Login"
     When I am on "/congresso/new"
-    And I fill in "Codice congresso" with "picny0875tb68b3"
+    And I fill in "Codice congresso" with "SIP2012"
     And I fill in "Url" with "http://www.google.com"
     And I fill in "Titolo" with "68° Congresso Nazionale SIP"
     And I fill in "Descrizione" with "mia descrizione"
@@ -29,7 +29,7 @@ Scenario: Voglio scegliere un congresso da un elenco e un relativo suo accredita
     Given I press "Create"
     When I follow "link_accreditamento_new"
     And I fill in "accreditamenti_congressibundle_accreditamentotype_numero_accreditamento" with "33"
-    And I fill in "accreditamenti_congressibundle_accreditamentotype_titolo" with "Titolo"
+    And I fill in "accreditamenti_congressibundle_accreditamentotype_titolo" with "TitoloAccreditamento"
     And I fill in "accreditamenti_congressibundle_accreditamentotype_luogo" with "Cesena"
     And I fill in "accreditamenti_congressibundle_accreditamentotype_data_inizio_day" with "01"
     And I fill in "accreditamenti_congressibundle_accreditamentotype_data_inizio_month" with "01"
@@ -42,5 +42,10 @@ Scenario: Voglio scegliere un congresso da un elenco e un relativo suo accredita
     And I fill in "accreditamenti_congressibundle_accreditamentotype_numero_crediti" with "2012"
     Given I press "Create"
     Given I go to "/congresso/elenco"
-    Then show last response
-    And I follow "68° Congresso Nazionale SIP"
+    When I follow "link_accreditamenti_congresso44"
+    When I follow "link_accesso_accreditamento42"
+    And I fill in "form[codice_fiscale]" with "RBNGPP74B15E882U"
+    Given I press "Accedi"
+    Then show last response    
+    Then the response should contain "Login effettuato senza controllare codice fiscale"
+
