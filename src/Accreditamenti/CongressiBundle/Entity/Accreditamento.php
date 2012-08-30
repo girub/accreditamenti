@@ -13,8 +13,8 @@ use Doctrine\ORM\Mapping\OneToMany;
  * @ORM\Table(name="ideacpa_accreditamento")
  * @ORM\Entity(repositoryClass="Accreditamenti\CongressiBundle\Entity\AccreditamentoRepository")
  */
-class Accreditamento
-{
+class Accreditamento {
+
     /**
      * @var integer $id
      *
@@ -96,30 +96,29 @@ class Accreditamento
      */
     private $questionarioCustomerSatisfaction;
 
-    
-      /**
+    /**
      * @OneToMany(targetEntity="QuestionarioValutazione", mappedBy="accreditamento")
      */
     private $questionarioValutazione;
 
-    
-    
-    
     /**
      * @var boolean $attiva_questionario
      *
      * @ORM\Column(name="attiva_questionario", nullable=true, type="boolean")
      */
-    private $attiva_questionario; 
-    
-   
+    private $attiva_questionario;
+
+    /**
+     * @OneToMany(targetEntity="Iscritti", mappedBy="accreditamento")
+     */
+    private $iscritti;
+
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -128,8 +127,7 @@ class Accreditamento
      *
      * @param string $titolo
      */
-    public function setTitolo($titolo)
-    {
+    public function setTitolo($titolo) {
         $this->titolo = $titolo;
     }
 
@@ -138,8 +136,7 @@ class Accreditamento
      *
      * @return string 
      */
-    public function getTitolo()
-    {
+    public function getTitolo() {
         return $this->titolo;
     }
 
@@ -148,8 +145,7 @@ class Accreditamento
      *
      * @param string $luogo
      */
-    public function setLuogo($luogo)
-    {
+    public function setLuogo($luogo) {
         $this->luogo = $luogo;
     }
 
@@ -158,8 +154,7 @@ class Accreditamento
      *
      * @return string 
      */
-    public function getLuogo()
-    {
+    public function getLuogo() {
         return $this->luogo;
     }
 
@@ -168,8 +163,7 @@ class Accreditamento
      *
      * @param date $dataInizio
      */
-    public function setDataInizio($dataInizio)
-    {
+    public function setDataInizio($dataInizio) {
         $this->data_inizio = $dataInizio;
     }
 
@@ -178,8 +172,7 @@ class Accreditamento
      *
      * @return date 
      */
-    public function getDataInizio()
-    {
+    public function getDataInizio() {
         return $this->data_inizio;
     }
 
@@ -188,8 +181,7 @@ class Accreditamento
      *
      * @param date $dataFine
      */
-    public function setDataFine($dataFine)
-    {
+    public function setDataFine($dataFine) {
         $this->data_fine = $dataFine;
     }
 
@@ -198,8 +190,7 @@ class Accreditamento
      *
      * @return date 
      */
-    public function getDataFine()
-    {
+    public function getDataFine() {
         return $this->data_fine;
     }
 
@@ -208,8 +199,7 @@ class Accreditamento
      *
      * @param string $oreFormative
      */
-    public function setOreFormative($oreFormative)
-    {
+    public function setOreFormative($oreFormative) {
         $this->ore_formative = $oreFormative;
     }
 
@@ -218,8 +208,7 @@ class Accreditamento
      *
      * @return string 
      */
-    public function getOreFormative()
-    {
+    public function getOreFormative() {
         return $this->ore_formative;
     }
 
@@ -228,8 +217,7 @@ class Accreditamento
      *
      * @param text $obiettivoFormativo
      */
-    public function setObiettivoFormativo($obiettivoFormativo)
-    {
+    public function setObiettivoFormativo($obiettivoFormativo) {
         $this->obiettivo_formativo = $obiettivoFormativo;
     }
 
@@ -238,8 +226,7 @@ class Accreditamento
      *
      * @return text 
      */
-    public function getObiettivoFormativo()
-    {
+    public function getObiettivoFormativo() {
         return $this->obiettivo_formativo;
     }
 
@@ -248,8 +235,7 @@ class Accreditamento
      *
      * @param float $numeroCrediti
      */
-    public function setNumeroCrediti($numeroCrediti)
-    {
+    public function setNumeroCrediti($numeroCrediti) {
         $this->numero_crediti = $numeroCrediti;
     }
 
@@ -258,8 +244,7 @@ class Accreditamento
      *
      * @return float 
      */
-    public function getNumeroCrediti()
-    {
+    public function getNumeroCrediti() {
         return $this->numero_crediti;
     }
 
@@ -268,8 +253,7 @@ class Accreditamento
      *
      * @param float $numeroAccreditamento
      */
-    public function setNumeroAccreditamento($numeroAccreditamento)
-    {
+    public function setNumeroAccreditamento($numeroAccreditamento) {
         $this->numero_accreditamento = $numeroAccreditamento;
     }
 
@@ -278,8 +262,7 @@ class Accreditamento
      *
      * @return float 
      */
-    public function getNumeroAccreditamento()
-    {
+    public function getNumeroAccreditamento() {
         return $this->numero_accreditamento;
     }
 
@@ -288,8 +271,7 @@ class Accreditamento
      *
      * @param Accreditamenti\CongressiBundle\Entity\Congresso $congresso
      */
-    public function setCongresso(\Accreditamenti\CongressiBundle\Entity\Congresso $congresso)
-    {
+    public function setCongresso(\Accreditamenti\CongressiBundle\Entity\Congresso $congresso) {
         $this->congresso = $congresso;
     }
 
@@ -298,13 +280,11 @@ class Accreditamento
      *
      * @return Accreditamenti\CongressiBundle\Entity\Congresso 
      */
-    public function getCongresso()
-    {
+    public function getCongresso() {
         return $this->congresso;
     }
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->questionarioecm = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -313,8 +293,7 @@ class Accreditamento
      *
      * @param Accreditamenti\CongressiBundle\Entity\QuestionarioEcm $questionarioecm
      */
-    public function addQuestionarioEcm(\Accreditamenti\CongressiBundle\Entity\QuestionarioEcm $questionarioecm)
-    {
+    public function addQuestionarioEcm(\Accreditamenti\CongressiBundle\Entity\QuestionarioEcm $questionarioecm) {
         $this->questionarioecm[] = $questionarioecm;
     }
 
@@ -323,24 +302,20 @@ class Accreditamento
      *
      * @return Doctrine\Common\Collections\Collection 
      */
-    public function getQuestionarioecm()
-    {
+    public function getQuestionarioecm() {
         return $this->questionarioecm;
     }
 
-    public function __toString()
-    {
+    public function __toString() {
         return $this->getTitolo();
     }
-
 
     /**
      * Set attiva_questionario
      *
      * @param boolean $attivaQuestionario
      */
-    public function setAttivaQuestionario($attivaQuestionario)
-    {
+    public function setAttivaQuestionario($attivaQuestionario) {
         $this->attiva_questionario = $attivaQuestionario;
     }
 
@@ -349,8 +324,7 @@ class Accreditamento
      *
      * @return boolean 
      */
-    public function getAttivaQuestionario()
-    {
+    public function getAttivaQuestionario() {
         return $this->attiva_questionario;
     }
 
@@ -359,8 +333,7 @@ class Accreditamento
      *
      * @param Accreditamenti\CongressiBundle\Entity\QuestionarioCustomerSatisfaction $questionarioCustomerSatisfaction
      */
-    public function addQuestionarioCustomerSatisfaction(\Accreditamenti\CongressiBundle\Entity\QuestionarioCustomerSatisfaction $questionarioCustomerSatisfaction)
-    {
+    public function addQuestionarioCustomerSatisfaction(\Accreditamenti\CongressiBundle\Entity\QuestionarioCustomerSatisfaction $questionarioCustomerSatisfaction) {
         $this->questionarioCustomerSatisfaction[] = $questionarioCustomerSatisfaction;
     }
 
@@ -369,8 +342,7 @@ class Accreditamento
      *
      * @return Doctrine\Common\Collections\Collection 
      */
-    public function getQuestionarioCustomerSatisfaction()
-    {
+    public function getQuestionarioCustomerSatisfaction() {
         return $this->questionarioCustomerSatisfaction;
     }
 
@@ -379,8 +351,7 @@ class Accreditamento
      *
      * @param Accreditamenti\CongressiBundle\Entity\QuestionarioValutazione $questionarioValutazione
      */
-    public function addQuestionarioValutazione(\Accreditamenti\CongressiBundle\Entity\QuestionarioValutazione $questionarioValutazione)
-    {
+    public function addQuestionarioValutazione(\Accreditamenti\CongressiBundle\Entity\QuestionarioValutazione $questionarioValutazione) {
         $this->questionarioValutazione[] = $questionarioValutazione;
     }
 
@@ -389,8 +360,8 @@ class Accreditamento
      *
      * @return Doctrine\Common\Collections\Collection 
      */
-    public function getQuestionarioValutazione()
-    {
+    public function getQuestionarioValutazione() {
         return $this->questionarioValutazione;
     }
+
 }

@@ -3,6 +3,8 @@
 namespace Accreditamenti\CongressiBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\JoinColumn;
 
 /**
  * Accreditamenti\CongressiBundle\Entity\Iscritti
@@ -10,8 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Accreditamenti\CongressiBundle\Entity\IscrittiRepository")
  */
-class Iscritti
-{
+class Iscritti {
+
     /**
      * @var integer $id
      *
@@ -49,14 +51,18 @@ class Iscritti
      */
     private $tipologia_iscritto;
 
+    /**
+     * @ManyToOne(targetEntity="Accreditamento", inversedBy="iscritti")
+     * @JoinColumn(name="accreditamento_id", referencedColumnName="id")
+     */
+    private $accreditamento;
 
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -65,8 +71,7 @@ class Iscritti
      *
      * @param string $cognome
      */
-    public function setCognome($cognome)
-    {
+    public function setCognome($cognome) {
         $this->cognome = $cognome;
     }
 
@@ -75,8 +80,7 @@ class Iscritti
      *
      * @return string 
      */
-    public function getCognome()
-    {
+    public function getCognome() {
         return $this->cognome;
     }
 
@@ -85,8 +89,7 @@ class Iscritti
      *
      * @param string $nome
      */
-    public function setNome($nome)
-    {
+    public function setNome($nome) {
         $this->nome = $nome;
     }
 
@@ -95,8 +98,7 @@ class Iscritti
      *
      * @return string 
      */
-    public function getNome()
-    {
+    public function getNome() {
         return $this->nome;
     }
 
@@ -105,8 +107,7 @@ class Iscritti
      *
      * @param string $codiceFiscale
      */
-    public function setCodiceFiscale($codiceFiscale)
-    {
+    public function setCodiceFiscale($codiceFiscale) {
         $this->codice_fiscale = $codiceFiscale;
     }
 
@@ -115,8 +116,7 @@ class Iscritti
      *
      * @return string 
      */
-    public function getCodiceFiscale()
-    {
+    public function getCodiceFiscale() {
         return $this->codice_fiscale;
     }
 
@@ -125,8 +125,7 @@ class Iscritti
      *
      * @param string $tipologiaIscritto
      */
-    public function setTipologiaIscritto($tipologiaIscritto)
-    {
+    public function setTipologiaIscritto($tipologiaIscritto) {
         $this->tipologia_iscritto = $tipologiaIscritto;
     }
 
@@ -135,8 +134,8 @@ class Iscritti
      *
      * @return string 
      */
-    public function getTipologiaIscritto()
-    {
+    public function getTipologiaIscritto() {
         return $this->tipologia_iscritto;
     }
+
 }
