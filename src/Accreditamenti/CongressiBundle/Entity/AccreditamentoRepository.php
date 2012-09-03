@@ -20,5 +20,6 @@ class AccreditamentoRepository extends EntityRepository
                         ->getQuery()
                         ->getResult();
     }
+    
 
 }

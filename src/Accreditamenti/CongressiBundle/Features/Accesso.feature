@@ -1,4 +1,4 @@
-Feature: Registrazione ad un accreditamento
+Feature: Registrazione ad un accreditamento e login
 
 Scenario: Voglio scegliere un congresso da un elenco e un relativo suo accreditamento
     Given I go to "/"
@@ -46,6 +46,4 @@ Scenario: Voglio scegliere un congresso da un elenco e un relativo suo accredita
     When I follow "link_accesso_accreditamento42"
     And I fill in "form[codice_fiscale]" with "RBNGPP74B15E882U"
     Given I press "Accedi"
-    Then show last response    
-    Then the response should contain "Login effettuato senza controllare codice fiscale"
-
+    Then the response should contain "Benvenuto - compila Anagrafica" 

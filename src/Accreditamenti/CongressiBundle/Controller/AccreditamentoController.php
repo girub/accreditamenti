@@ -47,8 +47,7 @@ class AccreditamentoController extends Controller {
         return array('form' => $form, 'id' => $id);
     }
 
-    
-     /**
+    /**
      * login Accreditamento.
      *
      * @Route("/{id}/form/iscritto", name="form_login_iscritto")
@@ -63,17 +62,13 @@ class AccreditamentoController extends Controller {
 
         return array('form' => $form, 'id' => $id);
     }
-    
-    
-    
+
     /**
      * login iscritto con codice fiscale.
      *
      * @Route("/{id}/login/iscritto", name="login_iscritto")
      */
     public function loginIscrittoAction($id) {
-        $em = $this->getDoctrine()->getEntityManager();
-        $accreditamento = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($id);
 
         $form = $this->createFormBuilder(null)
                 ->add('codice_fiscale', 'text')
@@ -83,45 +78,32 @@ class AccreditamentoController extends Controller {
 
         if ($form->isValid()) {
             if (!($form['codice_fiscale']->getData() === NULL)) {
-               
-//                $fileIscritti = date('YmdHis') . '.csv';
-//                $dir = $_SERVER['DOCUMENT_ROOT'] . "/resource/csv/" . $id;
-//                @mkdir($dir, 0775);
-//                $nomeFileCompleto = $dir . '/' . $fileIscritti;
-//                $form['file_iscritti']->getData()->move($dir, $fileIscritti);
-//
-//                // Controllo se c'è il file
-//                if (file_exists($nomeFileCompleto)) {
-//                    if ($file = file($nomeFileCompleto)) {
-//                        foreach ($file as $riga) {
-//
-//                            $riga = explode(';', $riga);
-//                            //echo $riga[0] . " -- " . $riga[1] . "<BR>";
-//
-//
-//                            $iscritti = new Iscritti();
-//                            $iscritti->setNome($riga[0]);
-//                            $iscritti->setCognome($riga[1]);
-//                            $iscritti->setCodiceFiscale($riga[2]);
-//                            $iscritti->setTipologiaIscritto($riga[3]);
-//                            $iscritti->setAccreditamento($accreditamento);
-//                            $em->persist($iscritti);
-//                        }
-//                        $em->flush();
-//                    } else {
-//                        throw new \Exception("Non riesco ad aprire il file");
-//                    }
-//                    // Lo apro ...
-//                    // Carico nell'entità
-//                } else {
-//                    throw new \Exception("Il File {$nomeFileCompleto} non esiste");
-//                }
+                $codice_fiscale = $form['codice_fiscale']->getData();
+                $em = $this->getDoctrine()->getEntityManager();
+                $query = $em->createQuery(
+                                'SELECT p.cognome, p.nome FROM AccreditamentiCongressiBundle:Iscritti p 
+                         WHERE p.codice_fiscale = :codice_fiscale and p.accreditamento_id = :id'
+                        )->setParameter('codice_fiscale', $codice_fiscale)
+                        ->setParameter('id', $id);
+                     $iscritto = $query->getResult();
+
+                if (isset($iscritto[0]['nome'])) {
+                        
+                    
+                } else {
+                    $this->get('session')->setFlash('notice', 'Codice_fiscale non presente per questo accreditamento');
+                    return $this->redirect($this->generateUrl('form_login_iscritto', array('id' => $id)));
+                }
+            } else {
+                    // non inserisco nulla
+                    $this->get('session')->setFlash('notice', 'Codice_fiscale vuoto non presente per questo accreditamento');
+                    return $this->redirect($this->generateUrl('form_login_iscritto', array('id' => $id)));
             }
         }
 
-        $this->get('session')->setFlash('notice', 'Login effettuato senza controllare codice fiscale');
-
+        $this->get('session')->setFlash('notice', 'Benvenuto '. $iscritto[0]['nome'] . ' ' .$iscritto[0]['cognome'] . ' Login effettuato con successo');
         return $this->redirect($this->generateUrl('compila_anagrafica', array('id' => $id)));
+        
     }
 
     /**
@@ -133,9 +115,8 @@ class AccreditamentoController extends Controller {
     public function compilaAnagraficaAction($id) {
 
         return array();
-    } 
-    
-    
+    }
+
     /**
      * Upload iscritti dal csv.
      *

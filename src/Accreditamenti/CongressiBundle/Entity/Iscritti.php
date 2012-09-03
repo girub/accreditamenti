@@ -51,6 +51,15 @@ class Iscritti {
      */
     private $tipologia_iscritto;
 
+   
+    /**
+     * @var integer $accreditamento_id
+     *
+     * @ORM\Column(name="accreditamento_id", type="integer")
+     */
+    protected $accreditamento_id;
+
+    
     /**
      * @ManyToOne(targetEntity="Accreditamento", inversedBy="iscritti")
      * @JoinColumn(name="accreditamento_id", referencedColumnName="id")
