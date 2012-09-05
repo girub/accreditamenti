@@ -1,0 +1,31 @@
+Feature: Compilazione anagrafica
+
+Scenario: Una volta effettuato il login con codice fiscale voglio compilare anagrafica 
+          salvarla ed andare nella pagina compila questionario ecm
+
+    Given I go to "/accreditamento/42/form/iscritto"
+    And I fill in "form[codice_fiscale]" with "RBNGPP74B15E882U"
+    Given I press "Accedi"
+    Then the response should contain "Benvenuto - compila Anagrafica"
+    And I fill in "tipo_iscrizione" with "Partecipante"
+    And I fill in "nome" with "Giuseppe"
+    And I fill in "cognome" with "Rubino"
+    And I fill in "data_nascita" with "15/02/1974"
+    And I fill in "luogo_nascita" with "Manduria (TA)"
+    And I fill in "codice_fiscale" with "RBNGPP74B15E882U"
+    And I fill in "ordine_numero" with "12312"
+    And I fill in "ordine_citta" with "Roma"
+    And I fill in "indirizzo" with "Piazzale delle province"
+    And I fill in "indirizzo_cap" with "00159"
+    And I fill in "indirizzoi_citta" with "Roma"
+    And I fill in "indirizzo_provincia" with "RM"
+    And I fill in "telefono" with "0644234"
+    And I fill in "cellulare" with "RM"
+    And I fill in "email" with "giuseppe.rubino@gmail.com"
+    And I fill in "professione" with "Medico Chirurgo"
+    And I fill in "disciplina" with "Pediatria"
+    And I fill in "qualifica" with "Libero Professionista"
+    And I fill in "sponsor" with "si"
+    And I fill in "sponsor_azienda" with "Nestlè"
+    And I check "accetto"
+    Given I press "Salva Anagrafica"

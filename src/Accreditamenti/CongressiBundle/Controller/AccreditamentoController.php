@@ -77,7 +77,7 @@ class AccreditamentoController extends Controller {
         $form->bindRequest($this->getRequest());
 
         if ($form->isValid()) {
-            if (!($form['codice_fiscale']->getData() === NULL)) {
+          
                 $codice_fiscale = $form['codice_fiscale']->getData();
                 $em = $this->getDoctrine()->getEntityManager();
                 $query = $em->createQuery(
@@ -87,18 +87,11 @@ class AccreditamentoController extends Controller {
                         ->setParameter('id', $id);
                      $iscritto = $query->getResult();
 
-                if (isset($iscritto[0]['nome'])) {
-                        
-                    
-                } else {
+                if (!isset($iscritto[0]['nome'])) {
                     $this->get('session')->setFlash('notice', 'Codice_fiscale non presente per questo accreditamento');
                     return $this->redirect($this->generateUrl('form_login_iscritto', array('id' => $id)));
                 }
-            } else {
-                    // non inserisco nulla
-                    $this->get('session')->setFlash('notice', 'Codice_fiscale vuoto non presente per questo accreditamento');
-                    return $this->redirect($this->generateUrl('form_login_iscritto', array('id' => $id)));
-            }
+    
         }
 
         $this->get('session')->setFlash('notice', 'Benvenuto '. $iscritto[0]['nome'] . ' ' .$iscritto[0]['cognome'] . ' Login effettuato con successo');
