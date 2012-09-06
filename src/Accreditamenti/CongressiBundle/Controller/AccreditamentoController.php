@@ -77,26 +77,27 @@ class AccreditamentoController extends Controller {
         $form->bindRequest($this->getRequest());
 
         if ($form->isValid()) {
-          
-                $codice_fiscale = $form['codice_fiscale']->getData();
-                $em = $this->getDoctrine()->getEntityManager();
-                $query = $em->createQuery(
-                                'SELECT p.cognome, p.nome FROM AccreditamentiCongressiBundle:Iscritti p 
-                         WHERE p.codice_fiscale = :codice_fiscale and p.accreditamento_id = :id'
-                        )->setParameter('codice_fiscale', $codice_fiscale)
-                        ->setParameter('id', $id);
-                     $iscritto = $query->getResult();
 
-                if (!isset($iscritto[0]['nome'])) {
-                    $this->get('session')->setFlash('notice', 'Codice_fiscale non presente per questo accreditamento');
-                    return $this->redirect($this->generateUrl('form_login_iscritto', array('id' => $id)));
-                }
-    
+            $codice_fiscale = $form['codice_fiscale']->getData();
+            $em = $this->getDoctrine()->getEntityManager();
+            $query = $em->createQuery(
+                            'SELECT p.cognome, p.nome FROM AccreditamentiCongressiBundle:Iscritti p 
+                         WHERE p.codice_fiscale = :codice_fiscale and p.accreditamento_id = :id'
+                    )->setParameter('codice_fiscale', $codice_fiscale)
+                    ->setParameter('id', $id);
+            $iscritto = $query->getResult();
+
+            if (!isset($iscritto[0]['nome'])) {
+                $this->get('session')->setFlash('notice', 'Codice_fiscale non presente per questo accreditamento');
+                return $this->redirect($this->generateUrl('form_login_iscritto', array('id' => $id)));
+            }
+
+            $user = $this->container->get('security.context')->getToken()->getUser();
+            $user->addRole('ROLE_ISCRITTO');
         }
 
-        $this->get('session')->setFlash('notice', 'Benvenuto '. $iscritto[0]['nome'] . ' ' .$iscritto[0]['cognome'] . ' Login effettuato con successo');
+        $this->get('session')->setFlash('notice', 'Benvenuto ' . $iscritto[0]['nome'] . ' ' . $iscritto[0]['cognome'] . ' Login effettuato con successo');
         return $this->redirect($this->generateUrl('compila_anagrafica', array('id' => $id)));
-        
     }
 
     /**
@@ -139,9 +140,6 @@ class AccreditamentoController extends Controller {
                         foreach ($file as $riga) {
 
                             $riga = explode(';', $riga);
-                            //echo $riga[0] . " -- " . $riga[1] . "<BR>";
-
-
                             $iscritti = new Iscritti();
                             $iscritti->setNome($riga[0]);
                             $iscritti->setCognome($riga[1]);

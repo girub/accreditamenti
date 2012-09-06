@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Accreditamenti\CongressiBundle\Entity\Congresso;
 use Accreditamenti\CongressiBundle\Form\CongressoType;
 
+
 /**
  * Congresso controller.
  *
@@ -41,7 +42,6 @@ class CongressoController extends Controller {
     public function elencoCongressiAction() {
 
         $entityManager = $this->getDoctrine()->getEntityManager();
-        
         $congressi = $entityManager
                 ->getRepository('AccreditamentiCongressiBundle:Congresso')
                 ->findAll();
@@ -50,6 +50,27 @@ class CongressoController extends Controller {
             'congressi' => $congressi
         );
     }
+    
+    
+    /**
+     * Creo questo metodo per eseguire il test.
+     * 
+     * @Route("/ultimo", name="ultimo_congresso")
+     */
+    public function UltimoCongressoCreatoAction() {
+
+            $em = $this->getDoctrine()->getEntityManager();
+            $query = $em->createQuery(
+                            'SELECT p FROM AccreditamentiCongressiBundle:Congresso p 
+                         ORDER BY p.id DESC')->setMaxResults(1);
+            $congressi= $query->getResult();
+        
+        die($congressi[0]['id']);
+    }
+    
+    
+    
+    
     
     /**
      * Finds and displays a Congresso entity.
