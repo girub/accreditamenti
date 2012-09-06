@@ -1,0 +1,77 @@
+<h1>Anagrafica list</h1>
+
+<table class="records_list">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Tipo_iscrizione</th>
+            <th>Nome</th>
+            <th>Cognome</th>
+            <th>Data_nascita</th>
+            <th>Luogo_nascita</th>
+            <th>Codice_fiscale</th>
+            <th>Ordine_numero</th>
+            <th>Ordine_citta</th>
+            <th>Indirizzo</th>
+            <th>Indirizzo_cap</th>
+            <th>Indirizzo_citta</th>
+            <th>Indirizzo_provincia</th>
+            <th>Telefono</th>
+            <th>Cellulare</th>
+            <th>Email</th>
+            <th>Professione</th>
+            <th>Disciplina</th>
+            <th>Qualifica</th>
+            <th>Sponsor</th>
+            <th>Sponsor_azienda</th>
+            <th>Privacy</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('anagrafica_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td>{{ entity.tipoiscrizione }}</td>
+            <td>{{ entity.nome }}</td>
+            <td>{{ entity.cognome }}</td>
+            <td>{% if entity.datanascita %}{{ entity.datanascita|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>{{ entity.luogonascita }}</td>
+            <td>{{ entity.codicefiscale }}</td>
+            <td>{{ entity.ordinenumero }}</td>
+            <td>{{ entity.ordinecitta }}</td>
+            <td>{{ entity.indirizzo }}</td>
+            <td>{{ entity.indirizzocap }}</td>
+            <td>{{ entity.indirizzocitta }}</td>
+            <td>{{ entity.indirizzoprovincia }}</td>
+            <td>{{ entity.telefono }}</td>
+            <td>{{ entity.cellulare }}</td>
+            <td>{{ entity.email }}</td>
+            <td>{{ entity.professione }}</td>
+            <td>{{ entity.disciplina }}</td>
+            <td>{{ entity.qualifica }}</td>
+            <td>{{ entity.sponsor }}</td>
+            <td>{{ entity.sponsorazienda }}</td>
+            <td>{{ entity.privacy }}</td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('anagrafica_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('anagrafica_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<ul>
+    <li>
+        <a href="{{ path('anagrafica_new') }}">
+            Create a new entry
+        </a>
+    </li>
+</ul>

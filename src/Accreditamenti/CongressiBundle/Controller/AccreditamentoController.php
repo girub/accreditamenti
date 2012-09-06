@@ -9,6 +9,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Accreditamenti\CongressiBundle\Entity\Accreditamento;
 use Accreditamenti\CongressiBundle\Form\AccreditamentoType;
 use Accreditamenti\CongressiBundle\Entity\Iscritti;
+use Accreditamenti\CongressiBundle\Entity\Anagrafica;
+use Accreditamenti\CongressiBundle\Form\AnagraficaType;
 
 /**
  * Accreditamento controller.
@@ -92,8 +94,17 @@ class AccreditamentoController extends Controller {
                 return $this->redirect($this->generateUrl('form_login_iscritto', array('id' => $id)));
             }
 
-            $user = $this->container->get('security.context')->getToken()->getUser();
-            $user->addRole('ROLE_ISCRITTO');
+//            $user = $this->container->get('security.context')->getToken()->getUser();
+//
+//            if (!is_object($user)) {
+//
+//                $this->get('session')->setFlash('notice', 'CODICE FISCALE NON TROVAto');
+//                return $this->redirect($this->generateUrl('compila_anagrafica', array('id' => $id)));
+//
+//                throw new \Exception("Utente non trovato");
+//            }
+//
+//            $user->addRole('ROLE_ISCRITTO');
         }
 
         $this->get('session')->setFlash('notice', 'Benvenuto ' . $iscritto[0]['nome'] . ' ' . $iscritto[0]['cognome'] . ' Login effettuato con successo');
@@ -107,8 +118,13 @@ class AccreditamentoController extends Controller {
      * @Template()
      */
     public function compilaAnagraficaAction($id) {
+        $entity = new Anagrafica();
+        $form = $this->createForm(new AnagraficaType(), $entity);
 
-        return array();
+        return array(
+            'entity' => $entity,
+            'form' => $form->createView()
+        );
     }
 
     /**

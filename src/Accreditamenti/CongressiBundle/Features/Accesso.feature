@@ -1,4 +1,4 @@
-Feature: Registrazione ad un accreditamento e login
+Feature: Registrazione ad un accreditamento login e compilo anagrafica
 
 Scenario: Voglio scegliere un congresso da un elenco e un relativo suo accreditamento
     Given I go to "/"
@@ -46,4 +46,30 @@ Scenario: Voglio scegliere un congresso da un elenco e un relativo suo accredita
     When I follow "link_accesso_accreditamento"
     And I fill in "form[codice_fiscale]" with "RBNGPP74B15E882U"
     Given I press "Accedi"
+    #Then show last response
     Then the response should contain "Benvenuto Rubino Giuseppe Login effettuato con successo"
+    And I fill in "accreditamenti_congressibundle_anagraficatype_tipo_iscrizione" with "P"
+    And I fill in "accreditamenti_congressibundle_anagraficatype_nome" with "Giuseppe"
+    And I fill in "accreditamenti_congressibundle_anagraficatype_cognome" with "Rubino"
+    And I fill in "accreditamenti_congressibundle_anagraficatype_data_nascita_year" with "2007"
+    And I fill in "accreditamenti_congressibundle_anagraficatype_data_nascita_month" with "02"
+    And I fill in "accreditamenti_congressibundle_anagraficatype_data_nascita_day" with "15"
+    And I fill in "accreditamenti_congressibundle_anagraficatype_luogo_nascita" with "Manduria (TA)"
+    And I fill in "accreditamenti_congressibundle_anagraficatype_codice_fiscale" with "RBNGPP74B15E882U"
+    And I fill in "accreditamenti_congressibundle_anagraficatype_ordine_numero" with "12312"
+    And I fill in "accreditamenti_congressibundle_anagraficatype_ordine_citta" with "Roma"
+    And I fill in "accreditamenti_congressibundle_anagraficatype_indirizzo" with "Piazzale delle province"
+    And I fill in "accreditamenti_congressibundle_anagraficatype_indirizzo_cap" with "00159"
+    And I fill in "accreditamenti_congressibundle_anagraficatype_indirizzo_citta" with "Roma"
+    And I fill in "accreditamenti_congressibundle_anagraficatype_indirizzo_provincia" with "RM"
+    And I fill in "accreditamenti_congressibundle_anagraficatype_telefono" with "0644234"
+    And I fill in "accreditamenti_congressibundle_anagraficatype_cellulare" with "RM"
+    And I fill in "accreditamenti_congressibundle_anagraficatype_email" with "giuseppe.rubino@gmail.com"
+    And I fill in "accreditamenti_congressibundle_anagraficatype_professione" with "1"
+    And I fill in "accreditamenti_congressibundle_anagraficatype_disciplina" with "24"
+    And I fill in "accreditamenti_congressibundle_anagraficatype_qualifica" with "L"
+    And I check "accreditamenti_congressibundle_anagraficatype_sponsor"
+    And I fill in "accreditamenti_congressibundle_anagraficatype_sponsor_azienda" with "Nestlè"
+    And I check "accreditamenti_congressibundle_anagraficatype_privacy"
+    Given I press "Create"
+    Then show last response
