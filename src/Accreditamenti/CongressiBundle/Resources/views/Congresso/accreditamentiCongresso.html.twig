@@ -46,7 +46,7 @@
                 <tr>
                     <td>
                         {% for accreditamento in accreditamenti %}
-                            <div><a href="{{ path('form_login_iscritto', {'id': accreditamento.id}) }}" id="link_accesso_accreditamento{{accreditamento.id}}" >{{ accreditamento.titolo }}</a></div>
+                            <div><a href="{{ path('form_login_iscritto', {'id': accreditamento.id}) }}" id="link_accesso_accreditamento" >{{ accreditamento.titolo }}</a></div>
                         {% endfor %}
                     </td>
                 </tr>

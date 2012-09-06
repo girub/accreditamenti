@@ -41,10 +41,9 @@ Scenario: Voglio scegliere un congresso da un elenco e un relativo suo accredita
     And I fill in "accreditamenti_congressibundle_accreditamentotype_obiettivo_formativo" with "Descrizione dell'obiettivo ..."
     And I fill in "accreditamenti_congressibundle_accreditamentotype_numero_crediti" with "2012"
     Given I press "Create"
+    And last accreditamento has "Giuseppe" "Rubino" "RBNGPP74B15E882U" "PAR" as attendee
     Given I go to "/congresso/ultimo"
-    
-    #When I follow "link_accreditamenti_congresso44"
-    #When I follow "link_accesso_accreditamento42"
-    #And I fill in "form[codice_fiscale]" with "RBNGPP74B15E882U"
-    #Given I press "Accedi"
-    #Then the response should contain "Benvenuto - compila Anagrafica"
+    When I follow "link_accesso_accreditamento"
+    And I fill in "form[codice_fiscale]" with "RBNGPP74B15E882U"
+    Given I press "Accedi"
+    Then the response should contain "Benvenuto Rubino Giuseppe Login effettuato con successo"

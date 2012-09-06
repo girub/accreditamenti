@@ -9,6 +9,7 @@ use Behat\Behat\Context\ClosuredContextInterface,
     Behat\Behat\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode,
     Behat\Gherkin\Node\TableNode;
+use Accreditamenti\CongressiBundle\Entity\Iscritti;
 
 //
 // Require 3rd-party libraries here:
@@ -21,5 +22,27 @@ use Behat\Gherkin\Node\PyStringNode,
  * Feature context.
  */
 class FeatureContext extends MinkContext {
-    
+
+    /**
+     * @Given /^last accreditamento has "([^"]*)" "([^"]*)" "([^"]*)" "([^"]*)" as attendee$/
+     */
+    public function lastAccreditamentoHasAsAttendee($cognome, $nome, $codiceFiscale, $tipologiaIscritto) {
+        
+        $em = $this->getContainer()->get('doctrine.orm.entity_manager');
+        $query = $em->createQuery(
+                        'SELECT p FROM AccreditamentiCongressiBundle:Accreditamento p
+          ORDER BY p.id DESC')->setMaxResults(1);
+        $accreditamento = $query->getResult();
+
+        $iscritto = new Iscritti();
+        $iscritto->setNome($nome);
+        $iscritto->setCognome($cognome);
+        $iscritto->setCodiceFiscale($codiceFiscale);
+        $iscritto->setTipologiaIscritto($tipologiaIscritto);
+        $iscritto->setAccreditamento($accreditamento[0]);
+        
+        $em->persist($iscritto);
+        $em->flush();
+    }
+
 }

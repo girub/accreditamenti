@@ -9,7 +9,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Accreditamenti\CongressiBundle\Entity\Congresso;
 use Accreditamenti\CongressiBundle\Form\CongressoType;
 
-
 /**
  * Congresso controller.
  *
@@ -50,8 +49,7 @@ class CongressoController extends Controller {
             'congressi' => $congressi
         );
     }
-    
-    
+
     /**
      * Creo questo metodo per eseguire il test.
      * 
@@ -59,19 +57,17 @@ class CongressoController extends Controller {
      */
     public function UltimoCongressoCreatoAction() {
 
-            $em = $this->getDoctrine()->getEntityManager();
-            $query = $em->createQuery(
-                            'SELECT p FROM AccreditamentiCongressiBundle:Congresso p 
+        $em = $this->getDoctrine()->getEntityManager();
+        $query = $em->createQuery(
+                        'SELECT p FROM AccreditamentiCongressiBundle:Congresso p 
                          ORDER BY p.id DESC')->setMaxResults(1);
-            $congressi= $query->getResult();
-        
-        die($congressi[0]['id']);
+        $congressi = $query->getResult();
+
+        return  $this->forward('AccreditamentiCongressiBundle:Congresso:accreditamentiCongresso', array(
+            'id' => $congressi[0]->getId()
+        ));
     }
-    
-    
-    
-    
-    
+
     /**
      * Finds and displays a Congresso entity.
      *
@@ -87,13 +83,13 @@ class CongressoController extends Controller {
         if (!$congresso) {
             throw $this->createNotFoundException('Unable to find Congresso entity.');
         }
-        
+
         return array(
             'accreditamenti' => $accreditamenti,
             'entity' => $congresso);
     }
-    
-     /**
+
+    /**
      * Lists all Congresso entities.
      * 
      * @Route("/mostraTutti", name="congresso_mostra_tutti")
