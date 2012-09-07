@@ -128,6 +128,31 @@ class AccreditamentoController extends Controller {
     }
 
     /**
+     * Pagina compilo ecm.
+     *
+     * @Route("/{id}/compila/ecm", name="compila_ecm")
+     * @Template()
+     */
+    public function compilaEcmAction($id) {
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $questionario = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($id);
+
+//        $domande = $em->getRepository('AccreditamentiCongressiBundle:Domanda')
+//                ->findDomandeDelQuestionario($questionario);
+
+        if (!$questionario) {
+            throw $this->createNotFoundException('Unable to find QuestionarioEcm entity.');
+        }
+
+
+        return array(
+            // 'entity' => $questionario,
+           // 'domande' => $domande,
+        );
+    }
+
+    /**
      * Upload iscritti dal csv.
      *
      * @Route("/{id}/uoload/iscritti", name="upload_iscritti")
