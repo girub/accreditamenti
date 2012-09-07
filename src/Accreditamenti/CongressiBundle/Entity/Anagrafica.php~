@@ -607,24 +607,4 @@ class Anagrafica
     {
         return $this->privacy;
     }
-
-    /**
-     * Set accreditamento
-     *
-     * @param Accreditamenti\CongressiBundle\Entity\Accreditamento $accreditamento
-     */
-    public function setAccreditamento(\Accreditamenti\CongressiBundle\Entity\Accreditamento $accreditamento)
-    {
-        $this->accreditamento = $accreditamento;
-    }
-
-    /**
-     * Get accreditamento
-     *
-     * @return Accreditamenti\CongressiBundle\Entity\Accreditamento 
-     */
-    public function getAccreditamento()
-    {
-        return $this->accreditamento;
-    }
 }

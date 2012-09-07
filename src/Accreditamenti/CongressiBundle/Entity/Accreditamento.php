@@ -114,6 +114,15 @@ class Accreditamento {
      */
     private $iscritti;
 
+    
+    /**
+     * @OneToMany(targetEntity="Anagrafica", mappedBy="accreditamento")
+     */
+    private $anagrafica;
+
+    
+    
+    
     /**
      * Get id
      *

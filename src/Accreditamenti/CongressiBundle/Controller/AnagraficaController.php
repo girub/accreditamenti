@@ -90,7 +90,7 @@ class AnagraficaController extends Controller
             $em->persist($entity);
             $em->flush();
 
-             return $this->redirect($this->generateUrl('anagrafica_show', array('id' => $entity->getId())));
+             return $this->redirect($this->generateUrl('compila_ecm', array('id' => $entity->getId())));
              
         }
 

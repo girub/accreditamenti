@@ -74,4 +74,7 @@ Scenario: Voglio scegliere un congresso da un elenco e un relativo suo accredita
     And I fill in "accreditamenti_congressibundle_anagraficatype_sponsor_azienda" with "Nestlè"
     And I check "accreditamenti_congressibundle_anagraficatype_privacy"
     Given I press "Create"
+    Then show last response
+    Then the response should contain "Compila il questionario ECM"
+    
    
