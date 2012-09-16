@@ -1,4 +1,4 @@
-{% extends '::base.html.twig' %}
+{% extends '::frontEnd/base.html.twig' %}
 
 {% block body %}
 <h1>Benvenuto - compila Anagrafica</h1>
@@ -8,7 +8,7 @@ qui devo far compilare l'anagrafica all'iscritto che è appena entrato inserendo
 
 <h1>Anagrafica creation</h1>
 
-<form action="{{ path('anagrafica_create') }}" method="post" {{ form_enctype(form) }}>
+<form action="{{ path('anagrafica_create', {'accreditamento_id': accreditamento_id}) }}" method="post" {{ form_enctype(form) }}>
     {{ form_widget(form) }}
     <p>
         <button type="submit">Create</button>

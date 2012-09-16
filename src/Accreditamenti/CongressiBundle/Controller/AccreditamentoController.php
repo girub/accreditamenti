@@ -93,26 +93,32 @@ class AccreditamentoController extends Controller {
         }
 
         if ($form->isValid()) {
-            $user = $this->container->get('security.context')->getToken()->getUser();
-            $user->addRole('ROLE_ISCRITTO');
+            // $user = $this->container->get('security.context')->getToken()->getUser();
+            // $user->addRole('ROLE_ISCRITTO');
         }
 
         $this->get('session')->setFlash('notice', 'Benvenuto ' . $iscritto[0]['nome'] . ' ' . $iscritto[0]['cognome'] . ' Login effettuato con successo');
-        return $this->redirect($this->generateUrl('compila_anagrafica', array('id' => $id)));
+        return $this->redirect($this->generateUrl('compila_anagrafica', array('accreditamento_id' => $id)));
     }
 
     /**
      * Pagina dove iscritto una volta entrato compila angrafica.
      *
-     * @Route("/{id}/compila/anagrafica", name="compila_anagrafica")
+     * @Route("/{accreditamento_id}/compila/anagrafica", name="compila_anagrafica")
      * @Template()
      */
-    public function compilaAnagraficaAction($id) {
-        $entity = new Anagrafica();
-        $form = $this->createForm(new AnagraficaType(), $entity);
+    public function compilaAnagraficaAction($accreditamento_id) {
+
+        $entityManager = $this->getDoctrine()->getEntityManager();
+        $accreditamento = $entityManager->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($accreditamento_id);
+
+        $anagrafica = new Anagrafica();
+        $anagrafica->setAccreditamento($accreditamento);
+        $form = $this->createForm(new AnagraficaType(), $anagrafica);
 
         return array(
-            'entity' => $entity,
+            'entity' => $anagrafica,
+            'accreditamento_id' => $accreditamento_id,
             'form' => $form->createView()
         );
     }
@@ -120,30 +126,31 @@ class AccreditamentoController extends Controller {
     /**
      * Pagina compilo ecm.
      *
-     * @Route("/{id}/compila/ecm", name="compila_ecm")
+     * @Route("/{accreditamento_id}/{anagrafica_id}/compila/ecm", name="compila_ecm")
      * @Template()
      */
-    public function compilaEcmAction($id) {
-
+    public function compilaEcmAction($accreditamento_id,$anagrafica_id) {
+        
         $em = $this->getDoctrine()->getEntityManager();
-
-
-        $anagrafica = $em->getRepository('AccreditamentiCongressiBundle:Anagrafica')->find($id);
-        $accreditamento = $anagrafica->getAccreditamento();
-
+        $accreditamento = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($accreditamento_id);
         $questionario = $accreditamento->getQuestionarioEcm();
-        $domande= $questionario->getDomanda();
-               
-
-        if (!$questionario) {
-            throw $this->createNotFoundException('Unable to find QuestionarioEcm entity.');
+        
+        //echo get_class($questionario[0]);die;
+        
+      
+        if (!$questionario[0]) {
+            throw $this->createNotFoundException('Unable to find QuestionarioEcm entity -- crea prima un questionario ecm');
         }
-
+        
+        $domande = $em->getRepository('AccreditamentiCongressiBundle:Domanda')
+                ->findDomandeDelQuestionario($questionario[0]);
 
         return array(
-                 'entity' => $questionario,
-                 'domande' => $domande,
+           'domande' => $domande,
+            'accreditamento_id' => $accreditamento_id,
+            'anagrafica_id' => $anagrafica_id
         );
+
     }
 
     /**
@@ -371,6 +378,42 @@ class AccreditamentoController extends Controller {
                         ->add('id', 'hidden')
                         ->getForm()
         ;
+    }
+    
+    
+    /**
+     * Creates a new QuestionarioEcm entity.
+     *
+     * 
+
+     * @Route("/{accreditamento_id}/{anagrafica_id}/controlla/questionario/ecm", name="controlla_questionario_ecm")
+     */
+    public function controllaQuestionarioEcmAction($accreditamento_id,$anagrafica_id) {
+       /* 
+        $entity = new QuestionarioEcm();
+        $request = $this->getRequest();
+
+        $form = $this->createForm(new QuestionarioEcmType(), $entity);
+        $form->bindRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($entity);
+            $em->flush();
+
+            // Imposto il flash message
+            $this->get('session')->setFlash('notice', 'Questionario creato con successo');
+
+
+            return $this->redirect($this->generateUrl('questionarioecm_show', array('id' => $entity->getId())));
+        }
+        
+        */
+
+        return array(
+//            'entity' => $entity,
+//            'form' => $form->createView()
+        );
     }
 
 }

@@ -41,6 +41,34 @@ Scenario: Voglio scegliere un congresso da un elenco e un relativo suo accredita
     And I fill in "accreditamenti_congressibundle_accreditamentotype_obiettivo_formativo" with "Descrizione dell'obiettivo ..."
     And I fill in "accreditamenti_congressibundle_accreditamentotype_numero_crediti" with "2012"
     Given I press "Create"
+    
+    When I follow "Quest. ecm"
+    And I fill in "accreditamenti_congressibundle_questionarioecmtype_descrizione" with "Esempio Questionario ECM"
+    And I fill in "accreditamenti_congressibundle_questionarioecmtype_data_inizio_compilazione_day" with "01"
+    And I fill in "accreditamenti_congressibundle_questionarioecmtype_data_inizio_compilazione_month" with "11"
+    And I fill in "accreditamenti_congressibundle_questionarioecmtype_data_inizio_compilazione_year" with "2012"
+    And I fill in "accreditamenti_congressibundle_questionarioecmtype_data_fine_compilazione_day" with "11"
+    And I fill in "accreditamenti_congressibundle_questionarioecmtype_data_fine_compilazione_month" with "11"   
+    And I fill in "accreditamenti_congressibundle_questionarioecmtype_data_fine_compilazione_year" with "2012"
+    And I fill in "accreditamenti_congressibundle_questionarioecmtype_percentuale_risposte_esatte" with "70"
+    And I fill in "accreditamenti_congressibundle_questionarioecmtype_numero_tentativi_compilazione" with "10"
+    Given I press "Create"
+    
+    When I follow "Crea domanda"
+    And I fill in "accreditamenti_congressibundle_domandatype_descrizione" with "Chi ha rubato la marmellata?"
+    Given I press "Create"
+
+    When I follow "aggiungi risposta"
+    And I fill in "accreditamenti_congressibundle_rispostatype_descrizione" with "Pippo Baudo"
+    Given I press "Create"
+    When I follow "aggiungi risposta"
+    And I fill in "accreditamenti_congressibundle_rispostatype_descrizione" with "Silvio Barlusconi"
+    Given I press "Create"
+    When I follow "aggiungi risposta"
+    And I fill in "accreditamenti_congressibundle_rispostatype_descrizione" with "Gianluca"
+    And I check "Vero"
+    Given I press "Create"
+    #Then show last response
     And last accreditamento has "Giuseppe" "Rubino" "RBNGPP74B15E882U" "PAR" as attendee
     Given I go to "/congresso/ultimo"
     When I follow "link_accesso_accreditamento"
@@ -74,7 +102,7 @@ Scenario: Voglio scegliere un congresso da un elenco e un relativo suo accredita
     And I fill in "accreditamenti_congressibundle_anagraficatype_sponsor_azienda" with "Nestlè"
     And I check "accreditamenti_congressibundle_anagraficatype_privacy"
     Given I press "Create"
-    Then show last response
+    #Then show last response
     Then the response should contain "Compila il questionario ECM"
     
    

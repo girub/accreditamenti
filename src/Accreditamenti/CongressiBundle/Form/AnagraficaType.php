@@ -17,6 +17,7 @@ class AnagraficaType extends AbstractType {
                         'T' => 'Tutor',
                         )))
                 ->add('nome')
+                ->add('accreditamento')
                 ->add('cognome')
                 ->add('data_nascita')
                 ->add('luogo_nascita')

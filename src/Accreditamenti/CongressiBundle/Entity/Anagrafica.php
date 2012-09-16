@@ -5,14 +5,15 @@ namespace Accreditamenti\CongressiBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\JoinColumn;
+
 /**
  * Accreditamenti\CongressiBundle\Entity\Anagrafica
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Accreditamenti\CongressiBundle\Entity\AnagraficaRepository")
  */
-class Anagrafica
-{
+class Anagrafica {
+
     /**
      * @var integer $id
      *
@@ -169,22 +170,18 @@ class Anagrafica
      */
     private $privacy;
 
-    
     /**
-     * @ManyToOne(targetEntity="Accreditamento", inversedBy="anagrafica")
+     * @ManyToOne(targetEntity="Accreditamenti\CongressiBundle\Entity\Accreditamento", inversedBy="anagrafica")
      * @JoinColumn(name="accreditamento_id", referencedColumnName="id")
      */
     private $accreditamento;
-    
-    
 
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -193,8 +190,7 @@ class Anagrafica
      *
      * @param string $tipoIscrizione
      */
-    public function setTipoIscrizione($tipoIscrizione)
-    {
+    public function setTipoIscrizione($tipoIscrizione) {
         $this->tipo_iscrizione = $tipoIscrizione;
     }
 
@@ -203,8 +199,7 @@ class Anagrafica
      *
      * @return string 
      */
-    public function getTipoIscrizione()
-    {
+    public function getTipoIscrizione() {
         return $this->tipo_iscrizione;
     }
 
@@ -213,8 +208,7 @@ class Anagrafica
      *
      * @param string $nome
      */
-    public function setNome($nome)
-    {
+    public function setNome($nome) {
         $this->nome = $nome;
     }
 
@@ -223,8 +217,7 @@ class Anagrafica
      *
      * @return string 
      */
-    public function getNome()
-    {
+    public function getNome() {
         return $this->nome;
     }
 
@@ -233,8 +226,7 @@ class Anagrafica
      *
      * @param string $cognome
      */
-    public function setCognome($cognome)
-    {
+    public function setCognome($cognome) {
         $this->cognome = $cognome;
     }
 
@@ -243,8 +235,7 @@ class Anagrafica
      *
      * @return string 
      */
-    public function getCognome()
-    {
+    public function getCognome() {
         return $this->cognome;
     }
 
@@ -253,8 +244,7 @@ class Anagrafica
      *
      * @param date $dataNascita
      */
-    public function setDataNascita($dataNascita)
-    {
+    public function setDataNascita($dataNascita) {
         $this->data_nascita = $dataNascita;
     }
 
@@ -263,8 +253,7 @@ class Anagrafica
      *
      * @return date 
      */
-    public function getDataNascita()
-    {
+    public function getDataNascita() {
         return $this->data_nascita;
     }
 
@@ -273,8 +262,7 @@ class Anagrafica
      *
      * @param string $luogoNascita
      */
-    public function setLuogoNascita($luogoNascita)
-    {
+    public function setLuogoNascita($luogoNascita) {
         $this->luogo_nascita = $luogoNascita;
     }
 
@@ -283,8 +271,7 @@ class Anagrafica
      *
      * @return string 
      */
-    public function getLuogoNascita()
-    {
+    public function getLuogoNascita() {
         return $this->luogo_nascita;
     }
 
@@ -293,8 +280,7 @@ class Anagrafica
      *
      * @param string $codiceFiscale
      */
-    public function setCodiceFiscale($codiceFiscale)
-    {
+    public function setCodiceFiscale($codiceFiscale) {
         $this->codice_fiscale = $codiceFiscale;
     }
 
@@ -303,8 +289,7 @@ class Anagrafica
      *
      * @return string 
      */
-    public function getCodiceFiscale()
-    {
+    public function getCodiceFiscale() {
         return $this->codice_fiscale;
     }
 
@@ -313,8 +298,7 @@ class Anagrafica
      *
      * @param string $ordineNumero
      */
-    public function setOrdineNumero($ordineNumero)
-    {
+    public function setOrdineNumero($ordineNumero) {
         $this->ordine_numero = $ordineNumero;
     }
 
@@ -323,8 +307,7 @@ class Anagrafica
      *
      * @return string 
      */
-    public function getOrdineNumero()
-    {
+    public function getOrdineNumero() {
         return $this->ordine_numero;
     }
 
@@ -333,8 +316,7 @@ class Anagrafica
      *
      * @param string $ordineCitta
      */
-    public function setOrdineCitta($ordineCitta)
-    {
+    public function setOrdineCitta($ordineCitta) {
         $this->ordine_citta = $ordineCitta;
     }
 
@@ -343,8 +325,7 @@ class Anagrafica
      *
      * @return string 
      */
-    public function getOrdineCitta()
-    {
+    public function getOrdineCitta() {
         return $this->ordine_citta;
     }
 
@@ -353,8 +334,7 @@ class Anagrafica
      *
      * @param string $indirizzo
      */
-    public function setIndirizzo($indirizzo)
-    {
+    public function setIndirizzo($indirizzo) {
         $this->indirizzo = $indirizzo;
     }
 
@@ -363,8 +343,7 @@ class Anagrafica
      *
      * @return string 
      */
-    public function getIndirizzo()
-    {
+    public function getIndirizzo() {
         return $this->indirizzo;
     }
 
@@ -373,8 +352,7 @@ class Anagrafica
      *
      * @param string $indirizzoCap
      */
-    public function setIndirizzoCap($indirizzoCap)
-    {
+    public function setIndirizzoCap($indirizzoCap) {
         $this->indirizzo_cap = $indirizzoCap;
     }
 
@@ -383,8 +361,7 @@ class Anagrafica
      *
      * @return string 
      */
-    public function getIndirizzoCap()
-    {
+    public function getIndirizzoCap() {
         return $this->indirizzo_cap;
     }
 
@@ -393,8 +370,7 @@ class Anagrafica
      *
      * @param string $indirizzoCitta
      */
-    public function setIndirizzoCitta($indirizzoCitta)
-    {
+    public function setIndirizzoCitta($indirizzoCitta) {
         $this->indirizzo_citta = $indirizzoCitta;
     }
 
@@ -403,8 +379,7 @@ class Anagrafica
      *
      * @return string 
      */
-    public function getIndirizzoCitta()
-    {
+    public function getIndirizzoCitta() {
         return $this->indirizzo_citta;
     }
 
@@ -413,8 +388,7 @@ class Anagrafica
      *
      * @param string $indirizzoProvincia
      */
-    public function setIndirizzoProvincia($indirizzoProvincia)
-    {
+    public function setIndirizzoProvincia($indirizzoProvincia) {
         $this->indirizzo_provincia = $indirizzoProvincia;
     }
 
@@ -423,8 +397,7 @@ class Anagrafica
      *
      * @return string 
      */
-    public function getIndirizzoProvincia()
-    {
+    public function getIndirizzoProvincia() {
         return $this->indirizzo_provincia;
     }
 
@@ -433,8 +406,7 @@ class Anagrafica
      *
      * @param string $telefono
      */
-    public function setTelefono($telefono)
-    {
+    public function setTelefono($telefono) {
         $this->telefono = $telefono;
     }
 
@@ -443,8 +415,7 @@ class Anagrafica
      *
      * @return string 
      */
-    public function getTelefono()
-    {
+    public function getTelefono() {
         return $this->telefono;
     }
 
@@ -453,8 +424,7 @@ class Anagrafica
      *
      * @param string $cellulare
      */
-    public function setCellulare($cellulare)
-    {
+    public function setCellulare($cellulare) {
         $this->cellulare = $cellulare;
     }
 
@@ -463,8 +433,7 @@ class Anagrafica
      *
      * @return string 
      */
-    public function getCellulare()
-    {
+    public function getCellulare() {
         return $this->cellulare;
     }
 
@@ -473,8 +442,7 @@ class Anagrafica
      *
      * @param string $email
      */
-    public function setEmail($email)
-    {
+    public function setEmail($email) {
         $this->email = $email;
     }
 
@@ -483,8 +451,7 @@ class Anagrafica
      *
      * @return string 
      */
-    public function getEmail()
-    {
+    public function getEmail() {
         return $this->email;
     }
 
@@ -493,8 +460,7 @@ class Anagrafica
      *
      * @param string $professione
      */
-    public function setProfessione($professione)
-    {
+    public function setProfessione($professione) {
         $this->professione = $professione;
     }
 
@@ -503,8 +469,7 @@ class Anagrafica
      *
      * @return string 
      */
-    public function getProfessione()
-    {
+    public function getProfessione() {
         return $this->professione;
     }
 
@@ -513,8 +478,7 @@ class Anagrafica
      *
      * @param string $disciplina
      */
-    public function setDisciplina($disciplina)
-    {
+    public function setDisciplina($disciplina) {
         $this->disciplina = $disciplina;
     }
 
@@ -523,8 +487,7 @@ class Anagrafica
      *
      * @return string 
      */
-    public function getDisciplina()
-    {
+    public function getDisciplina() {
         return $this->disciplina;
     }
 
@@ -533,8 +496,7 @@ class Anagrafica
      *
      * @param string $qualifica
      */
-    public function setQualifica($qualifica)
-    {
+    public function setQualifica($qualifica) {
         $this->qualifica = $qualifica;
     }
 
@@ -543,8 +505,7 @@ class Anagrafica
      *
      * @return string 
      */
-    public function getQualifica()
-    {
+    public function getQualifica() {
         return $this->qualifica;
     }
 
@@ -553,8 +514,7 @@ class Anagrafica
      *
      * @param boolean $sponsor
      */
-    public function setSponsor($sponsor)
-    {
+    public function setSponsor($sponsor) {
         $this->sponsor = $sponsor;
     }
 
@@ -563,8 +523,7 @@ class Anagrafica
      *
      * @return boolean 
      */
-    public function getSponsor()
-    {
+    public function getSponsor() {
         return $this->sponsor;
     }
 
@@ -573,8 +532,7 @@ class Anagrafica
      *
      * @param string $sponsorAzienda
      */
-    public function setSponsorAzienda($sponsorAzienda)
-    {
+    public function setSponsorAzienda($sponsorAzienda) {
         $this->sponsor_azienda = $sponsorAzienda;
     }
 
@@ -583,8 +541,7 @@ class Anagrafica
      *
      * @return string 
      */
-    public function getSponsorAzienda()
-    {
+    public function getSponsorAzienda() {
         return $this->sponsor_azienda;
     }
 
@@ -593,8 +550,7 @@ class Anagrafica
      *
      * @param boolean $privacy
      */
-    public function setPrivacy($privacy)
-    {
+    public function setPrivacy($privacy) {
         $this->privacy = $privacy;
     }
 
@@ -603,8 +559,7 @@ class Anagrafica
      *
      * @return boolean 
      */
-    public function getPrivacy()
-    {
+    public function getPrivacy() {
         return $this->privacy;
     }
 
@@ -613,8 +568,7 @@ class Anagrafica
      *
      * @param Accreditamenti\CongressiBundle\Entity\Accreditamento $accreditamento
      */
-    public function setAccreditamento(\Accreditamenti\CongressiBundle\Entity\Accreditamento $accreditamento)
-    {
+    public function setAccreditamento(\Accreditamenti\CongressiBundle\Entity\Accreditamento $accreditamento) {
         $this->accreditamento = $accreditamento;
     }
 
@@ -623,8 +577,11 @@ class Anagrafica
      *
      * @return Accreditamenti\CongressiBundle\Entity\Accreditamento 
      */
-    public function getAccreditamento()
-    {
+    public function getAccreditamento() {
         return $this->accreditamento;
     }
+    
+    
+    
+
 }

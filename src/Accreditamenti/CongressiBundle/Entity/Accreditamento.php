@@ -90,7 +90,7 @@ class Accreditamento {
     /**
      * @OneToMany(targetEntity="QuestionarioEcm", mappedBy="accreditamento")
      */
-    private $questionarioecm;
+    private $questionarioEcm;
 
     /**
      * @OneToMany(targetEntity="QuestionarioCustomerSatisfaction", mappedBy="accreditamento")
@@ -114,15 +114,11 @@ class Accreditamento {
      */
     private $iscritti;
 
-    
     /**
      * @OneToMany(targetEntity="Anagrafica", mappedBy="accreditamento")
      */
     private $anagrafica;
 
-    
-    
-    
     /**
      * Get id
      *
@@ -294,28 +290,6 @@ class Accreditamento {
         return $this->congresso;
     }
 
-    public function __construct() {
-        $this->questionarioecm = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add questionarioecm
-     *
-     * @param Accreditamenti\CongressiBundle\Entity\QuestionarioEcm $questionarioecm
-     */
-    public function addQuestionarioEcm(\Accreditamenti\CongressiBundle\Entity\QuestionarioEcm $questionarioecm) {
-        $this->questionarioecm[] = $questionarioecm;
-    }
-
-    /**
-     * Get questionarioecm
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getQuestionarioecm() {
-        return $this->questionarioecm;
-    }
-
     public function __toString() {
         return $this->getTitolo();
     }
@@ -373,8 +347,67 @@ class Accreditamento {
     public function getQuestionarioValutazione() {
         return $this->questionarioValutazione;
     }
-    
-    
-    
+
+    /**
+     * Add iscritti
+     *
+     * @param Accreditamenti\CongressiBundle\Entity\Iscritti $iscritti
+     */
+    public function addIscritti(\Accreditamenti\CongressiBundle\Entity\Iscritti $iscritti) {
+        $this->iscritti[] = $iscritti;
+    }
+
+    /**
+     * Get iscritti
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getIscritti() {
+        return $this->iscritti;
+    }
+
+    /**
+     * Add anagrafica
+     *
+     * @param Accreditamenti\CongressiBundle\Entity\Anagrafica $anagrafica
+     */
+    public function addAnagrafica(\Accreditamenti\CongressiBundle\Entity\Anagrafica $anagrafica) {
+        $this->anagrafica[] = $anagrafica;
+    }
+
+    /**
+     * Get anagrafica
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getAnagrafica() {
+        return $this->anagrafica;
+    }
+
+    public function __construct() {
+        $this->questionarioEcm = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->questionarioCustomerSatisfaction = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->questionarioValutazione = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->iscritti = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->anagrafica = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add questionarioEcm
+     *
+     * @param Accreditamenti\CongressiBundle\Entity\QuestionarioEcm $questionarioEcm
+     */
+    public function addQuestionarioEcm(\Accreditamenti\CongressiBundle\Entity\QuestionarioEcm $questionarioEcm) {
+        $this->questionarioEcm[] = $questionarioEcm;
+    }
+
+    /**
+     * Get questionarioEcm
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getQuestionarioEcm() {
+        return $this->questionarioEcm;
+    }
 
 }

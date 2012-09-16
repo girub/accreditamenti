@@ -9,21 +9,21 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Accreditamenti\CongressiBundle\Entity\Anagrafica;
 use Accreditamenti\CongressiBundle\Form\AnagraficaType;
 
+
 /**
  * Anagrafica controller.
  *
  * @Route("/anagrafica")
  */
-class AnagraficaController extends Controller
-{
+class AnagraficaController extends Controller {
+
     /**
      * Lists all Anagrafica entities.
      *
      * @Route("/", name="anagrafica")
      * @Template()
      */
-    public function indexAction()
-    {
+    public function indexAction() {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entities = $em->getRepository('AccreditamentiCongressiBundle:Anagrafica')->findAll();
@@ -37,8 +37,7 @@ class AnagraficaController extends Controller
      * @Route("/{id}/show", name="anagrafica_show")
      * @Template()
      */
-    public function showAction($id)
-    {
+    public function showAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('AccreditamentiCongressiBundle:Anagrafica')->find($id);
@@ -50,8 +49,8 @@ class AnagraficaController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        );
+            'entity' => $entity,
+            'delete_form' => $deleteForm->createView(),);
     }
 
     /**
@@ -60,43 +59,43 @@ class AnagraficaController extends Controller
      * @Route("/new", name="anagrafica_new")
      * @Template()
      */
-    public function newAction()
-    {
+    public function newAction() {
         $entity = new Anagrafica();
-        $form   = $this->createForm(new AnagraficaType(), $entity);
+        $form = $this->createForm(new AnagraficaType(), $entity);
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView()
+            'form' => $form->createView()
         );
     }
 
     /**
      * Creates a new Anagrafica entity.
      *
-     * @Route("/create", name="anagrafica_create")
+     * @Route("/create/{accreditamento_id}", name="anagrafica_create")
      * @Method("post")
      * @Template("AccreditamentiCongressiBundle:Anagrafica:new.html.twig")
      */
-    public function createAction()
-    {
-        $entity  = new Anagrafica();
+    public function createAction($accreditamento_id) {
+        $anagrafica = new Anagrafica();
         $request = $this->getRequest();
-        $form    = $this->createForm(new AnagraficaType(), $entity);
+        $form = $this->createForm(new AnagraficaType(), $anagrafica);
         $form->bindRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
-            $em->persist($entity);
+            $em->persist($anagrafica);
             $em->flush();
 
-             return $this->redirect($this->generateUrl('compila_ecm', array('id' => $entity->getId())));
-             
+            return $this->redirect($this->generateUrl('compila_ecm', array(
+                'anagrafica_id' => $anagrafica->getId(),
+                 'accreditamento_id' => $accreditamento_id,   
+                 )));
         }
 
         return array(
-            'entity' => $entity,
-            'form'   => $form->createView()
+            'entity' => $anagrafica,
+            'form' => $form->createView()
         );
     }
 
@@ -106,8 +105,7 @@ class AnagraficaController extends Controller
      * @Route("/{id}/edit", name="anagrafica_edit")
      * @Template()
      */
-    public function editAction($id)
-    {
+    public function editAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('AccreditamentiCongressiBundle:Anagrafica')->find($id);
@@ -120,8 +118,8 @@ class AnagraficaController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -133,8 +131,7 @@ class AnagraficaController extends Controller
      * @Method("post")
      * @Template("AccreditamentiCongressiBundle:Anagrafica:edit.html.twig")
      */
-    public function updateAction($id)
-    {
+    public function updateAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('AccreditamentiCongressiBundle:Anagrafica')->find($id);
@@ -143,7 +140,7 @@ class AnagraficaController extends Controller
             throw $this->createNotFoundException('Unable to find Anagrafica entity.');
         }
 
-        $editForm   = $this->createForm(new AnagraficaType(), $entity);
+        $editForm = $this->createForm(new AnagraficaType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         $request = $this->getRequest();
@@ -158,8 +155,8 @@ class AnagraficaController extends Controller
         }
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -170,8 +167,7 @@ class AnagraficaController extends Controller
      * @Route("/{id}/delete", name="anagrafica_delete")
      * @Method("post")
      */
-    public function deleteAction($id)
-    {
+    public function deleteAction($id) {
         $form = $this->createDeleteForm($id);
         $request = $this->getRequest();
 
@@ -192,11 +188,11 @@ class AnagraficaController extends Controller
         return $this->redirect($this->generateUrl('anagrafica'));
     }
 
-    private function createDeleteForm($id)
-    {
+    private function createDeleteForm($id) {
         return $this->createFormBuilder(array('id' => $id))
-            ->add('id', 'hidden')
-            ->getForm()
+                        ->add('id', 'hidden')
+                        ->getForm()
         ;
     }
+
 }
