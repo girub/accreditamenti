@@ -43,15 +43,13 @@ class Risposta {
      * @ORM\Column(name="aperta", type="boolean")
      */
     private $aperta = false;
-    
+
     /**
      * @var boolean $textarea
      *
      * @ORM\Column(name="textarea", type="boolean")
      */
     private $textarea = false;
-    
-    
 
     /**
      * @ManyToOne(targetEntity="Domanda", inversedBy="risposta")
@@ -122,14 +120,12 @@ class Risposta {
         return $this->domanda;
     }
 
-
     /**
      * Set aperta
      *
      * @param boolean $aperta
      */
-    public function setAperta($aperta)
-    {
+    public function setAperta($aperta) {
         $this->aperta = $aperta;
     }
 
@@ -138,8 +134,7 @@ class Risposta {
      *
      * @return boolean 
      */
-    public function getAperta()
-    {
+    public function getAperta() {
         return $this->aperta;
     }
 
@@ -148,8 +143,7 @@ class Risposta {
      *
      * @param boolean $textarea
      */
-    public function setTextarea($textarea)
-    {
+    public function setTextarea($textarea) {
         $this->textarea = $textarea;
     }
 
@@ -158,8 +152,17 @@ class Risposta {
      *
      * @return boolean 
      */
-    public function getTextarea()
-    {
+    public function getTextarea() {
         return $this->textarea;
     }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function __toString() {
+        return $this->getDescrizione();
+    }
+
 }

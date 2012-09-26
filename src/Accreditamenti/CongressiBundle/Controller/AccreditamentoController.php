@@ -8,9 +8,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Accreditamenti\CongressiBundle\Entity\Accreditamento;
 use Accreditamenti\CongressiBundle\Form\AccreditamentoType;
+use Accreditamenti\CongressiBundle\Entity\Domanda;
 use Accreditamenti\CongressiBundle\Entity\Iscritti;
 use Accreditamenti\CongressiBundle\Entity\Anagrafica;
 use Accreditamenti\CongressiBundle\Form\AnagraficaType;
+use Accreditamenti\CongressiBundle\Entity\RispostaRepository;
 
 /**
  * Accreditamento controller.
@@ -129,28 +131,18 @@ class AccreditamentoController extends Controller {
      * @Route("/{accreditamento_id}/{anagrafica_id}/compila/ecm", name="compila_ecm")
      * @Template()
      */
-    public function compilaEcmAction($accreditamento_id,$anagrafica_id) {
-        
+    public function compilaEcmAction($accreditamento_id, $anagrafica_id) {
+
         $em = $this->getDoctrine()->getEntityManager();
         $accreditamento = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($accreditamento_id);
-        $questionario = $accreditamento->getQuestionarioEcm();
-        
-        //echo get_class($questionario[0]);die;
-        
-      
-        if (!$questionario[0]) {
-            throw $this->createNotFoundException('Unable to find QuestionarioEcm entity -- crea prima un questionario ecm');
-        }
-        
-        $domande = $em->getRepository('AccreditamentiCongressiBundle:Domanda')
-                ->findDomandeDelQuestionario($questionario[0]);
+
+        $formDomande = $this->createQuestionarioForm($accreditamento);
 
         return array(
-           'domande' => $domande,
+            'formDomande' => $formDomande,
             'accreditamento_id' => $accreditamento_id,
             'anagrafica_id' => $anagrafica_id
         );
-
     }
 
     /**
@@ -379,36 +371,65 @@ class AccreditamentoController extends Controller {
                         ->getForm()
         ;
     }
-    
-    
+
+    private function createQuestionarioForm(Accreditamento $accreditamento) {
+
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $questionario = $accreditamento->getQuestionarioEcm();
+
+        if (!$questionario[0]) {
+            throw $this->createNotFoundException('Unable to find QuestionarioEcm entity -- crea prima un questionario ecm');
+        }
+
+        $domande = $em->getRepository('AccreditamentiCongressiBundle:Domanda')
+                ->findDomandeDelQuestionario($questionario[0]);
+
+        $formBuilder = $this->createFormBuilder();
+
+        foreach ($domande as $domanda) {
+            $formBuilder->add($domanda->getDescrizione(), 'entity', array(
+                'class' => 'AccreditamentiCongressiBundle:Risposta',
+                'multiple' => false,
+                'expanded' => true,
+                'query_builder' => function(RispostaRepository $risposta) use ($domanda) {
+                    return $risposta->createQueryBuilder('r')
+                                    ->where('r.domanda=:domanda')
+                                    ->setParameter('domanda', $domanda);
+                },
+            ));
+        }
+
+        return $formBuilder->getForm()->createView();
+    }
+
     /**
      * Creates a new QuestionarioEcm entity.
      *
      * 
-
      * @Route("/{accreditamento_id}/{anagrafica_id}/controlla/questionario/ecm", name="controlla_questionario_ecm")
      */
-    public function controllaQuestionarioEcmAction($accreditamento_id,$anagrafica_id) {
-       /* 
-        $entity = new QuestionarioEcm();
-        $request = $this->getRequest();
+    public function controllaQuestionarioEcmAction($accreditamento_id, $anagrafica_id) {
+        /*
+          $entity = new QuestionarioEcm();
+          $request = $this->getRequest();
 
-        $form = $this->createForm(new QuestionarioEcmType(), $entity);
-        $form->bindRequest($request);
+          $form = $this->createForm(new QuestionarioEcmType(), $entity);
+          $form->bindRequest($request);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
-            $em->persist($entity);
-            $em->flush();
+          if ($form->isValid()) {
+          $em = $this->getDoctrine()->getEntityManager();
+          $em->persist($entity);
+          $em->flush();
 
-            // Imposto il flash message
-            $this->get('session')->setFlash('notice', 'Questionario creato con successo');
+          // Imposto il flash message
+          $this->get('session')->setFlash('notice', 'Questionario creato con successo');
 
 
-            return $this->redirect($this->generateUrl('questionarioecm_show', array('id' => $entity->getId())));
-        }
-        
-        */
+          return $this->redirect($this->generateUrl('questionarioecm_show', array('id' => $entity->getId())));
+          }
+
+         */
 
         return array(
 //            'entity' => $entity,
