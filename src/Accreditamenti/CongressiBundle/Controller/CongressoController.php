@@ -9,17 +9,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Accreditamenti\CongressiBundle\Entity\Congresso;
 use Accreditamenti\CongressiBundle\Form\CongressoType;
 
-/**
- * Congresso controller.
- *
- * @Route("/congresso")
- */
 class CongressoController extends Controller {
 
     /**
      * Lists all Congresso entities.
      * 
-     * @Route("/", name="congresso")
+     * @Route("congresso/", name="congresso")
      * @Template()
      */
     public function indexAction() {
@@ -35,13 +30,12 @@ class CongressoController extends Controller {
     /**
      * Lists all Congresso entities.
      * 
-     * @Route("/elenco", name="elenco_congresso")
+     * @Route("/", name="elenco_congresso")
      * @Template()
      */
     public function elencoCongressiAction() {
 
         $entityManager = $this->getDoctrine()->getEntityManager();
-        
         $congressi = $entityManager
                 ->getRepository('AccreditamentiCongressiBundle:Congresso')
                 ->findAll();
@@ -50,11 +44,29 @@ class CongressoController extends Controller {
             'congressi' => $congressi
         );
     }
-    
+
+    /**
+     * Creo questo metodo per eseguire il test.
+     * 
+     * @Route("congresso/ultimo", name="ultimo_congresso")
+     */
+    public function UltimoCongressoCreatoAction() {
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $query = $em->createQuery(
+                        'SELECT p FROM AccreditamentiCongressiBundle:Congresso p 
+                         ORDER BY p.id DESC')->setMaxResults(1);
+        $congressi = $query->getResult();
+
+        return $this->forward('AccreditamentiCongressiBundle:Congresso:accreditamentiCongresso', array(
+                    'id' => $congressi[0]->getId()
+                ));
+    }
+
     /**
      * Finds and displays a Congresso entity.
      *
-     * @Route("/mostra/accreditamenti/{id}", name="accreditamenti_congresso")
+     * @Route("congresso/mostra/accreditamenti/{id}", name="accreditamenti_congresso")
      * @Template()
      */
     public function accreditamentiCongressoAction($id) {
@@ -66,16 +78,16 @@ class CongressoController extends Controller {
         if (!$congresso) {
             throw $this->createNotFoundException('Unable to find Congresso entity.');
         }
-        
+
         return array(
             'accreditamenti' => $accreditamenti,
             'entity' => $congresso);
     }
-    
-     /**
+
+    /**
      * Lists all Congresso entities.
      * 
-     * @Route("/mostraTutti", name="congresso_mostra_tutti")
+     * @Route("congresso/mostraTutti", name="congresso_mostra_tutti")
      * @Template()
      */
     public function mostraTuttiAction() {
@@ -91,7 +103,7 @@ class CongressoController extends Controller {
     /**
      * Finds and displays a Congresso entity.
      *
-     * @Route("/mostra/{id}", name="congresso_show")
+     * @Route("congresso/mostra/{id}", name="congresso_show")
      * @Template()
      */
     public function showAction($id) {
@@ -115,7 +127,7 @@ class CongressoController extends Controller {
     /**
      * Displays a form to create a new Congresso entity.
      *
-     * @Route("/new", name="congresso_new")
+     * @Route("congresso/new", name="congresso_new")
      * @Template()
      */
     public function newAction() {
@@ -131,7 +143,7 @@ class CongressoController extends Controller {
     /**
      * Creates a new Congresso entity.
      *
-     * @Route("/create", name="congresso_create")
+     * @Route("congresso/create", name="congresso_create")
      * @Method("post")
      * @Template("AccreditamentiCongressiBundle:Congresso:new.html.twig")
      */
@@ -164,7 +176,7 @@ class CongressoController extends Controller {
     /**
      * Displays a form to edit an existing Congresso entity.
      *
-     * @Route("/{id}/edit", name="congresso_edit")
+     * @Route("congresso/{id}/edit", name="congresso_edit")
      * @Template()
      */
     public function editAction($id) {
@@ -198,7 +210,7 @@ class CongressoController extends Controller {
     /**
      * Modifica una entità Congresso esistente
      *
-     * @Route("/{id}/update", name="congresso_update")
+     * @Route("congresso/{id}/update", name="congresso_update")
      * @Method("post")
      * @Template("AccreditamentiCongressiBundle:Congresso:edit.html.twig")
      */
@@ -282,7 +294,7 @@ class CongressoController extends Controller {
     /**
      * Displays a form to edit an existing Congresso entity.
      *
-     * @Route("/{id}/deletemanifesto", name="congresso_delete_manifesto")
+     * @Route("congresso/{id}/deletemanifesto", name="congresso_delete_manifesto")
      */
     public function removeManifestoAction($id) {
 
@@ -315,7 +327,7 @@ class CongressoController extends Controller {
     /**
      * Deletes a Congresso entity.
      *
-     * @Route("/{id}/delete", name="congresso_delete")
+     * @Route("congresso/{id}/delete", name="congresso_delete")
      * @Method("post")
      */
     public function deleteAction($id) {

@@ -9,6 +9,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Accreditamenti\CongressiBundle\Entity\Accreditamento;
 use Accreditamenti\CongressiBundle\Form\AccreditamentoType;
 use Accreditamenti\CongressiBundle\Entity\Iscritti;
+use Accreditamenti\CongressiBundle\Entity\Anagrafica;
+use Accreditamenti\CongressiBundle\Form\AnagraficaType;
 
 /**
  * Accreditamento controller.
@@ -76,45 +78,79 @@ class AccreditamentoController extends Controller {
 
         $form->bindRequest($this->getRequest());
 
-        if ($form->isValid()) {
-            if (!($form['codice_fiscale']->getData() === NULL)) {
-                $codice_fiscale = $form['codice_fiscale']->getData();
-                $em = $this->getDoctrine()->getEntityManager();
-                $query = $em->createQuery(
-                                'SELECT p.cognome, p.nome FROM AccreditamentiCongressiBundle:Iscritti p 
+        $codice_fiscale = $form['codice_fiscale']->getData();
+        $em = $this->getDoctrine()->getEntityManager();
+        $query = $em->createQuery(
+                        'SELECT p.cognome, p.nome FROM AccreditamentiCongressiBundle:Iscritti p 
                          WHERE p.codice_fiscale = :codice_fiscale and p.accreditamento_id = :id'
-                        )->setParameter('codice_fiscale', $codice_fiscale)
-                        ->setParameter('id', $id);
-                     $iscritto = $query->getResult();
+                )->setParameter('codice_fiscale', $codice_fiscale)
+                ->setParameter('id', $id);
+        $iscritto = $query->getResult();
 
-                if (isset($iscritto[0]['nome'])) {
-                        
-                    
-                } else {
-                    $this->get('session')->setFlash('notice', 'Codice_fiscale non presente per questo accreditamento');
-                    return $this->redirect($this->generateUrl('form_login_iscritto', array('id' => $id)));
-                }
-            } else {
-                    // non inserisco nulla
-                    $this->get('session')->setFlash('notice', 'Codice_fiscale vuoto non presente per questo accreditamento');
-                    return $this->redirect($this->generateUrl('form_login_iscritto', array('id' => $id)));
-            }
+        if (!isset($iscritto[0]['nome'])) {
+            $this->get('session')->setFlash('notice', 'Codice_fiscale non presente per questo accreditamento');
+            return $this->redirect($this->generateUrl('form_login_iscritto', array('id' => $id)));
         }
 
-        $this->get('session')->setFlash('notice', 'Benvenuto '. $iscritto[0]['nome'] . ' ' .$iscritto[0]['cognome'] . ' Login effettuato con successo');
-        return $this->redirect($this->generateUrl('compila_anagrafica', array('id' => $id)));
-        
+        if ($form->isValid()) {
+            // $user = $this->container->get('security.context')->getToken()->getUser();
+            // $user->addRole('ROLE_ISCRITTO');
+        }
+
+        $this->get('session')->setFlash('notice', 'Benvenuto ' . $iscritto[0]['nome'] . ' ' . $iscritto[0]['cognome'] . ' Login effettuato con successo');
+        return $this->redirect($this->generateUrl('compila_anagrafica', array('accreditamento_id' => $id)));
     }
 
     /**
      * Pagina dove iscritto una volta entrato compila angrafica.
      *
-     * @Route("/{id}/compila/anagrafica", name="compila_anagrafica")
+     * @Route("/{accreditamento_id}/compila/anagrafica", name="compila_anagrafica")
      * @Template()
      */
-    public function compilaAnagraficaAction($id) {
+    public function compilaAnagraficaAction($accreditamento_id) {
 
-        return array();
+        $entityManager = $this->getDoctrine()->getEntityManager();
+        $accreditamento = $entityManager->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($accreditamento_id);
+
+        $anagrafica = new Anagrafica();
+        $anagrafica->setAccreditamento($accreditamento);
+        $form = $this->createForm(new AnagraficaType(), $anagrafica);
+
+        return array(
+            'entity' => $anagrafica,
+            'accreditamento_id' => $accreditamento_id,
+            'form' => $form->createView()
+        );
+    }
+
+    /**
+     * Pagina compilo ecm.
+     *
+     * @Route("/{accreditamento_id}/{anagrafica_id}/compila/ecm", name="compila_ecm")
+     * @Template()
+     */
+    public function compilaEcmAction($accreditamento_id,$anagrafica_id) {
+        
+        $em = $this->getDoctrine()->getEntityManager();
+        $accreditamento = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($accreditamento_id);
+        $questionario = $accreditamento->getQuestionarioEcm();
+        
+        //echo get_class($questionario[0]);die;
+        
+      
+        if (!$questionario[0]) {
+            throw $this->createNotFoundException('Unable to find QuestionarioEcm entity -- crea prima un questionario ecm');
+        }
+        
+        $domande = $em->getRepository('AccreditamentiCongressiBundle:Domanda')
+                ->findDomandeDelQuestionario($questionario[0]);
+
+        return array(
+           'domande' => $domande,
+            'accreditamento_id' => $accreditamento_id,
+            'anagrafica_id' => $anagrafica_id
+        );
+
     }
 
     /**
@@ -146,9 +182,6 @@ class AccreditamentoController extends Controller {
                         foreach ($file as $riga) {
 
                             $riga = explode(';', $riga);
-                            //echo $riga[0] . " -- " . $riga[1] . "<BR>";
-
-
                             $iscritti = new Iscritti();
                             $iscritti->setNome($riga[0]);
                             $iscritti->setCognome($riga[1]);
@@ -345,6 +378,42 @@ class AccreditamentoController extends Controller {
                         ->add('id', 'hidden')
                         ->getForm()
         ;
+    }
+    
+    
+    /**
+     * Creates a new QuestionarioEcm entity.
+     *
+     * 
+
+     * @Route("/{accreditamento_id}/{anagrafica_id}/controlla/questionario/ecm", name="controlla_questionario_ecm")
+     */
+    public function controllaQuestionarioEcmAction($accreditamento_id,$anagrafica_id) {
+       /* 
+        $entity = new QuestionarioEcm();
+        $request = $this->getRequest();
+
+        $form = $this->createForm(new QuestionarioEcmType(), $entity);
+        $form->bindRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($entity);
+            $em->flush();
+
+            // Imposto il flash message
+            $this->get('session')->setFlash('notice', 'Questionario creato con successo');
+
+
+            return $this->redirect($this->generateUrl('questionarioecm_show', array('id' => $entity->getId())));
+        }
+        
+        */
+
+        return array(
+//            'entity' => $entity,
+//            'form' => $form->createView()
+        );
     }
 
 }

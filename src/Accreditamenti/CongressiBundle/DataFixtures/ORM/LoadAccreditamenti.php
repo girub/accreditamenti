@@ -8,11 +8,11 @@ use Accreditamenti\CongressiBundle\Entity\Accreditamento;
 use Accreditamenti\CongressiBundle\Entity\Congresso;
 use Accreditamenti\CongressiBundle\Entity\Domanda;
 use Accreditamenti\CongressiBundle\Entity\QuestionarioEcm;
+use Accreditamenti\CongressiBundle\Entity\Iscritti;
 
-class LoadAccreditamenti implements FixtureInterface
-{
-    public function load(ObjectManager $manager)
-    {
+class LoadAccreditamenti implements FixtureInterface {
+
+    public function load(ObjectManager $manager) {
 
         $cong = new Congresso();
         $cong->setTitolo('Congresso sulla pigna');
@@ -38,7 +38,7 @@ class LoadAccreditamenti implements FixtureInterface
         $acc->setObiettivoFormativo('Obiettivo formativo');
         $acc->setNumeroCrediti(33);
         $manager->persist($acc);
-        
+
         $quest = new QuestionarioEcm();
         $quest->setAccreditamento($acc);
         $quest->setAccreditamentoId($acc->getId());
@@ -48,7 +48,7 @@ class LoadAccreditamenti implements FixtureInterface
         $quest->setPercentualeRisposteEsatte(33);
         $quest->setNumeroTentativiCompilazione(3);
         $manager->persist($quest);
-        
+
         $quest = new QuestionarioEcm();
         $quest->setAccreditamento($acc);
         $quest->setAccreditamentoId($acc->getId());
@@ -59,6 +59,14 @@ class LoadAccreditamenti implements FixtureInterface
         $quest->setNumeroTentativiCompilazione(3);
         $manager->persist($quest);
 
+        $iscritti = new Iscritti();
+        $iscritti->setAccreditamento($acc);
+        $iscritti->setCognome('RUBINO');
+        $iscritti->setNome('GIUSEPPE');
+        $iscritti->setCodiceFiscale('RBNGPP74B15E882U');
+        $iscritti->setTipologiaIscritto(Iscritti::PARTECIPANTE);
+        $manager->persist($iscritti);
+        
         $manager->flush();
     }
 

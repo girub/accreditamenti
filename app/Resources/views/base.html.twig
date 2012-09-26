@@ -16,57 +16,9 @@
     </head>
     <body>
 
-        <div class="navbar navbar-fixed-top">
-            <div class="navbar-inner">
-                <div class="container-fluid">
-                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
-                <a class="brand" href="{{ path('accreditamenti_congressi_default_index') }}">Admin</a>
-                    <div class="btn-group pull-right">
-                        {% if app.user %}
-                            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                                <i class="icon-user"></i> {{ app.user }}
-                                <span class="caret"></span>
-                            </a>
-                        {% else %}
-                            <a class="btn dropdown-toggle" href="{{ path('fos_user_security_login') }}">
-                                <i class="icon-user"></i> Login
-                            </a>
-                        {% endif %}
-
-                        <ul class="dropdown-menu">
-                            <li><a href="{{ path('fos_user_profile_edit') }}">Profile</a></li>
-                            <li class="divider"></li>
-                            <li><a href="{{ path('fos_user_security_logout') }}">logout ({{ app.user }})</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="nav-collapse">
-                        <ul class="nav">
-                            {% block menu %}{% endblock %}
-                            {% if app.user %}
-                                <li>
-                                    <a href="{{ path('congresso_new') }}" id="link-crea-nuovo-congresso">
-                                    <span class="icon-plus icon-white"></span>nuovo congresso!
-                                </a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('congresso') }}">Congressi</a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('accreditamento') }}">Accreditamenti</a>
-                                </li>
-                            {% endif %}
-                        </ul>
-                    </div>
-
-                    <!--/.nav-collapse -->
-                </div>
-            </div>
-        </div>
+        
+        {% block topmenu %}
+        {% endblock %}
         
         <br><br><br><br>
         <div class="container">
@@ -80,6 +32,7 @@
 
         <br><br><br>
 
+        
         <div class="container">
             <div class="container-fluid">
                 <div class="row-fluid">

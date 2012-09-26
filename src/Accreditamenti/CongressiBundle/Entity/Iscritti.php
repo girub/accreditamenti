@@ -13,6 +13,8 @@ use Doctrine\ORM\Mapping\JoinColumn;
  * @ORM\Entity(repositoryClass="Accreditamenti\CongressiBundle\Entity\IscrittiRepository")
  */
 class Iscritti {
+    
+    const PARTECIPANTE = 'PAR';
 
     /**
      * @var integer $id

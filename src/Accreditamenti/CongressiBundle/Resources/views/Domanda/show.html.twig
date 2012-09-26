@@ -1,4 +1,4 @@
-{% extends '::base.html.twig' %}
+{% extends '::backEnd/base.html.twig' %}
 
 {% block body %}
 
@@ -7,7 +7,7 @@
             <div class="container">
                 <ul class="nav">
                     <li>
-                        <a href="{{ path('questionarioecm_show', { 'id': entity.getQuestionarioecm.id }) }}">
+                        <a href="{{ path('questionarioecm_show', { 'id': entity.getQuestionarioEcm.id }) }}">
                         <span class="icon-backward icon-white"></span> Crea risposta </a>
                     </li>
                     <li>

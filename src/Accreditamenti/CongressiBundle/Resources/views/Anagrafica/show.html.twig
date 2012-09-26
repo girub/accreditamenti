@@ -1,0 +1,113 @@
+<h1>Anagrafica</h1>
+
+<table class="record_properties">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>Tipo_iscrizione</th>
+            <td>{{ entity.tipoiscrizione }}</td>
+        </tr>
+        <tr>
+            <th>Nome</th>
+            <td>{{ entity.nome }}</td>
+        </tr>
+        <tr>
+            <th>Cognome</th>
+            <td>{{ entity.cognome }}</td>
+        </tr>
+        <tr>
+            <th>Data_nascita</th>
+            <td>{{ entity.datanascita|date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr>
+            <th>Luogo_nascita</th>
+            <td>{{ entity.luogonascita }}</td>
+        </tr>
+        <tr>
+            <th>Codice_fiscale</th>
+            <td>{{ entity.codicefiscale }}</td>
+        </tr>
+        <tr>
+            <th>Ordine_numero</th>
+            <td>{{ entity.ordinenumero }}</td>
+        </tr>
+        <tr>
+            <th>Ordine_citta</th>
+            <td>{{ entity.ordinecitta }}</td>
+        </tr>
+        <tr>
+            <th>Indirizzo</th>
+            <td>{{ entity.indirizzo }}</td>
+        </tr>
+        <tr>
+            <th>Indirizzo_cap</th>
+            <td>{{ entity.indirizzocap }}</td>
+        </tr>
+        <tr>
+            <th>Indirizzo_citta</th>
+            <td>{{ entity.indirizzocitta }}</td>
+        </tr>
+        <tr>
+            <th>Indirizzo_provincia</th>
+            <td>{{ entity.indirizzoprovincia }}</td>
+        </tr>
+        <tr>
+            <th>Telefono</th>
+            <td>{{ entity.telefono }}</td>
+        </tr>
+        <tr>
+            <th>Cellulare</th>
+            <td>{{ entity.cellulare }}</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>{{ entity.email }}</td>
+        </tr>
+        <tr>
+            <th>Professione</th>
+            <td>{{ entity.professione }}</td>
+        </tr>
+        <tr>
+            <th>Disciplina</th>
+            <td>{{ entity.disciplina }}</td>
+        </tr>
+        <tr>
+            <th>Qualifica</th>
+            <td>{{ entity.qualifica }}</td>
+        </tr>
+        <tr>
+            <th>Sponsor</th>
+            <td>{{ entity.sponsor }}</td>
+        </tr>
+        <tr>
+            <th>Sponsor_azienda</th>
+            <td>{{ entity.sponsorazienda }}</td>
+        </tr>
+        <tr>
+            <th>Privacy</th>
+            <td>{{ entity.privacy }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('anagrafica') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('anagrafica_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('anagrafica_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+</ul>

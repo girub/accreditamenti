@@ -156,7 +156,7 @@ class DomandaController extends Controller {
             $em->persist($domanda);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('questionarioecm_show', array('id' => $domanda->getQuestionarioecm()->getId())));
+            return $this->redirect($this->generateUrl('questionarioecm_show', array('id' => $domanda->getQuestionarioEcm()->getId())));
         }
 
         return array(
@@ -298,7 +298,7 @@ class DomandaController extends Controller {
             $em->persist($entity);
             $em->flush();
 
-            $id = $entity->getQuestionarioecm()->getId();
+            $id = $entity->getQuestionarioEcm()->getId();
 
             return $this->redirect($this->generateUrl('questionarioecm_show', array('id' => $id)));
         }

@@ -100,7 +100,7 @@ class Domanda {
      *
      * @return Accreditamenti\CongressiBundle\Entity\QuestionarioEcm 
      */
-    public function getQuestionarioecm() {
+    public function getQuestionarioEcm() {
         return $this->questionarioecm;
     }
 

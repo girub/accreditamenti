@@ -124,7 +124,7 @@ class RispostaController extends Controller {
             $em->persist($risposta);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('questionarioecm_show', array('id' => $risposta->getDomanda()->getQuestionarioecm()->getId())));
+            return $this->redirect($this->generateUrl('questionarioecm_show', array('id' => $risposta->getDomanda()->getQuestionarioEcm()->getId())));
         }
 
         return array(
@@ -237,7 +237,7 @@ class RispostaController extends Controller {
             $em->persist($risposta);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('questionarioecm_show', array('id' => $risposta->getDomanda()->getQuestionarioecm()->getId())));
+            return $this->redirect($this->generateUrl('questionarioecm_show', array('id' => $risposta->getDomanda()->getQuestionarioEcm()->getId())));
         }
 
         return array(
@@ -309,7 +309,7 @@ class RispostaController extends Controller {
         }
 
         return $this->redirect($this->generateUrl('questionarioecm_show', array(
-                            'id' => $risposta->getDomanda()->getQuestionarioecm()->getId())));
+                            'id' => $risposta->getDomanda()->getQuestionarioEcm()->getId())));
     }
 
     /**

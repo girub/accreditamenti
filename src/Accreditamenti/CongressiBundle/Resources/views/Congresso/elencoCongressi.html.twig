@@ -1,6 +1,9 @@
-{% extends '::base.html.twig' %}
+{% extends '::backEnd/base.html.twig' %}
 
 {% block body %}
+
+<h2>Pagina elenco congressi</h2>
+
     {% for congresso in congressi %}
 
      {#<a href="{{ path('accreditamenti_congresso', { 'id': congresso.id }) }}" id="link_accreditamenti_congresso">#}
