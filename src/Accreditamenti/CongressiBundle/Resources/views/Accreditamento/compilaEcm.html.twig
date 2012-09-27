@@ -1,40 +1,12 @@
 {% extends '::frontEnd/base.html.twig' %}
 
 {% block body %}
+    <h2>Compila il questionario ECM</h2>
 
-<h2>Compila il questionario ECM</h2>
-
-<form action="{{ path('controlla_questionario_ecm', {'accreditamento_id': accreditamento_id,'anagrafica_id': anagrafica_id}) }}" method="post">
   
-        <ul>
-    {% for domanda in domande %}
-                <li> {{ domanda.descrizione }}
-                    <ul>
-            {% for risposta in domanda.getRisposta %}
-                            <li>
-                                <a href="{{ path('risposta_ecm_edit', {'id': risposta.id }) }}">
-                                    <span class="icon-edit"></span></a>
-                       {% if risposta.aperta %}
-                                <span class="icon-folder-open"></span>
-                       {% else %}
-                                <span class="icon-folder-close"></span>
-                       {% endif %}
-                       {% if risposta.vero|length > 0 %}
-                                <span class="label label-warning"> {{ risposta.descrizione }} </span>
-                       {% else %}
-                            {{ risposta.descrizione }} 
-                       {% endif %}
-                            </li>
-            {% endfor %}
-                        </ul>
-                    </li><br>
-    {% endfor %}
-                </ul>
-
-                <button type="submit">invio</button>
-            </p>
-        </form>      
-
-
-
+    
+    <form action="{{ path('controlla_questionario_ecm', {'accreditamento_id': accreditamento_id,'anagrafica_id': anagrafica_id}) }}" method="post">
+        {{form_widget(formDomande)}}
+        <button type="submit">invio</button>
+    </form>
 {%endblock%}
