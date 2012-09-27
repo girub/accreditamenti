@@ -135,6 +135,9 @@ class AccreditamentoController extends Controller {
 
         $em = $this->getDoctrine()->getEntityManager();
         $accreditamento = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($accreditamento_id);
+        $questionarioecm = $accreditamento->getQuestionarioEcm();
+
+
 
         $formDomande = $this->createQuestionarioForm($accreditamento);
 
@@ -388,7 +391,8 @@ class AccreditamentoController extends Controller {
         $formBuilder = $this->createFormBuilder();
 
         foreach ($domande as $domanda) {
-            $formBuilder->add($domanda->getDescrizione(), 'entity', array(
+            $formBuilder->add("domanda_" . ($domanda->getId()) . "", 'entity', array(
+                'label' => $domanda->getDescrizione(),
                 'class' => 'AccreditamentiCongressiBundle:Risposta',
                 'multiple' => false,
                 'expanded' => true,
@@ -410,31 +414,47 @@ class AccreditamentoController extends Controller {
      * @Route("/{accreditamento_id}/{anagrafica_id}/controlla/questionario/ecm", name="controlla_questionario_ecm")
      */
     public function controllaQuestionarioEcmAction($accreditamento_id, $anagrafica_id) {
-        /*
-          $entity = new QuestionarioEcm();
-          $request = $this->getRequest();
 
-          $form = $this->createForm(new QuestionarioEcmType(), $entity);
-          $form->bindRequest($request);
+        $entityManager = $this->getDoctrine()->getEntityManager();
+        $accreditamento = $entityManager->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($accreditamento_id);
+        $questionario = $accreditamento->getQuestionarioEcm();
+        $domande = $entityManager->getRepository('AccreditamentiCongressiBundle:Domanda')
+                ->findDomandeDelQuestionario($questionario[0]);
+         
+//        $percentuale_risposte_esatte = $questionario->getPercentualeRisposteEsatte();
+//        $numero_tentativi = getNumeroTentativiCompilazione();
+        
+        
+        
+        foreach ($domande as $domanda) {
 
-          if ($form->isValid()) {
-          $em = $this->getDoctrine()->getEntityManager();
-          $em->persist($entity);
-          $em->flush();
+            if (!isset($_POST['form']['domanda_' . $domanda->getId()])) {
+                return $this->redirect($this->generateUrl('compila_ecm', array(
+                                    'accreditamento_id' => $accreditamento_id,
+                                    'anagrafica_id' => $anagrafica_id
+                                )));
+            }
 
-          // Imposto il flash message
-          $this->get('session')->setFlash('notice', 'Questionario creato con successo');
+            $risposte = $domanda->getRisposta();
+            $idRispostaGiusta = null;
+            foreach ($risposte as $risposta) {
+                if ($risposta->getVero() === true)
+                    $idRispostaGiusta = $risposta->getId();
+            }
+
+//            echo "Domanda " . $domanda->getId() . " ha come risposta giusta risposta " . $idRispostaGiusta . "<br>";
+        }
 
 
-          return $this->redirect($this->generateUrl('questionarioecm_show', array('id' => $entity->getId())));
-          }
+        echo "<pre>";
+//        var_dump($arrayDomandeQuestionario);
 
-         */
+        die;
 
-        return array(
-//            'entity' => $entity,
-//            'form' => $form->createView()
-        );
+
+
+
+        return array();
     }
 
 }

@@ -53,11 +53,10 @@ Scenario: Voglio scegliere un congresso da un elenco e un relativo suo accredita
     And I fill in "accreditamenti_congressibundle_questionarioecmtype_percentuale_risposte_esatte" with "70"
     And I fill in "accreditamenti_congressibundle_questionarioecmtype_numero_tentativi_compilazione" with "10"
     Given I press "Create"
-    
+    #Creo anche una domana e tre risposte
     When I follow "Crea domanda"
     And I fill in "accreditamenti_congressibundle_domandatype_descrizione" with "Chi ha rubato la marmellata?"
     Given I press "Create"
-
     When I follow "aggiungi risposta"
     And I fill in "accreditamenti_congressibundle_rispostatype_descrizione" with "Pippo Baudo"
     Given I press "Create"
@@ -67,6 +66,20 @@ Scenario: Voglio scegliere un congresso da un elenco e un relativo suo accredita
     When I follow "aggiungi risposta"
     And I fill in "accreditamenti_congressibundle_rispostatype_descrizione" with "Gianluca"
     And I check "Vero"
+    #seconda domanda
+    When I follow "Crea domanda"
+    And I fill in "accreditamenti_congressibundle_domandatype_descrizione" with "Chi il piu brutto del reame?"
+    Given I press "Create"
+    When I follow "aggiungi risposta"
+    And I fill in "accreditamenti_congressibundle_rispostatype_descrizione" with "io"
+    Given I press "Create"
+    When I follow "aggiungi risposta"
+    And I fill in "accreditamenti_congressibundle_rispostatype_descrizione" with "tu"
+    Given I press "Create"
+    When I follow "aggiungi risposta"
+    And I fill in "accreditamenti_congressibundle_rispostatype_descrizione" with "lui"
+    And I check "Vero"
+
     Given I press "Create"
     #Then show last response
     And last accreditamento has "Giuseppe" "Rubino" "RBNGPP74B15E882U" "PAR" as attendee
@@ -104,5 +117,7 @@ Scenario: Voglio scegliere un congresso da un elenco e un relativo suo accredita
     Given I press "Create"
     #Then show last response
     Then the response should contain "Compila il questionario ECM"
+    #And I clic "Pippo Baudo"
+    #Given I press "invio"
+    #Then the response should contain "Compila il questionario di valutazione"
     
-   

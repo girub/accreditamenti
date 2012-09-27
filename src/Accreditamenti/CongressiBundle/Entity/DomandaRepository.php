@@ -6,6 +6,8 @@ use Doctrine\ORM\EntityRepository;
 use Accreditamenti\CongressiBundle\Entity\QuestionarioEcm;
 use Accreditamenti\CongressiBundle\Entity\QuestionarioCustomerSatisfaction;
 use Accreditamenti\CongressiBundle\Entity\QuestionarioValutazione;
+use Accreditamenti\CongressiBundle\Entity\Domanda;
+
 /**
  * DomandaRepository
  *
@@ -13,6 +15,15 @@ use Accreditamenti\CongressiBundle\Entity\QuestionarioValutazione;
  * repository methods below.
  */
 class DomandaRepository extends EntityRepository {
+    
+//    public function isAnswerRight(Domanda $domanda, $risposta_id) {
+//        $result = $this->createQueryBuilder('d')
+//                        ->join('d.questionarioecm', 'questionario')
+//                        ->where('d.questionarioecm = :questionario')
+//                        ->setParameter('questionario', $questionario)
+//                        ->getQuery()
+//                        ->getResult();
+//    }
 
     public function findDomandeDelQuestionario(Questionario $questionario) {
         return $this->createQueryBuilder('d')
