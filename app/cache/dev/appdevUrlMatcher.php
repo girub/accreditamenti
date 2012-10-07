@@ -84,6 +84,99 @@ class appdevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
+        // risposta
+        if (rtrim($pathinfo, '/') === '/risposta') {
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', 'risposta');
+            }
+            return array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::indexAction',  '_route' => 'risposta',);
+        }
+
+        // risposta_show
+        if (0 === strpos($pathinfo, '/risposta') && preg_match('#^/risposta/(?P<id>[^/]+?)/show$#s', $pathinfo, $matches)) {
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::showAction',)), array('_route' => 'risposta_show'));
+        }
+
+        // risposta_ecm_new
+        if (0 === strpos($pathinfo, '/risposta/new/ecm') && preg_match('#^/risposta/new/ecm/(?P<domanda_id>[^/]+?)$#s', $pathinfo, $matches)) {
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::newEcmAction',)), array('_route' => 'risposta_ecm_new'));
+        }
+
+        // risposta_customer_satisfaction_new
+        if (0 === strpos($pathinfo, '/risposta/new/cs') && preg_match('#^/risposta/new/cs/(?P<domanda_id>[^/]+?)$#s', $pathinfo, $matches)) {
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::newCustomerSatisfactionAction',)), array('_route' => 'risposta_customer_satisfaction_new'));
+        }
+
+        // risposta_ecm_create
+        if ($pathinfo === '/risposta/create/ecm') {
+            if ($this->context->getMethod() != 'POST') {
+                $allow[] = 'POST';
+                goto not_risposta_ecm_create;
+            }
+            return array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::createEcmAction',  '_route' => 'risposta_ecm_create',);
+        }
+        not_risposta_ecm_create:
+
+        // risposta_cs_create
+        if ($pathinfo === '/risposta/create/cs') {
+            if ($this->context->getMethod() != 'POST') {
+                $allow[] = 'POST';
+                goto not_risposta_cs_create;
+            }
+            return array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::createCustomerSatisfactionAction',  '_route' => 'risposta_cs_create',);
+        }
+        not_risposta_cs_create:
+
+        // risposta_ecm_edit
+        if (0 === strpos($pathinfo, '/risposta') && preg_match('#^/risposta/(?P<id>[^/]+?)/edit/ecm$#s', $pathinfo, $matches)) {
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::editEcmAction',)), array('_route' => 'risposta_ecm_edit'));
+        }
+
+        // risposta_customer_satisfaction_edit
+        if (0 === strpos($pathinfo, '/risposta') && preg_match('#^/risposta/(?P<id>[^/]+?)/edit/customer/satisfaction$#s', $pathinfo, $matches)) {
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::editCustomerSatisfactionAction',)), array('_route' => 'risposta_customer_satisfaction_edit'));
+        }
+
+        // risposta_ecm_update
+        if (0 === strpos($pathinfo, '/risposta') && preg_match('#^/risposta/(?P<id>[^/]+?)/update/ecm$#s', $pathinfo, $matches)) {
+            if ($this->context->getMethod() != 'POST') {
+                $allow[] = 'POST';
+                goto not_risposta_ecm_update;
+            }
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::updateEcmAction',)), array('_route' => 'risposta_ecm_update'));
+        }
+        not_risposta_ecm_update:
+
+        // risposta_customer_satisfaction_update
+        if (0 === strpos($pathinfo, '/risposta') && preg_match('#^/risposta/(?P<id>[^/]+?)/update/customer/satisfaction$#s', $pathinfo, $matches)) {
+            if ($this->context->getMethod() != 'POST') {
+                $allow[] = 'POST';
+                goto not_risposta_customer_satisfaction_update;
+            }
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::updateCustomerSatisfactionAction',)), array('_route' => 'risposta_customer_satisfaction_update'));
+        }
+        not_risposta_customer_satisfaction_update:
+
+        // risposta_ecm_delete
+        if (0 === strpos($pathinfo, '/risposta') && preg_match('#^/risposta/(?P<id>[^/]+?)/delete/ecm$#s', $pathinfo, $matches)) {
+            if ($this->context->getMethod() != 'POST') {
+                $allow[] = 'POST';
+                goto not_risposta_ecm_delete;
+            }
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::deleteEcmAction',)), array('_route' => 'risposta_ecm_delete'));
+        }
+        not_risposta_ecm_delete:
+
+        // risposta_customer_satisfaction_delete
+        if (0 === strpos($pathinfo, '/risposta') && preg_match('#^/risposta/(?P<id>[^/]+?)/delete/customer/satisfaction$#s', $pathinfo, $matches)) {
+            if ($this->context->getMethod() != 'POST') {
+                $allow[] = 'POST';
+                goto not_risposta_customer_satisfaction_delete;
+            }
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::deleteCustomerSatisfactionAction',)), array('_route' => 'risposta_customer_satisfaction_delete'));
+        }
+        not_risposta_customer_satisfaction_delete:
+
         // questionario_customer_satisfaction
         if (rtrim($pathinfo, '/') === '/questionario/customer/satisfaction') {
             if (substr($pathinfo, -1) !== '/') {
@@ -137,174 +230,111 @@ class appdevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         }
         not_questionario_customer_satisfaction_delete:
 
-        // accreditamento
-        if (rtrim($pathinfo, '/') === '/accreditamento') {
+        // questionario_valutazione
+        if (rtrim($pathinfo, '/') === '/questionario/valutazione') {
             if (substr($pathinfo, -1) !== '/') {
-                return $this->redirect($pathinfo.'/', 'accreditamento');
+                return $this->redirect($pathinfo.'/', 'questionario_valutazione');
             }
-            return array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::indexAction',  '_route' => 'accreditamento',);
+            return array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioValutazioneController::indexAction',  '_route' => 'questionario_valutazione',);
         }
 
-        // carica_iscritti
-        if (0 === strpos($pathinfo, '/accreditamento') && preg_match('#^/accreditamento/(?P<id>[^/]+?)/carica/iscritti$#s', $pathinfo, $matches)) {
-            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::caricaIscrittiAction',)), array('_route' => 'carica_iscritti'));
+        // questionario_valutazione_show
+        if (0 === strpos($pathinfo, '/questionario/valutazione') && preg_match('#^/questionario/valutazione/(?P<id>[^/]+?)/show$#s', $pathinfo, $matches)) {
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioValutazioneController::showAction',)), array('_route' => 'questionario_valutazione_show'));
         }
 
-        // form_login_iscritto
-        if (0 === strpos($pathinfo, '/accreditamento') && preg_match('#^/accreditamento/(?P<id>[^/]+?)/form/iscritto$#s', $pathinfo, $matches)) {
-            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::formLoginIscrittoAction',)), array('_route' => 'form_login_iscritto'));
+        // questionario_valutazione_new
+        if (0 === strpos($pathinfo, '/questionario/valutazione/new/valutazione') && preg_match('#^/questionario/valutazione/new/valutazione/(?P<accreditamento_id>[^/]+?)$#s', $pathinfo, $matches)) {
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioValutazioneController::newAction',)), array('_route' => 'questionario_valutazione_new'));
         }
 
-        // login_iscritto
-        if (0 === strpos($pathinfo, '/accreditamento') && preg_match('#^/accreditamento/(?P<id>[^/]+?)/login/iscritto$#s', $pathinfo, $matches)) {
-            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::loginIscrittoAction',)), array('_route' => 'login_iscritto'));
-        }
-
-        // compila_anagrafica
-        if (0 === strpos($pathinfo, '/accreditamento') && preg_match('#^/accreditamento/(?P<accreditamento_id>[^/]+?)/compila/anagrafica$#s', $pathinfo, $matches)) {
-            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::compilaAnagraficaAction',)), array('_route' => 'compila_anagrafica'));
-        }
-
-        // compila_ecm
-        if (0 === strpos($pathinfo, '/accreditamento') && preg_match('#^/accreditamento/(?P<accreditamento_id>[^/]+?)/(?P<anagrafica_id>[^/]+?)/compila/ecm$#s', $pathinfo, $matches)) {
-            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::compilaEcmAction',)), array('_route' => 'compila_ecm'));
-        }
-
-        // upload_iscritti
-        if (0 === strpos($pathinfo, '/accreditamento') && preg_match('#^/accreditamento/(?P<id>[^/]+?)/uoload/iscritti$#s', $pathinfo, $matches)) {
-            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::uploadIscrittiAction',)), array('_route' => 'upload_iscritti'));
-        }
-
-        // accreditamento_show
-        if (0 === strpos($pathinfo, '/accreditamento') && preg_match('#^/accreditamento/(?P<id>[^/]+?)/show$#s', $pathinfo, $matches)) {
-            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::showAction',)), array('_route' => 'accreditamento_show'));
-        }
-
-        // accreditamento_new
-        if (0 === strpos($pathinfo, '/accreditamento/new') && preg_match('#^/accreditamento/new/(?P<congresso_id>[^/]+?)$#s', $pathinfo, $matches)) {
-            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::newAction',)), array('_route' => 'accreditamento_new'));
-        }
-
-        // accreditamento_create
-        if ($pathinfo === '/accreditamento/create') {
+        // questionario_valutazione_create
+        if ($pathinfo === '/questionario/valutazione/create/valutazione') {
             if ($this->context->getMethod() != 'POST') {
                 $allow[] = 'POST';
-                goto not_accreditamento_create;
+                goto not_questionario_valutazione_create;
             }
-            return array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::createAction',  '_route' => 'accreditamento_create',);
+            return array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioValutazioneController::createAction',  '_route' => 'questionario_valutazione_create',);
         }
-        not_accreditamento_create:
+        not_questionario_valutazione_create:
 
-        // accreditamento_edit
-        if (0 === strpos($pathinfo, '/accreditamento') && preg_match('#^/accreditamento/(?P<id>[^/]+?)/edit$#s', $pathinfo, $matches)) {
-            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::editAction',)), array('_route' => 'accreditamento_edit'));
+        // questionario_valutazione_edit
+        if (0 === strpos($pathinfo, '/questionario/valutazione') && preg_match('#^/questionario/valutazione/(?P<id>[^/]+?)/edit/valutazione$#s', $pathinfo, $matches)) {
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioValutazioneController::editAction',)), array('_route' => 'questionario_valutazione_edit'));
         }
 
-        // accreditamento_update
-        if (0 === strpos($pathinfo, '/accreditamento') && preg_match('#^/accreditamento/(?P<id>[^/]+?)/update$#s', $pathinfo, $matches)) {
+        // questionario_valutazione_update
+        if (0 === strpos($pathinfo, '/questionario/valutazione') && preg_match('#^/questionario/valutazione/(?P<id>[^/]+?)/update/valutazione$#s', $pathinfo, $matches)) {
             if ($this->context->getMethod() != 'POST') {
                 $allow[] = 'POST';
-                goto not_accreditamento_update;
+                goto not_questionario_valutazione_update;
             }
-            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::updateAction',)), array('_route' => 'accreditamento_update'));
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioValutazioneController::updateAction',)), array('_route' => 'questionario_valutazione_update'));
         }
-        not_accreditamento_update:
+        not_questionario_valutazione_update:
 
-        // accreditamento_delete
-        if (0 === strpos($pathinfo, '/accreditamento') && preg_match('#^/accreditamento/(?P<id>[^/]+?)/delete$#s', $pathinfo, $matches)) {
+        // questionario_valutazione_delete
+        if (0 === strpos($pathinfo, '/questionario/valutazione') && preg_match('#^/questionario/valutazione/(?P<id>[^/]+?)/delete/valutazione$#s', $pathinfo, $matches)) {
             if ($this->context->getMethod() != 'POST') {
                 $allow[] = 'POST';
-                goto not_accreditamento_delete;
+                goto not_questionario_valutazione_delete;
             }
-            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::deleteAction',)), array('_route' => 'accreditamento_delete'));
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioValutazioneController::deleteAction',)), array('_route' => 'questionario_valutazione_delete'));
         }
-        not_accreditamento_delete:
+        not_questionario_valutazione_delete:
 
-        // controlla_questionario_ecm
-        if (0 === strpos($pathinfo, '/accreditamento') && preg_match('#^/accreditamento/(?P<accreditamento_id>[^/]+?)/(?P<anagrafica_id>[^/]+?)/controlla/questionario/ecm$#s', $pathinfo, $matches)) {
-            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::controllaQuestionarioEcmAction',)), array('_route' => 'controlla_questionario_ecm'));
-        }
-
-        // congresso
-        if (rtrim($pathinfo, '/') === '/congresso') {
+        // questionarioecm
+        if (rtrim($pathinfo, '/') === '/questionarioecm') {
             if (substr($pathinfo, -1) !== '/') {
-                return $this->redirect($pathinfo.'/', 'congresso');
+                return $this->redirect($pathinfo.'/', 'questionarioecm');
             }
-            return array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::indexAction',  '_route' => 'congresso',);
+            return array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioEcmController::indexAction',  '_route' => 'questionarioecm',);
         }
 
-        // elenco_congresso
-        if (rtrim($pathinfo, '/') === '') {
-            if (substr($pathinfo, -1) !== '/') {
-                return $this->redirect($pathinfo.'/', 'elenco_congresso');
-            }
-            return array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::elencoCongressiAction',  '_route' => 'elenco_congresso',);
+        // questionarioecm_show
+        if (0 === strpos($pathinfo, '/questionarioecm') && preg_match('#^/questionarioecm/(?P<id>[^/]+?)/show$#s', $pathinfo, $matches)) {
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioEcmController::showAction',)), array('_route' => 'questionarioecm_show'));
         }
 
-        // ultimo_congresso
-        if ($pathinfo === '/congresso/ultimo') {
-            return array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::UltimoCongressoCreatoAction',  '_route' => 'ultimo_congresso',);
+        // questionarioecm_new
+        if (0 === strpos($pathinfo, '/questionarioecm/new') && preg_match('#^/questionarioecm/new/(?P<accreditamento_id>[^/]+?)$#s', $pathinfo, $matches)) {
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioEcmController::newAction',)), array('_route' => 'questionarioecm_new'));
         }
 
-        // accreditamenti_congresso
-        if (0 === strpos($pathinfo, '/congresso/mostra/accreditamenti') && preg_match('#^/congresso/mostra/accreditamenti/(?P<id>[^/]+?)$#s', $pathinfo, $matches)) {
-            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::accreditamentiCongressoAction',)), array('_route' => 'accreditamenti_congresso'));
-        }
-
-        // congresso_mostra_tutti
-        if ($pathinfo === '/congresso/mostraTutti') {
-            return array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::mostraTuttiAction',  '_route' => 'congresso_mostra_tutti',);
-        }
-
-        // congresso_show
-        if (0 === strpos($pathinfo, '/congresso/mostra') && preg_match('#^/congresso/mostra/(?P<id>[^/]+?)$#s', $pathinfo, $matches)) {
-            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::showAction',)), array('_route' => 'congresso_show'));
-        }
-
-        // congresso_new
-        if ($pathinfo === '/congresso/new') {
-            return array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::newAction',  '_route' => 'congresso_new',);
-        }
-
-        // congresso_create
-        if ($pathinfo === '/congresso/create') {
+        // questionarioecm_create
+        if ($pathinfo === '/questionarioecm/create') {
             if ($this->context->getMethod() != 'POST') {
                 $allow[] = 'POST';
-                goto not_congresso_create;
+                goto not_questionarioecm_create;
             }
-            return array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::createAction',  '_route' => 'congresso_create',);
+            return array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioEcmController::createAction',  '_route' => 'questionarioecm_create',);
         }
-        not_congresso_create:
+        not_questionarioecm_create:
 
-        // congresso_edit
-        if (0 === strpos($pathinfo, '/congresso') && preg_match('#^/congresso/(?P<id>[^/]+?)/edit$#s', $pathinfo, $matches)) {
-            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::editAction',)), array('_route' => 'congresso_edit'));
+        // questionarioecm_edit
+        if (0 === strpos($pathinfo, '/questionarioecm') && preg_match('#^/questionarioecm/(?P<id>[^/]+?)/edit$#s', $pathinfo, $matches)) {
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioEcmController::editAction',)), array('_route' => 'questionarioecm_edit'));
         }
 
-        // congresso_update
-        if (0 === strpos($pathinfo, '/congresso') && preg_match('#^/congresso/(?P<id>[^/]+?)/update$#s', $pathinfo, $matches)) {
+        // questionarioecm_update
+        if (0 === strpos($pathinfo, '/questionarioecm') && preg_match('#^/questionarioecm/(?P<id>[^/]+?)/update$#s', $pathinfo, $matches)) {
             if ($this->context->getMethod() != 'POST') {
                 $allow[] = 'POST';
-                goto not_congresso_update;
+                goto not_questionarioecm_update;
             }
-            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::updateAction',)), array('_route' => 'congresso_update'));
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioEcmController::updateAction',)), array('_route' => 'questionarioecm_update'));
         }
-        not_congresso_update:
+        not_questionarioecm_update:
 
-        // congresso_delete_manifesto
-        if (0 === strpos($pathinfo, '/congresso') && preg_match('#^/congresso/(?P<id>[^/]+?)/deletemanifesto$#s', $pathinfo, $matches)) {
-            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::removeManifestoAction',)), array('_route' => 'congresso_delete_manifesto'));
-        }
-
-        // congresso_delete
-        if (0 === strpos($pathinfo, '/congresso') && preg_match('#^/congresso/(?P<id>[^/]+?)/delete$#s', $pathinfo, $matches)) {
+        // questionarioecm_delete
+        if (0 === strpos($pathinfo, '/questionarioecm') && preg_match('#^/questionarioecm/(?P<id>[^/]+?)/delete$#s', $pathinfo, $matches)) {
             if ($this->context->getMethod() != 'POST') {
                 $allow[] = 'POST';
-                goto not_congresso_delete;
+                goto not_questionarioecm_delete;
             }
-            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::deleteAction',)), array('_route' => 'congresso_delete'));
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioEcmController::deleteAction',)), array('_route' => 'questionarioecm_delete'));
         }
-        not_congresso_delete:
+        not_questionarioecm_delete:
 
         // domanda
         if (rtrim($pathinfo, '/') === '/domanda') {
@@ -414,204 +444,93 @@ class appdevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         }
         not_domanda_customer_satisfaction_delete:
 
-        // questionarioecm
-        if (rtrim($pathinfo, '/') === '/questionarioecm') {
+        // accreditamento
+        if (rtrim($pathinfo, '/') === '/accreditamento') {
             if (substr($pathinfo, -1) !== '/') {
-                return $this->redirect($pathinfo.'/', 'questionarioecm');
+                return $this->redirect($pathinfo.'/', 'accreditamento');
             }
-            return array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioEcmController::indexAction',  '_route' => 'questionarioecm',);
+            return array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::indexAction',  '_route' => 'accreditamento',);
         }
 
-        // questionarioecm_show
-        if (0 === strpos($pathinfo, '/questionarioecm') && preg_match('#^/questionarioecm/(?P<id>[^/]+?)/show$#s', $pathinfo, $matches)) {
-            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioEcmController::showAction',)), array('_route' => 'questionarioecm_show'));
+        // carica_iscritti
+        if (0 === strpos($pathinfo, '/accreditamento') && preg_match('#^/accreditamento/(?P<id>[^/]+?)/carica/iscritti$#s', $pathinfo, $matches)) {
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::caricaIscrittiAction',)), array('_route' => 'carica_iscritti'));
         }
 
-        // questionarioecm_new
-        if (0 === strpos($pathinfo, '/questionarioecm/new') && preg_match('#^/questionarioecm/new/(?P<accreditamento_id>[^/]+?)$#s', $pathinfo, $matches)) {
-            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioEcmController::newAction',)), array('_route' => 'questionarioecm_new'));
+        // form_login_iscritto
+        if (0 === strpos($pathinfo, '/accreditamento') && preg_match('#^/accreditamento/(?P<id>[^/]+?)/form/iscritto$#s', $pathinfo, $matches)) {
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::formLoginIscrittoAction',)), array('_route' => 'form_login_iscritto'));
         }
 
-        // questionarioecm_create
-        if ($pathinfo === '/questionarioecm/create') {
+        // login_iscritto
+        if (0 === strpos($pathinfo, '/accreditamento') && preg_match('#^/accreditamento/(?P<id>[^/]+?)/login/iscritto$#s', $pathinfo, $matches)) {
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::loginIscrittoAction',)), array('_route' => 'login_iscritto'));
+        }
+
+        // compila_anagrafica
+        if (0 === strpos($pathinfo, '/accreditamento') && preg_match('#^/accreditamento/(?P<accreditamento_id>[^/]+?)/compila/anagrafica$#s', $pathinfo, $matches)) {
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::compilaAnagraficaAction',)), array('_route' => 'compila_anagrafica'));
+        }
+
+        // compila_ecm
+        if (0 === strpos($pathinfo, '/accreditamento') && preg_match('#^/accreditamento/(?P<accreditamento_id>[^/]+?)/(?P<anagrafica_id>[^/]+?)/compila/ecm$#s', $pathinfo, $matches)) {
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::compilaEcmAction',)), array('_route' => 'compila_ecm'));
+        }
+
+        // upload_iscritti
+        if (0 === strpos($pathinfo, '/accreditamento') && preg_match('#^/accreditamento/(?P<id>[^/]+?)/uoload/iscritti$#s', $pathinfo, $matches)) {
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::uploadIscrittiAction',)), array('_route' => 'upload_iscritti'));
+        }
+
+        // accreditamento_show
+        if (0 === strpos($pathinfo, '/accreditamento') && preg_match('#^/accreditamento/(?P<id>[^/]+?)/show$#s', $pathinfo, $matches)) {
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::showAction',)), array('_route' => 'accreditamento_show'));
+        }
+
+        // accreditamento_new
+        if (0 === strpos($pathinfo, '/accreditamento/new') && preg_match('#^/accreditamento/new/(?P<congresso_id>[^/]+?)$#s', $pathinfo, $matches)) {
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::newAction',)), array('_route' => 'accreditamento_new'));
+        }
+
+        // accreditamento_create
+        if ($pathinfo === '/accreditamento/create') {
             if ($this->context->getMethod() != 'POST') {
                 $allow[] = 'POST';
-                goto not_questionarioecm_create;
+                goto not_accreditamento_create;
             }
-            return array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioEcmController::createAction',  '_route' => 'questionarioecm_create',);
+            return array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::createAction',  '_route' => 'accreditamento_create',);
         }
-        not_questionarioecm_create:
+        not_accreditamento_create:
 
-        // questionarioecm_edit
-        if (0 === strpos($pathinfo, '/questionarioecm') && preg_match('#^/questionarioecm/(?P<id>[^/]+?)/edit$#s', $pathinfo, $matches)) {
-            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioEcmController::editAction',)), array('_route' => 'questionarioecm_edit'));
+        // accreditamento_edit
+        if (0 === strpos($pathinfo, '/accreditamento') && preg_match('#^/accreditamento/(?P<id>[^/]+?)/edit$#s', $pathinfo, $matches)) {
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::editAction',)), array('_route' => 'accreditamento_edit'));
         }
 
-        // questionarioecm_update
-        if (0 === strpos($pathinfo, '/questionarioecm') && preg_match('#^/questionarioecm/(?P<id>[^/]+?)/update$#s', $pathinfo, $matches)) {
+        // accreditamento_update
+        if (0 === strpos($pathinfo, '/accreditamento') && preg_match('#^/accreditamento/(?P<id>[^/]+?)/update$#s', $pathinfo, $matches)) {
             if ($this->context->getMethod() != 'POST') {
                 $allow[] = 'POST';
-                goto not_questionarioecm_update;
+                goto not_accreditamento_update;
             }
-            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioEcmController::updateAction',)), array('_route' => 'questionarioecm_update'));
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::updateAction',)), array('_route' => 'accreditamento_update'));
         }
-        not_questionarioecm_update:
+        not_accreditamento_update:
 
-        // questionarioecm_delete
-        if (0 === strpos($pathinfo, '/questionarioecm') && preg_match('#^/questionarioecm/(?P<id>[^/]+?)/delete$#s', $pathinfo, $matches)) {
+        // accreditamento_delete
+        if (0 === strpos($pathinfo, '/accreditamento') && preg_match('#^/accreditamento/(?P<id>[^/]+?)/delete$#s', $pathinfo, $matches)) {
             if ($this->context->getMethod() != 'POST') {
                 $allow[] = 'POST';
-                goto not_questionarioecm_delete;
+                goto not_accreditamento_delete;
             }
-            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioEcmController::deleteAction',)), array('_route' => 'questionarioecm_delete'));
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::deleteAction',)), array('_route' => 'accreditamento_delete'));
         }
-        not_questionarioecm_delete:
+        not_accreditamento_delete:
 
-        // risposta
-        if (rtrim($pathinfo, '/') === '/risposta') {
-            if (substr($pathinfo, -1) !== '/') {
-                return $this->redirect($pathinfo.'/', 'risposta');
-            }
-            return array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::indexAction',  '_route' => 'risposta',);
+        // controlla_questionario_ecm
+        if (0 === strpos($pathinfo, '/accreditamento') && preg_match('#^/accreditamento/(?P<accreditamento_id>[^/]+?)/(?P<anagrafica_id>[^/]+?)/controlla/questionario/ecm$#s', $pathinfo, $matches)) {
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::controllaQuestionarioEcmAction',)), array('_route' => 'controlla_questionario_ecm'));
         }
-
-        // risposta_show
-        if (0 === strpos($pathinfo, '/risposta') && preg_match('#^/risposta/(?P<id>[^/]+?)/show$#s', $pathinfo, $matches)) {
-            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::showAction',)), array('_route' => 'risposta_show'));
-        }
-
-        // risposta_ecm_new
-        if (0 === strpos($pathinfo, '/risposta/new/ecm') && preg_match('#^/risposta/new/ecm/(?P<domanda_id>[^/]+?)$#s', $pathinfo, $matches)) {
-            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::newEcmAction',)), array('_route' => 'risposta_ecm_new'));
-        }
-
-        // risposta_customer_satisfaction_new
-        if (0 === strpos($pathinfo, '/risposta/new/cs') && preg_match('#^/risposta/new/cs/(?P<domanda_id>[^/]+?)$#s', $pathinfo, $matches)) {
-            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::newCustomerSatisfactionAction',)), array('_route' => 'risposta_customer_satisfaction_new'));
-        }
-
-        // risposta_ecm_create
-        if ($pathinfo === '/risposta/create/ecm') {
-            if ($this->context->getMethod() != 'POST') {
-                $allow[] = 'POST';
-                goto not_risposta_ecm_create;
-            }
-            return array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::createEcmAction',  '_route' => 'risposta_ecm_create',);
-        }
-        not_risposta_ecm_create:
-
-        // risposta_cs_create
-        if ($pathinfo === '/risposta/create/cs') {
-            if ($this->context->getMethod() != 'POST') {
-                $allow[] = 'POST';
-                goto not_risposta_cs_create;
-            }
-            return array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::createCustomerSatisfactionAction',  '_route' => 'risposta_cs_create',);
-        }
-        not_risposta_cs_create:
-
-        // risposta_ecm_edit
-        if (0 === strpos($pathinfo, '/risposta') && preg_match('#^/risposta/(?P<id>[^/]+?)/edit/ecm$#s', $pathinfo, $matches)) {
-            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::editEcmAction',)), array('_route' => 'risposta_ecm_edit'));
-        }
-
-        // risposta_customer_satisfaction_edit
-        if (0 === strpos($pathinfo, '/risposta') && preg_match('#^/risposta/(?P<id>[^/]+?)/edit/customer/satisfaction$#s', $pathinfo, $matches)) {
-            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::editCustomerSatisfactionAction',)), array('_route' => 'risposta_customer_satisfaction_edit'));
-        }
-
-        // risposta_ecm_update
-        if (0 === strpos($pathinfo, '/risposta') && preg_match('#^/risposta/(?P<id>[^/]+?)/update/ecm$#s', $pathinfo, $matches)) {
-            if ($this->context->getMethod() != 'POST') {
-                $allow[] = 'POST';
-                goto not_risposta_ecm_update;
-            }
-            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::updateEcmAction',)), array('_route' => 'risposta_ecm_update'));
-        }
-        not_risposta_ecm_update:
-
-        // risposta_customer_satisfaction_update
-        if (0 === strpos($pathinfo, '/risposta') && preg_match('#^/risposta/(?P<id>[^/]+?)/update/customer/satisfaction$#s', $pathinfo, $matches)) {
-            if ($this->context->getMethod() != 'POST') {
-                $allow[] = 'POST';
-                goto not_risposta_customer_satisfaction_update;
-            }
-            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::updateCustomerSatisfactionAction',)), array('_route' => 'risposta_customer_satisfaction_update'));
-        }
-        not_risposta_customer_satisfaction_update:
-
-        // risposta_ecm_delete
-        if (0 === strpos($pathinfo, '/risposta') && preg_match('#^/risposta/(?P<id>[^/]+?)/delete/ecm$#s', $pathinfo, $matches)) {
-            if ($this->context->getMethod() != 'POST') {
-                $allow[] = 'POST';
-                goto not_risposta_ecm_delete;
-            }
-            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::deleteEcmAction',)), array('_route' => 'risposta_ecm_delete'));
-        }
-        not_risposta_ecm_delete:
-
-        // risposta_customer_satisfaction_delete
-        if (0 === strpos($pathinfo, '/risposta') && preg_match('#^/risposta/(?P<id>[^/]+?)/delete/customer/satisfaction$#s', $pathinfo, $matches)) {
-            if ($this->context->getMethod() != 'POST') {
-                $allow[] = 'POST';
-                goto not_risposta_customer_satisfaction_delete;
-            }
-            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::deleteCustomerSatisfactionAction',)), array('_route' => 'risposta_customer_satisfaction_delete'));
-        }
-        not_risposta_customer_satisfaction_delete:
-
-        // questionario_valutazione
-        if (rtrim($pathinfo, '/') === '/questionario/valutazione') {
-            if (substr($pathinfo, -1) !== '/') {
-                return $this->redirect($pathinfo.'/', 'questionario_valutazione');
-            }
-            return array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioValutazioneController::indexAction',  '_route' => 'questionario_valutazione',);
-        }
-
-        // questionario_valutazione_show
-        if (0 === strpos($pathinfo, '/questionario/valutazione') && preg_match('#^/questionario/valutazione/(?P<id>[^/]+?)/show$#s', $pathinfo, $matches)) {
-            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioValutazioneController::showAction',)), array('_route' => 'questionario_valutazione_show'));
-        }
-
-        // questionario_valutazione_new
-        if (0 === strpos($pathinfo, '/questionario/valutazione/new/valutazione') && preg_match('#^/questionario/valutazione/new/valutazione/(?P<accreditamento_id>[^/]+?)$#s', $pathinfo, $matches)) {
-            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioValutazioneController::newAction',)), array('_route' => 'questionario_valutazione_new'));
-        }
-
-        // questionario_valutazione_create
-        if ($pathinfo === '/questionario/valutazione/create/valutazione') {
-            if ($this->context->getMethod() != 'POST') {
-                $allow[] = 'POST';
-                goto not_questionario_valutazione_create;
-            }
-            return array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioValutazioneController::createAction',  '_route' => 'questionario_valutazione_create',);
-        }
-        not_questionario_valutazione_create:
-
-        // questionario_valutazione_edit
-        if (0 === strpos($pathinfo, '/questionario/valutazione') && preg_match('#^/questionario/valutazione/(?P<id>[^/]+?)/edit/valutazione$#s', $pathinfo, $matches)) {
-            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioValutazioneController::editAction',)), array('_route' => 'questionario_valutazione_edit'));
-        }
-
-        // questionario_valutazione_update
-        if (0 === strpos($pathinfo, '/questionario/valutazione') && preg_match('#^/questionario/valutazione/(?P<id>[^/]+?)/update/valutazione$#s', $pathinfo, $matches)) {
-            if ($this->context->getMethod() != 'POST') {
-                $allow[] = 'POST';
-                goto not_questionario_valutazione_update;
-            }
-            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioValutazioneController::updateAction',)), array('_route' => 'questionario_valutazione_update'));
-        }
-        not_questionario_valutazione_update:
-
-        // questionario_valutazione_delete
-        if (0 === strpos($pathinfo, '/questionario/valutazione') && preg_match('#^/questionario/valutazione/(?P<id>[^/]+?)/delete/valutazione$#s', $pathinfo, $matches)) {
-            if ($this->context->getMethod() != 'POST') {
-                $allow[] = 'POST';
-                goto not_questionario_valutazione_delete;
-            }
-            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioValutazioneController::deleteAction',)), array('_route' => 'questionario_valutazione_delete'));
-        }
-        not_questionario_valutazione_delete:
 
         // anagrafica
         if (rtrim($pathinfo, '/') === '/anagrafica') {
@@ -665,6 +584,87 @@ class appdevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AnagraficaController::deleteAction',)), array('_route' => 'anagrafica_delete'));
         }
         not_anagrafica_delete:
+
+        // congresso
+        if (rtrim($pathinfo, '/') === '/congresso') {
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', 'congresso');
+            }
+            return array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::indexAction',  '_route' => 'congresso',);
+        }
+
+        // elenco_congresso
+        if (rtrim($pathinfo, '/') === '') {
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', 'elenco_congresso');
+            }
+            return array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::elencoCongressiAction',  '_route' => 'elenco_congresso',);
+        }
+
+        // ultimo_congresso
+        if ($pathinfo === '/congresso/ultimo') {
+            return array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::UltimoCongressoCreatoAction',  '_route' => 'ultimo_congresso',);
+        }
+
+        // accreditamenti_congresso
+        if (0 === strpos($pathinfo, '/congresso/mostra/accreditamenti') && preg_match('#^/congresso/mostra/accreditamenti/(?P<id>[^/]+?)$#s', $pathinfo, $matches)) {
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::accreditamentiCongressoAction',)), array('_route' => 'accreditamenti_congresso'));
+        }
+
+        // congresso_mostra_tutti
+        if ($pathinfo === '/congresso/mostraTutti') {
+            return array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::mostraTuttiAction',  '_route' => 'congresso_mostra_tutti',);
+        }
+
+        // congresso_show
+        if (0 === strpos($pathinfo, '/congresso/mostra') && preg_match('#^/congresso/mostra/(?P<id>[^/]+?)$#s', $pathinfo, $matches)) {
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::showAction',)), array('_route' => 'congresso_show'));
+        }
+
+        // congresso_new
+        if ($pathinfo === '/congresso/new') {
+            return array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::newAction',  '_route' => 'congresso_new',);
+        }
+
+        // congresso_create
+        if ($pathinfo === '/congresso/create') {
+            if ($this->context->getMethod() != 'POST') {
+                $allow[] = 'POST';
+                goto not_congresso_create;
+            }
+            return array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::createAction',  '_route' => 'congresso_create',);
+        }
+        not_congresso_create:
+
+        // congresso_edit
+        if (0 === strpos($pathinfo, '/congresso') && preg_match('#^/congresso/(?P<id>[^/]+?)/edit$#s', $pathinfo, $matches)) {
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::editAction',)), array('_route' => 'congresso_edit'));
+        }
+
+        // congresso_update
+        if (0 === strpos($pathinfo, '/congresso') && preg_match('#^/congresso/(?P<id>[^/]+?)/update$#s', $pathinfo, $matches)) {
+            if ($this->context->getMethod() != 'POST') {
+                $allow[] = 'POST';
+                goto not_congresso_update;
+            }
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::updateAction',)), array('_route' => 'congresso_update'));
+        }
+        not_congresso_update:
+
+        // congresso_delete_manifesto
+        if (0 === strpos($pathinfo, '/congresso') && preg_match('#^/congresso/(?P<id>[^/]+?)/deletemanifesto$#s', $pathinfo, $matches)) {
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::removeManifestoAction',)), array('_route' => 'congresso_delete_manifesto'));
+        }
+
+        // congresso_delete
+        if (0 === strpos($pathinfo, '/congresso') && preg_match('#^/congresso/(?P<id>[^/]+?)/delete$#s', $pathinfo, $matches)) {
+            if ($this->context->getMethod() != 'POST') {
+                $allow[] = 'POST';
+                goto not_congresso_delete;
+            }
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::deleteAction',)), array('_route' => 'congresso_delete'));
+        }
+        not_congresso_delete:
 
         // fos_user_security_login
         if ($pathinfo === '/login') {

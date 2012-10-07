@@ -36,6 +36,12 @@ class AccreditamentiCongressiBundleEntityCongressoProxy extends \Accreditamenti\
     }
     
     
+    public function __toString()
+    {
+        $this->__load();
+        return parent::__toString();
+    }
+
     public function getId()
     {
         $this->__load();
@@ -222,22 +228,16 @@ class AccreditamentiCongressiBundleEntityCongressoProxy extends \Accreditamenti\
         return parent::getAbilitato();
     }
 
-    public function addAccreditamenti(\Accreditamenti\CongressiBundle\Entity\Accreditamento $accreditamenti)
+    public function addAccreditamento(\Accreditamenti\CongressiBundle\Entity\Accreditamento $accreditamenti)
     {
         $this->__load();
-        return parent::addAccreditamenti($accreditamenti);
+        return parent::addAccreditamento($accreditamenti);
     }
 
     public function getAccreditamenti()
     {
         $this->__load();
         return parent::getAccreditamenti();
-    }
-
-    public function __toString()
-    {
-        $this->__load();
-        return parent::__toString();
     }
 
 

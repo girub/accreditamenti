@@ -23,6 +23,18 @@ class appdevUrlGenerator extends Symfony\Component\Routing\Generator\UrlGenerato
        '_configurator_home' => true,
        '_configurator_step' => true,
        '_configurator_final' => true,
+       'risposta' => true,
+       'risposta_show' => true,
+       'risposta_ecm_new' => true,
+       'risposta_customer_satisfaction_new' => true,
+       'risposta_ecm_create' => true,
+       'risposta_cs_create' => true,
+       'risposta_ecm_edit' => true,
+       'risposta_customer_satisfaction_edit' => true,
+       'risposta_ecm_update' => true,
+       'risposta_customer_satisfaction_update' => true,
+       'risposta_ecm_delete' => true,
+       'risposta_customer_satisfaction_delete' => true,
        'questionario_customer_satisfaction' => true,
        'questionario_customer_satisfaction_show' => true,
        'questionario_customer_satisfaction_new' => true,
@@ -30,32 +42,20 @@ class appdevUrlGenerator extends Symfony\Component\Routing\Generator\UrlGenerato
        'questionario_customer_satisfaction_edit' => true,
        'questionario_customer_satisfaction_update' => true,
        'questionario_customer_satisfaction_delete' => true,
-       'accreditamento' => true,
-       'carica_iscritti' => true,
-       'form_login_iscritto' => true,
-       'login_iscritto' => true,
-       'compila_anagrafica' => true,
-       'compila_ecm' => true,
-       'upload_iscritti' => true,
-       'accreditamento_show' => true,
-       'accreditamento_new' => true,
-       'accreditamento_create' => true,
-       'accreditamento_edit' => true,
-       'accreditamento_update' => true,
-       'accreditamento_delete' => true,
-       'controlla_questionario_ecm' => true,
-       'congresso' => true,
-       'elenco_congresso' => true,
-       'ultimo_congresso' => true,
-       'accreditamenti_congresso' => true,
-       'congresso_mostra_tutti' => true,
-       'congresso_show' => true,
-       'congresso_new' => true,
-       'congresso_create' => true,
-       'congresso_edit' => true,
-       'congresso_update' => true,
-       'congresso_delete_manifesto' => true,
-       'congresso_delete' => true,
+       'questionario_valutazione' => true,
+       'questionario_valutazione_show' => true,
+       'questionario_valutazione_new' => true,
+       'questionario_valutazione_create' => true,
+       'questionario_valutazione_edit' => true,
+       'questionario_valutazione_update' => true,
+       'questionario_valutazione_delete' => true,
+       'questionarioecm' => true,
+       'questionarioecm_show' => true,
+       'questionarioecm_new' => true,
+       'questionarioecm_create' => true,
+       'questionarioecm_edit' => true,
+       'questionarioecm_update' => true,
+       'questionarioecm_delete' => true,
        'domanda' => true,
        'domanda_show' => true,
        'domanda_ecm_new' => true,
@@ -70,32 +70,20 @@ class appdevUrlGenerator extends Symfony\Component\Routing\Generator\UrlGenerato
        'domanda_customer_satisfaction_update' => true,
        'domanda_delete' => true,
        'domanda_customer_satisfaction_delete' => true,
-       'questionarioecm' => true,
-       'questionarioecm_show' => true,
-       'questionarioecm_new' => true,
-       'questionarioecm_create' => true,
-       'questionarioecm_edit' => true,
-       'questionarioecm_update' => true,
-       'questionarioecm_delete' => true,
-       'risposta' => true,
-       'risposta_show' => true,
-       'risposta_ecm_new' => true,
-       'risposta_customer_satisfaction_new' => true,
-       'risposta_ecm_create' => true,
-       'risposta_cs_create' => true,
-       'risposta_ecm_edit' => true,
-       'risposta_customer_satisfaction_edit' => true,
-       'risposta_ecm_update' => true,
-       'risposta_customer_satisfaction_update' => true,
-       'risposta_ecm_delete' => true,
-       'risposta_customer_satisfaction_delete' => true,
-       'questionario_valutazione' => true,
-       'questionario_valutazione_show' => true,
-       'questionario_valutazione_new' => true,
-       'questionario_valutazione_create' => true,
-       'questionario_valutazione_edit' => true,
-       'questionario_valutazione_update' => true,
-       'questionario_valutazione_delete' => true,
+       'accreditamento' => true,
+       'carica_iscritti' => true,
+       'form_login_iscritto' => true,
+       'login_iscritto' => true,
+       'compila_anagrafica' => true,
+       'compila_ecm' => true,
+       'upload_iscritti' => true,
+       'accreditamento_show' => true,
+       'accreditamento_new' => true,
+       'accreditamento_create' => true,
+       'accreditamento_edit' => true,
+       'accreditamento_update' => true,
+       'accreditamento_delete' => true,
+       'controlla_questionario_ecm' => true,
        'anagrafica' => true,
        'anagrafica_show' => true,
        'anagrafica_new' => true,
@@ -103,6 +91,18 @@ class appdevUrlGenerator extends Symfony\Component\Routing\Generator\UrlGenerato
        'anagrafica_edit' => true,
        'anagrafica_update' => true,
        'anagrafica_delete' => true,
+       'congresso' => true,
+       'elenco_congresso' => true,
+       'ultimo_congresso' => true,
+       'accreditamenti_congresso' => true,
+       'congresso_mostra_tutti' => true,
+       'congresso_show' => true,
+       'congresso_new' => true,
+       'congresso_create' => true,
+       'congresso_edit' => true,
+       'congresso_update' => true,
+       'congresso_delete_manifesto' => true,
+       'congresso_delete' => true,
        'fos_user_security_login' => true,
        'fos_user_security_check' => true,
        'fos_user_security_logout' => true,
@@ -190,6 +190,66 @@ class appdevUrlGenerator extends Symfony\Component\Routing\Generator\UrlGenerato
         return array(array (), array (  '_controller' => 'Sensio\\Bundle\\DistributionBundle\\Controller\\ConfiguratorController::finalAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/_configurator/final',  ),));
     }
 
+    private function getrispostaRouteInfo()
+    {
+        return array(array (), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::indexAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/risposta/',  ),));
+    }
+
+    private function getrisposta_showRouteInfo()
+    {
+        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::showAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/show',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/risposta',  ),));
+    }
+
+    private function getrisposta_ecm_newRouteInfo()
+    {
+        return array(array (  0 => 'domanda_id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::newEcmAction',), array (), array (  0 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'domanda_id',  ),  1 =>   array (    0 => 'text',    1 => '/risposta/new/ecm',  ),));
+    }
+
+    private function getrisposta_customer_satisfaction_newRouteInfo()
+    {
+        return array(array (  0 => 'domanda_id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::newCustomerSatisfactionAction',), array (), array (  0 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'domanda_id',  ),  1 =>   array (    0 => 'text',    1 => '/risposta/new/cs',  ),));
+    }
+
+    private function getrisposta_ecm_createRouteInfo()
+    {
+        return array(array (), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::createEcmAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/risposta/create/ecm',  ),));
+    }
+
+    private function getrisposta_cs_createRouteInfo()
+    {
+        return array(array (), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::createCustomerSatisfactionAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/risposta/create/cs',  ),));
+    }
+
+    private function getrisposta_ecm_editRouteInfo()
+    {
+        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::editEcmAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/edit/ecm',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/risposta',  ),));
+    }
+
+    private function getrisposta_customer_satisfaction_editRouteInfo()
+    {
+        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::editCustomerSatisfactionAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/edit/customer/satisfaction',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/risposta',  ),));
+    }
+
+    private function getrisposta_ecm_updateRouteInfo()
+    {
+        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::updateEcmAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/update/ecm',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/risposta',  ),));
+    }
+
+    private function getrisposta_customer_satisfaction_updateRouteInfo()
+    {
+        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::updateCustomerSatisfactionAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/update/customer/satisfaction',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/risposta',  ),));
+    }
+
+    private function getrisposta_ecm_deleteRouteInfo()
+    {
+        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::deleteEcmAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/delete/ecm',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/risposta',  ),));
+    }
+
+    private function getrisposta_customer_satisfaction_deleteRouteInfo()
+    {
+        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::deleteCustomerSatisfactionAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/delete/customer/satisfaction',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/risposta',  ),));
+    }
+
     private function getquestionario_customer_satisfactionRouteInfo()
     {
         return array(array (), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioCustomerSatisfactionController::indexAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/questionario/customer/satisfaction/',  ),));
@@ -225,134 +285,74 @@ class appdevUrlGenerator extends Symfony\Component\Routing\Generator\UrlGenerato
         return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioCustomerSatisfactionController::deleteAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/delete',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/questionario/customer/satisfaction',  ),));
     }
 
-    private function getaccreditamentoRouteInfo()
+    private function getquestionario_valutazioneRouteInfo()
     {
-        return array(array (), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::indexAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/accreditamento/',  ),));
+        return array(array (), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioValutazioneController::indexAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/questionario/valutazione/',  ),));
     }
 
-    private function getcarica_iscrittiRouteInfo()
+    private function getquestionario_valutazione_showRouteInfo()
     {
-        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::caricaIscrittiAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/carica/iscritti',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/accreditamento',  ),));
+        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioValutazioneController::showAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/show',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/questionario/valutazione',  ),));
     }
 
-    private function getform_login_iscrittoRouteInfo()
+    private function getquestionario_valutazione_newRouteInfo()
     {
-        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::formLoginIscrittoAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/form/iscritto',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/accreditamento',  ),));
+        return array(array (  0 => 'accreditamento_id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioValutazioneController::newAction',), array (), array (  0 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'accreditamento_id',  ),  1 =>   array (    0 => 'text',    1 => '/questionario/valutazione/new/valutazione',  ),));
     }
 
-    private function getlogin_iscrittoRouteInfo()
+    private function getquestionario_valutazione_createRouteInfo()
     {
-        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::loginIscrittoAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/login/iscritto',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/accreditamento',  ),));
+        return array(array (), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioValutazioneController::createAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/questionario/valutazione/create/valutazione',  ),));
     }
 
-    private function getcompila_anagraficaRouteInfo()
+    private function getquestionario_valutazione_editRouteInfo()
     {
-        return array(array (  0 => 'accreditamento_id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::compilaAnagraficaAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/compila/anagrafica',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'accreditamento_id',  ),  2 =>   array (    0 => 'text',    1 => '/accreditamento',  ),));
+        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioValutazioneController::editAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/edit/valutazione',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/questionario/valutazione',  ),));
     }
 
-    private function getcompila_ecmRouteInfo()
+    private function getquestionario_valutazione_updateRouteInfo()
     {
-        return array(array (  0 => 'accreditamento_id',  1 => 'anagrafica_id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::compilaEcmAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/compila/ecm',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'anagrafica_id',  ),  2 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'accreditamento_id',  ),  3 =>   array (    0 => 'text',    1 => '/accreditamento',  ),));
+        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioValutazioneController::updateAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/update/valutazione',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/questionario/valutazione',  ),));
     }
 
-    private function getupload_iscrittiRouteInfo()
+    private function getquestionario_valutazione_deleteRouteInfo()
     {
-        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::uploadIscrittiAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/uoload/iscritti',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/accreditamento',  ),));
+        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioValutazioneController::deleteAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/delete/valutazione',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/questionario/valutazione',  ),));
     }
 
-    private function getaccreditamento_showRouteInfo()
+    private function getquestionarioecmRouteInfo()
     {
-        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::showAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/show',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/accreditamento',  ),));
+        return array(array (), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioEcmController::indexAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/questionarioecm/',  ),));
     }
 
-    private function getaccreditamento_newRouteInfo()
+    private function getquestionarioecm_showRouteInfo()
     {
-        return array(array (  0 => 'congresso_id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::newAction',), array (), array (  0 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'congresso_id',  ),  1 =>   array (    0 => 'text',    1 => '/accreditamento/new',  ),));
+        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioEcmController::showAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/show',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/questionarioecm',  ),));
     }
 
-    private function getaccreditamento_createRouteInfo()
+    private function getquestionarioecm_newRouteInfo()
     {
-        return array(array (), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::createAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/accreditamento/create',  ),));
+        return array(array (  0 => 'accreditamento_id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioEcmController::newAction',), array (), array (  0 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'accreditamento_id',  ),  1 =>   array (    0 => 'text',    1 => '/questionarioecm/new',  ),));
     }
 
-    private function getaccreditamento_editRouteInfo()
+    private function getquestionarioecm_createRouteInfo()
     {
-        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::editAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/edit',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/accreditamento',  ),));
+        return array(array (), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioEcmController::createAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/questionarioecm/create',  ),));
     }
 
-    private function getaccreditamento_updateRouteInfo()
+    private function getquestionarioecm_editRouteInfo()
     {
-        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::updateAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/update',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/accreditamento',  ),));
+        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioEcmController::editAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/edit',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/questionarioecm',  ),));
     }
 
-    private function getaccreditamento_deleteRouteInfo()
+    private function getquestionarioecm_updateRouteInfo()
     {
-        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::deleteAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/delete',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/accreditamento',  ),));
+        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioEcmController::updateAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/update',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/questionarioecm',  ),));
     }
 
-    private function getcontrolla_questionario_ecmRouteInfo()
+    private function getquestionarioecm_deleteRouteInfo()
     {
-        return array(array (  0 => 'accreditamento_id',  1 => 'anagrafica_id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::controllaQuestionarioEcmAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/controlla/questionario/ecm',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'anagrafica_id',  ),  2 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'accreditamento_id',  ),  3 =>   array (    0 => 'text',    1 => '/accreditamento',  ),));
-    }
-
-    private function getcongressoRouteInfo()
-    {
-        return array(array (), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::indexAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/congresso/',  ),));
-    }
-
-    private function getelenco_congressoRouteInfo()
-    {
-        return array(array (), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::elencoCongressiAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/',  ),));
-    }
-
-    private function getultimo_congressoRouteInfo()
-    {
-        return array(array (), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::UltimoCongressoCreatoAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/congresso/ultimo',  ),));
-    }
-
-    private function getaccreditamenti_congressoRouteInfo()
-    {
-        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::accreditamentiCongressoAction',), array (), array (  0 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  1 =>   array (    0 => 'text',    1 => '/congresso/mostra/accreditamenti',  ),));
-    }
-
-    private function getcongresso_mostra_tuttiRouteInfo()
-    {
-        return array(array (), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::mostraTuttiAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/congresso/mostraTutti',  ),));
-    }
-
-    private function getcongresso_showRouteInfo()
-    {
-        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::showAction',), array (), array (  0 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  1 =>   array (    0 => 'text',    1 => '/congresso/mostra',  ),));
-    }
-
-    private function getcongresso_newRouteInfo()
-    {
-        return array(array (), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::newAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/congresso/new',  ),));
-    }
-
-    private function getcongresso_createRouteInfo()
-    {
-        return array(array (), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::createAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/congresso/create',  ),));
-    }
-
-    private function getcongresso_editRouteInfo()
-    {
-        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::editAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/edit',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/congresso',  ),));
-    }
-
-    private function getcongresso_updateRouteInfo()
-    {
-        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::updateAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/update',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/congresso',  ),));
-    }
-
-    private function getcongresso_delete_manifestoRouteInfo()
-    {
-        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::removeManifestoAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/deletemanifesto',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/congresso',  ),));
-    }
-
-    private function getcongresso_deleteRouteInfo()
-    {
-        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::deleteAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/delete',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/congresso',  ),));
+        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioEcmController::deleteAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/delete',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/questionarioecm',  ),));
     }
 
     private function getdomandaRouteInfo()
@@ -425,134 +425,74 @@ class appdevUrlGenerator extends Symfony\Component\Routing\Generator\UrlGenerato
         return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\DomandaController::deleteCustomerSatisfactionAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/delete/customer/satisfaction',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/domanda',  ),));
     }
 
-    private function getquestionarioecmRouteInfo()
+    private function getaccreditamentoRouteInfo()
     {
-        return array(array (), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioEcmController::indexAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/questionarioecm/',  ),));
+        return array(array (), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::indexAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/accreditamento/',  ),));
     }
 
-    private function getquestionarioecm_showRouteInfo()
+    private function getcarica_iscrittiRouteInfo()
     {
-        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioEcmController::showAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/show',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/questionarioecm',  ),));
+        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::caricaIscrittiAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/carica/iscritti',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/accreditamento',  ),));
     }
 
-    private function getquestionarioecm_newRouteInfo()
+    private function getform_login_iscrittoRouteInfo()
     {
-        return array(array (  0 => 'accreditamento_id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioEcmController::newAction',), array (), array (  0 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'accreditamento_id',  ),  1 =>   array (    0 => 'text',    1 => '/questionarioecm/new',  ),));
+        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::formLoginIscrittoAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/form/iscritto',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/accreditamento',  ),));
     }
 
-    private function getquestionarioecm_createRouteInfo()
+    private function getlogin_iscrittoRouteInfo()
     {
-        return array(array (), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioEcmController::createAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/questionarioecm/create',  ),));
+        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::loginIscrittoAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/login/iscritto',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/accreditamento',  ),));
     }
 
-    private function getquestionarioecm_editRouteInfo()
+    private function getcompila_anagraficaRouteInfo()
     {
-        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioEcmController::editAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/edit',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/questionarioecm',  ),));
+        return array(array (  0 => 'accreditamento_id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::compilaAnagraficaAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/compila/anagrafica',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'accreditamento_id',  ),  2 =>   array (    0 => 'text',    1 => '/accreditamento',  ),));
     }
 
-    private function getquestionarioecm_updateRouteInfo()
+    private function getcompila_ecmRouteInfo()
     {
-        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioEcmController::updateAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/update',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/questionarioecm',  ),));
+        return array(array (  0 => 'accreditamento_id',  1 => 'anagrafica_id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::compilaEcmAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/compila/ecm',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'anagrafica_id',  ),  2 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'accreditamento_id',  ),  3 =>   array (    0 => 'text',    1 => '/accreditamento',  ),));
     }
 
-    private function getquestionarioecm_deleteRouteInfo()
+    private function getupload_iscrittiRouteInfo()
     {
-        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioEcmController::deleteAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/delete',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/questionarioecm',  ),));
+        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::uploadIscrittiAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/uoload/iscritti',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/accreditamento',  ),));
     }
 
-    private function getrispostaRouteInfo()
+    private function getaccreditamento_showRouteInfo()
     {
-        return array(array (), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::indexAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/risposta/',  ),));
+        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::showAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/show',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/accreditamento',  ),));
     }
 
-    private function getrisposta_showRouteInfo()
+    private function getaccreditamento_newRouteInfo()
     {
-        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::showAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/show',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/risposta',  ),));
+        return array(array (  0 => 'congresso_id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::newAction',), array (), array (  0 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'congresso_id',  ),  1 =>   array (    0 => 'text',    1 => '/accreditamento/new',  ),));
     }
 
-    private function getrisposta_ecm_newRouteInfo()
+    private function getaccreditamento_createRouteInfo()
     {
-        return array(array (  0 => 'domanda_id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::newEcmAction',), array (), array (  0 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'domanda_id',  ),  1 =>   array (    0 => 'text',    1 => '/risposta/new/ecm',  ),));
+        return array(array (), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::createAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/accreditamento/create',  ),));
     }
 
-    private function getrisposta_customer_satisfaction_newRouteInfo()
+    private function getaccreditamento_editRouteInfo()
     {
-        return array(array (  0 => 'domanda_id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::newCustomerSatisfactionAction',), array (), array (  0 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'domanda_id',  ),  1 =>   array (    0 => 'text',    1 => '/risposta/new/cs',  ),));
+        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::editAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/edit',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/accreditamento',  ),));
     }
 
-    private function getrisposta_ecm_createRouteInfo()
+    private function getaccreditamento_updateRouteInfo()
     {
-        return array(array (), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::createEcmAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/risposta/create/ecm',  ),));
+        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::updateAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/update',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/accreditamento',  ),));
     }
 
-    private function getrisposta_cs_createRouteInfo()
+    private function getaccreditamento_deleteRouteInfo()
     {
-        return array(array (), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::createCustomerSatisfactionAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/risposta/create/cs',  ),));
+        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::deleteAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/delete',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/accreditamento',  ),));
     }
 
-    private function getrisposta_ecm_editRouteInfo()
+    private function getcontrolla_questionario_ecmRouteInfo()
     {
-        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::editEcmAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/edit/ecm',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/risposta',  ),));
-    }
-
-    private function getrisposta_customer_satisfaction_editRouteInfo()
-    {
-        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::editCustomerSatisfactionAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/edit/customer/satisfaction',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/risposta',  ),));
-    }
-
-    private function getrisposta_ecm_updateRouteInfo()
-    {
-        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::updateEcmAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/update/ecm',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/risposta',  ),));
-    }
-
-    private function getrisposta_customer_satisfaction_updateRouteInfo()
-    {
-        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::updateCustomerSatisfactionAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/update/customer/satisfaction',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/risposta',  ),));
-    }
-
-    private function getrisposta_ecm_deleteRouteInfo()
-    {
-        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::deleteEcmAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/delete/ecm',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/risposta',  ),));
-    }
-
-    private function getrisposta_customer_satisfaction_deleteRouteInfo()
-    {
-        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\RispostaController::deleteCustomerSatisfactionAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/delete/customer/satisfaction',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/risposta',  ),));
-    }
-
-    private function getquestionario_valutazioneRouteInfo()
-    {
-        return array(array (), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioValutazioneController::indexAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/questionario/valutazione/',  ),));
-    }
-
-    private function getquestionario_valutazione_showRouteInfo()
-    {
-        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioValutazioneController::showAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/show',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/questionario/valutazione',  ),));
-    }
-
-    private function getquestionario_valutazione_newRouteInfo()
-    {
-        return array(array (  0 => 'accreditamento_id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioValutazioneController::newAction',), array (), array (  0 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'accreditamento_id',  ),  1 =>   array (    0 => 'text',    1 => '/questionario/valutazione/new/valutazione',  ),));
-    }
-
-    private function getquestionario_valutazione_createRouteInfo()
-    {
-        return array(array (), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioValutazioneController::createAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/questionario/valutazione/create/valutazione',  ),));
-    }
-
-    private function getquestionario_valutazione_editRouteInfo()
-    {
-        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioValutazioneController::editAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/edit/valutazione',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/questionario/valutazione',  ),));
-    }
-
-    private function getquestionario_valutazione_updateRouteInfo()
-    {
-        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioValutazioneController::updateAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/update/valutazione',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/questionario/valutazione',  ),));
-    }
-
-    private function getquestionario_valutazione_deleteRouteInfo()
-    {
-        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\QuestionarioValutazioneController::deleteAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/delete/valutazione',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/questionario/valutazione',  ),));
+        return array(array (  0 => 'accreditamento_id',  1 => 'anagrafica_id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AccreditamentoController::controllaQuestionarioEcmAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/controlla/questionario/ecm',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'anagrafica_id',  ),  2 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'accreditamento_id',  ),  3 =>   array (    0 => 'text',    1 => '/accreditamento',  ),));
     }
 
     private function getanagraficaRouteInfo()
@@ -588,6 +528,66 @@ class appdevUrlGenerator extends Symfony\Component\Routing\Generator\UrlGenerato
     private function getanagrafica_deleteRouteInfo()
     {
         return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\AnagraficaController::deleteAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/delete',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/anagrafica',  ),));
+    }
+
+    private function getcongressoRouteInfo()
+    {
+        return array(array (), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::indexAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/congresso/',  ),));
+    }
+
+    private function getelenco_congressoRouteInfo()
+    {
+        return array(array (), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::elencoCongressiAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/',  ),));
+    }
+
+    private function getultimo_congressoRouteInfo()
+    {
+        return array(array (), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::UltimoCongressoCreatoAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/congresso/ultimo',  ),));
+    }
+
+    private function getaccreditamenti_congressoRouteInfo()
+    {
+        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::accreditamentiCongressoAction',), array (), array (  0 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  1 =>   array (    0 => 'text',    1 => '/congresso/mostra/accreditamenti',  ),));
+    }
+
+    private function getcongresso_mostra_tuttiRouteInfo()
+    {
+        return array(array (), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::mostraTuttiAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/congresso/mostraTutti',  ),));
+    }
+
+    private function getcongresso_showRouteInfo()
+    {
+        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::showAction',), array (), array (  0 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  1 =>   array (    0 => 'text',    1 => '/congresso/mostra',  ),));
+    }
+
+    private function getcongresso_newRouteInfo()
+    {
+        return array(array (), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::newAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/congresso/new',  ),));
+    }
+
+    private function getcongresso_createRouteInfo()
+    {
+        return array(array (), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::createAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/congresso/create',  ),));
+    }
+
+    private function getcongresso_editRouteInfo()
+    {
+        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::editAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/edit',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/congresso',  ),));
+    }
+
+    private function getcongresso_updateRouteInfo()
+    {
+        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::updateAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/update',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/congresso',  ),));
+    }
+
+    private function getcongresso_delete_manifestoRouteInfo()
+    {
+        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::removeManifestoAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/deletemanifesto',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/congresso',  ),));
+    }
+
+    private function getcongresso_deleteRouteInfo()
+    {
+        return array(array (  0 => 'id',), array (  '_controller' => 'Accreditamenti\\CongressiBundle\\Controller\\CongressoController::deleteAction',), array (  '_method' => 'post',), array (  0 =>   array (    0 => 'text',    1 => '/delete',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/congresso',  ),));
     }
 
     private function getfos_user_security_loginRouteInfo()

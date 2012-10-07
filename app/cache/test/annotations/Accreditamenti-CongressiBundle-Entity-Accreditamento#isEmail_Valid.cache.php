@@ -1,1 +1,0 @@
-<?php return unserialize('a:1:{i:0;O:44:"Symfony\\Component\\Validator\\Constraints\\True":2:{s:7:"message";s:68:"Inserisci l\'indirizzo email (o in alternativa un recapito telefonico";s:6:"groups";a:1:{i:0;s:6:"create";}}}');

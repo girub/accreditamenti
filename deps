@@ -72,11 +72,6 @@
     git=git://github.com/doctrine/migrations.git
     version=fe98141b1e460baf5ab52f9139e1ae238101b28b
 
-[DoctrineMigrationsBundle]
-    git=git://github.com/symfony/DoctrineMigrationsBundle.git
-    target=/bundles/Symfony/Bundle/DoctrineMigrationsBundle
-    version=origin/2.0
-
 [gherkin]
     git=git://github.com/Behat/Gherkin.git
     target=/behat/gherkin
@@ -111,8 +106,13 @@
     git=http://github.com/doctrine/data-fixtures.git
     version=64538135ef2b17a296e26f88a04c7ce2e4551459
 
+[DoctrineMigrationsBundle]
+    git=http://github.com/doctrine/DoctrineMigrationsBundle.git
+    target=/bundles/Symfony/Bundle/DoctrineMigrationsBundle
+    version=origin/2.0
+
 [DoctrineFixturesBundle]
-    git=http://github.com/symfony/DoctrineFixturesBundle.git
+    git=http://github.com/doctrine/DoctrineFixturesBundle.git
     target=/bundles/Symfony/Bundle/DoctrineFixturesBundle
     version=a66be2f077f3a4e5c3801b356b42b8782f1abbd6
 

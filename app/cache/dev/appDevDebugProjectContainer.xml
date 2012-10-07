@@ -35,7 +35,7 @@
     <parameter key="database_port"></parameter>
     <parameter key="database_name">accreditamenti</parameter>
     <parameter key="database_user">root</parameter>
-    <parameter key="database_password">cparoot</parameter>
+    <parameter key="database_password">root</parameter>
     <parameter key="mailer_transport">smtp</parameter>
     <parameter key="mailer_host">localhost</parameter>
     <parameter key="mailer_user"></parameter>
@@ -117,11 +117,11 @@
         <parameter>88531E</parameter>
       </parameter>
       <parameter key="fonts" type="collection">
-        <parameter>/var/www/accreditamenti/app/../web/bundles/genemuform/fonts/akbar.ttf</parameter>
-        <parameter>/var/www/accreditamenti/app/../web/bundles/genemuform/fonts/brushcut.ttf</parameter>
-        <parameter>/var/www/accreditamenti/app/../web/bundles/genemuform/fonts/molten.ttf</parameter>
-        <parameter>/var/www/accreditamenti/app/../web/bundles/genemuform/fonts/planetbe.ttf</parameter>
-        <parameter>/var/www/accreditamenti/app/../web/bundles/genemuform/fonts/whoobub.ttf</parameter>
+        <parameter>akbar.ttf</parameter>
+        <parameter>brushcut.ttf</parameter>
+        <parameter>molten.ttf</parameter>
+        <parameter>planetbe.ttf</parameter>
+        <parameter>whoobub.ttf</parameter>
       </parameter>
       <parameter key="background_color">DDDDDD</parameter>
       <parameter key="border_color">000000</parameter>
@@ -667,11 +667,11 @@
           <argument>88531E</argument>
         </argument>
         <argument key="fonts" type="collection">
-          <argument>/var/www/accreditamenti/app/../web/bundles/genemuform/fonts/akbar.ttf</argument>
-          <argument>/var/www/accreditamenti/app/../web/bundles/genemuform/fonts/brushcut.ttf</argument>
-          <argument>/var/www/accreditamenti/app/../web/bundles/genemuform/fonts/molten.ttf</argument>
-          <argument>/var/www/accreditamenti/app/../web/bundles/genemuform/fonts/planetbe.ttf</argument>
-          <argument>/var/www/accreditamenti/app/../web/bundles/genemuform/fonts/whoobub.ttf</argument>
+          <argument>akbar.ttf</argument>
+          <argument>brushcut.ttf</argument>
+          <argument>molten.ttf</argument>
+          <argument>planetbe.ttf</argument>
+          <argument>whoobub.ttf</argument>
         </argument>
         <argument key="background_color">DDDDDD</argument>
         <argument key="border_color">000000</argument>
@@ -1394,7 +1394,7 @@
         <argument key="host">localhost</argument>
         <argument key="port"></argument>
         <argument key="user">root</argument>
-        <argument key="password">cparoot</argument>
+        <argument key="password">root</argument>
         <argument key="driver">pdo_mysql</argument>
         <argument key="driverOptions" type="collection"/>
       </argument>
@@ -1830,8 +1830,20 @@
       </call>
       <call method="addResource">
         <argument>yml</argument>
-        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/FOSUserBundle.da.yml</argument>
-        <argument>da</argument>
+        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/FOSUserBundle.it.yml</argument>
+        <argument>it</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/FOSUserBundle.hr.yml</argument>
+        <argument>hr</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/FOSUserBundle.nl.yml</argument>
+        <argument>nl</argument>
         <argument>FOSUserBundle</argument>
       </call>
       <call method="addResource">
@@ -1842,152 +1854,8 @@
       </call>
       <call method="addResource">
         <argument>yml</argument>
-        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/FOSUserBundle.hu.yml</argument>
-        <argument>hu</argument>
-        <argument>FOSUserBundle</argument>
-      </call>
-      <call method="addResource">
-        <argument>yml</argument>
-        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/FOSUserBundle.ro.yml</argument>
-        <argument>ro</argument>
-        <argument>FOSUserBundle</argument>
-      </call>
-      <call method="addResource">
-        <argument>yml</argument>
-        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/FOSUserBundle.it.yml</argument>
-        <argument>it</argument>
-        <argument>FOSUserBundle</argument>
-      </call>
-      <call method="addResource">
-        <argument>yml</argument>
-        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/validators.bg.yml</argument>
-        <argument>bg</argument>
-        <argument>validators</argument>
-      </call>
-      <call method="addResource">
-        <argument>yml</argument>
-        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/FOSUserBundle.cs.yml</argument>
-        <argument>cs</argument>
-        <argument>FOSUserBundle</argument>
-      </call>
-      <call method="addResource">
-        <argument>yml</argument>
-        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/validators.de.yml</argument>
-        <argument>de</argument>
-        <argument>validators</argument>
-      </call>
-      <call method="addResource">
-        <argument>yml</argument>
-        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/validators.es.yml</argument>
-        <argument>es</argument>
-        <argument>validators</argument>
-      </call>
-      <call method="addResource">
-        <argument>yml</argument>
-        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/FOSUserBundle.sl.yml</argument>
-        <argument>sl</argument>
-        <argument>FOSUserBundle</argument>
-      </call>
-      <call method="addResource">
-        <argument>yml</argument>
-        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/FOSUserBundle.de.yml</argument>
-        <argument>de</argument>
-        <argument>FOSUserBundle</argument>
-      </call>
-      <call method="addResource">
-        <argument>yml</argument>
-        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/validators.en.yml</argument>
-        <argument>en</argument>
-        <argument>validators</argument>
-      </call>
-      <call method="addResource">
-        <argument>yml</argument>
-        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/FOSUserBundle.sv.yml</argument>
-        <argument>sv</argument>
-        <argument>FOSUserBundle</argument>
-      </call>
-      <call method="addResource">
-        <argument>yml</argument>
-        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/validators.hr.yml</argument>
-        <argument>hr</argument>
-        <argument>validators</argument>
-      </call>
-      <call method="addResource">
-        <argument>yml</argument>
-        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/FOSUserBundle.ja.yml</argument>
-        <argument>ja</argument>
-        <argument>FOSUserBundle</argument>
-      </call>
-      <call method="addResource">
-        <argument>yml</argument>
-        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/FOSUserBundle.en.yml</argument>
-        <argument>en</argument>
-        <argument>FOSUserBundle</argument>
-      </call>
-      <call method="addResource">
-        <argument>yml</argument>
         <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/validators.pt_BR.yml</argument>
         <argument>pt_BR</argument>
-        <argument>validators</argument>
-      </call>
-      <call method="addResource">
-        <argument>yml</argument>
-        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/FOSUserBundle.es.yml</argument>
-        <argument>es</argument>
-        <argument>FOSUserBundle</argument>
-      </call>
-      <call method="addResource">
-        <argument>yml</argument>
-        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/validators.it.yml</argument>
-        <argument>it</argument>
-        <argument>validators</argument>
-      </call>
-      <call method="addResource">
-        <argument>yml</argument>
-        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/validators.fr.yml</argument>
-        <argument>fr</argument>
-        <argument>validators</argument>
-      </call>
-      <call method="addResource">
-        <argument>yml</argument>
-        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/validators.sk.yml</argument>
-        <argument>sk</argument>
-        <argument>validators</argument>
-      </call>
-      <call method="addResource">
-        <argument>yml</argument>
-        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/FOSUserBundle.sk.yml</argument>
-        <argument>sk</argument>
-        <argument>FOSUserBundle</argument>
-      </call>
-      <call method="addResource">
-        <argument>yml</argument>
-        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/FOSUserBundle.ca.yml</argument>
-        <argument>ca</argument>
-        <argument>FOSUserBundle</argument>
-      </call>
-      <call method="addResource">
-        <argument>yml</argument>
-        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/validators.pl.yml</argument>
-        <argument>pl</argument>
-        <argument>validators</argument>
-      </call>
-      <call method="addResource">
-        <argument>yml</argument>
-        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/FOSUserBundle.nl.yml</argument>
-        <argument>nl</argument>
-        <argument>FOSUserBundle</argument>
-      </call>
-      <call method="addResource">
-        <argument>yml</argument>
-        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/FOSUserBundle.ru.yml</argument>
-        <argument>ru</argument>
-        <argument>FOSUserBundle</argument>
-      </call>
-      <call method="addResource">
-        <argument>yml</argument>
-        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/validators.sl.yml</argument>
-        <argument>sl</argument>
         <argument>validators</argument>
       </call>
       <call method="addResource">
@@ -1998,8 +1866,110 @@
       </call>
       <call method="addResource">
         <argument>yml</argument>
-        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/FOSUserBundle.hr.yml</argument>
+        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/validators.fr.yml</argument>
+        <argument>fr</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/FOSUserBundle.sv.yml</argument>
+        <argument>sv</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/FOSUserBundle.sl.yml</argument>
+        <argument>sl</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/FOSUserBundle.ca.yml</argument>
+        <argument>ca</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/validators.sl.yml</argument>
+        <argument>sl</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/validators.hr.yml</argument>
         <argument>hr</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/FOSUserBundle.cs.yml</argument>
+        <argument>cs</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/FOSUserBundle.de.yml</argument>
+        <argument>de</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/FOSUserBundle.en.yml</argument>
+        <argument>en</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/FOSUserBundle.et.yml</argument>
+        <argument>et</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/validators.ja.yml</argument>
+        <argument>ja</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/FOSUserBundle.pl.yml</argument>
+        <argument>pl</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/FOSUserBundle.hu.yml</argument>
+        <argument>hu</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/validators.bg.yml</argument>
+        <argument>bg</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/FOSUserBundle.ro.yml</argument>
+        <argument>ro</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/FOSUserBundle.sk.yml</argument>
+        <argument>sk</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/validators.sk.yml</argument>
+        <argument>sk</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/FOSUserBundle.da.yml</argument>
+        <argument>da</argument>
         <argument>FOSUserBundle</argument>
       </call>
       <call method="addResource">
@@ -2010,21 +1980,27 @@
       </call>
       <call method="addResource">
         <argument>yml</argument>
+        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/FOSUserBundle.pt_BR.yml</argument>
+        <argument>pt_BR</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/validators.de.yml</argument>
+        <argument>de</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
         <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/FOSUserBundle.bg.yml</argument>
         <argument>bg</argument>
         <argument>FOSUserBundle</argument>
       </call>
       <call method="addResource">
         <argument>yml</argument>
-        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/FOSUserBundle.pt_PT.yml</argument>
-        <argument>pt_PT</argument>
-        <argument>FOSUserBundle</argument>
-      </call>
-      <call method="addResource">
-        <argument>yml</argument>
-        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/FOSUserBundle.pt_BR.yml</argument>
-        <argument>pt_BR</argument>
-        <argument>FOSUserBundle</argument>
+        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/validators.es.yml</argument>
+        <argument>es</argument>
+        <argument>validators</argument>
       </call>
       <call method="addResource">
         <argument>yml</argument>
@@ -2034,134 +2010,44 @@
       </call>
       <call method="addResource">
         <argument>yml</argument>
-        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/FOSUserBundle.et.yml</argument>
-        <argument>et</argument>
-        <argument>FOSUserBundle</argument>
-      </call>
-      <call method="addResource">
-        <argument>yml</argument>
-        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/FOSUserBundle.pl.yml</argument>
-        <argument>pl</argument>
-        <argument>FOSUserBundle</argument>
-      </call>
-      <call method="addResource">
-        <argument>yml</argument>
-        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/validators.ja.yml</argument>
+        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/FOSUserBundle.ja.yml</argument>
         <argument>ja</argument>
-        <argument>validators</argument>
+        <argument>FOSUserBundle</argument>
       </call>
       <call method="addResource">
-        <argument>xliff</argument>
-        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.lt.xliff</argument>
-        <argument>lt</argument>
-        <argument>validators</argument>
+        <argument>yml</argument>
+        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/FOSUserBundle.ru.yml</argument>
+        <argument>ru</argument>
+        <argument>FOSUserBundle</argument>
       </call>
       <call method="addResource">
-        <argument>xliff</argument>
-        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.de.xliff</argument>
-        <argument>de</argument>
-        <argument>validators</argument>
-      </call>
-      <call method="addResource">
-        <argument>xliff</argument>
-        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.sv.xliff</argument>
-        <argument>sv</argument>
-        <argument>validators</argument>
-      </call>
-      <call method="addResource">
-        <argument>xliff</argument>
-        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.da.xliff</argument>
-        <argument>da</argument>
-        <argument>validators</argument>
-      </call>
-      <call method="addResource">
-        <argument>xliff</argument>
-        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.hu.xliff</argument>
-        <argument>hu</argument>
-        <argument>validators</argument>
-      </call>
-      <call method="addResource">
-        <argument>xliff</argument>
-        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.pl.xliff</argument>
-        <argument>pl</argument>
-        <argument>validators</argument>
-      </call>
-      <call method="addResource">
-        <argument>xliff</argument>
-        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.et.xliff</argument>
-        <argument>et</argument>
-        <argument>validators</argument>
-      </call>
-      <call method="addResource">
-        <argument>xliff</argument>
-        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.fr.xliff</argument>
-        <argument>fr</argument>
-        <argument>validators</argument>
-      </call>
-      <call method="addResource">
-        <argument>xliff</argument>
-        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.lb.xliff</argument>
-        <argument>lb</argument>
-        <argument>validators</argument>
-      </call>
-      <call method="addResource">
-        <argument>xliff</argument>
-        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.fa.xliff</argument>
-        <argument>fa</argument>
-        <argument>validators</argument>
-      </call>
-      <call method="addResource">
-        <argument>xliff</argument>
-        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.eu.xliff</argument>
-        <argument>eu</argument>
-        <argument>validators</argument>
-      </call>
-      <call method="addResource">
-        <argument>xliff</argument>
-        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.ua.xliff</argument>
-        <argument>ua</argument>
-        <argument>validators</argument>
-      </call>
-      <call method="addResource">
-        <argument>xliff</argument>
-        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.mn.xliff</argument>
-        <argument>mn</argument>
-        <argument>validators</argument>
-      </call>
-      <call method="addResource">
-        <argument>xliff</argument>
-        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.es.xliff</argument>
+        <argument>yml</argument>
+        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/FOSUserBundle.es.yml</argument>
         <argument>es</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/validators.en.yml</argument>
+        <argument>en</argument>
         <argument>validators</argument>
       </call>
       <call method="addResource">
-        <argument>xliff</argument>
-        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.ca.xliff</argument>
-        <argument>ca</argument>
-        <argument>validators</argument>
-      </call>
-      <call method="addResource">
-        <argument>xliff</argument>
-        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.pt_PT.xliff</argument>
+        <argument>yml</argument>
+        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/FOSUserBundle.pt_PT.yml</argument>
         <argument>pt_PT</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/validators.it.yml</argument>
+        <argument>it</argument>
         <argument>validators</argument>
       </call>
       <call method="addResource">
-        <argument>xliff</argument>
-        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.zh_CN.xliff</argument>
-        <argument>zh_CN</argument>
-        <argument>validators</argument>
-      </call>
-      <call method="addResource">
-        <argument>xliff</argument>
-        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.ja.xliff</argument>
-        <argument>ja</argument>
-        <argument>validators</argument>
-      </call>
-      <call method="addResource">
-        <argument>xliff</argument>
-        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.he.xliff</argument>
-        <argument>he</argument>
+        <argument>yml</argument>
+        <argument>/var/www/accreditamenti/vendor/bundles/FOS/UserBundle/Resources/translations/validators.pl.yml</argument>
+        <argument>pl</argument>
         <argument>validators</argument>
       </call>
       <call method="addResource">
@@ -2172,62 +2058,8 @@
       </call>
       <call method="addResource">
         <argument>xliff</argument>
-        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.ru.xliff</argument>
-        <argument>ru</argument>
-        <argument>validators</argument>
-      </call>
-      <call method="addResource">
-        <argument>xliff</argument>
-        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.hy.xliff</argument>
-        <argument>hy</argument>
-        <argument>validators</argument>
-      </call>
-      <call method="addResource">
-        <argument>xliff</argument>
-        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.id.xliff</argument>
-        <argument>id</argument>
-        <argument>validators</argument>
-      </call>
-      <call method="addResource">
-        <argument>xliff</argument>
-        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.pt_BR.xliff</argument>
-        <argument>pt_BR</argument>
-        <argument>validators</argument>
-      </call>
-      <call method="addResource">
-        <argument>xliff</argument>
-        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.sl.xliff</argument>
-        <argument>sl</argument>
-        <argument>validators</argument>
-      </call>
-      <call method="addResource">
-        <argument>xliff</argument>
-        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.ro.xliff</argument>
-        <argument>ro</argument>
-        <argument>validators</argument>
-      </call>
-      <call method="addResource">
-        <argument>xliff</argument>
-        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.hr.xliff</argument>
-        <argument>hr</argument>
-        <argument>validators</argument>
-      </call>
-      <call method="addResource">
-        <argument>xliff</argument>
-        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.sr.xliff</argument>
-        <argument>sr</argument>
-        <argument>validators</argument>
-      </call>
-      <call method="addResource">
-        <argument>xliff</argument>
-        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.fi.xliff</argument>
-        <argument>fi</argument>
-        <argument>validators</argument>
-      </call>
-      <call method="addResource">
-        <argument>xliff</argument>
-        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.cs.xliff</argument>
-        <argument>cs</argument>
+        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.de.xliff</argument>
+        <argument>de</argument>
         <argument>validators</argument>
       </call>
       <call method="addResource">
@@ -2238,8 +2070,176 @@
       </call>
       <call method="addResource">
         <argument>xliff</argument>
+        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.ua.xliff</argument>
+        <argument>ua</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xliff</argument>
+        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.fa.xliff</argument>
+        <argument>fa</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xliff</argument>
+        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.ru.xliff</argument>
+        <argument>ru</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xliff</argument>
+        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.pt_BR.xliff</argument>
+        <argument>pt_BR</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xliff</argument>
         <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.it.xliff</argument>
         <argument>it</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xliff</argument>
+        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.pl.xliff</argument>
+        <argument>pl</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xliff</argument>
+        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.hr.xliff</argument>
+        <argument>hr</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xliff</argument>
+        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.lb.xliff</argument>
+        <argument>lb</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xliff</argument>
+        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.fi.xliff</argument>
+        <argument>fi</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xliff</argument>
+        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.da.xliff</argument>
+        <argument>da</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xliff</argument>
+        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.ja.xliff</argument>
+        <argument>ja</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xliff</argument>
+        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.fr.xliff</argument>
+        <argument>fr</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xliff</argument>
+        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.eu.xliff</argument>
+        <argument>eu</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xliff</argument>
+        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.hy.xliff</argument>
+        <argument>hy</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xliff</argument>
+        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.pt_PT.xliff</argument>
+        <argument>pt_PT</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xliff</argument>
+        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.ro.xliff</argument>
+        <argument>ro</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xliff</argument>
+        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.sr.xliff</argument>
+        <argument>sr</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xliff</argument>
+        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.sl.xliff</argument>
+        <argument>sl</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xliff</argument>
+        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.mn.xliff</argument>
+        <argument>mn</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xliff</argument>
+        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.hu.xliff</argument>
+        <argument>hu</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xliff</argument>
+        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.ca.xliff</argument>
+        <argument>ca</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xliff</argument>
+        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.lt.xliff</argument>
+        <argument>lt</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xliff</argument>
+        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.cs.xliff</argument>
+        <argument>cs</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xliff</argument>
+        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.es.xliff</argument>
+        <argument>es</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xliff</argument>
+        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.sv.xliff</argument>
+        <argument>sv</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xliff</argument>
+        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.zh_CN.xliff</argument>
+        <argument>zh_CN</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xliff</argument>
+        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.et.xliff</argument>
+        <argument>et</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xliff</argument>
+        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.id.xliff</argument>
+        <argument>id</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xliff</argument>
+        <argument>/var/www/accreditamenti/vendor/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/translations/validators.he.xliff</argument>
+        <argument>he</argument>
         <argument>validators</argument>
       </call>
       <call method="addResource">
@@ -2782,7 +2782,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>50719ce18bf2d</argument>
+            <argument>5071a3a6a58e7</argument>
           </service>
         </argument>
       </argument>
@@ -3048,7 +3048,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>50719ce18bf2d</argument>
+            <argument>5071a3a6a58e7</argument>
             <argument type="service" id="monolog.logger.security"/>
           </service>
         </argument>

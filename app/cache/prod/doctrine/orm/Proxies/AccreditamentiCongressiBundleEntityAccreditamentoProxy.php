@@ -150,10 +150,88 @@ class AccreditamentiCongressiBundleEntityAccreditamentoProxy extends \Accreditam
         return parent::getCongresso();
     }
 
+    public function __toString()
+    {
+        $this->__load();
+        return parent::__toString();
+    }
+
+    public function setAttivaQuestionario($attivaQuestionario)
+    {
+        $this->__load();
+        return parent::setAttivaQuestionario($attivaQuestionario);
+    }
+
+    public function getAttivaQuestionario()
+    {
+        $this->__load();
+        return parent::getAttivaQuestionario();
+    }
+
+    public function addQuestionarioCustomerSatisfaction(\Accreditamenti\CongressiBundle\Entity\QuestionarioCustomerSatisfaction $questionarioCustomerSatisfaction)
+    {
+        $this->__load();
+        return parent::addQuestionarioCustomerSatisfaction($questionarioCustomerSatisfaction);
+    }
+
+    public function getQuestionarioCustomerSatisfaction()
+    {
+        $this->__load();
+        return parent::getQuestionarioCustomerSatisfaction();
+    }
+
+    public function addQuestionarioValutazione(\Accreditamenti\CongressiBundle\Entity\QuestionarioValutazione $questionarioValutazione)
+    {
+        $this->__load();
+        return parent::addQuestionarioValutazione($questionarioValutazione);
+    }
+
+    public function getQuestionarioValutazione()
+    {
+        $this->__load();
+        return parent::getQuestionarioValutazione();
+    }
+
+    public function addIscritti(\Accreditamenti\CongressiBundle\Entity\Iscritti $iscritti)
+    {
+        $this->__load();
+        return parent::addIscritti($iscritti);
+    }
+
+    public function getIscritti()
+    {
+        $this->__load();
+        return parent::getIscritti();
+    }
+
+    public function addAnagrafica(\Accreditamenti\CongressiBundle\Entity\Anagrafica $anagrafica)
+    {
+        $this->__load();
+        return parent::addAnagrafica($anagrafica);
+    }
+
+    public function getAnagrafica()
+    {
+        $this->__load();
+        return parent::getAnagrafica();
+    }
+
+    public function addQuestionarioEcm(\Accreditamenti\CongressiBundle\Entity\QuestionarioEcm $questionarioEcm)
+    {
+        $this->__load();
+        return parent::addQuestionarioEcm($questionarioEcm);
+    }
+
+    public function getQuestionarioEcm()
+    {
+        $this->__load();
+        return parent::getQuestionarioEcm();
+    }
+
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'numero_accreditamento', 'titolo', 'luogo', 'data_inizio', 'data_fine', 'ore_formative', 'obiettivo_formativo', 'numero_crediti', 'congresso');
+        return array('__isInitialized__', 'id', 'numero_accreditamento', 'titolo', 'luogo', 'data_inizio', 'data_fine', 'ore_formative', 'obiettivo_formativo', 'numero_crediti', 'congresso', 'questionarioEcm', 'questionarioCustomerSatisfaction', 'questionarioValutazione', 'attiva_questionario', 'iscritti', 'anagrafica');
     }
 
     public function __clone()
