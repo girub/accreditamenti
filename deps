@@ -75,7 +75,7 @@
 [DoctrineMigrationsBundle]
     git=git://github.com/symfony/DoctrineMigrationsBundle.git
     target=/bundles/Symfony/Bundle/DoctrineMigrationsBundle
-    version=dd9a336c574301b0b6a7e82a0865cab3d4d95503
+    version=origin/2.0
 
 [gherkin]
     git=git://github.com/Behat/Gherkin.git
