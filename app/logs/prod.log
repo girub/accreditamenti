@@ -65,3 +65,6 @@
 [2012-09-27 12:20:11] security.INFO: Populated SecurityContext with an anonymous Token [] []
 [2012-09-27 12:20:11] request.INFO: Matched route "accreditamenti_congressi_default_index" (parameters: "_controller": "Accreditamenti\CongressiBundle\Controller\DefaultController::indexAction", "_route": "accreditamenti_congressi_default_index") [] []
 [2012-09-27 12:20:11] request.CRITICAL: InvalidArgumentException: Class "Accreditamenti\CongressiBundle\Controller\DefaultController" does not exist. (uncaught exception) at /var/www/accreditamenti/app/cache/prod/classes.php line 4882 [] []
+[2012-10-07 17:17:07] security.INFO: Populated SecurityContext with an anonymous Token [] []
+[2012-10-07 17:17:07] request.INFO: Matched route "accreditamenti_congressi_default_index" (parameters: "_controller": "Accreditamenti\CongressiBundle\Controller\DefaultController::indexAction", "_route": "accreditamenti_congressi_default_index") [] []
+[2012-10-07 17:17:07] request.CRITICAL: InvalidArgumentException: Class "Accreditamenti\CongressiBundle\Controller\DefaultController" does not exist. (uncaught exception) at /var/www/accreditamenti/app/cache/prod/classes.php line 4882 [] []
