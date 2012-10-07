@@ -7,6 +7,8 @@ web/uploads/*
 web/bundles/*
 ./app/cache/**
 ./app/logs/**
+app/cache/*
+app/logs/*
 
 # Configuration files
 app/config/parameters.ini
