@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        
+        <title>Welcome!</title>
+        
+                
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="stylesheet" type="text/css" href="/bundles/ruiantwitterbootstrap/css/bootstrapv2.css">
+   
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js" type="text/javascript"></script>
+
+    </head>
+    <body>
+
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <a class="brand" href="/">Admin</a>
+                    <div class="btn-group pull-right">
+                                                    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="icon-user"></i> giuseppe
+                                <span class="caret"></span>
+                            </a>
+                        
+                        <ul class="dropdown-menu">
+                            <li><a href="/profile/edit">Profile</a></li>
+                            <li class="divider"></li>
+                            <li><a href="/logout">logout (giuseppe)</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-collapse">
+                        <ul class="nav">
+                                                                                        <li>
+                                    <a href="/congresso/new" id="link-crea-nuovo-congresso">
+                                    <span class="icon-plus icon-white"></span>nuovo congresso!
+                                </a>
+                                </li>
+                                <li>
+                                    <a href="/congresso/">Congressi</a>
+                                </li>
+                                <li>
+                                    <a href="/accreditamento/">Accreditamenti</a>
+                                </li>
+                                                    </ul>
+                    </div>
+
+                    <!--/.nav-collapse -->
+                </div>
+            </div>
+        </div>
+        
+        <br><br><br><br>
+        <div class="container">
+                            <div class="alert">
+                    <button class="close" data-dismiss="alert">×</button>
+                    Benvenuto Rubino Giuseppe Login effettuato con successo
+                </div>
+                    </div>
+
+        <br><br><br>
+
+        <div class="container">
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span4">
+                                                    <h3>Sidebar</h3>
+                            <div class="well">
+                                Ciao mondo!
+                            </div>
+                                            </div>
+                    <div class="span8">
+                        <h1>Benvenuto - compila Anagrafica</h1>
+
+qui devo far compilare l'anagrafica all'iscritto che è appena entrato inserendo il suo codice fiscale
+
+
+<h1>Anagrafica creation</h1>
+
+<form action="/anagrafica/create" method="post" >
+    <div id="accreditamenti_congressibundle_anagraficatype"><input type="hidden" id="accreditamenti_congressibundle_anagraficatype__token" name="accreditamenti_congressibundle_anagraficatype[_token]" value="70724fd2def99dce1944aa2de3bce4160fb295a0" /><div><label for="accreditamenti_congressibundle_anagraficatype_tipo_iscrizione" class=" required">Tipo iscrizione</label><select id="accreditamenti_congressibundle_anagraficatype_tipo_iscrizione" name="accreditamenti_congressibundle_anagraficatype[tipo_iscrizione]" required="required"><option value="P">Partecipante</option><option value="D">Docente</option><option value="R">Relatore</option><option value="T">Tutor</option></select></div><div><label for="accreditamenti_congressibundle_anagraficatype_nome" class=" required">Nome</label><input type="text" id="accreditamenti_congressibundle_anagraficatype_nome" name="accreditamenti_congressibundle_anagraficatype[nome]" required="required" maxlength="255" /></div><div><label for="accreditamenti_congressibundle_anagraficatype_cognome" class=" required">Cognome</label><input type="text" id="accreditamenti_congressibundle_anagraficatype_cognome" name="accreditamenti_congressibundle_anagraficatype[cognome]" required="required" maxlength="255" /></div><div><label class=" required">Data nascita</label><div id="accreditamenti_congressibundle_anagraficatype_data_nascita"><select id="accreditamenti_congressibundle_anagraficatype_data_nascita_year" name="accreditamenti_congressibundle_anagraficatype[data_nascita][year]" required="required"><option value="2007">2007</option><option value="2008">2008</option><option value="2009">2009</option><option value="2010">2010</option><option value="2011">2011</option><option value="2012">2012</option><option value="2013">2013</option><option value="2014">2014</option><option value="2015">2015</option><option value="2016">2016</option><option value="2017">2017</option></select>-<select id="accreditamenti_congressibundle_anagraficatype_data_nascita_month" name="accreditamenti_congressibundle_anagraficatype[data_nascita][month]" required="required"><option value="1">01</option><option value="2">02</option><option value="3">03</option><option value="4">04</option><option value="5">05</option><option value="6">06</option><option value="7">07</option><option value="8">08</option><option value="9">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select>-<select id="accreditamenti_congressibundle_anagraficatype_data_nascita_day" name="accreditamenti_congressibundle_anagraficatype[data_nascita][day]" required="required"><option value="1">01</option><option value="2">02</option><option value="3">03</option><option value="4">04</option><option value="5">05</option><option value="6">06</option><option value="7">07</option><option value="8">08</option><option value="9">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option></select></div></div><div><label for="accreditamenti_congressibundle_anagraficatype_luogo_nascita" class=" required">Luogo nascita</label><input type="text" id="accreditamenti_congressibundle_anagraficatype_luogo_nascita" name="accreditamenti_congressibundle_anagraficatype[luogo_nascita]" required="required" maxlength="255" /></div><div><label for="accreditamenti_congressibundle_anagraficatype_codice_fiscale" class=" required">Codice fiscale</label><input type="text" id="accreditamenti_congressibundle_anagraficatype_codice_fiscale" name="accreditamenti_congressibundle_anagraficatype[codice_fiscale]" required="required" maxlength="255" /></div><div><label for="accreditamenti_congressibundle_anagraficatype_ordine_numero" class=" required">Ordine numero</label><input type="text" id="accreditamenti_congressibundle_anagraficatype_ordine_numero" name="accreditamenti_congressibundle_anagraficatype[ordine_numero]" required="required" maxlength="255" /></div><div><label for="accreditamenti_congressibundle_anagraficatype_ordine_citta" class=" required">Ordine citta</label><input type="text" id="accreditamenti_congressibundle_anagraficatype_ordine_citta" name="accreditamenti_congressibundle_anagraficatype[ordine_citta]" required="required" maxlength="255" /></div><div><label for="accreditamenti_congressibundle_anagraficatype_indirizzo" class=" required">Indirizzo</label><input type="text" id="accreditamenti_congressibundle_anagraficatype_indirizzo" name="accreditamenti_congressibundle_anagraficatype[indirizzo]" required="required" maxlength="255" /></div><div><label for="accreditamenti_congressibundle_anagraficatype_indirizzo_cap" class=" required">Indirizzo cap</label><input type="text" id="accreditamenti_congressibundle_anagraficatype_indirizzo_cap" name="accreditamenti_congressibundle_anagraficatype[indirizzo_cap]" required="required" maxlength="255" /></div><div><label for="accreditamenti_congressibundle_anagraficatype_indirizzo_citta" class=" required">Indirizzo citta</label><input type="text" id="accreditamenti_congressibundle_anagraficatype_indirizzo_citta" name="accreditamenti_congressibundle_anagraficatype[indirizzo_citta]" required="required" maxlength="255" /></div><div><label for="accreditamenti_congressibundle_anagraficatype_indirizzo_provincia" class=" required">Indirizzo provincia</label><input type="text" id="accreditamenti_congressibundle_anagraficatype_indirizzo_provincia" name="accreditamenti_congressibundle_anagraficatype[indirizzo_provincia]" required="required" maxlength="255" /></div><div><label for="accreditamenti_congressibundle_anagraficatype_telefono" class=" required">Telefono</label><input type="text" id="accreditamenti_congressibundle_anagraficatype_telefono" name="accreditamenti_congressibundle_anagraficatype[telefono]" required="required" maxlength="255" /></div><div><label for="accreditamenti_congressibundle_anagraficatype_cellulare" class=" required">Cellulare</label><input type="text" id="accreditamenti_congressibundle_anagraficatype_cellulare" name="accreditamenti_congressibundle_anagraficatype[cellulare]" required="required" maxlength="255" /></div><div><label for="accreditamenti_congressibundle_anagraficatype_email" class=" required">Email</label><input type="text" id="accreditamenti_congressibundle_anagraficatype_email" name="accreditamenti_congressibundle_anagraficatype[email]" required="required" maxlength="255" /></div><div><label for="accreditamenti_congressibundle_anagraficatype_professione" class=" required">Professione</label><select id="accreditamenti_congressibundle_anagraficatype_professione" name="accreditamenti_congressibundle_anagraficatype[professione]" required="required"><option value="1">MEDICO GHIRURGO</option><option value="2">ODONTOIATRA</option><option value="3">FARMACISTA</option><option value="14">INFERMIERE</option><option value="15">INFERMIERE PEDIATRICO</option><option value="18">OSTETRICA/O</option></select></div><div><label for="accreditamenti_congressibundle_anagraficatype_disciplina" class=" required">Disciplina</label><select id="accreditamenti_congressibundle_anagraficatype_disciplina" name="accreditamenti_congressibundle_anagraficatype[disciplina]" required="required"><option value="42">ANATOMIA PATOLOGICA</option><option value="32">CHIRURGIA PEDIATRICA</option><option value="5">EMATOLOGIA</option><option value="40">OTORINOLARINGOIATRIA</option><option value="24">PEDIATRIA</option><option value="60">PEDIATRIA (PEDIATRI DI LIBERA SCELTA)</option><option value="89">OSTETRICA/O</option></select></div><div><label for="accreditamenti_congressibundle_anagraficatype_qualifica" class=" required">Qualifica</label><select id="accreditamenti_congressibundle_anagraficatype_qualifica" name="accreditamenti_congressibundle_anagraficatype[qualifica]" required="required"><option value="D">Dipendente</option><option value="L">Libero Professionista</option><option value="C">Convenzionato</option></select></div><div><label for="accreditamenti_congressibundle_anagraficatype_sponsor" class=" required">Sponsor</label><input type="checkbox" id="accreditamenti_congressibundle_anagraficatype_sponsor" name="accreditamenti_congressibundle_anagraficatype[sponsor]" required="required" value="1" /></div><div><label for="accreditamenti_congressibundle_anagraficatype_sponsor_azienda" class=" required">Sponsor azienda</label><input type="text" id="accreditamenti_congressibundle_anagraficatype_sponsor_azienda" name="accreditamenti_congressibundle_anagraficatype[sponsor_azienda]" required="required" maxlength="255" /></div><div><label for="accreditamenti_congressibundle_anagraficatype_privacy" class=" required">Privacy</label><input type="checkbox" id="accreditamenti_congressibundle_anagraficatype_privacy" name="accreditamenti_congressibundle_anagraficatype[privacy]" required="required" value="1" /></div></div>
+    <p>
+        <button type="submit">Create</button>
+    </p>
+</form>
+
+<ul class="record_actions">
+    <li>
+        <a href="/anagrafica/">
+            Back to the list
+        </a>
+    </li>
+</ul>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <!-- Some code -->
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script type="text/javascript" src="/bundles/ruiantwitterbootstrap/js/bootstrapv2.js"></script>
+
+    </body>
+</html>
