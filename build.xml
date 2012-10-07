@@ -24,7 +24,7 @@
     </target>
     
     <target name="vendors">
-        <exec command="./bin/vendors update" />
+        <exec command="./bin/vendors install" />
     </target>
     
     <target name="migrations">
@@ -35,6 +35,23 @@
         <exec command="php app/console twitter-bootstrap:clear" />
         <exec command="php app/console twitter-bootstrap:compile v2" />
         <exec command="php app/console assets:install web/" />
+    </target>
+
+    <target name="install">
+        <input propertyname="database_host" defaultValue="localhost" promptChar="?">The database host</input>
+        <input propertyname="database_name" defaultValue="accreditamenti" promptChar="?">The database name</input>
+        <input propertyname="database_user" defaultValue="root" promptChar="?">The database user</input>
+        <input propertyname="database_password" defaultValue="root" promptChar="?">The database password</input>
+        <copy file="app/config/parameters.ini.dist" tofile="app/config/parameters.ini" overwrite="false">
+            <filterchain>
+                <replacetokens begintoken="[[" endtoken="]]">
+                    <token key="database_host" value="${database_host}" />
+                    <token key="database_name" value="${database_name}" />
+                    <token key="database_user" value="${database_user}" />
+                    <token key="database_password" value="${database_password}" />
+                </replacetokens>
+            </filterchain>
+        </copy>
     </target>
 
     <target name="help">
@@ -49,6 +66,7 @@
             $ phing vendors     - Installa i vendors.
             $ phing buongiorno  - Imposta tutto per partire.
             $ phing migrations  - Esegue tutte le migrations.
+            $ phing install     - Installa Accreditamenti.
         </echo>
     </target>
     

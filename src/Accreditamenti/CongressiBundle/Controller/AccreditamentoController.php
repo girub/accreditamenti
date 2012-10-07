@@ -442,11 +442,11 @@ class AccreditamentoController extends Controller {
                     $idRispostaGiusta = $risposta->getId();
             }
 
-//            echo "Domanda " . $domanda->getId() . " ha come risposta giusta risposta " . $idRispostaGiusta . "<br>";
+            echo "Domanda " . $domanda->getId() . " ha come risposta giusta risposta " . $idRispostaGiusta . "<br>";
         }
 
 
-        echo "<pre>";
+        //echo "<pre>";
 //        var_dump($arrayDomandeQuestionario);
 
         die;
