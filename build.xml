@@ -24,7 +24,7 @@
     </target>
     
     <target name="vendors">
-        <exec command="./bin/vendors update" />
+        <exec command="./bin/vendors install" />
     </target>
     
     <target name="migrations">
