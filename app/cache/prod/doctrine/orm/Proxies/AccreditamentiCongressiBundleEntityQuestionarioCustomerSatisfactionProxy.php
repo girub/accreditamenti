@@ -123,7 +123,7 @@ class AccreditamentiCongressiBundleEntityQuestionarioCustomerSatisfactionProxy e
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'data_inizio_compilazione', 'data_fine_compilazione', 'accreditamento_id', 'accreditamento', 'domanda', 'descrizione');
+        return array('__isInitialized__', 'id', 'data_inizio_compilazione', 'data_fine_compilazione', 'accreditamento_id', 'domanda');
     }
 
     public function __clone()

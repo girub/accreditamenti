@@ -147,7 +147,7 @@ class AccreditamentiCongressiBundleEntityQuestionarioEcmProxy extends \Accredita
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'percentuale_risposte_esatte', 'numero_tentativi_compilazione', 'id', 'data_inizio_compilazione', 'data_fine_compilazione', 'accreditamento_id', 'accreditamento', 'domanda', 'descrizione');
+        return array('__isInitialized__', 'percentuale_risposte_esatte', 'numero_tentativi_compilazione', 'id', 'data_inizio_compilazione', 'data_fine_compilazione', 'accreditamento_id', 'domanda');
     }
 
     public function __clone()

@@ -117,11 +117,11 @@
         <parameter>88531E</parameter>
       </parameter>
       <parameter key="fonts" type="collection">
-        <parameter>akbar.ttf</parameter>
-        <parameter>brushcut.ttf</parameter>
-        <parameter>molten.ttf</parameter>
-        <parameter>planetbe.ttf</parameter>
-        <parameter>whoobub.ttf</parameter>
+        <parameter>/var/www/accreditamenti/app/../web/bundles/genemuform/fonts/akbar.ttf</parameter>
+        <parameter>/var/www/accreditamenti/app/../web/bundles/genemuform/fonts/brushcut.ttf</parameter>
+        <parameter>/var/www/accreditamenti/app/../web/bundles/genemuform/fonts/molten.ttf</parameter>
+        <parameter>/var/www/accreditamenti/app/../web/bundles/genemuform/fonts/planetbe.ttf</parameter>
+        <parameter>/var/www/accreditamenti/app/../web/bundles/genemuform/fonts/whoobub.ttf</parameter>
       </parameter>
       <parameter key="background_color">DDDDDD</parameter>
       <parameter key="border_color">000000</parameter>
@@ -667,11 +667,11 @@
           <argument>88531E</argument>
         </argument>
         <argument key="fonts" type="collection">
-          <argument>akbar.ttf</argument>
-          <argument>brushcut.ttf</argument>
-          <argument>molten.ttf</argument>
-          <argument>planetbe.ttf</argument>
-          <argument>whoobub.ttf</argument>
+          <argument>/var/www/accreditamenti/app/../web/bundles/genemuform/fonts/akbar.ttf</argument>
+          <argument>/var/www/accreditamenti/app/../web/bundles/genemuform/fonts/brushcut.ttf</argument>
+          <argument>/var/www/accreditamenti/app/../web/bundles/genemuform/fonts/molten.ttf</argument>
+          <argument>/var/www/accreditamenti/app/../web/bundles/genemuform/fonts/planetbe.ttf</argument>
+          <argument>/var/www/accreditamenti/app/../web/bundles/genemuform/fonts/whoobub.ttf</argument>
         </argument>
         <argument key="background_color">DDDDDD</argument>
         <argument key="border_color">000000</argument>
@@ -2782,7 +2782,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>5071c0d390891</argument>
+            <argument>5071c5baae475</argument>
           </service>
         </argument>
       </argument>
@@ -3048,7 +3048,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>5071c0d390891</argument>
+            <argument>5071c5baae475</argument>
             <argument type="service" id="monolog.logger.security"/>
           </service>
         </argument>
