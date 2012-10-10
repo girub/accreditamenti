@@ -1,6 +1,6 @@
 <?php
 
-/* FOSUserBundle::layout.html.twig */
+/* AccreditamentiUserBundle::layout.html.twig */
 class __TwigTemplate_9f30e892c98fd2d710083127c1f0bb8d extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
@@ -36,7 +36,7 @@ class __TwigTemplate_9f30e892c98fd2d710083127c1f0bb8d extends Twig_Template
 
     public function getTemplateName()
     {
-        return "FOSUserBundle::layout.html.twig";
+        return "AccreditamentiUserBundle::layout.html.twig";
     }
 
     public function isTraitable()
@@ -46,6 +46,6 @@ class __TwigTemplate_9f30e892c98fd2d710083127c1f0bb8d extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  76 => 26,  70 => 23,  61 => 17,  54 => 13,  50 => 12,  44 => 9,  40 => 8,  37 => 7,  31 => 5,  29 => 4,  26 => 3,);
+        return array (  29 => 4,  26 => 3,);
     }
 }

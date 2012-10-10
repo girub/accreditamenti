@@ -2,7 +2,7 @@
 
 <project name="accreditamenti" default="help">
     
-    <target name="buongiorno" depends="vendors,bootstrap,docs,cache:clear,migrations,fixtures">
+    <target name="buongiorno" depends="bootstrap,cache:clear,migrations">
         <echo msg="Buon lavoro =)!!!" />
         <echo msg="Adesso lancia 'sh behat' per lanciare i tests" />
     </target>
@@ -11,20 +11,8 @@
         <exec command="rst2pdf app/Resources/doc/index.rst -o app/Resources/doc/docs.pdf" />
     </target>
     
-    <target name="test">
-        <exec command="sh behat" />
-    </target>
-    
-    <target name="fixtures">
-        <exec command="./app/console doctrine:fixtures:load" />
-    </target>
-    
     <target name="cache:clear">
         <exec command="./app/console cache:clear" />
-    </target>
-    
-    <target name="vendors">
-        <exec command="./bin/vendors install" />
     </target>
     
     <target name="migrations">
@@ -37,7 +25,7 @@
         <exec command="php app/console assets:install web/" />
     </target>
 
-    <target name="install">
+    <target name="install" description="Crea il file parameters.ini">
         <input propertyname="database_host" defaultValue="localhost" promptChar="?">The database host</input>
         <input propertyname="database_name" defaultValue="accreditamenti" promptChar="?">The database name</input>
         <input propertyname="database_user" defaultValue="root" promptChar="?">The database user</input>
@@ -59,11 +47,8 @@
             Accreditamenti:
 
             $ phing help        - Lancia questo help.
-            $ phing test        - Lancia i test con behat.
             $ phing docs        - Genera la documentazione.
-            $ phing fixtures    - Caricare dei dati di default.
             $ phing cache:clear - Pulisce la cache.
-            $ phing vendors     - Installa i vendors.
             $ phing buongiorno  - Imposta tutto per partire.
             $ phing migrations  - Esegue tutte le migrations.
             $ phing install     - Installa Accreditamenti.
