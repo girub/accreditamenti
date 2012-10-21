@@ -403,6 +403,24 @@ class AccreditamentoController extends Controller {
         $arrayDiDomande = array();
 
         /* Carico tutte quante le domande */
+        /**
+         * Nota: Doctrine2 non supporta l'order by rand quindi devo per forza
+         * inventarmi un barbatrucco. La mia idea è quella di:
+         * 
+         *  - caricare tutti gli id delle domande in un array
+         *  - disordinare l'array
+         *  - iterare per tutto l'array ricaricando ogni volta le domande
+         * 
+         * PRO:
+         *  funziona
+         * 
+         * CONTRO:
+         *  la pagina fa molte query
+         * 
+         * RI-CONTRO:
+         *  viene caricata una tantum quindi non incide sulle performance
+         *  dell'applicazione.
+         */
         foreach ($domande as $domanda) {
             $arrayDiDomande[] .= $domanda->getId();
         }
@@ -413,7 +431,8 @@ class AccreditamentoController extends Controller {
         /* Costruisco il form con domande ordinate in modo randomizzato */
         foreach ($arrayDiDomande as $domanda) {
 
-            $domanda = $entityManager->getRepository('AccreditamentiCongressiBundle:Domanda')
+            $domanda = $entityManager
+                    ->getRepository('AccreditamentiCongressiBundle:Domanda')
                     ->find((int) $domanda);
 
             $formBuilder->add("domanda_" . ($domanda->getId()) . "", 'entity', array(
