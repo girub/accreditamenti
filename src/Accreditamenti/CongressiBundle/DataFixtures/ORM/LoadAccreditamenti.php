@@ -7,6 +7,7 @@ use Doctrine\Common\DataFixtures\FixtureInterface;
 use Accreditamenti\CongressiBundle\Entity\Accreditamento;
 use Accreditamenti\CongressiBundle\Entity\Congresso;
 use Accreditamenti\CongressiBundle\Entity\Domanda;
+use Accreditamenti\CongressiBundle\Entity\Risposta;
 use Accreditamenti\CongressiBundle\Entity\QuestionarioEcm;
 use Accreditamenti\CongressiBundle\Entity\Iscritti;
 
@@ -59,6 +60,23 @@ class LoadAccreditamenti implements FixtureInterface {
         $questionarioECM->setNumeroTentativiCompilazione(3);
         $manager->persist($questionarioECM);
 
+        $domanda = new Domanda();
+        $domanda->setDescrizione("Questa è la descrizione della domanda");
+        $domanda->setQuestionarioecm($questionarioECM);
+        $manager->persist($domanda);
+        
+        $risposta = new Risposta();
+        $risposta->setDomanda($domanda);
+        $risposta->setDescrizione("Questa risposta è vera");
+        $risposta->setVero(true);
+        $manager->persist($risposta);
+        
+        $risposta = new Risposta();
+        $risposta->setDomanda($domanda);
+        $risposta->setDescrizione("Questa risposta è falsa");
+        $risposta->setVero(false);
+        $manager->persist($risposta);
+        
         $iscritto = new Iscritti();
         $iscritto->setAccreditamento($accreditamentoDellaPigna);
         $iscritto->setCognome('RUBINO');

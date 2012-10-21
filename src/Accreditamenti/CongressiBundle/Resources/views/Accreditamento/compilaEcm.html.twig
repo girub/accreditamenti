@@ -2,9 +2,7 @@
 
 {% block body %}
     <h2>Compila il questionario ECM</h2>
-
-  
-    
+   
     <form action="{{ path('controlla_questionario_ecm', {'accreditamento_id': accreditamento_id,'anagrafica_id': anagrafica_id}) }}" method="post">
         {{form_widget(formDomande)}}
         <button type="submit">invio</button>

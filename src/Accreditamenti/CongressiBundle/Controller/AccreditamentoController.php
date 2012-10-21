@@ -133,18 +133,23 @@ class AccreditamentoController extends Controller {
      */
     public function compilaEcmAction($accreditamento_id, $anagrafica_id) {
 
-        $em = $this->getDoctrine()->getEntityManager();
-        $accreditamento = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($accreditamento_id);
-        $questionarioecm = $accreditamento->getQuestionarioEcm();
+        $em = $this
+                ->getDoctrine()
+                ->getEntityManager();
 
+        $accreditamento = $em
+                ->getRepository('AccreditamentiCongressiBundle:Accreditamento')
+                ->find($accreditamento_id);
 
+        //$questionarioecm = $accreditamento->getQuestionarioEcm();
 
-        $formDomande = $this->createQuestionarioForm($accreditamento);
+        $formDomande = $this
+                ->createQuestionarioForm($accreditamento);
 
         return array(
             'formDomande' => $formDomande,
             'accreditamento_id' => $accreditamento_id,
-            'anagrafica_id' => $anagrafica_id
+            'anagrafica_id' => $anagrafica_id,
         );
     }
 
@@ -420,12 +425,12 @@ class AccreditamentoController extends Controller {
         $questionario = $accreditamento->getQuestionarioEcm();
         $domande = $entityManager->getRepository('AccreditamentiCongressiBundle:Domanda')
                 ->findDomandeDelQuestionario($questionario[0]);
-         
+
 //        $percentuale_risposte_esatte = $questionario->getPercentualeRisposteEsatte();
 //        $numero_tentativi = getNumeroTentativiCompilazione();
-        
-        
-        
+
+
+
         foreach ($domande as $domanda) {
 
             if (!isset($_POST['form']['domanda_' . $domanda->getId()])) {
