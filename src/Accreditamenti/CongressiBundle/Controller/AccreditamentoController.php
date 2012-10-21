@@ -441,11 +441,14 @@ class AccreditamentoController extends Controller {
                 'multiple' => false,
                 'expanded' => true,
                 'query_builder' => function(RispostaRepository $risposta) use ($domanda) {
+                
                     $ordinamento = rand(0, 1) == 0 ? 'ASC' : 'DESC';
+                    
                     $elencoRisposte = $risposta->createQueryBuilder('r')
                             ->where('r.domanda=:domanda')
                             ->setParameter('domanda', $domanda)
                             ->orderBy('r.id', $ordinamento);
+                    
                     return $elencoRisposte;
                 },
             ));
