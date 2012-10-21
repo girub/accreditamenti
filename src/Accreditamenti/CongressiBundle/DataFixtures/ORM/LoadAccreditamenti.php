@@ -66,6 +66,14 @@ class LoadAccreditamenti implements FixtureInterface {
         $iscritti->setCodiceFiscale('RBNGPP74B15E882U');
         $iscritti->setTipologiaIscritto(Iscritti::PARTECIPANTE);
         $manager->persist($iscritti);
+
+        $iscritti = new Iscritti();
+        $iscritti->setAccreditamento($acc);
+        $iscritti->setCognome('GENTILI');
+        $iscritti->setNome('SIMONE');
+        $iscritti->setCodiceFiscale('GNTSMN82P10C573Q');
+        $iscritti->setTipologiaIscritto(Iscritti::PARTECIPANTE);
+        $manager->persist($iscritti);
         
         $manager->flush();
     }
