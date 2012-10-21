@@ -30,9 +30,33 @@
     git=http://github.com/kriswallsmith/assetic.git
     version=v1.0.3
 
+[twig-extensions]
+    git=http://github.com/fabpot/Twig-extensions.git
+    version=feb6d3f10c411e2631997c0a905aa581c80305c1
+
 [metadata]
     git=http://github.com/schmittjoh/metadata.git
     version=1.0.0
+
+[SensioFrameworkExtraBundle]
+    git=http://github.com/sensio/SensioFrameworkExtraBundle.git
+    target=/bundles/Sensio/Bundle/FrameworkExtraBundle
+    version=891359252711c424d5da8cac9fa1e757450a6db2
+
+[JMSSecurityExtraBundle]
+    git=http://github.com/schmittjoh/JMSSecurityExtraBundle.git
+    target=/bundles/JMS/SecurityExtraBundle
+    version=e752f888c51425f71382c056961f10f2be642102
+
+[SensioDistributionBundle]
+    git=http://github.com/sensio/SensioDistributionBundle.git
+    target=/bundles/Sensio/Bundle/DistributionBundle
+    version=41a6c5caed65f02bb09c95a90579f047616471fd
+
+[SensioGeneratorBundle]
+    git=http://github.com/sensio/SensioGeneratorBundle.git
+    target=/bundles/Sensio/Bundle/GeneratorBundle
+    version=c0118ce370f8da20e43051f2dd1ae331a202ab9c
 
 [AsseticBundle]
     git=http://github.com/symfony/AsseticBundle.git
@@ -43,6 +67,10 @@
     git=git://github.com/FriendsOfSymfony/FOSUserBundle.git
     target=bundles/FOS/UserBundle
     version=1.2.0
+
+[doctrine-migrations]
+    git=git://github.com/doctrine/migrations.git
+    version=fe98141b1e460baf5ab52f9139e1ae238101b28b
 
 [gherkin]
     git=git://github.com/Behat/Gherkin.git
@@ -69,10 +97,29 @@
     target=/behat/mink
     version=v1.3.3
 
+[MinkBundle]
+    git=git://github.com/Behat/MinkBundle.git
+    target=/bundles/Behat/MinkBundle
+    version=144c8cbc08e386e70029edae7a73611079e2dca1
+
+[doctrine-fixtures]
+    git=http://github.com/doctrine/data-fixtures.git
+    version=64538135ef2b17a296e26f88a04c7ce2e4551459
+
 [DoctrineMigrationsBundle]
     git=http://github.com/doctrine/DoctrineMigrationsBundle.git
     target=/bundles/Symfony/Bundle/DoctrineMigrationsBundle
     version=origin/2.0
+
+[DoctrineFixturesBundle]
+    git=http://github.com/doctrine/DoctrineFixturesBundle.git
+    target=/bundles/Symfony/Bundle/DoctrineFixturesBundle
+    version=a66be2f077f3a4e5c3801b356b42b8782f1abbd6
+
+[RuianTwitterBootstrapBundle]
+    git=git://github.com/ruian/TwitterBootstrapBundle.git
+    version=1594b84da7450f5740eb225bf3bde0e6792a0800
+    target=/bundles/Ruian/TwitterBootstrapBundle
 
 [TwitterBootstrap1]
     git=git://github.com/twitter/bootstrap.git
@@ -84,59 +131,12 @@
     target=/twitter/bootstrap/v2/
     version=v2.0.0
 
-[GenemuFormBundle]
-    git=git://github.com/genemu/GenemuFormBundle.git
-    target=bundles/Genemu/Bundle/FormBundle
-    version=2.0
-
-[DoctrineFixturesBundle]
-    git=http://github.com/doctrine/DoctrineFixturesBundle.git
-    target=/bundles/Symfony/Bundle/DoctrineFixturesBundle
-    version=a66be2f077f3a4e5c3801b356b42b8782f1abbd6
-
 [lessphp]
     git=git://github.com/leafo/lessphp.git
     target=/lessphp/
     version=85487a83381ae292e8bba1c699eb4af31d87eb9e
 
-[MinkBundle]
-    git=git://github.com/Behat/MinkBundle.git
-    target=/bundles/Behat/MinkBundle
-    version=144c8cbc08e386e70029edae7a73611079e2dca1
-
-[doctrine-fixtures]
-    git=http://github.com/doctrine/data-fixtures.git
-    version=64538135ef2b17a296e26f88a04c7ce2e4551459
-
-[RuianTwitterBootstrapBundle]
-    git=git://github.com/ruian/TwitterBootstrapBundle.git
-    version=1594b84da7450f5740eb225bf3bde0e6792a0800
-    target=/bundles/Ruian/TwitterBootstrapBundle
-
-[SensioFrameworkExtraBundle]
-    git=http://github.com/sensio/SensioFrameworkExtraBundle.git
-    target=/bundles/Sensio/Bundle/FrameworkExtraBundle
-    version=891359252711c424d5da8cac9fa1e757450a6db2
-
-[twig-extensions]
-    git=http://github.com/fabpot/Twig-extensions.git
-    version=feb6d3f10c411e2631997c0a905aa581c80305c1
-
-[JMSSecurityExtraBundle]
-    git=http://github.com/schmittjoh/JMSSecurityExtraBundle.git
-    target=/bundles/JMS/SecurityExtraBundle
-    version=e752f888c51425f71382c056961f10f2be642102
-
-[SensioDistributionBundle]
-    git=http://github.com/sensio/SensioDistributionBundle.git
-    target=/bundles/Sensio/Bundle/DistributionBundle
-    version=41a6c5caed65f02bb09c95a90579f047616471fd
-
-[SensioGeneratorBundle]
-    git=http://github.com/sensio/SensioGeneratorBundle.git
-    target=/bundles/Sensio/Bundle/GeneratorBundle
-    version=c0118ce370f8da20e43051f2dd1ae331a202ab9c
-
-[doctrine-migrations]
-    git=git://github.com/doctrine/migrations.git
-    version=fe98141b1e460baf5ab52f9139e1ae238101b28b
+[GenemuFormBundle]
+    git=git://github.com/genemu/GenemuFormBundle.git
+    target=bundles/Genemu/Bundle/FormBundle
+    version=1ec6316ef78c65747bc767210c98daa5b50ae30f
