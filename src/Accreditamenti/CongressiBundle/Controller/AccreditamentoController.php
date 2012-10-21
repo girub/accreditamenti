@@ -133,18 +133,20 @@ class AccreditamentoController extends Controller {
      */
     public function compilaEcmAction($accreditamento_id, $anagrafica_id) {
 
-        $em = $this->getDoctrine()->getEntityManager();
-        $accreditamento = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($accreditamento_id);
-        $questionarioecm = $accreditamento->getQuestionarioEcm();
+        $entityManager = $this->getDoctrine()
+                ->getEntityManager();
 
+        $accreditamento = $entityManager
+                ->getRepository('AccreditamentiCongressiBundle:Accreditamento')
+                ->find($accreditamento_id);
 
-
-        $formDomande = $this->createQuestionarioForm($accreditamento);
+        $formDomande = $this
+                ->createQuestionarioForm($accreditamento);
 
         return array(
             'formDomande' => $formDomande,
             'accreditamento_id' => $accreditamento_id,
-            'anagrafica_id' => $anagrafica_id
+            'anagrafica_id' => $anagrafica_id,
         );
     }
 
@@ -375,36 +377,83 @@ class AccreditamentoController extends Controller {
         ;
     }
 
+    /**
+     * Questo metodo crea il form per un questionario a partire dal suo accretiamento.
+     * 
+     * @param \Accreditamenti\CongressiBundle\Entity\Accreditamento $accreditamento
+     * @return form
+     * @throws type
+     */
     private function createQuestionarioForm(Accreditamento $accreditamento) {
 
-        $em = $this->getDoctrine()->getEntityManager();
+        $entityManager = $this->getDoctrine()
+                ->getEntityManager();
 
         $questionario = $accreditamento->getQuestionarioEcm();
 
         if (!$questionario[0]) {
-            throw $this->createNotFoundException('Unable to find QuestionarioEcm entity -- crea prima un questionario ecm');
+            throw $this->createNotFoundException('Unable to find QuestionarioEcm entity');
         }
 
-        $domande = $em->getRepository('AccreditamentiCongressiBundle:Domanda')
+        $domande = $entityManager->getRepository('AccreditamentiCongressiBundle:Domanda')
                 ->findDomandeDelQuestionario($questionario[0]);
 
         $formBuilder = $this->createFormBuilder();
 
+        $arrayDiDomande = array();
+
+        /* Carico tutte quante le domande */
+        /**
+         * Nota: Doctrine2 non supporta l'order by rand quindi devo per forza
+         * inventarmi un barbatrucco. La mia idea è quella di:
+         * 
+         *  - caricare tutti gli id delle domande in un array
+         *  - disordinare l'array
+         *  - iterare per tutto l'array ricaricando ogni volta le domande
+         * 
+         * PRO:
+         *  funziona
+         * 
+         * CONTRO:
+         *  la pagina fa molte query
+         * 
+         * RI-CONTRO:
+         *  viene caricata una tantum quindi non incide sulle performance
+         *  dell'applicazione.
+         */
         foreach ($domande as $domanda) {
+            $arrayDiDomande[] .= $domanda->getId();
+        }
+
+        /* Modifico l'ordine dell'array */
+        shuffle($arrayDiDomande);
+
+        /* Costruisco il form con domande ordinate in modo randomizzato */
+        foreach ($arrayDiDomande as $domanda) {
+
+            $domanda = $entityManager
+                    ->getRepository('AccreditamentiCongressiBundle:Domanda')
+                    ->find((int) $domanda);
+
             $formBuilder->add("domanda_" . ($domanda->getId()) . "", 'entity', array(
                 'label' => $domanda->getDescrizione(),
                 'class' => 'AccreditamentiCongressiBundle:Risposta',
                 'multiple' => false,
                 'expanded' => true,
                 'query_builder' => function(RispostaRepository $risposta) use ($domanda) {
-                    return $risposta->createQueryBuilder('r')
-                                    ->where('r.domanda=:domanda')
-                                    ->setParameter('domanda', $domanda);
+                    $ordinamento = rand(0, 1) == 0 ? 'ASC' : 'DESC';
+                    $elencoRisposte = $risposta->createQueryBuilder('r')
+                            ->where('r.domanda=:domanda')
+                            ->setParameter('domanda', $domanda)
+                            ->orderBy('r.id', $ordinamento);
+                    return $elencoRisposte;
                 },
             ));
         }
 
-        return $formBuilder->getForm()->createView();
+
+        return $formBuilder->getForm()
+                        ->createView();
     }
 
     /**
@@ -415,17 +464,23 @@ class AccreditamentoController extends Controller {
      */
     public function controllaQuestionarioEcmAction($accreditamento_id, $anagrafica_id) {
 
-        $entityManager = $this->getDoctrine()->getEntityManager();
-        $accreditamento = $entityManager->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($accreditamento_id);
-        $questionario = $accreditamento->getQuestionarioEcm();
-        $domande = $entityManager->getRepository('AccreditamentiCongressiBundle:Domanda')
+        $entityManager = $this->getDoctrine()
+                ->getEntityManager();
+
+        $accreditamento = $entityManager
+                ->getRepository('AccreditamentiCongressiBundle:Accreditamento')
+                ->find($accreditamento_id);
+
+        $questionario = $accreditamento
+                ->getQuestionarioEcm();
+
+        $domande = $entityManager
+                ->getRepository('AccreditamentiCongressiBundle:Domanda')
                 ->findDomandeDelQuestionario($questionario[0]);
-         
+
 //        $percentuale_risposte_esatte = $questionario->getPercentualeRisposteEsatte();
 //        $numero_tentativi = getNumeroTentativiCompilazione();
-        
-        
-        
+
         foreach ($domande as $domanda) {
 
             if (!isset($_POST['form']['domanda_' . $domanda->getId()])) {

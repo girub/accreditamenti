@@ -15,15 +15,6 @@ use Accreditamenti\CongressiBundle\Entity\Domanda;
  * repository methods below.
  */
 class DomandaRepository extends EntityRepository {
-    
-//    public function isAnswerRight(Domanda $domanda, $risposta_id) {
-//        $result = $this->createQueryBuilder('d')
-//                        ->join('d.questionarioecm', 'questionario')
-//                        ->where('d.questionarioecm = :questionario')
-//                        ->setParameter('questionario', $questionario)
-//                        ->getQuery()
-//                        ->getResult();
-//    }
 
     public function findDomandeDelQuestionario(Questionario $questionario) {
         return $this->createQueryBuilder('d')
@@ -42,8 +33,8 @@ class DomandaRepository extends EntityRepository {
                         ->getQuery()
                         ->getResult();
     }
-    
-     public function findDomandeDelQuestionarioValutazione(QuestionarioValutazione $questionario) {
+
+    public function findDomandeDelQuestionarioValutazione(QuestionarioValutazione $questionario) {
         return $this->createQueryBuilder('d')
                         ->join('d.questionarioValutazione', 'questionario')
                         ->where('d.questionarioValutazione = :questionario')
