@@ -50,38 +50,55 @@ class LoadAccreditamenti implements FixtureInterface {
         $questionarioECM->setNumeroTentativiCompilazione(3);
         $manager->persist($questionarioECM);
 
-        $domanda = new Domanda();
-        $domanda->setDescrizione("Questa è la descrizione della domanda");
-        $domanda->setQuestionarioecm($questionarioECM);
-        $manager->persist($domanda);
+        $primaDomanda = new Domanda();
+        $primaDomanda->setDescrizione("Di che colore era il cavallo bianco di Napoleone");
+        $primaDomanda->setQuestionarioecm($questionarioECM);
+        $manager->persist($primaDomanda);
         
-        $risposta = new Risposta();
-        $risposta->setDomanda($domanda);
-        $risposta->setDescrizione("Questa risposta è vera");
-        $risposta->setVero(true);
-        $manager->persist($risposta);
+        $primaRisposta = new Risposta();
+        $primaRisposta->setDomanda($primaDomanda);
+        $primaRisposta->setDescrizione("Bianco");
+        $primaRisposta->setVero(true);
+        $manager->persist($primaRisposta);
         
-        $risposta = new Risposta();
-        $risposta->setDomanda($domanda);
-        $risposta->setDescrizione("Questa risposta è falsa");
-        $risposta->setVero(false);
-        $manager->persist($risposta);
-        
-        $iscritto = new Iscritti();
-        $iscritto->setAccreditamento($accreditamentoDellaPigna);
-        $iscritto->setCognome('RUBINO');
-        $iscritto->setNome('GIUSEPPE');
-        $iscritto->setCodiceFiscale('RBNGPP74B15E882U');
-        $iscritto->setTipologiaIscritto(Iscritti::PARTECIPANTE);
-        $manager->persist($iscritto);
+        $secondaRisposta = new Risposta();
+        $secondaRisposta->setDomanda($primaDomanda);
+        $secondaRisposta->setDescrizione("Verde");
+        $secondaRisposta->setVero(false);
+        $manager->persist($secondaRisposta);
 
-        $iscritto = new Iscritti();
-        $iscritto->setAccreditamento($accreditamentoDellaPigna);
-        $iscritto->setCognome('GENTILI');
-        $iscritto->setNome('SIMONE');
-        $iscritto->setCodiceFiscale('GNTSMN82P10C573Q');
-        $iscritto->setTipologiaIscritto(Iscritti::PARTECIPANTE);
-        $manager->persist($iscritto);
+        $secondaDomanda = new Domanda();
+        $secondaDomanda->setDescrizione("Quanti sono i sette nani");
+        $secondaDomanda->setQuestionarioecm($questionarioECM);
+        $manager->persist($secondaDomanda);
+        
+        $primaRispostaSecondaDomanda = new Risposta();
+        $primaRispostaSecondaDomanda->setDomanda($secondaDomanda);
+        $primaRispostaSecondaDomanda->setDescrizione("Sono 7");
+        $primaRispostaSecondaDomanda->setVero(true);
+        $manager->persist($primaRispostaSecondaDomanda);
+        
+        $secondaRispostaSecondaDomanda = new Risposta();
+        $secondaRispostaSecondaDomanda->setDomanda($secondaDomanda);
+        $secondaRispostaSecondaDomanda->setDescrizione("49");
+        $secondaRispostaSecondaDomanda->setVero(false);
+        $manager->persist($secondaRispostaSecondaDomanda);
+        
+        $primoIscritto = new Iscritti();
+        $primoIscritto->setAccreditamento($accreditamentoDellaPigna);
+        $primoIscritto->setCognome('RUBINO');
+        $primoIscritto->setNome('GIUSEPPE');
+        $primoIscritto->setCodiceFiscale('RBNGPP74B15E882U');
+        $primoIscritto->setTipologiaIscritto(Iscritti::PARTECIPANTE);
+        $manager->persist($primoIscritto);
+
+        $secondoIscritto = new Iscritti();
+        $secondoIscritto->setAccreditamento($accreditamentoDellaPigna);
+        $secondoIscritto->setCognome('GENTILI');
+        $secondoIscritto->setNome('SIMONE');
+        $secondoIscritto->setCodiceFiscale('GNTSMN82P10C573Q');
+        $secondoIscritto->setTipologiaIscritto(Iscritti::PARTECIPANTE);
+        $manager->persist($secondoIscritto);
         
         $manager->flush();
     }

@@ -397,10 +397,25 @@ class AccreditamentoController extends Controller {
 
         $domande = $entityManager->getRepository('AccreditamentiCongressiBundle:Domanda')
                 ->findDomandeDelQuestionario($questionario[0]);
-        
+
         $formBuilder = $this->createFormBuilder();
 
+        $arrayDiDomande = array();
+
+        /* Carico tutte quante le domande */
         foreach ($domande as $domanda) {
+            $arrayDiDomande[] .= $domanda->getId();
+        }
+
+        /* Modifico l'ordine dell'array */
+        shuffle($arrayDiDomande);
+
+        /* Costruisco il form con domande ordinate in modo randomizzato */
+        foreach ($arrayDiDomande as $domanda) {
+
+            $domanda = $entityManager->getRepository('AccreditamentiCongressiBundle:Domanda')
+                    ->find((int) $domanda);
+
             $formBuilder->add("domanda_" . ($domanda->getId()) . "", 'entity', array(
                 'label' => $domanda->getDescrizione(),
                 'class' => 'AccreditamentiCongressiBundle:Risposta',
@@ -414,6 +429,7 @@ class AccreditamentoController extends Controller {
             ));
         }
 
+
         return $formBuilder->getForm()
                         ->createView();
     }
@@ -426,16 +442,22 @@ class AccreditamentoController extends Controller {
      */
     public function controllaQuestionarioEcmAction($accreditamento_id, $anagrafica_id) {
 
-        $entityManager = $this->getDoctrine()->getEntityManager();
-        $accreditamento = $entityManager->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($accreditamento_id);
-        $questionario = $accreditamento->getQuestionarioEcm();
-        $domande = $entityManager->getRepository('AccreditamentiCongressiBundle:Domanda')
+        $entityManager = $this->getDoctrine()
+                ->getEntityManager();
+
+        $accreditamento = $entityManager
+                ->getRepository('AccreditamentiCongressiBundle:Accreditamento')
+                ->find($accreditamento_id);
+
+        $questionario = $accreditamento
+                ->getQuestionarioEcm();
+
+        $domande = $entityManager
+                ->getRepository('AccreditamentiCongressiBundle:Domanda')
                 ->findDomandeDelQuestionario($questionario[0]);
 
 //        $percentuale_risposte_esatte = $questionario->getPercentualeRisposteEsatte();
 //        $numero_tentativi = getNumeroTentativiCompilazione();
-
-
 
         foreach ($domande as $domanda) {
 
