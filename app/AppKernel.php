@@ -10,7 +10,6 @@ class AppKernel extends Kernel
         $bundles = array(
             new Accreditamenti\UserBundle\AccreditamentiUserBundle(),
             new FOS\UserBundle\FOSUserBundle(),
-            new Genemu\Bundle\FormBundle\GenemuFormBundle(),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),

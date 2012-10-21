@@ -1,41 +1,41 @@
 [symfony]
-    git=http://github.com/symfony/symfony.git
-    version=v2.0.14
+    git=git://github.com/symfony/symfony.git
+    version=v2.0.17
 
 [twig]
-    git=http://github.com/fabpot/Twig.git
-    version=v1.7.0
+    git=git://github.com/fabpot/Twig.git
+    version=v1.10.3
 
 [monolog]
-    git=http://github.com/Seldaek/monolog.git
+    git=git://github.com/Seldaek/monolog.git
     version=1.0.2
 
 [doctrine-common]
-    git=http://github.com/doctrine/common.git
+    git=git://github.com/doctrine/common.git
     version=2.1.4
 
 [doctrine-dbal]
-    git=http://github.com/doctrine/dbal.git
+    git=git://github.com/doctrine/dbal.git
     version=2.1.6
 
 [doctrine]
-    git=http://github.com/doctrine/doctrine2.git
+    git=git://github.com/doctrine/doctrine2.git
     version=2.1.6
 
 [swiftmailer]
-    git=http://github.com/swiftmailer/swiftmailer.git
+    git=git://github.com/swiftmailer/swiftmailer.git
     version=v4.1.7
 
 [assetic]
-    git=http://github.com/kriswallsmith/assetic.git
+    git=git://github.com/kriswallsmith/assetic.git
     version=v1.0.3
 
 [metadata]
-    git=http://github.com/schmittjoh/metadata.git
+    git=git://github.com/schmittjoh/metadata.git
     version=1.0.0
 
 [AsseticBundle]
-    git=http://github.com/symfony/AsseticBundle.git
+    git=git://github.com/symfony/AsseticBundle.git
     target=/bundles/Symfony/Bundle/AsseticBundle
     version=v1.0.1
 
@@ -70,7 +70,7 @@
     version=v1.3.3
 
 [DoctrineMigrationsBundle]
-    git=http://github.com/doctrine/DoctrineMigrationsBundle.git
+    git=git://github.com/doctrine/DoctrineMigrationsBundle.git
     target=/bundles/Symfony/Bundle/DoctrineMigrationsBundle
     version=origin/2.0
 
@@ -84,15 +84,10 @@
     target=/twitter/bootstrap/v2/
     version=v2.0.0
 
-[GenemuFormBundle]
-    git=git://github.com/genemu/GenemuFormBundle.git
-    target=bundles/Genemu/Bundle/FormBundle
-    version=2.0
-
 [DoctrineFixturesBundle]
-    git=http://github.com/doctrine/DoctrineFixturesBundle.git
+    git=git://github.com/doctrine/DoctrineFixturesBundle.git
     target=/bundles/Symfony/Bundle/DoctrineFixturesBundle
-    version=a66be2f077f3a4e5c3801b356b42b8782f1abbd6
+    version=v2.0.0
 
 [lessphp]
     git=git://github.com/leafo/lessphp.git
@@ -105,7 +100,7 @@
     version=144c8cbc08e386e70029edae7a73611079e2dca1
 
 [doctrine-fixtures]
-    git=http://github.com/doctrine/data-fixtures.git
+    git=git://github.com/doctrine/data-fixtures.git
     version=64538135ef2b17a296e26f88a04c7ce2e4551459
 
 [RuianTwitterBootstrapBundle]
@@ -114,29 +109,29 @@
     target=/bundles/Ruian/TwitterBootstrapBundle
 
 [SensioFrameworkExtraBundle]
-    git=http://github.com/sensio/SensioFrameworkExtraBundle.git
+    git=git://github.com/sensio/SensioFrameworkExtraBundle.git
     target=/bundles/Sensio/Bundle/FrameworkExtraBundle
     version=891359252711c424d5da8cac9fa1e757450a6db2
 
 [twig-extensions]
-    git=http://github.com/fabpot/Twig-extensions.git
-    version=feb6d3f10c411e2631997c0a905aa581c80305c1
+    git=git://github.com/fabpot/Twig-extensions.git
+    version=1.0.0-alpha
 
 [JMSSecurityExtraBundle]
-    git=http://github.com/schmittjoh/JMSSecurityExtraBundle.git
+    git=git://github.com/schmittjoh/JMSSecurityExtraBundle.git
     target=/bundles/JMS/SecurityExtraBundle
-    version=e752f888c51425f71382c056961f10f2be642102
+    version=1.0.0
 
 [SensioDistributionBundle]
-    git=http://github.com/sensio/SensioDistributionBundle.git
+    git=git://github.com/sensio/SensioDistributionBundle.git
     target=/bundles/Sensio/Bundle/DistributionBundle
-    version=41a6c5caed65f02bb09c95a90579f047616471fd
+    version=v2.0.17
 
 [SensioGeneratorBundle]
-    git=http://github.com/sensio/SensioGeneratorBundle.git
+    git=git://github.com/sensio/SensioGeneratorBundle.git
     target=/bundles/Sensio/Bundle/GeneratorBundle
-    version=c0118ce370f8da20e43051f2dd1ae331a202ab9c
+    version=v2.0.17
 
 [doctrine-migrations]
     git=git://github.com/doctrine/migrations.git
-    version=fe98141b1e460baf5ab52f9139e1ae238101b28b
+    version=v1.0-ALPHA1
