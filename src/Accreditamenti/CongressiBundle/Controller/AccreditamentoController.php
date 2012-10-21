@@ -133,15 +133,12 @@ class AccreditamentoController extends Controller {
      */
     public function compilaEcmAction($accreditamento_id, $anagrafica_id) {
 
-        $em = $this
-                ->getDoctrine()
+        $entityManager = $this->getDoctrine()
                 ->getEntityManager();
 
-        $accreditamento = $em
+        $accreditamento = $entityManager
                 ->getRepository('AccreditamentiCongressiBundle:Accreditamento')
                 ->find($accreditamento_id);
-
-        //$questionarioecm = $accreditamento->getQuestionarioEcm();
 
         $formDomande = $this
                 ->createQuestionarioForm($accreditamento);
@@ -380,19 +377,27 @@ class AccreditamentoController extends Controller {
         ;
     }
 
+    /**
+     * Questo metodo crea il form per un questionario a partire dal suo accretiamento.
+     * 
+     * @param \Accreditamenti\CongressiBundle\Entity\Accreditamento $accreditamento
+     * @return form
+     * @throws type
+     */
     private function createQuestionarioForm(Accreditamento $accreditamento) {
 
-        $em = $this->getDoctrine()->getEntityManager();
+        $entityManager = $this->getDoctrine()
+                ->getEntityManager();
 
         $questionario = $accreditamento->getQuestionarioEcm();
 
         if (!$questionario[0]) {
-            throw $this->createNotFoundException('Unable to find QuestionarioEcm entity -- crea prima un questionario ecm');
+            throw $this->createNotFoundException('Unable to find QuestionarioEcm entity');
         }
 
-        $domande = $em->getRepository('AccreditamentiCongressiBundle:Domanda')
+        $domande = $entityManager->getRepository('AccreditamentiCongressiBundle:Domanda')
                 ->findDomandeDelQuestionario($questionario[0]);
-
+        
         $formBuilder = $this->createFormBuilder();
 
         foreach ($domande as $domanda) {
@@ -409,7 +414,8 @@ class AccreditamentoController extends Controller {
             ));
         }
 
-        return $formBuilder->getForm()->createView();
+        return $formBuilder->getForm()
+                        ->createView();
     }
 
     /**

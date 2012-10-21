@@ -50,16 +50,6 @@ class LoadAccreditamenti implements FixtureInterface {
         $questionarioECM->setNumeroTentativiCompilazione(3);
         $manager->persist($questionarioECM);
 
-        $questionarioECM = new QuestionarioEcm();
-        $questionarioECM->setAccreditamento($accreditamentoDellaPigna);
-        $questionarioECM->setAccreditamentoId($accreditamentoDellaPigna->getId());
-        $questionarioECM->setDescrizione('Descrizione del secondo questionario ECM');
-        $questionarioECM->setDataInizioCompilazione(new \DateTime);
-        $questionarioECM->setDataFineCompilazione(new \DateTime);
-        $questionarioECM->setPercentualeRisposteEsatte(33);
-        $questionarioECM->setNumeroTentativiCompilazione(3);
-        $manager->persist($questionarioECM);
-
         $domanda = new Domanda();
         $domanda->setDescrizione("Questa è la descrizione della domanda");
         $domanda->setQuestionarioecm($questionarioECM);
