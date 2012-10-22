@@ -441,14 +441,14 @@ class AccreditamentoController extends Controller {
                 'multiple' => false,
                 'expanded' => true,
                 'query_builder' => function(RispostaRepository $risposta) use ($domanda) {
-                
+
                     $ordinamento = rand(0, 1) == 0 ? 'ASC' : 'DESC';
-                    
+
                     $elencoRisposte = $risposta->createQueryBuilder('r')
                             ->where('r.domanda=:domanda')
                             ->setParameter('domanda', $domanda)
                             ->orderBy('r.id', $ordinamento);
-                    
+
                     return $elencoRisposte;
                 },
             ));
@@ -481,9 +481,6 @@ class AccreditamentoController extends Controller {
                 ->getRepository('AccreditamentiCongressiBundle:Domanda')
                 ->findDomandeDelQuestionario($questionario[0]);
 
-//        $percentuale_risposte_esatte = $questionario->getPercentualeRisposteEsatte();
-//        $numero_tentativi = getNumeroTentativiCompilazione();
-
         foreach ($domande as $domanda) {
 
             if (!isset($_POST['form']['domanda_' . $domanda->getId()])) {
@@ -500,19 +497,48 @@ class AccreditamentoController extends Controller {
                     $idRispostaGiusta = $risposta->getId();
             }
 
-            echo "Domanda " . $domanda->getId() . " ha come risposta giusta risposta " . $idRispostaGiusta . "<br>";
+           
+
+            $idRispostaRicevuta = $_POST['form']['domanda_' . $domanda->getId()];
+
+            
+            echo "Domanda " . $domanda->getId() . " ha come risposta giusta risposta " . $idRispostaGiusta . " ----- risposta Ricevuta: " .$idRispostaRicevuta . "<br>";
+            
+            
+            $risposteUtenti = new \Accreditamenti\CongressiBundle\Entity\RisposteUtentiQuestionarioEcm;
+            $risposteUtenti->setAnagraficaId($anagrafica_id);
+            $risposteUtenti->setRispostaId($idRispostaRicevuta);
+            $entityManager->persist($risposteUtenti);
         }
+        //effettuo salvataggio risposte ecm 
+        $entityManager->flush();
 
+        
+        //faccio un redirect su compila_valutazione (view che conterrà il questionario di valutazione)
+        return $this->redirect($this->generateUrl('compila_valutazione', array(
+                                    'accreditamento_id' => $accreditamento_id,
+                                    'anagrafica_id' => $anagrafica_id
+                                )));
+        
+        
+    }
+    
+    
+    
+    /**
+     * Pagina dove compilo questionario di valutazione.
+     *
+     * @Route("/{accreditamento_id}/{anagrafica_id}/compila/valutazione", name="compila_valutazione")
+     * @Template()
+     */
+    public function compilaValutazioneAction($accreditamento_id, $anagrafica_id) {
 
-        //echo "<pre>";
-//        var_dump($arrayDomandeQuestionario);
-
-        die;
-
-
-
+   
 
         return array();
     }
+    
+    
+    
 
 }
