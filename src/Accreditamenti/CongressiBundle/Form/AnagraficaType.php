@@ -32,7 +32,7 @@ class AnagraficaType extends AbstractType {
                 ->add('ordine_numero')
                 ->add('ordine_citta')
                 ->add('indirizzo_via')
-                ->add('indirizzo_via')
+                ->add('indirizzo_cap')
                 ->add('indirizzo_numero_civico')
                 ->add('indirizzo_citta')
                 ->add('indirizzo_provincia')
