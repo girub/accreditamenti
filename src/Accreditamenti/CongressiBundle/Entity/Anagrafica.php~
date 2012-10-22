@@ -908,24 +908,4 @@ class Anagrafica {
     {
         return $this->iscritto_in_modo_autonomo;
     }
-
-    /**
-     * Set indirizzo_numero_civico
-     *
-     * @param string $indirizzoNumeroCivico
-     */
-    public function setIndirizzoNumeroCivico($indirizzoNumeroCivico)
-    {
-        $this->indirizzo_numero_civico = $indirizzoNumeroCivico;
-    }
-
-    /**
-     * Get indirizzo_numero_civico
-     *
-     * @return string 
-     */
-    public function getIndirizzoNumeroCivico()
-    {
-        return $this->indirizzo_numero_civico;
-    }
 }
