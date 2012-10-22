@@ -10,12 +10,12 @@ class AnagraficaType extends AbstractType {
     public function buildForm(FormBuilder $builder, array $options) {
         $builder
                 ->add('ente_appartenenza')
-                ->add('citta')
-                ->add('provincia')
-                ->add('cap')
-                ->add('via')
-                ->add('numero_civico')
-                ->add('telefono')
+                ->add('ente_citta')
+                ->add('ente_provincia')
+                ->add('ente_cap')
+                ->add('ente_via')
+                ->add('ente_numero_civico')
+                ->add('ente_telefono')
                 ->add('tipo_iscrizione', 'choice', array(
                     'choices' => array(
                         'P' => 'Partecipante',
@@ -24,17 +24,19 @@ class AnagraficaType extends AbstractType {
                         'T' => 'Tutor',
                         )))
                 ->add('nome')
-                ->add('accreditamento')
                 ->add('cognome')
+                ->add('accreditamento')
                 ->add('data_nascita', 'birthday')
                 ->add('luogo_nascita')
                 ->add('codice_fiscale')
                 ->add('ordine_numero')
                 ->add('ordine_citta')
-                ->add('indirizzo')
-                ->add('indirizzo_cap')
+                ->add('indirizzo_via')
+                ->add('indirizzo_via')
+                ->add('indirizzo_numero_civico')
                 ->add('indirizzo_citta')
                 ->add('indirizzo_provincia')
+                ->add('telefono')
                 ->add('cellulare')
                 ->add('email')
                 ->add('professione', 'choice', array(
@@ -66,7 +68,7 @@ class AnagraficaType extends AbstractType {
                         'C' => 'Convenzionato',
                     )
                 ))
-                ->add('sponsor')
+                ->add('iscritto_in_modo_autonomo')
                 ->add('sponsor_azienda')
                 ->add('privacy')
         ;

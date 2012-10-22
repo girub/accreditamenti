@@ -38,33 +38,51 @@ class Anagrafica {
     private $ente_appartenenza;
 
     /**
-     * @var string $citta
+     * @var string $ente_citta
      *
-     * @ORM\Column(name="citta", type="string", length=255)
+     * @ORM\Column(name="ente_citta", type="string", length=255)
      */
-    private $citta;
+    private $ente_citta;
 
     /**
-     * @var string $provincia
+     * @var string $ente_provincia
      *
-     * @ORM\Column(name="provincia", type="string", length=255)
+     * @ORM\Column(name="ente_provincia", type="string", length=255)
      */
-    private $provincia;
+    private $ente_provincia;
 
     /**
-     * @var string $cap
+     * @var string $ente_cap
      *
-     * @ORM\Column(name="cap", type="string", length=255)
+     * @ORM\Column(name="ente_cap", type="string", length=255)
      */
-    private $cap;
+    private $ente_cap;
+    
+    
+      /**
+     * @var string $ente_via
+     *
+     * @ORM\Column(name="ente_via", type="string", length=255)
+     */
+    private $ente_via;
+    
 
     /**
-     * @var string $numero_civico
+     * @var string $ente_numero_civico
      *
-     * @ORM\Column(name="numero_civico", type="string", length=255)
+     * @ORM\Column(name="ente_numero_civico", type="string", length=255)
      */
-    private $numero_civico;
+    private $ente_numero_civico;
 
+    
+    /**
+     * @var string $ente_telefono
+     *
+     * @ORM\Column(name="ente_telefono", type="string", length=255)
+     */
+    private $ente_telefono;
+    
+    
     /**
      * @var string $nome
      *
@@ -115,11 +133,11 @@ class Anagrafica {
     private $ordine_citta;
 
     /**
-     * @var string $indirizzo
+     * @var string $indirizzo_via
      *
-     * @ORM\Column(name="indirizzo", type="string", length=255)
+     * @ORM\Column(name="indirizzo_via", type="string", length=255)
      */
-    private $indirizzo;
+    private $indirizzo_via;
 
     /**
      * @var string $indirizzo_cap
@@ -128,6 +146,8 @@ class Anagrafica {
      */
     private $indirizzo_cap;
 
+    
+    
     /**
      * @var string $indirizzo_citta
      *
@@ -135,6 +155,7 @@ class Anagrafica {
      */
     private $indirizzo_citta;
 
+    
     /**
      * @var string $indirizzo_provincia
      *
@@ -185,11 +206,11 @@ class Anagrafica {
     private $qualifica;
 
     /**
-     * @var boolean $sponsor
+     * @var boolean $iscritto_in_modo_autonomo
      *
-     * @ORM\Column(name="sponsor", type="boolean")
+     * @ORM\Column(name="iscritto_in_modo_autonomo", type="boolean")
      */
-    private $sponsor;
+    private $iscritto_in_modo_autonomo;
 
     /**
      * @var string $sponsor_azienda
