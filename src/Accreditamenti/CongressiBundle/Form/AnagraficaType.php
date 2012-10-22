@@ -9,6 +9,13 @@ class AnagraficaType extends AbstractType {
 
     public function buildForm(FormBuilder $builder, array $options) {
         $builder
+                ->add('ente_appartenenza')
+                ->add('citta')
+                ->add('provincia')
+                ->add('cap')
+                ->add('via')
+                ->add('numero_civico')
+                ->add('telefono')
                 ->add('tipo_iscrizione', 'choice', array(
                     'choices' => array(
                         'P' => 'Partecipante',
@@ -28,7 +35,6 @@ class AnagraficaType extends AbstractType {
                 ->add('indirizzo_cap')
                 ->add('indirizzo_citta')
                 ->add('indirizzo_provincia')
-                ->add('telefono')
                 ->add('cellulare')
                 ->add('email')
                 ->add('professione', 'choice', array(

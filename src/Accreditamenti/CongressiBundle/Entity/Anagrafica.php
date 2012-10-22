@@ -31,6 +31,41 @@ class Anagrafica {
     private $tipo_iscrizione;
 
     /**
+     * @var string $ente_appartenenza
+     *
+     * @ORM\Column(name="ente_appartenenza", type="string", length=255)
+     */
+    private $ente_appartenenza;
+
+    /**
+     * @var string $citta
+     *
+     * @ORM\Column(name="citta", type="string", length=255)
+     */
+    private $citta;
+
+    /**
+     * @var string $provincia
+     *
+     * @ORM\Column(name="provincia", type="string", length=255)
+     */
+    private $provincia;
+
+    /**
+     * @var string $cap
+     *
+     * @ORM\Column(name="cap", type="string", length=255)
+     */
+    private $cap;
+
+    /**
+     * @var string $numero_civico
+     *
+     * @ORM\Column(name="numero_civico", type="string", length=255)
+     */
+    private $numero_civico;
+
+    /**
      * @var string $nome
      *
      * @ORM\Column(name="nome", type="string", length=255)
@@ -580,8 +615,105 @@ class Anagrafica {
     public function getAccreditamento() {
         return $this->accreditamento;
     }
-    
-    
-    
 
+
+    /**
+     * Set ente_appartenenza
+     *
+     * @param string $enteAppartenenza
+     */
+    public function setEnteAppartenenza($enteAppartenenza)
+    {
+        $this->ente_appartenenza = $enteAppartenenza;
+    }
+
+    /**
+     * Get ente_appartenenza
+     *
+     * @return string 
+     */
+    public function getEnteAppartenenza()
+    {
+        return $this->ente_appartenenza;
+    }
+
+    /**
+     * Set citta
+     *
+     * @param string $citta
+     */
+    public function setCitta($citta)
+    {
+        $this->citta = $citta;
+    }
+
+    /**
+     * Get citta
+     *
+     * @return string 
+     */
+    public function getCitta()
+    {
+        return $this->citta;
+    }
+
+    /**
+     * Set provincia
+     *
+     * @param string $provincia
+     */
+    public function setProvincia($provincia)
+    {
+        $this->provincia = $provincia;
+    }
+
+    /**
+     * Get provincia
+     *
+     * @return string 
+     */
+    public function getProvincia()
+    {
+        return $this->provincia;
+    }
+
+    /**
+     * Set cap
+     *
+     * @param string $cap
+     */
+    public function setCap($cap)
+    {
+        $this->cap = $cap;
+    }
+
+    /**
+     * Get cap
+     *
+     * @return string 
+     */
+    public function getCap()
+    {
+        return $this->cap;
+    }
+
+    /**
+     * Set numero_civico
+     *
+     * @param string $numeroCivico
+     */
+    public function setNumeroCivico($numeroCivico)
+    {
+        $this->numero_civico = $numeroCivico;
+    }
+
+    /**
+     * Get numero_civico
+     *
+     * @return string 
+     */
+    public function getNumeroCivico()
+    {
+        return $this->numero_civico;
+    }
 }
