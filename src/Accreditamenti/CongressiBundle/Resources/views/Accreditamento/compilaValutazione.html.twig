@@ -1,14 +1,61 @@
 {% extends '::frontEnd/base.html.twig' %}
 
 {% block body %}
- <h2>Compila il questionario di valutazione</h2>
- questa pagina conterrà il questionario di valutazione
+<h2>Compila il questionario di valutazione</h2>
+questa pagina conterrà il questionario di valutazione
 
-    <form action="{{ path('valutazione_save', {'accreditamento_id': accreditamento_id,'anagrafica_id': anagrafica_id}) }}" method="post">
-    {{ form_widget(form) }}
-    <p>
-        <button type="submit">Create</button>
-    </p>
-</form>
-   
+
+
+
+ {{ accreditamento.SupportoAziendeSponsor }}
+
+xxxxxxxxxxx<br><br>
+
+<form action="{{ path('valutazione_save', {'accreditamento_id': accreditamento_id,'anagrafica_id': anagrafica_id}) }}" method="post">
+    {# form_widget(form) #}
+
+        <div>
+            {{ form_label(form.rilevanza_degli_argomenti,'1) Come valuta la rilevanza degli argomenti trattati rispetto alla sua necessità di aggiornamento?') }}
+            {{ form_errors(form.rilevanza_degli_argomenti) }}
+            {{ form_widget(form.rilevanza_degli_argomenti) }}
+            </div>        
+
+
+            <div>
+            {{ form_label(form.qualita_educativa,'2) Come valuta la qualità educativa/di aggiornamento fornita da questo evento?') }}
+            {{ form_errors(form.qualita_educativa) }}
+            {{ form_widget(form.qualita_educativa) }}
+                </div>   
+
+
+                <div>
+            {{ form_label(form.utilita_evento,'3) Come valuta la qualità educativa/di aggiornamento fornita da questo evento?') }}
+            {{ form_errors(form.utilita_evento) }}
+            {{ form_widget(form.utilita_evento) }}
+                    </div>  
+
+
+
+
+                    <div>
+            {{ form_label(form.influenza_sponsor,'4) Questo evento è  stato realizzato con il  di  '~  accreditamento.SupportoAziendeSponsor  ~' e di altri...') }}
+            {{ form_errors(form.influenza_sponsor) }}
+            {{ form_widget(form.influenza_sponsor) }}
+                        </div> 
+
+
+                <div>
+            {{ form_label(form.esempio_influenza_sponsor,'* In caso di risposte “sì” o “molto e rilevanti” si prega di indicare qualche esempio
+') }}
+            {{ form_errors(form.esempio_influenza_sponsor) }}
+            {{ form_widget(form.esempio_influenza_sponsor) }}
+                    </div>  
+
+
+
+                        <p>
+                            <button type="submit">Create</button>
+                        </p>
+                    </form>
+
 {%endblock%}

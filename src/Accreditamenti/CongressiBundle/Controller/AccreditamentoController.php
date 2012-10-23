@@ -497,14 +497,14 @@ class AccreditamentoController extends Controller {
                     $idRispostaGiusta = $risposta->getId();
             }
 
-           
+
 
             $idRispostaRicevuta = $_POST['form']['domanda_' . $domanda->getId()];
 
-            
-            echo "Domanda " . $domanda->getId() . " ha come risposta giusta risposta " . $idRispostaGiusta . " ----- risposta Ricevuta: " .$idRispostaRicevuta . "<br>";
-            
-            
+
+            echo "Domanda " . $domanda->getId() . " ha come risposta giusta risposta " . $idRispostaGiusta . " ----- risposta Ricevuta: " . $idRispostaRicevuta . "<br>";
+
+
             $risposteUtenti = new \Accreditamenti\CongressiBundle\Entity\RisposteUtentiQuestionarioEcm;
             $risposteUtenti->setAnagraficaId($anagrafica_id);
             $risposteUtenti->setRispostaId($idRispostaRicevuta);
@@ -513,18 +513,14 @@ class AccreditamentoController extends Controller {
         //effettuo salvataggio risposte ecm 
         $entityManager->flush();
 
-        
+
         //faccio un redirect su compila_valutazione (view che conterrà il questionario di valutazione)
         return $this->redirect($this->generateUrl('compila_valutazione', array(
-                                    'accreditamento_id' => $accreditamento_id,
-                                    'anagrafica_id' => $anagrafica_id
-                                )));
-        
-        
+                            'accreditamento_id' => $accreditamento_id,
+                            'anagrafica_id' => $anagrafica_id
+                        )));
     }
-    
-    
-    
+
     /**
      * Pagina dove compilo questionario di valutazione.
      *
@@ -533,11 +529,15 @@ class AccreditamentoController extends Controller {
      */
     public function compilaValutazioneAction($accreditamento_id, $anagrafica_id) {
 
-   
+        $em = $this->getDoctrine()->getEntityManager();
+        $accreditamento = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($accreditamento_id);
 
-       $form = $this->createFormBuilder(null)
+        //echo $accreditamento->getSupportoAziendeSponsor();die;
+
+        $form = $this->createFormBuilder(null)
                 ->add('rilevanza_degli_argomenti', 'choice', array(
                     'choices' => array(
+                        '' => 'Selezionare dalla lista',
                         'Non rilevante' => 'Non rilevante',
                         'Poco rilevante' => 'Poco rilevante',
                         'Abbastanza rilevante' => 'Abbastanza rilevante',
@@ -546,6 +546,7 @@ class AccreditamentoController extends Controller {
                         )))
                 ->add('qualita_educativa', 'choice', array(
                     'choices' => array(
+                        '' => 'Selezionare dalla lista',
                         'Scarsa' => 'Scarsa',
                         'Mediocre' => 'Mediocre',
                         'Soddisfacente' => 'Soddisfacente',
@@ -554,6 +555,7 @@ class AccreditamentoController extends Controller {
                         )))
                 ->add('utilita_evento', 'choice', array(
                     'choices' => array(
+                        '' => 'Selezionare dalla lista',
                         'Insufficiente' => 'Insufficiente',
                         'Parzialmente utile' => 'Parzialmente utile',
                         'Abbastanza utile' => 'Abbastanza utile',
@@ -562,6 +564,7 @@ class AccreditamentoController extends Controller {
                         )))
                 ->add('influenza_sponsor', 'choice', array(
                     'choices' => array(
+                               '' => 'Selezionare dalla lista',
                         'No' => 'No',
                         'Parzialmente' => 'Parzialmente',
                         'Abbastanza' => 'Abbastanza',
@@ -571,16 +574,15 @@ class AccreditamentoController extends Controller {
                 ->add('esempio_influenza_sponsor')
                 ->getForm()
                 ->createView();
-                
+
         return array(
             'form' => $form,
+            'accreditamento' => $accreditamento,
             'accreditamento_id' => $accreditamento_id,
             'anagrafica_id' => $anagrafica_id,);
-
     }
-    
-    
-     /**
+
+    /**
      * Salvo il questionario di valutazione.
      *
      * @Route("/{accreditamento_id}/{anagrafica_id}/save/valutazione", name="valutazione_save")
@@ -592,9 +594,5 @@ class AccreditamentoController extends Controller {
 
         return array();
     }
-    
-    
-    
-    
 
 }
