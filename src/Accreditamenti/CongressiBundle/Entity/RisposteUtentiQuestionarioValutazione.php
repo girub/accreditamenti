@@ -66,7 +66,7 @@ class RisposteUtentiQuestionarioValutazione
     /**
      * @var string $esempio_influenza_sponsor
      *
-     * @ORM\Column(name="esempio_influenza_sponsor", type="string", length=255)
+     * @ORM\Column(name="esempio_influenza_sponsor", nullable=true, type="string", length=255)
      */
     private $esempio_influenza_sponsor;
 

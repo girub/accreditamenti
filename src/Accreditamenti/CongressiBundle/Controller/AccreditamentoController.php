@@ -587,6 +587,7 @@ class AccreditamentoController extends Controller {
      * @Template()
      */
     public function saveValutazioneAction($accreditamento_id, $anagrafica_id) {
+        $entityManager = $this->getDoctrine()->getEntityManager();
 
         $form = $this->createFormBuilder(null)
                 ->add('rilevanza_degli_argomenti', 'choice', array(
@@ -631,20 +632,31 @@ class AccreditamentoController extends Controller {
 
 
         $form->bindRequest($this->getRequest());
-
         $data = $form->getData();
-        echo "<PRE>";
-        echo $data['rilevanza_degli_argomenti'] . "<br>";
-        echo $data['qualita_educativa'] . "<br>";
-        echo $data['utilita_evento'] . "<br>";
-        echo $data['influenza_sponsor'] . "<br>";
-        echo $data['esempio_influenza_sponsor'] . "<br>";
 
-        //if ($form->isValid()) {
-
+//        echo "<PRE>";
+//        echo $data['rilevanza_degli_argomenti'] . "<br>";
+//        echo $data['qualita_educativa'] . "<br>";
+//        echo $data['utilita_evento'] . "<br>";
+//        echo $data['influenza_sponsor'] . "<br>";
+//        echo $data['esempio_influenza_sponsor'] . "<br>";
 
 
-        die('qui salvo il questionario di valutazione');
+
+        $risposteValutazione = new \Accreditamenti\CongressiBundle\Entity\RisposteUtentiQuestionarioValutazione;
+        $risposteValutazione->setAnagraficaId($anagrafica_id);
+        $risposteValutazione->setAccreditamentoId($accreditamento_id);
+        $risposteValutazione->setRilevanzaDegliArgomenti($data['rilevanza_degli_argomenti']);
+        $risposteValutazione->setQualitaEducativa($data['qualita_educativa']);
+        $risposteValutazione->setUtilitaEvento($data['utilita_evento']);
+        $risposteValutazione->setInfluenzaSponsor($data['influenza_sponsor']);
+        $risposteValutazione->setEsempioInfluenzaSponsor($data['esempio_influenza_sponsor']);
+        $entityManager->persist($risposteValutazione);
+        $entityManager->flush();
+        $entityManager->persist($risposteValutazione);
+
+
+        die('ho salvato i dati');
 
         return array();
     }
