@@ -119,6 +119,17 @@ class Accreditamento {
      */
     private $anagrafica;
 
+    
+     /**
+     * @var text $supporto_aziende_sponsor
+     *
+     * @ORM\Column(name="supporto_aziende_sponsor", type="text")
+     */
+    private $supporto_aziende_sponsor;
+    
+    
+    
+    
     /**
      * Get id
      *
@@ -410,4 +421,24 @@ class Accreditamento {
         return $this->questionarioEcm;
     }
 
+
+    /**
+     * Set supporto_aziende_sponsor
+     *
+     * @param text $supportoAziendeSponsor
+     */
+    public function setSupportoAziendeSponsor($supportoAziendeSponsor)
+    {
+        $this->supporto_aziende_sponsor = $supportoAziendeSponsor;
+    }
+
+    /**
+     * Get supporto_aziende_sponsor
+     *
+     * @return text 
+     */
+    public function getSupportoAziendeSponsor()
+    {
+        return $this->supporto_aziende_sponsor;
+    }
 }

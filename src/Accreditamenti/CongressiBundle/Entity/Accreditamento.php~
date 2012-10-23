@@ -119,6 +119,17 @@ class Accreditamento {
      */
     private $anagrafica;
 
+    
+     /**
+     * @var text $supporto_aziende_sponsor
+     *
+     * @ORM\Column(name="supporto_aziende_sponsor", type="text")
+     */
+    private $supporto_aziende_sponsor;
+    
+    
+    
+    
     /**
      * Get id
      *
@@ -382,6 +393,32 @@ class Accreditamento {
      */
     public function getAnagrafica() {
         return $this->anagrafica;
+    }
+
+    public function __construct() {
+        $this->questionarioEcm = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->questionarioCustomerSatisfaction = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->questionarioValutazione = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->iscritti = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->anagrafica = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add questionarioEcm
+     *
+     * @param Accreditamenti\CongressiBundle\Entity\QuestionarioEcm $questionarioEcm
+     */
+    public function addQuestionarioEcm(\Accreditamenti\CongressiBundle\Entity\QuestionarioEcm $questionarioEcm) {
+        $this->questionarioEcm[] = $questionarioEcm;
+    }
+
+    /**
+     * Get questionarioEcm
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getQuestionarioEcm() {
+        return $this->questionarioEcm;
     }
 
 }
