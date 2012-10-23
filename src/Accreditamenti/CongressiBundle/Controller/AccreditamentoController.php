@@ -532,7 +532,61 @@ class AccreditamentoController extends Controller {
         $em = $this->getDoctrine()->getEntityManager();
         $accreditamento = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($accreditamento_id);
 
-        //echo $accreditamento->getSupportoAziendeSponsor();die;
+        $form = $this->createFormBuilder(null)
+                ->add('rilevanza_degli_argomenti', 'choice', array(
+                    'choices' => array(
+                        '' => 'Selezionare dalla lista',
+                        'Non rilevante' => 'Non rilevante',
+                        'Poco rilevante' => 'Poco rilevante',
+                        'Abbastanza rilevante' => 'Abbastanza rilevante',
+                        'Rilevante' => 'Rilevante',
+                        'Molto rilevant' => 'Molto rilevante',
+                        )))
+                ->add('qualita_educativa', 'choice', array(
+                    'choices' => array(
+                        '' => 'Selezionare dalla lista',
+                        'Scarsa' => 'Scarsa',
+                        'Mediocre' => 'Mediocre',
+                        'Soddisfacente' => 'Soddisfacente',
+                        'Buona' => 'Buona',
+                        'Eccellentet' => 'Eccellente',
+                        )))
+                ->add('utilita_evento', 'choice', array(
+                    'choices' => array(
+                        '' => 'Selezionare dalla lista',
+                        'Insufficiente' => 'Insufficiente',
+                        'Parzialmente utile' => 'Parzialmente utile',
+                        'Abbastanza utile' => 'Abbastanza utile',
+                        'Utile' => 'Utile',
+                        'Molto utile' => 'Molto utile',
+                        )))
+                ->add('influenza_sponsor', 'choice', array(
+                    'choices' => array(
+                        '' => 'Selezionare dalla lista',
+                        'No' => 'No',
+                        'Parzialmente' => 'Parzialmente',
+                        'Abbastanza' => 'Abbastanza',
+                        'Si' => 'Si',
+                        'Molto e rilevante' => 'Molto e rilevante',
+                        )))
+                ->add('esempio_influenza_sponsor', 'text', array('required' => false))
+                ->getForm()
+                ->createView();
+
+        return array(
+            'form' => $form,
+            'accreditamento' => $accreditamento,
+            'accreditamento_id' => $accreditamento_id,
+            'anagrafica_id' => $anagrafica_id,);
+    }
+
+    /**
+     * Salvo il questionario di valutazione.
+     *
+     * @Route("/{accreditamento_id}/{anagrafica_id}/save/valutazione", name="valutazione_save")
+     * @Template()
+     */
+    public function saveValutazioneAction($accreditamento_id, $anagrafica_id) {
 
         $form = $this->createFormBuilder(null)
                 ->add('rilevanza_degli_argomenti', 'choice', array(
@@ -564,31 +618,31 @@ class AccreditamentoController extends Controller {
                         )))
                 ->add('influenza_sponsor', 'choice', array(
                     'choices' => array(
-                               '' => 'Selezionare dalla lista',
+                        '' => 'Selezionare dalla lista',
                         'No' => 'No',
                         'Parzialmente' => 'Parzialmente',
                         'Abbastanza' => 'Abbastanza',
                         'Si' => 'Si',
                         'Molto e rilevante' => 'Molto e rilevante',
                         )))
-                ->add('esempio_influenza_sponsor','text', array('required' => false))
-                ->getForm()
-                ->createView();
+                ->add('esempio_influenza_sponsor', 'text', array('required' => false))
+                ->getForm();
 
-        return array(
-            'form' => $form,
-            'accreditamento' => $accreditamento,
-            'accreditamento_id' => $accreditamento_id,
-            'anagrafica_id' => $anagrafica_id,);
-    }
 
-    /**
-     * Salvo il questionario di valutazione.
-     *
-     * @Route("/{accreditamento_id}/{anagrafica_id}/save/valutazione", name="valutazione_save")
-     * @Template()
-     */
-    public function saveValutazioneAction($accreditamento_id, $anagrafica_id) {
+
+        $form->bindRequest($this->getRequest());
+
+        $data = $form->getData();
+        echo "<PRE>";
+        echo $data['rilevanza_degli_argomenti'] . "<br>";
+        echo $data['qualita_educativa'] . "<br>";
+        echo $data['utilita_evento'] . "<br>";
+        echo $data['influenza_sponsor'] . "<br>";
+        echo $data['esempio_influenza_sponsor'] . "<br>";
+
+        //if ($form->isValid()) {
+
+
 
         die('qui salvo il questionario di valutazione');
 
