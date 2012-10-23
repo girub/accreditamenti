@@ -656,7 +656,7 @@ class AccreditamentoController extends Controller {
         $entityManager->persist($risposteValutazione);
 
 
-        die('ho salvato i dati');
+        die('ho salvato i dati - ritorna il giorno x per scaricare attestato');
 
         return array();
     }
