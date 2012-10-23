@@ -18,6 +18,7 @@ class AccreditamentoType extends AbstractType
             ->add('ore_formative')
             ->add('obiettivo_formativo')
             ->add('numero_crediti')
+            ->add('supporto_aziende_sponsor')
             ->add('congresso')
         ;
     }
