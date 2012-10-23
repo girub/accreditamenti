@@ -166,7 +166,7 @@ class Accreditamento {
         $this->luogo = $luogo;
     }
 
-    /**
+    /**qui salvo il questionario di valutazione
      * Get luogo
      *
      * @return string 

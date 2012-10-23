@@ -571,7 +571,7 @@ class AccreditamentoController extends Controller {
                         'Si' => 'Si',
                         'Molto e rilevante' => 'Molto e rilevante',
                         )))
-                ->add('esempio_influenza_sponsor')
+                ->add('esempio_influenza_sponsor','text', array('required' => false))
                 ->getForm()
                 ->createView();
 
