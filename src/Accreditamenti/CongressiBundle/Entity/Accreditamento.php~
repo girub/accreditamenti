@@ -127,7 +127,13 @@ class Accreditamento {
      */
     private $supporto_aziende_sponsor;
     
-    
+     
+     /**
+     * @var text $certificato_ecm
+     *
+     * @ORM\Column(name="certificato_ecm", nullable=true, type="text")
+     */
+    private $certificato_ecm;
     
     
     /**
@@ -166,7 +172,7 @@ class Accreditamento {
         $this->luogo = $luogo;
     }
 
-    /**
+    /**qui salvo il questionario di valutazione
      * Get luogo
      *
      * @return string 
@@ -421,4 +427,24 @@ class Accreditamento {
         return $this->questionarioEcm;
     }
 
+
+    /**
+     * Set supporto_aziende_sponsor
+     *
+     * @param text $supportoAziendeSponsor
+     */
+    public function setSupportoAziendeSponsor($supportoAziendeSponsor)
+    {
+        $this->supporto_aziende_sponsor = $supportoAziendeSponsor;
+    }
+
+    /**
+     * Get supporto_aziende_sponsor
+     *
+     * @return text 
+     */
+    public function getSupportoAziendeSponsor()
+    {
+        return $this->supporto_aziende_sponsor;
+    }
 }
