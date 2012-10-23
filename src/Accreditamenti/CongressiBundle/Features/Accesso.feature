@@ -40,6 +40,8 @@ Scenario: Voglio scegliere un congresso da un elenco e un relativo suo accredita
     And I fill in "accreditamenti_congressibundle_accreditamentotype_ore_formative" with "2012"
     And I fill in "accreditamenti_congressibundle_accreditamentotype_obiettivo_formativo" with "Descrizione dell'obiettivo ..."
     And I fill in "accreditamenti_congressibundle_accreditamentotype_numero_crediti" with "2012"
+    And I fill in "accreditamenti_congressibundle_accreditamentotype_supporto_aziende_sponsor" with "Mellin, plasmon, chicco"
+
     Given I press "Create"
     
     When I follow "Quest. ecm"
