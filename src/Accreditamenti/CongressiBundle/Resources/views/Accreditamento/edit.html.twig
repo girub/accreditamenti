@@ -3,12 +3,93 @@
 
 {% block body %}
 
+{{ entity.numeroCrediti }}<hr>
 
 <h1>Accreditamento edit</h1>
-
 <form action="{{ path('accreditamento_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
-    {{ form_widget(edit_form) }}
-    <p>
+    {#{ form_widget(edit_form) }#}
+    
+         {{ form_errors(edit_form) }}
+
+        <div>
+            {{ form_label(edit_form.numero_accreditamento) }}
+            {{ form_errors(edit_form.numero_accreditamento) }}
+            {{ form_widget(edit_form.numero_accreditamento) }}
+        </div>
+               
+        <div>
+            {{ form_label(edit_form.titolo) }}
+            {{ form_errors(edit_form.titolo) }}
+            {{ form_widget(edit_form.titolo) }}
+        </div>
+        
+        <div>
+            {{ form_label(edit_form.luogo) }}
+            {{ form_errors(edit_form.luogo) }}
+            {{ form_widget(edit_form.luogo) }}
+        </div>
+        
+        <div>
+            {{ form_label(edit_form.data_inizio) }}
+            {{ form_errors(edit_form.data_inizio) }}
+            {{ form_widget(edit_form.data_inizio) }}
+        </div>
+        
+         <div>
+            {{ form_label(edit_form.data_fine) }}
+            {{ form_errors(edit_form.data_fine) }}
+            {{ form_widget(edit_form.data_fine) }}
+        </div>
+        
+         <div>
+            {{ form_label(edit_form.ore_formative) }}
+            {{ form_errors(edit_form.ore_formative) }}
+            {{ form_widget(edit_form.ore_formative) }}
+        </div>
+        
+         <div>
+            {{ form_label(edit_form.obiettivo_formativo) }}
+            {{ form_errors(edit_form.obiettivo_formativo) }}
+            {{ form_widget(edit_form.obiettivo_formativo) }}
+        </div>
+        
+         <div>
+            {{ form_label(edit_form.numero_crediti) }}
+            {{ form_errors(edit_form.numero_crediti) }}
+            {{ form_widget(edit_form.numero_crediti) }}
+        </div>
+        
+          <div>
+            {{ form_label(edit_form.supporto_aziende_sponsor) }}
+            {{ form_errors(edit_form.supporto_aziende_sponsor) }}
+            {{ form_widget(edit_form.supporto_aziende_sponsor) }}
+        </div>
+        
+        
+      
+        {% if entity.certificatoEcm|length > 0 %}
+            <div>
+                <img src="/resource/img/{{ entity.congresso.id }}/{{ entity.certificatoEcm }}" width="200" style="border:1px solid #333333;">
+                    <br><a href="{{ path('accreditamento_delete_certificato', { 'id': entity.id }) }}">Cancella Certificato</a><br><br>
+            </div>                 
+        {% else %}
+          <div>
+            {{ form_label(edit_form.certificato_ecm) }}
+            {{ form_errors(edit_form.certificato_ecm) }}
+            {{ form_widget(edit_form.certificato_ecm) }}
+        </div>
+        {% endif %}
+        
+        
+          <div>
+            {{ form_label(edit_form.congresso) }}
+            {{ form_errors(edit_form.congresso) }}
+            {{ form_widget(edit_form.congresso) }}
+        </div>
+        
+        
+         {{ form_rest(edit_form) }}
+   <p>
         <button type="submit">Edit</button>
     </p>
 </form>

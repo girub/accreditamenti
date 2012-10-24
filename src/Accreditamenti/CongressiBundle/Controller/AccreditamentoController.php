@@ -351,8 +351,8 @@ class AccreditamentoController extends Controller {
 
         $request = $this->getRequest();
         $editForm->bindRequest($request);
-
-        if ($editForm->isValid()) {
+        
+        if ($editForm->isValid()){
             
             // upload certificato_ecm
             if (!($editForm['certificato_ecm']->getData() === NULL)) {
@@ -365,12 +365,11 @@ class AccreditamentoController extends Controller {
                 $certificato = $entity->getNumeroAccreditamento() . '.' . $extension;
                 $dir = $_SERVER['DOCUMENT_ROOT'] . "/resource/img/" . $entity->getCongresso()->getId(); 
                 @mkdir($dir, 0775);
-           
                 $editForm['certificato_ecm']->getData()->move($dir, $certificato);
                 $entity->setCertificatoEcm($certificato);
+            
+                
             }
-            
-            
             
             
             $em->persist($entity);
@@ -702,6 +701,38 @@ class AccreditamentoController extends Controller {
         die('ho salvato i dati - ritorna il giorno x per scaricare attestato');
 
         return array();
+    }
+    
+    
+    
+    
+    
+     /**
+     * Cancella il certificato ecm
+     *
+     * @Route("/{id}/deletecertificato", name="accreditamento_delete_certificato")
+     */
+    public function removeCertificatoEcmAction($id) {
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $accreditamento = $this->getDoctrine()
+                ->getRepository('AccreditamentiCongressiBundle:Accreditamento')
+                ->find($id);
+
+        if (!$accreditamento) {
+            throw $this->createNotFoundException('Nessun prodotto trovato per l\'id ' . $id);
+        }
+
+        $dir = $_SERVER['DOCUMENT_ROOT'] . "/resource/img/" . $accreditamento->getCongresso()->getId(); 
+        unlink($dir . '/' . $accreditamento->getCertificatoEcm());
+        $accreditamento->setCertificatoEcm(null);
+
+        $em->persist($accreditamento);
+        $em->flush();
+
+    
+        
+         return $this->redirect($this->generateUrl('accreditamento_edit', array('id' => $id)));
     }
 
 }
