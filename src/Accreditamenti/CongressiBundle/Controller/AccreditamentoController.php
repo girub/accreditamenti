@@ -266,6 +266,30 @@ class AccreditamentoController extends Controller {
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
+
+
+            // upload certificato_ecm
+            if (!($form['certificato_ecm']->getData() === NULL)) {
+                $extension = $form['certificato_ecm']->getData()->guessExtension();
+                if (!$extension) {
+                    // l'estensione non può essere indovinata
+                    $extension = 'bin';
+                }
+                //cambiare
+                $certificato = $entity->getNumeroAccreditamento() . '.' . $extension;
+                $dir = $_SERVER['DOCUMENT_ROOT'] . "/resource/img/" . $entity->getCongresso()->getId(); 
+                @mkdir($dir, 0775);
+           
+                $form['certificato_ecm']->getData()->move($dir, $certificato);
+                $entity->setCertificatoEcm($certificato);
+            }
+
+         
+
+
+
+
+
             $em->persist($entity);
             $em->flush();
 
@@ -326,10 +350,29 @@ class AccreditamentoController extends Controller {
         $deleteForm = $this->createDeleteForm($id);
 
         $request = $this->getRequest();
-
         $editForm->bindRequest($request);
 
         if ($editForm->isValid()) {
+            
+            // upload certificato_ecm
+            if (!($editForm['certificato_ecm']->getData() === NULL)) {
+                $extension = $editForm['certificato_ecm']->getData()->guessExtension();
+                if (!$extension) {
+                    // l'estensione non può essere indovinata
+                    $extension = 'bin';
+                }
+                //cambiare
+                $certificato = $entity->getNumeroAccreditamento() . '.' . $extension;
+                $dir = $_SERVER['DOCUMENT_ROOT'] . "/resource/img/" . $entity->getCongresso()->getId(); 
+                @mkdir($dir, 0775);
+           
+                $editForm['certificato_ecm']->getData()->move($dir, $certificato);
+                $entity->setCertificatoEcm($certificato);
+            }
+            
+            
+            
+            
             $em->persist($entity);
             $em->flush();
 

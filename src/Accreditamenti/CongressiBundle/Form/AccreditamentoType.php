@@ -19,6 +19,7 @@ class AccreditamentoType extends AbstractType
             ->add('obiettivo_formativo')
             ->add('numero_crediti')
             ->add('supporto_aziende_sponsor')
+            ->add('certificato_ecm', 'file', array('required' => false, 'label' => 'Certificato ECM'))
             ->add('congresso')
         ;
     }
