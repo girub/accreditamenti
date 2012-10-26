@@ -3,8 +3,10 @@
 use Symfony\Component\ClassLoader\UniversalClassLoader;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 
+
 $loader = new UniversalClassLoader();
 $loader->registerNamespaces(array(
+    'Io'                                => __DIR__.'/../vendor/bundles',
     'Assetic'                           => __DIR__.'/../vendor/assetic/src',
     'JMS'                               => __DIR__.'/../vendor/bundles',
     'Monolog'                           => __DIR__.'/../vendor/monolog/src',
@@ -54,4 +56,4 @@ require_once __DIR__.'/../vendor/swiftmailer/lib/classes/Swift.php';
 Swift::registerAutoload(__DIR__.'/../vendor/swiftmailer/lib/swift_init.php');
 require  __DIR__.'/../vendor/lessphp/lessc.inc.php';
 
-
+require_once __DIR__.'/../vendor/tcpdf/tcpdf.php';
