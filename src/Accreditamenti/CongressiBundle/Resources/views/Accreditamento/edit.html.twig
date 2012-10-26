@@ -1,15 +1,10 @@
 {% extends '::backEnd/base.html.twig' %}
 
-
 {% block body %}
-
-{{ entity.numeroCrediti }}<hr>
 
 <h1>Accreditamento edit</h1>
 <form action="{{ path('accreditamento_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
-    {#{ form_widget(edit_form) }#}
-    
-         {{ form_errors(edit_form) }}
+            {{ form_errors(edit_form) }}
 
         <div>
             {{ form_label(edit_form.numero_accreditamento) }}

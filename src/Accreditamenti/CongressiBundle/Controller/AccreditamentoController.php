@@ -277,14 +277,14 @@ class AccreditamentoController extends Controller {
                 }
                 //cambiare
                 $certificato = $entity->getNumeroAccreditamento() . '.' . $extension;
-                $dir = $_SERVER['DOCUMENT_ROOT'] . "/resource/img/" . $entity->getCongresso()->getId(); 
+                $dir = $_SERVER['DOCUMENT_ROOT'] . "/resource/img/" . $entity->getCongresso()->getId();
                 @mkdir($dir, 0775);
-           
+
                 $form['certificato_ecm']->getData()->move($dir, $certificato);
                 $entity->setCertificatoEcm($certificato);
             }
 
-         
+
 
 
 
@@ -351,9 +351,9 @@ class AccreditamentoController extends Controller {
 
         $request = $this->getRequest();
         $editForm->bindRequest($request);
-        
-        if ($editForm->isValid()){
-            
+
+        if ($editForm->isValid()) {
+
             // upload certificato_ecm
             if (!($editForm['certificato_ecm']->getData() === NULL)) {
                 $extension = $editForm['certificato_ecm']->getData()->guessExtension();
@@ -363,15 +363,13 @@ class AccreditamentoController extends Controller {
                 }
                 //cambiare
                 $certificato = $entity->getNumeroAccreditamento() . '.' . $extension;
-                $dir = $_SERVER['DOCUMENT_ROOT'] . "/resource/img/" . $entity->getCongresso()->getId(); 
+                $dir = $_SERVER['DOCUMENT_ROOT'] . "/resource/img/" . $entity->getCongresso()->getId();
                 @mkdir($dir, 0775);
                 $editForm['certificato_ecm']->getData()->move($dir, $certificato);
                 $entity->setCertificatoEcm($certificato);
-            
-                
             }
-            
-            
+
+
             $em->persist($entity);
             $em->flush();
 
@@ -543,9 +541,7 @@ class AccreditamentoController extends Controller {
 
             $idRispostaRicevuta = $_POST['form']['domanda_' . $domanda->getId()];
 
-
-            echo "Domanda " . $domanda->getId() . " ha come risposta giusta risposta " . $idRispostaGiusta . " ----- risposta Ricevuta: " . $idRispostaRicevuta . "<br>";
-
+            // echo "Domanda " . $domanda->getId() . " ha come risposta giusta risposta " . $idRispostaGiusta . " ----- risposta Ricevuta: " . $idRispostaRicevuta . "<br>";
 
             $risposteUtenti = new \Accreditamenti\CongressiBundle\Entity\RisposteUtentiQuestionarioEcm;
             $risposteUtenti->setAnagraficaId($anagrafica_id);
@@ -555,7 +551,6 @@ class AccreditamentoController extends Controller {
         //effettuo salvataggio risposte ecm 
         $entityManager->flush();
 
-
         //faccio un redirect su compila_valutazione (view che conterrà il questionario di valutazione)
         return $this->redirect($this->generateUrl('compila_valutazione', array(
                             'accreditamento_id' => $accreditamento_id,
@@ -563,6 +558,8 @@ class AccreditamentoController extends Controller {
                         )));
     }
 
+    
+    
     /**
      * Pagina dove compilo questionario di valutazione.
      *
@@ -671,19 +668,8 @@ class AccreditamentoController extends Controller {
                 ->add('esempio_influenza_sponsor', 'text', array('required' => false))
                 ->getForm();
 
-
-
         $form->bindRequest($this->getRequest());
         $data = $form->getData();
-
-//        echo "<PRE>";
-//        echo $data['rilevanza_degli_argomenti'] . "<br>";
-//        echo $data['qualita_educativa'] . "<br>";
-//        echo $data['utilita_evento'] . "<br>";
-//        echo $data['influenza_sponsor'] . "<br>";
-//        echo $data['esempio_influenza_sponsor'] . "<br>";
-
-
 
         $risposteValutazione = new \Accreditamenti\CongressiBundle\Entity\RisposteUtentiQuestionarioValutazione;
         $risposteValutazione->setAnagraficaId($anagrafica_id);
@@ -702,12 +688,8 @@ class AccreditamentoController extends Controller {
 
         return array();
     }
-    
-    
-    
-    
-    
-     /**
+
+    /**
      * Cancella il certificato ecm
      *
      * @Route("/{id}/deletecertificato", name="accreditamento_delete_certificato")
@@ -723,16 +705,14 @@ class AccreditamentoController extends Controller {
             throw $this->createNotFoundException('Nessun prodotto trovato per l\'id ' . $id);
         }
 
-        $dir = $_SERVER['DOCUMENT_ROOT'] . "/resource/img/" . $accreditamento->getCongresso()->getId(); 
+        $dir = $_SERVER['DOCUMENT_ROOT'] . "/resource/img/" . $accreditamento->getCongresso()->getId();
         unlink($dir . '/' . $accreditamento->getCertificatoEcm());
         $accreditamento->setCertificatoEcm(null);
 
         $em->persist($accreditamento);
         $em->flush();
 
-    
-        
-         return $this->redirect($this->generateUrl('accreditamento_edit', array('id' => $id)));
+        return $this->redirect($this->generateUrl('accreditamento_edit', array('id' => $id)));
     }
 
 }
