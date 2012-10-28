@@ -622,7 +622,7 @@ class AccreditamentoController extends Controller {
     /**
      * Salvo il questionario di valutazione.
      *
-     * @Route("/{accreditamento_id}/{anagrafica_id}/save/valutazione", name="valutazione_save")
+     * @Route("/{accreditamento_id}/{anagrafica_id}/save/valutazione/", name="valutazione_save")
      * @Template()
      */
     public function saveValutazioneAction($accreditamento_id, $anagrafica_id) {
@@ -684,10 +684,39 @@ class AccreditamentoController extends Controller {
         $entityManager->persist($risposteValutazione);
 
 
-        die('ho salvato i dati - ritorna il giorno x per scaricare attestato');
-
-        return array();
+//        //faccio un redirect su compila_valutazione (view che conterrà il questionario di valutazione)
+//        return $this->redirect($this->generateUrl('crea_certificato', array(
+//                            'accreditamento_id' => $accreditamento_id,
+//                            'anagrafica_id' => $anagrafica_id
+//                        )));
+        
+        $html = $this->renderView('AccreditamentiCongressiBundle:Accreditamento:mypage.pdf.twig', array());
+        //io_tcpdf will returns Response object
+        return $this->get('io_tcpdf')->quick_pdf($html);
+        
+        
     }
+    
+    
+     /**
+     * Salvo il questionario di valutazione.
+     *
+     * @Route("/{accreditamento_id}/{anagrafica_id}/save/valutazione/", name="crea_certificato")
+     * @Template()
+     */
+        public function creaPdfCertificatoAction()
+        {
+            
+           
+         $html = $this->renderView('AccreditamentiCongressiBundle:Accreditamento:mypage.pdf.twig', array());
+        //io_tcpdf will returns Response object
+        return $this->get('io_tcpdf')->quick_pdf($html);
+        }
+    
+    
+    
+    
+    
 
     /**
      * Cancella il certificato ecm
@@ -714,5 +743,12 @@ class AccreditamentoController extends Controller {
 
         return $this->redirect($this->generateUrl('accreditamento_edit', array('id' => $id)));
     }
+    
+    
+    
+    
+    
+    
+    
 
 }
