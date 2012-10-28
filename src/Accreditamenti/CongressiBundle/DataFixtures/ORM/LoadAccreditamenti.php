@@ -38,6 +38,7 @@ class LoadAccreditamenti implements FixtureInterface {
         $accreditamentoDellaPigna->setOreFormative(123);
         $accreditamentoDellaPigna->setObiettivoFormativo('Obiettivo formativo');
         $accreditamentoDellaPigna->setNumeroCrediti(33);
+        $accreditamentoDellaPigna->setSupportoAziendeSponsor('Mellin, Plasmon, Humana');
         $manager->persist($accreditamentoDellaPigna);
 
         $questionarioECM = new QuestionarioEcm();

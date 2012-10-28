@@ -40,6 +40,7 @@ Scenario: Voglio vedere il titolo del congresso associato ad un accreditamento
     And I fill in "accreditamenti_congressibundle_accreditamentotype_ore_formative" with "2012"
     And I fill in "accreditamenti_congressibundle_accreditamentotype_obiettivo_formativo" with "Descrizione dell'obiettivo ..."
     And I fill in "accreditamenti_congressibundle_accreditamentotype_numero_crediti" with "2012"
+    And I fill in "accreditamenti_congressibundle_accreditamentotype_supporto_aziende_sponsor" with "Mellin, Plasmon"
     Given I press "Create"
     Then the response should contain "Accreditamento creato con successo"
     Then the response should contain "Questo è il titolo dell&#039;accreditamento"

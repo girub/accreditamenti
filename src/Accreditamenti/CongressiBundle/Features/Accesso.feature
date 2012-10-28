@@ -7,6 +7,7 @@ Scenario: Voglio scegliere un congresso da un elenco e un relativo suo accredita
     And I fill in "_password" with "giuseppe"
     Given I press "Login"
     When I am on "/congresso/new"
+    #Then show last response
     And I fill in "Codice congresso" with "SIP2012"
     And I fill in "Url" with "http://www.google.com"
     And I fill in "Titolo" with "68° Congresso Nazionale SIP"
