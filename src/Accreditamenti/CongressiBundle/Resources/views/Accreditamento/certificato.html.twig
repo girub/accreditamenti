@@ -1,0 +1,12 @@
+{% extends '::frontEnd/base.html.twig' %}
+
+{% block body %}
+<h1>Benvenuto - compila Anagrafica</h1>
+
+Complimenti l'anagrafica e questionari sono stati compilati con successo!
+<form action="{{ path('pdf_create', {'accreditamento_id': accreditamento_id,'anagrafica_id': anagrafica_id}) }}" method="post" >
+    <p>
+        <button type="submit">Stampa il certificato</button>
+    </p>
+</form>
+{% endblock %}

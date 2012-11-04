@@ -182,7 +182,3 @@
 [doctrine-migrations]
     git=git://github.com/doctrine/migrations.git
     version=v1.0-ALPHA1
-
-[IoTcpdfBundle]
-git=git://github.com/ioalessio/IoTcpdfBundle.git
-target=/bundles/Io/TcpdfBundle

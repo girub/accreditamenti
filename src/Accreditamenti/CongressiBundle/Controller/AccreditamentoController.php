@@ -558,9 +558,8 @@ class AccreditamentoController extends Controller {
                         )));
     }
 
-    
-    
     /**
+     * 
      * Pagina dove compilo questionario di valutazione.
      *
      * @Route("/{accreditamento_id}/{anagrafica_id}/compila/valutazione", name="compila_valutazione")
@@ -627,7 +626,6 @@ class AccreditamentoController extends Controller {
      */
     public function saveValutazioneAction($accreditamento_id, $anagrafica_id) {
         $entityManager = $this->getDoctrine()->getEntityManager();
-
         $form = $this->createFormBuilder(null)
                 ->add('rilevanza_degli_argomenti', 'choice', array(
                     'choices' => array(
@@ -683,40 +681,55 @@ class AccreditamentoController extends Controller {
         $entityManager->flush();
         $entityManager->persist($risposteValutazione);
 
-
-//        //faccio un redirect su compila_valutazione (view che conterrà il questionario di valutazione)
-//        return $this->redirect($this->generateUrl('crea_certificato', array(
-//                            'accreditamento_id' => $accreditamento_id,
-//                            'anagrafica_id' => $anagrafica_id
-//                        )));
-        
-        $html = $this->renderView('AccreditamentiCongressiBundle:Accreditamento:mypage.pdf.twig', array());
-        //io_tcpdf will returns Response object
-        return $this->get('io_tcpdf')->quick_pdf($html);
-        
-        
+        //faccio un redirect su compila_valutazione (view che conterrà il questionario di valutazione)
+        return $this->redirect($this->generateUrl('certificato', array(
+                            'accreditamento_id' => $accreditamento_id,
+                            'anagrafica_id' => $anagrafica_id
+                        )));
     }
-    
-    
-     /**
-     * Salvo il questionario di valutazione.
+
+    /**
+     * Creo certificato pdf.
      *
-     * @Route("/{accreditamento_id}/{anagrafica_id}/save/valutazione/", name="crea_certificato")
+     * @Route("/{accreditamento_id}/{anagrafica_id}/certificato/", name="certificato")
      * @Template()
      */
-        public function creaPdfCertificatoAction()
-        {
-            
-           
-         $html = $this->renderView('AccreditamentiCongressiBundle:Accreditamento:mypage.pdf.twig', array());
+    public function certificatoAction($accreditamento_id, $anagrafica_id) {
+
+
+        return array(
+            'accreditamento_id' => $accreditamento_id,
+            'anagrafica_id' => $anagrafica_id,);
+    }
+
+    /**
+     * Creo certificato pdf.
+     *
+     * @Route("/{accreditamento_id}/{anagrafica_id}/crea/pdf/", name="pdf_create")
+     * @Template()
+     */
+    public function creaPdfCertificatoAction($accreditamento_id, $anagrafica_id) {
+        $em = $this->getDoctrine()->getEntityManager();
+        $accreditamento = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($accreditamento_id);
+        $anagrafica = $em->getRepository('AccreditamentiCongressiBundle:Anagrafica')->find($anagrafica_id);
+        //die($anagrafica->getNome());
+
+
+
+        $certificato = $accreditamento->getCertificatoEcm();
+
+
+
+
+
+        $dir = $_SERVER['DOCUMENT_ROOT'] . "/resource/img/" . $accreditamento->getCongresso()->getId();
+        $certificato = $dir . "/" . $certificato;
+        $html = $this->renderView('AccreditamentiCongressiBundle:Accreditamento:certificato_crea.pdf.twig', array(
+           'anagrafica' => $anagrafica));
         //io_tcpdf will returns Response object
-        return $this->get('io_tcpdf')->quick_pdf($html);
-        }
-    
-    
-    
-    
-    
+        return $this->get('io_tcpdf')
+                        ->quick_pdf($html, $file = "html.pdf", $format = "S", $certificato);
+    }
 
     /**
      * Cancella il certificato ecm
@@ -743,12 +756,5 @@ class AccreditamentoController extends Controller {
 
         return $this->redirect($this->generateUrl('accreditamento_edit', array('id' => $id)));
     }
-    
-    
-    
-    
-    
-    
-    
 
 }
