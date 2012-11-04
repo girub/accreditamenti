@@ -1,5 +1,11 @@
 {% extends '::frontEnd/base.html.twig' %}
 
+
+
+    
+    
+    
+
 {% block body %}
 <h1>Benvenuto - compila Anagrafica</h1>
 
@@ -24,5 +30,36 @@ qui devo far compilare l'anagrafica all'iscritto che è appena entrato inserendo
 </ul>
 
 
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/ui-lightness/jquery-ui.css" type="text/css" media="all"/>
+<script type="text/javascript">
+(function($) {
+$(document).ready(function(){
+   $( "#accreditamenti_congressibundle_anagraficatype_data_nascita" ).datepicker({
+    dateFormat: 'dd-mm-yy',
+    changeMonth: 'true',
+    changeYear: 'true',
+    monthNamesShort: ['Gen','Feb','Mar','Apr','Mag','Giu','Lug','Ago','Set','Ott','Nov','Dic'],
+    dayNamesShort: ['Dom','Lun','Mar','Mer','Gio','Ven','Sab'],	
+    dayNamesMin: ['Dom','Lun','Mar','Mer','Gio','Ven','Sab'],
+    constrainInput:'false',
+    showAnim: 'slideDown',
+    firstDay:1
+});
+   
+});
+})(jQuery);
+
+$.datepicker.setDefaults($.datepicker.regional[it]);
+
+</script>
 
 {% endblock %}
+
+
+
+
+
+
+
+
+
