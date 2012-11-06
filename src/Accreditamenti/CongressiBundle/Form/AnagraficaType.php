@@ -27,7 +27,7 @@ class AnagraficaType extends AbstractType {
                 ->add('cognome')
                 ->add('accreditamento')
                 //->add('data_nascita', 'birthday')
-                ->add('data_nascita', 'date', array(
+                ->add('data_nascita', 'birthday', array(
                     'label' => 'Data Nascita',
                     'widget' => 'single_text',
                     'format' => 'dd-MM-yyyy'

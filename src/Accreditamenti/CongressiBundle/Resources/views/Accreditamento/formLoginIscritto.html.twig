@@ -4,7 +4,7 @@
 <h1>Entra in accreditamento</h1>
 
 Inserire il proprio codice fiscale (senza spazi)
-<form action="{{ path('login_iscritto',{'id':id}) }}" method="post" {{ form_enctype(form) }}>
+<form action="{{ path('login_iscritto',{'accreditamento_id':id}) }}" method="post" {{ form_enctype(form) }}>
 
 {{ form_widget(form) }}
    

@@ -12,12 +12,206 @@
 qui devo far compilare l'anagrafica all'iscritto che è appena entrato inserendo il suo codice fiscale
 
 
-<h1>Anagrafica creation</h1>
+ <h3>Dati Personali</h3> 
 
 <form action="{{ path('anagrafica_create', {'accreditamento_id': accreditamento_id}) }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
+    {# form_widget(form) #}
+        
+     {{ form_errors(form) }}
+
+        <div style="display: none">
+            {{ form_label(form.tipo_iscrizione) }}
+            {{ form_errors(form.tipo_iscrizione) }}
+            {{ form_widget(form.tipo_iscrizione) }}
+        </div>    
+        
+        <div>
+            {{ form_label(form.nome) }}
+            {{ form_errors(form.nome) }}
+            {{ form_widget(form.nome) }}
+        </div>  
+        
+        <div>
+            {{ form_label(form.cognome) }}
+            {{ form_errors(form.cognome) }}
+            {{ form_widget(form.cognome) }}
+        </div>  
+        
+        
+         <div>
+            {{ form_label(form.luogo_nascita,  'Nato a') }}
+            {{ form_errors(form.luogo_nascita) }}
+            {{ form_widget(form.luogo_nascita) }}
+        </div> 
+        
+         <div>
+            {{ form_label(form.data_nascita,'il') }}
+            {{ form_errors(form.data_nascita) }}
+            {{ form_widget(form.data_nascita) }}
+        </div> 
+         <div>
+            {{ form_label(form.codice_fiscale) }}
+            {{ form_errors(form.codice_fiscale) }}
+            {{ form_widget(form.codice_fiscale) }}
+        </div>
+        
+        
+         <div>
+            {{ form_label(form.indirizzo_citta, 'Residente in') }}
+            {{ form_errors(form.indirizzo_citta) }}
+            {{ form_widget(form.indirizzo_citta) }}
+        </div> 
+        
+         <div>
+            {{ form_label(form.indirizzo_provincia, 'Provincia') }}
+            {{ form_errors(form.indirizzo_provincia) }}
+            {{ form_widget(form.indirizzo_provincia) }}
+        </div> 
+        
+        <div>
+            {{ form_label(form.indirizzo_cap, 'Cap') }}
+            {{ form_errors(form.indirizzo_cap) }}
+            {{ form_widget(form.indirizzo_cap) }}
+        </div> 
+        
+         <div>
+            {{ form_label(form.indirizzo_via, 'Via') }}
+            {{ form_errors(form.indirizzo_via) }}
+            {{ form_widget(form.indirizzo_via) }}
+        </div> 
+        
+        
+         <div>
+            {{ form_label(form.indirizzo_numero_civico, 'N° civico') }}
+            {{ form_errors(form.indirizzo_numero_civico) }}
+            {{ form_widget(form.indirizzo_numero_civico) }}
+        </div> 
+        
+        
+        <div>
+            {{ form_label(form.telefono) }}
+            {{ form_errors(form.telefono) }}
+            {{ form_widget(form.telefono) }}
+        </div> 
+        
+        <div>
+            {{ form_label(form.cellulare) }}
+            {{ form_errors(form.cellulare) }}
+            {{ form_widget(form.cellulare) }}
+        </div> 
+           <div>
+            {{ form_label(form.email) }}
+            {{ form_errors(form.email) }}
+            {{ form_widget(form.email) }}
+        </div> 
+        
+        
+          <div>
+            {{ form_label(form.professione) }}
+            {{ form_errors(form.professione) }}
+            {{ form_widget(form.professione) }}
+        </div> 
+        
+          <div>
+            {{ form_label(form.disciplina) }}
+            {{ form_errors(form.disciplina) }}
+            {{ form_widget(form.disciplina) }}
+        </div> 
+            <div>
+            {{ form_label(form.ordine_numero,'Nr. Iscrizione Ordine/Collegio Ass. prof.le') }}
+            {{ form_errors(form.ordine_numero) }}
+            {{ form_widget(form.ordine_numero) }}
+        </div> 
+          <div>
+            {{ form_label(form.ordine_citta,'di') }}
+            {{ form_errors(form.ordine_citta) }}
+            {{ form_widget(form.ordine_citta) }}
+        </div> 
+        
+            <div>
+            {{ form_label(form.qualifica) }}
+            {{ form_errors(form.qualifica) }}
+            {{ form_widget(form.qualifica) }}
+        </div> 
+        
+        
+        <h3>Dati Ente di appartenenza</h3> 
+        <div>
+            {{ form_label(form.ente_appartenenza) }}
+            {{ form_errors(form.ente_appartenenza) }}
+            {{ form_widget(form.ente_appartenenza) }}
+        </div> 
+        
+        
+          <div>
+            {{ form_label(form.ente_citta,'Città') }}
+            {{ form_errors(form.ente_citta) }}
+            {{ form_widget(form.ente_citta) }}
+        </div>
+        
+          <div>
+            {{ form_label(form.ente_provincia,'Provincia') }}
+            {{ form_errors(form.ente_provincia) }}
+            {{ form_widget(form.ente_provincia) }}
+        </div>
+        
+          <div>
+            {{ form_label(form.ente_cap,'cap') }}
+            {{ form_errors(form.ente_cap) }}
+            {{ form_widget(form.ente_cap) }}
+        </div>
+        
+          <div>
+            {{ form_label(form.ente_via,'Via') }}
+            {{ form_errors(form.ente_via) }}
+            {{ form_widget(form.ente_via) }}
+        </div>
+        
+          <div>
+            {{ form_label(form.ente_numero_civico,'N° civico') }}
+            {{ form_errors(form.ente_numero_civico) }}
+            {{ form_widget(form.ente_numero_civico) }}
+        </div>
+        
+        
+         <div>
+            {{ form_label(form.ente_telefono) }}
+            {{ form_errors(form.ente_telefono) }}
+            {{ form_widget(form.ente_telefono) }}
+        </div>
+          
+        <h3>Dati relativi congresso</h3>
+        
+        
+         <div>
+            {{ form_label(form.sponsor_azienda,'Essendo stato Invitato da') }}
+            {{ form_errors(form.sponsor_azienda) }}
+            {{ form_widget(form.sponsor_azienda) }}
+        </div>
+        
+        
+        
+         <div>
+            {{ form_label(form.iscritto_in_modo_autonomo,'Essendosi  iscritto in modo autonomo') }}
+            {{ form_errors(form.iscritto_in_modo_autonomo) }}
+            {{ form_widget(form.iscritto_in_modo_autonomo) }}
+        </div>
+        
+        
+        
+        Informativa ai sensi del D. Lgs. 30 giugno 2003, n. 196
+        
+        <div>
+            {{ form_label(form.privacy, 'Accetto si/no') }}
+            {{ form_errors(form.privacy) }}
+            {{ form_widget(form.privacy) }}
+        </div>
+        
+   
+        {{ form_rest(form) }}
+        
     <p>
-        <button type="submit">Create</button>
+        <button type="submit">Salva Anagrafica</button>
     </p>
 </form>
 
@@ -38,6 +232,7 @@ $(document).ready(function(){
     dateFormat: 'dd-mm-yy',
     changeMonth: 'true',
     changeYear: 'true',
+    yearRange: "-80:+0",
     monthNamesShort: ['Gen','Feb','Mar','Apr','Mag','Giu','Lug','Ago','Set','Ott','Nov','Dic'],
     dayNamesShort: ['Dom','Lun','Mar','Mer','Gio','Ven','Sab'],	
     dayNamesMin: ['Dom','Lun','Mar','Mer','Gio','Ven','Sab'],

@@ -15,7 +15,7 @@ use Accreditamenti\CongressiBundle\Form\AnagraficaType;
 use Accreditamenti\CongressiBundle\Entity\RispostaRepository;
 
 /**
- * Accreditamento controller.
+ * Accreditamento controller
  *
  * @Route("/accreditamento")
  */
@@ -70,10 +70,9 @@ class AccreditamentoController extends Controller {
     /**
      * login iscritto con codice fiscale.
      *
-     * @Route("/{id}/login/iscritto", name="login_iscritto")
+     * @Route("/{accreditamento_id}/login/iscritto", name="login_iscritto")
      */
-    public function loginIscrittoAction($id) {
-
+    public function loginIscrittoAction($accreditamento_id) {
         $form = $this->createFormBuilder(null)
                 ->add('codice_fiscale', 'text')
                 ->getForm();
@@ -86,12 +85,12 @@ class AccreditamentoController extends Controller {
                         'SELECT p.cognome, p.nome FROM AccreditamentiCongressiBundle:Iscritti p 
                          WHERE p.codice_fiscale = :codice_fiscale and p.accreditamento_id = :id'
                 )->setParameter('codice_fiscale', $codice_fiscale)
-                ->setParameter('id', $id);
+                ->setParameter('id', $accreditamento_id);
         $iscritto = $query->getResult();
 
         if (!isset($iscritto[0]['nome'])) {
             $this->get('session')->setFlash('notice', 'Codice_fiscale non presente per questo accreditamento');
-            return $this->redirect($this->generateUrl('form_login_iscritto', array('id' => $id)));
+            return $this->redirect($this->generateUrl('form_login_iscritto', array('id' => $accreditamento_id)));
         }
 
         if ($form->isValid()) {
@@ -99,8 +98,39 @@ class AccreditamentoController extends Controller {
             // $user->addRole('ROLE_ISCRITTO');
         }
 
+
+
+        // controllo se l'utente ha già compilato l'anagrafica per questo accreditamento
+        // se trovo un record vado alla pagina successiva
+
+        $query = $em->createQuery(
+                        'SELECT a.id, a.codice_fiscale FROM AccreditamentiCongressiBundle:Anagrafica a 
+                         WHERE a.codice_fiscale = :codice_fiscale and a.accreditamento = :id'
+                )->setParameter('codice_fiscale', $codice_fiscale)
+                ->setParameter('id', $accreditamento_id);
+
+        $anagrafica = $query->getResult();
+            
+        if (isset($anagrafica[0]['codice_fiscale'])) {
+
+            $this->get('session')->setFlash('notice', 'Ben tornato ' . $iscritto[0]['nome'] . ' ' . $iscritto[0]['cognome'] . ' continua a compilare il questionario!');
+            return $this->redirect($this->generateUrl('compila_ecm', array(
+                                'accreditamento_id' => $accreditamento_id,
+                                'anagrafica_id' => $anagrafica[0]['id'],
+                            )));
+        }
+
+
+
+
+
+
+
+
         $this->get('session')->setFlash('notice', 'Benvenuto ' . $iscritto[0]['nome'] . ' ' . $iscritto[0]['cognome'] . ' Login effettuato con successo');
-        return $this->redirect($this->generateUrl('compila_anagrafica', array('accreditamento_id' => $id)));
+        return $this->redirect($this->generateUrl('compila_anagrafica', array(
+                            'accreditamento_id' => $accreditamento_id
+                        )));
     }
 
     /**
@@ -112,8 +142,8 @@ class AccreditamentoController extends Controller {
     public function compilaAnagraficaAction($accreditamento_id) {
 
         $entityManager = $this->getDoctrine()->getEntityManager();
-        $accreditamento = $entityManager->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($accreditamento_id);
 
+        $accreditamento = $entityManager->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($accreditamento_id);
         $anagrafica = new Anagrafica();
         $anagrafica->setAccreditamento($accreditamento);
         $form = $this->createForm(new AnagraficaType(), $anagrafica);
@@ -725,7 +755,7 @@ class AccreditamentoController extends Controller {
         $dir = $_SERVER['DOCUMENT_ROOT'] . "/resource/img/" . $accreditamento->getCongresso()->getId();
         $certificato = $dir . "/" . $certificato;
         $html = $this->renderView('AccreditamentiCongressiBundle:Accreditamento:certificato_crea.pdf.twig', array(
-           'anagrafica' => $anagrafica));
+            'anagrafica' => $anagrafica));
         //io_tcpdf will returns Response object
         return $this->get('io_tcpdf')
                         ->quick_pdf($html, $file = "html.pdf", $format = "S", $certificato);
