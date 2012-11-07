@@ -626,6 +626,30 @@ class AccreditamentoController extends Controller {
         
         
         
+         //##################### INIZIO ###################################
+        //controllo se già ha compilato il questionario di valutazione, se si
+        //ridirigo l'utente direttamente alla pagina di stampa
+        $query = $em->createQuery(
+                        'SELECT a.anagrafica_id FROM AccreditamentiCongressiBundle:RisposteUtentiQuestionarioValutazione a 
+                         WHERE a.anagrafica_id = :id'
+                )->setParameter('id', $anagrafica_id);
+        
+        $risposteEcm = $query->getResult();
+      //  die($risposteEcm[0]['anagrafica_id']);
+        if (isset($risposteEcm[0]['anagrafica_id'])) {
+            
+            // aggiungere nome e cognome
+            $this->get('session')->setFlash('notice', 'Ben tornato continua a compilare il questionario!');
+            return $this->redirect($this->generateUrl('certificato', array(
+                                'accreditamento_id' => $accreditamento_id,
+                                'anagrafica_id' => $anagrafica_id,
+                            )));
+        }
+        //######################## fine ################################
+        
+        
+        
+        
         $accreditamento = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($accreditamento_id);
         $form = $this->createFormBuilder(null)
                 ->add('rilevanza_degli_argomenti', 'choice', array(
