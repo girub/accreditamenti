@@ -101,9 +101,7 @@ Scenario: Voglio scegliere un congresso da un elenco e un relativo suo accredita
     And I fill in "accreditamenti_congressibundle_anagraficatype_tipo_iscrizione" with "P"
     And I fill in "accreditamenti_congressibundle_anagraficatype_nome" with "Giuseppe"
     And I fill in "accreditamenti_congressibundle_anagraficatype_cognome" with "Rubino"
-    And I fill in "accreditamenti_congressibundle_anagraficatype_data_nascita_year" with "2007"
-    And I fill in "accreditamenti_congressibundle_anagraficatype_data_nascita_month" with "02"
-    And I fill in "accreditamenti_congressibundle_anagraficatype_data_nascita_day" with "15"
+    And I fill in "accreditamenti_congressibundle_anagraficatype_data_nascita" with "15-02-1974"
     And I fill in "accreditamenti_congressibundle_anagraficatype_luogo_nascita" with "Manduria (TA)"
     And I fill in "accreditamenti_congressibundle_anagraficatype_codice_fiscale" with "RBNGPP74B15E882U"
     And I fill in "accreditamenti_congressibundle_anagraficatype_ordine_numero" with "12312"
@@ -129,6 +127,7 @@ Scenario: Voglio scegliere un congresso da un elenco e un relativo suo accredita
     And I fill in "accreditamenti_congressibundle_anagraficatype_ente_numero_civico" with "numero civico ente di appartenenza test"     
     And I fill in "accreditamenti_congressibundle_anagraficatype_ente_telefono" with "telefono ente di appartenenza test"     
     And I check "accreditamenti_congressibundle_anagraficatype_privacy"
-    Given I press "Create"
+    #Then show last response
+    Given I press "Salva Anagrafica"
     #Then show last response
     Then the response should contain "Compila il questionario ECM"

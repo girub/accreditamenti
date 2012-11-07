@@ -647,9 +647,7 @@ class AccreditamentoController extends Controller {
         }
         //######################## fine ################################
         
-        
-        
-        
+               
         $accreditamento = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($accreditamento_id);
         $form = $this->createFormBuilder(null)
                 ->add('rilevanza_degli_argomenti', 'choice', array(
