@@ -102,7 +102,6 @@ class AccreditamentoController extends Controller {
 
         // controllo se l'utente ha già compilato l'anagrafica per questo accreditamento
         // se trovo un record vado alla pagina successiva
-
         $query = $em->createQuery(
                         'SELECT a.id, a.codice_fiscale FROM AccreditamentiCongressiBundle:Anagrafica a 
                          WHERE a.codice_fiscale = :codice_fiscale and a.accreditamento = :id'
@@ -110,7 +109,7 @@ class AccreditamentoController extends Controller {
                 ->setParameter('id', $accreditamento_id);
 
         $anagrafica = $query->getResult();
-            
+
         if (isset($anagrafica[0]['codice_fiscale'])) {
 
             $this->get('session')->setFlash('notice', 'Ben tornato ' . $iscritto[0]['nome'] . ' ' . $iscritto[0]['cognome'] . ' continua a compilare il questionario!');
@@ -119,11 +118,6 @@ class AccreditamentoController extends Controller {
                                 'anagrafica_id' => $anagrafica[0]['id'],
                             )));
         }
-
-
-
-
-
 
 
 
@@ -165,6 +159,37 @@ class AccreditamentoController extends Controller {
 
         $entityManager = $this->getDoctrine()
                 ->getEntityManager();
+
+        //##################### INIZIO ###################################
+        //controllo se già ha compilato il questionario ecm, se si
+        //ridirigo l'utente al questionario di valutazione
+        $query = $entityManager->createQuery(
+                        'SELECT a.anagrafica_id FROM AccreditamentiCongressiBundle:RisposteUtentiQuestionarioEcm a 
+                         WHERE a.anagrafica_id = :id'
+                )->setParameter('id', $anagrafica_id);
+        
+        //$test = $em->createQuery(
+        //    'SELECT DISTINCT d
+        //    FROM AccreditamentiCongressiBundle:RisposteUtentiQuestionarioEcm d
+        //    INNER JOIN d.userGruppen ug
+        //    WHERE ug.userId =9
+        //    '
+        //);
+
+        $risposteEcm = $query->getResult();
+      //  die($risposteEcm[0]['anagrafica_id']);
+        if (isset($risposteEcm[0]['anagrafica_id'])) {
+            
+            // aggiungere nome e cognome
+            $this->get('session')->setFlash('notice', 'Ben tornato continua a compilare il questionario!');
+            return $this->redirect($this->generateUrl('compila_valutazione', array(
+                                'accreditamento_id' => $accreditamento_id,
+                                'anagrafica_id' => $anagrafica_id,
+                            )));
+        }
+        //######################## fine ################################
+
+
 
         $accreditamento = $entityManager
                 ->getRepository('AccreditamentiCongressiBundle:Accreditamento')
@@ -598,8 +623,10 @@ class AccreditamentoController extends Controller {
     public function compilaValutazioneAction($accreditamento_id, $anagrafica_id) {
 
         $em = $this->getDoctrine()->getEntityManager();
+        
+        
+        
         $accreditamento = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($accreditamento_id);
-
         $form = $this->createFormBuilder(null)
                 ->add('rilevanza_degli_argomenti', 'choice', array(
                     'choices' => array(
