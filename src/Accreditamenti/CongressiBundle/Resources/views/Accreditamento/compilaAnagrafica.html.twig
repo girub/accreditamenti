@@ -36,8 +36,7 @@ qui devo far compilare l'anagrafica all'iscritto che è appena entrato inserendo
             {{ form_errors(form.cognome) }}
             {{ form_widget(form.cognome) }}
         </div>  
-        
-        
+                
          <div>
             {{ form_label(form.luogo_nascita,  'Nato a') }}
             {{ form_errors(form.luogo_nascita) }}
@@ -50,7 +49,7 @@ qui devo far compilare l'anagrafica all'iscritto che è appena entrato inserendo
             {{ form_widget(form.data_nascita) }}
         </div> 
          <div>
-            {{ form_label(form.codice_fiscale) }}
+            {{ form_label(form.codice_fiscale,'Codice fiscale') }}
             {{ form_errors(form.codice_fiscale) }}
             {{ form_widget(form.codice_fiscale) }}
         </div>

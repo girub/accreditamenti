@@ -82,7 +82,7 @@ class AccreditamentoController extends Controller {
         $codice_fiscale = $form['codice_fiscale']->getData();
         $em = $this->getDoctrine()->getEntityManager();
         $query = $em->createQuery(
-                        'SELECT p.cognome, p.nome FROM AccreditamentiCongressiBundle:Iscritti p 
+                        'SELECT p.cognome, p.nome,p.codice_fiscale FROM AccreditamentiCongressiBundle:Iscritti p 
                          WHERE p.codice_fiscale = :codice_fiscale and p.accreditamento_id = :id'
                 )->setParameter('codice_fiscale', $codice_fiscale)
                 ->setParameter('id', $accreditamento_id);
@@ -123,23 +123,30 @@ class AccreditamentoController extends Controller {
 
         $this->get('session')->setFlash('notice', 'Benvenuto ' . $iscritto[0]['nome'] . ' ' . $iscritto[0]['cognome'] . ' Login effettuato con successo');
         return $this->redirect($this->generateUrl('compila_anagrafica', array(
-                            'accreditamento_id' => $accreditamento_id
+                            'accreditamento_id' => $accreditamento_id,
+                            'nome' => $iscritto[0]['nome'],
+                            'cognome' => $iscritto[0]['cognome'],
+                            'codice_fiscale' => $iscritto[0]['codice_fiscale'],
                         )));
     }
 
     /**
      * Pagina dove iscritto una volta entrato compila angrafica.
      *
-     * @Route("/{accreditamento_id}/compila/anagrafica", name="compila_anagrafica")
+     * @Route("/{accreditamento_id}/compila/anagrafica/{nome}/{cognome}/{codice_fiscale}", name="compila_anagrafica")
      * @Template()
      */
-    public function compilaAnagraficaAction($accreditamento_id) {
+    public function compilaAnagraficaAction($accreditamento_id,$nome,$cognome,$codice_fiscale) {
 
         $entityManager = $this->getDoctrine()->getEntityManager();
-
         $accreditamento = $entityManager->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($accreditamento_id);
         $anagrafica = new Anagrafica();
         $anagrafica->setAccreditamento($accreditamento);
+        
+        $anagrafica->setNome($nome);
+        $anagrafica->setCognome($cognome);
+        $anagrafica->setCodiceFiscale($codice_fiscale);
+        
         $form = $this->createForm(new AnagraficaType(), $anagrafica);
 
         return array(
