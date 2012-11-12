@@ -4,6 +4,7 @@ namespace Accreditamenti\CongressiBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\OneToMany;
+use Accreditamenti\CongressiBundle\Entity\Disciplina;
 
 /**
  * Accreditamenti\CongressiBundle\Entity\Professione
@@ -35,6 +36,12 @@ class Professione {
      * @ORM\Column(name="nome", type="string", length=255)
      */
     private $nome;
+    
+    
+    /**
+     * @OneToMany(targetEntity="Disciplina", mappedBy="professione")
+     */
+    private $discipline;
 
     /**
      * Get id
