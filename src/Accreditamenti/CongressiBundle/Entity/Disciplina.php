@@ -38,6 +38,12 @@ class Disciplina {
     private $nome;
 
     /**
+     * @ManyToOne(targetEntity="Professione", inversedBy="discipline")
+     * @JoinColumn(name="professione_id", referencedColumnName="id")
+     */
+    private $professione;
+
+    /**
      * Get id
      *
      * @return integer 
