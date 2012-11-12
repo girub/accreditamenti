@@ -3,6 +3,7 @@
 namespace Accreditamenti\CongressiBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\OneToMany;
 
 /**
  * Accreditamenti\CongressiBundle\Entity\Professione
@@ -10,8 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Accreditamenti\CongressiBundle\Entity\ProfessioneRepository")
  */
-class Professione
-{
+class Professione {
+
     /**
      * @var integer $id
      *
@@ -35,14 +36,12 @@ class Professione
      */
     private $nome;
 
-
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -51,8 +50,7 @@ class Professione
      *
      * @param integer $codice
      */
-    public function setCodice($codice)
-    {
+    public function setCodice($codice) {
         $this->codice = $codice;
     }
 
@@ -61,8 +59,7 @@ class Professione
      *
      * @return integer 
      */
-    public function getCodice()
-    {
+    public function getCodice() {
         return $this->codice;
     }
 
@@ -71,8 +68,7 @@ class Professione
      *
      * @param string $nome
      */
-    public function setNome($nome)
-    {
+    public function setNome($nome) {
         $this->nome = $nome;
     }
 
@@ -81,8 +77,8 @@ class Professione
      *
      * @return string 
      */
-    public function getNome()
-    {
+    public function getNome() {
         return $this->nome;
     }
+
 }

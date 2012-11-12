@@ -3,6 +3,8 @@
 namespace Accreditamenti\CongressiBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\JoinColumn;
 
 /**
  * Accreditamenti\CongressiBundle\Entity\Disciplina
@@ -10,8 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Accreditamenti\CongressiBundle\Entity\DisciplinaRepository")
  */
-class Disciplina
-{
+class Disciplina {
+
     /**
      * @var integer $id
      *
@@ -35,14 +37,12 @@ class Disciplina
      */
     private $nome;
 
-
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -51,8 +51,7 @@ class Disciplina
      *
      * @param integer $codice
      */
-    public function setCodice($codice)
-    {
+    public function setCodice($codice) {
         $this->codice = $codice;
     }
 
@@ -61,8 +60,7 @@ class Disciplina
      *
      * @return integer 
      */
-    public function getCodice()
-    {
+    public function getCodice() {
         return $this->codice;
     }
 
@@ -71,8 +69,7 @@ class Disciplina
      *
      * @param string $nome
      */
-    public function setNome($nome)
-    {
+    public function setNome($nome) {
         $this->nome = $nome;
     }
 
@@ -81,8 +78,8 @@ class Disciplina
      *
      * @return string 
      */
-    public function getNome()
-    {
+    public function getNome() {
         return $this->nome;
     }
+
 }
