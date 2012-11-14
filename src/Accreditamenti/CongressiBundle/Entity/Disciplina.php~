@@ -88,24 +88,4 @@ class Disciplina {
         return $this->nome;
     }
 
-
-    /**
-     * Set professione
-     *
-     * @param Accreditamenti\CongressiBundle\Entity\Professione $professione
-     */
-    public function setProfessione(\Accreditamenti\CongressiBundle\Entity\Professione $professione)
-    {
-        $this->professione = $professione;
-    }
-
-    /**
-     * Get professione
-     *
-     * @return Accreditamenti\CongressiBundle\Entity\Professione 
-     */
-    public function getProfessione()
-    {
-        return $this->professione;
-    }
 }
