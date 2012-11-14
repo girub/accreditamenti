@@ -3,19 +3,30 @@
 namespace Accreditamenti\CongressiBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+<<<<<<< HEAD
 
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\JoinColumn;
 
 
+=======
+use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\JoinColumn;
+
+>>>>>>> professione-disciplina
 /**
  * Accreditamenti\CongressiBundle\Entity\Disciplina
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Accreditamenti\CongressiBundle\Entity\DisciplinaRepository")
  */
+<<<<<<< HEAD
 class Disciplina
 {
+=======
+class Disciplina {
+
+>>>>>>> professione-disciplina
     /**
      * @var integer $id
      *
@@ -26,6 +37,7 @@ class Disciplina
     private $id;
 
     /**
+<<<<<<< HEAD
      * @var string $titolo_disciplina
      *
      * @ORM\Column(name="titolo_disciplina", type="string", length=255)
@@ -44,5 +56,70 @@ class Disciplina
     
     
 
+=======
+     * @var integer $codice
+     *
+     * @ORM\Column(name="codice", type="integer")
+     */
+    private $codice;
+
+    /**
+     * @var string $nome
+     *
+     * @ORM\Column(name="nome", type="string", length=255)
+     */
+    private $nome;
+
+    /**
+     * @ManyToOne(targetEntity="Professione", inversedBy="discipline")
+     * @JoinColumn(name="professione_id", referencedColumnName="id")
+     */
+    private $professione;
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId() {
+        return $this->id;
+    }
+
+    /**
+     * Set codice
+     *
+     * @param integer $codice
+     */
+    public function setCodice($codice) {
+        $this->codice = $codice;
+    }
+
+    /**
+     * Get codice
+     *
+     * @return integer 
+     */
+    public function getCodice() {
+        return $this->codice;
+    }
+
+    /**
+     * Set nome
+     *
+     * @param string $nome
+     */
+    public function setNome($nome) {
+        $this->nome = $nome;
+    }
+
+    /**
+     * Get nome
+     *
+     * @return string 
+     */
+    public function getNome() {
+        return $this->nome;
+    }
+>>>>>>> professione-disciplina
 
 }

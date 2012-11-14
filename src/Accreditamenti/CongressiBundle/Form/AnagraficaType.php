@@ -50,26 +50,52 @@ class AnagraficaType extends AbstractType {
                 ->add('email')
                 ->add('professione', 'choice', array(
                     'choices' => array(
-                        '1' => 'MEDICO GHIRURGO',
+                        '1' => 'Medico Chirurgo',
                         '2' => 'ODONTOIATRA',
                         '3' => 'FARMACISTA',
                         '14' => 'INFERMIERE',
                         '15' => 'INFERMIERE PEDIATRICO',
                         '18' => 'OSTETRICA/O',
-                    )
+                     
+                    ),                   
+                    'attr' => array('disabled' => true,)
+                    
+                    
                         )
                 )
-                ->add('disciplina', 'choice', array(
-                    'choices' => array(
-                        '42' => 'ANATOMIA PATOLOGICA',
-                        '32' => 'CHIRURGIA PEDIATRICA',
-                        '5' => 'EMATOLOGIA',
-                        '40' => 'OTORINOLARINGOIATRIA',
-                        '24' => 'PEDIATRIA',
-                        '60' => 'PEDIATRIA (PEDIATRI DI LIBERA SCELTA)',
-                        '89' => 'OSTETRICA/O',
+
+        ->add('disciplina',
+              'entity',
+               array(
+                     'class'=>'AccreditamentiCongressiBundle:Disciplina',
+                     'property'=>'nome',
+                     'query_builder' => function (\Accreditamenti\CongressiBundle\Entity\DisciplinaRepository $repository)
+                     {
+                         return $repository->createQueryBuilder('s')
+                                ->where('s.professione = 1')
+                                ->add('orderBy', 's.codice');
+                     }
                     )
-                ))
+              )
+
+
+                
+                
+//                ->add('disciplina', 'choice', array(
+ //
+//                    'choices' => array(
+//                        '42' => 'ANATOMIA PATOLOGICA',
+//                        '32' => 'CHIRURGIA PEDIATRICA',
+//                        '5' => 'EMATOLOGIA',
+//                        '40' => 'OTORINOLARINGOIATRIA',
+//                        '24' => 'PEDIATRIA',
+//                        '60' => 'PEDIATRIA (PEDIATRI DI LIBERA SCELTA)',
+//                        '89' => 'OSTETRICA/O',
+//                    )
+//                ))
+//                
+                
+                
                 ->add('qualifica', 'choice', array(
                     'choices' => array(
                         'D' => 'Dipendente',

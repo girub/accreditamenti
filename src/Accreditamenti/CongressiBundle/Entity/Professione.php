@@ -5,6 +5,8 @@ namespace Accreditamenti\CongressiBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\OneToMany;
 
+use Accreditamenti\CongressiBundle\Entity\Disciplina;
+
 /**
  * Accreditamenti\CongressiBundle\Entity\Professione
  *
@@ -23,17 +25,27 @@ class Professione {
     private $id;
 
     /**
-     * @var string $titolo_professione
+
+     * @var integer $codice
      *
-     * @ORM\Column(name="titolo_professione", type="string", length=255)
+     * @ORM\Column(name="codice", type="integer")
      */
-    private $titolo_professione;
+    private $codice;
+
+    /**
+     * @var string $nome
+     *
+     * @ORM\Column(name="nome", type="string", length=255)
+     */
+    private $nome;
+    
 
     
     /**
      * @OneToMany(targetEntity="Disciplina", mappedBy="professione")
      */
-    private $disciplina;
+
+    private $discipline;
 
     /**
      * Get id
@@ -44,49 +56,40 @@ class Professione {
         return $this->id;
     }
 
-   
-    public function __construct()
-    {
-        $this->disciplina = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-    
     /**
-     * Set titolo_professione
+     * Set codice
      *
-     * @param string $titoloProfessione
+     * @param integer $codice
      */
-    public function setTitoloProfessione($titoloProfessione)
-    {
-        $this->titolo_professione = $titoloProfessione;
+    public function setCodice($codice) {
+        $this->codice = $codice;
     }
 
     /**
-     * Get titolo_professione
+     * Get codice
+     *
+     * @return integer 
+     */
+    public function getCodice() {
+        return $this->codice;
+    }
+
+    /**
+     * Set nome
+     *
+     * @param string $nome
+     */
+    public function setNome($nome) {
+        $this->nome = $nome;
+    }
+
+    /**
+     * Get nome
      *
      * @return string 
      */
-    public function getTitoloProfessione()
-    {
-        return $this->titolo_professione;
+    public function getNome() {
+        return $this->nome;
     }
 
-    /**
-     * Add disciplina
-     *
-     * @param Accreditamenti\CongressiBundle\Entity\Disciplina $disciplina
-     */
-    public function addDisciplina(\Accreditamenti\CongressiBundle\Entity\Disciplina $disciplina)
-    {
-        $this->disciplina[] = $disciplina;
-    }
-
-    /**
-     * Get disciplina
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getDisciplina()
-    {
-        return $this->disciplina;
-    }
 }

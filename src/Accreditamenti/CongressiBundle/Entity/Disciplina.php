@@ -7,15 +7,13 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\JoinColumn;
 
-
 /**
  * Accreditamenti\CongressiBundle\Entity\Disciplina
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Accreditamenti\CongressiBundle\Entity\DisciplinaRepository")
  */
-class Disciplina
-{
+class Disciplina {
     /**
      * @var integer $id
      *
@@ -26,17 +24,22 @@ class Disciplina
     private $id;
 
     /**
-     * @var string $titolo_disciplina
+
+     * @var integer $codice
      *
-     * @ORM\Column(name="titolo_disciplina", type="string", length=255)
+     * @ORM\Column(name="codice", type="integer")
      */
-    private $titolo_disciplina;
-   
-    
-   
-    
+    private $codice;
+
     /**
-     * @ManyToOne(targetEntity="Professione", inversedBy="disciplina")
+     * @var string $nome
+     *
+     * @ORM\Column(name="nome", type="string", length=255)
+     */
+    private $nome;
+
+    /**
+     * @ManyToOne(targetEntity="Professione", inversedBy="discipline")
      * @JoinColumn(name="professione_id", referencedColumnName="id")
      */
     private $professione;
@@ -48,30 +51,47 @@ class Disciplina
      *
      * @return integer 
      */
-    public function getId()
-    {
+
+    public function getId() {
         return $this->id;
     }
 
     /**
-     * Set titolo_disciplina
+     * Set codice
      *
-     * @param string $titoloDisciplina
+     * @param integer $codice
      */
-    public function setTitoloDisciplina($titoloDisciplina)
-    {
-        $this->titolo_disciplina = $titoloDisciplina;
+    public function setCodice($codice) {
+        $this->codice = $codice;
     }
 
     /**
-     * Get titolo_disciplina
+     * Get codice
+     *
+     * @return integer 
+     */
+    public function getCodice() {
+        return $this->codice;
+    }
+
+    /**
+     * Set nome
+     *
+     * @param string $nome
+     */
+    public function setNome($nome) {
+        $this->nome = $nome;
+    }
+
+    /**
+     * Get nome
      *
      * @return string 
      */
-    public function getTitoloDisciplina()
-    {
-        return $this->titolo_disciplina;
+    public function getNome() {
+        return $this->nome;
     }
+
 
     /**
      * Set professione
