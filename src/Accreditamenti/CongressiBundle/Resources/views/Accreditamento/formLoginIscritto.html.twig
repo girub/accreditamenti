@@ -1,7 +1,7 @@
 {% extends '::frontEnd/base.html.twig' %}
 
 {% block body %}
-<h1>Entra in accreditamento</h1>
+<h1>Entra</h1>
 
 Inserire il proprio codice fiscale (senza spazi)
 <form action="{{ path('login_iscritto',{'accreditamento_id':id}) }}" method="post" {{ form_enctype(form) }}>
