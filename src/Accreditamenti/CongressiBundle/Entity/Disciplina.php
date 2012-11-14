@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping\JoinColumn;
 /**
  * Accreditamenti\CongressiBundle\Entity\Disciplina
  *
- * @ORM\Table()
+ * @ORM\Table(name="aim_disciplina")
  * @ORM\Entity(repositoryClass="Accreditamenti\CongressiBundle\Entity\DisciplinaRepository")
  */
 class Disciplina {

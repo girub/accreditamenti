@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping\OneToMany;
 /**
  * Accreditamenti\CongressiBundle\Entity\QuestionarioEcm
  *
- * @ORM\Table(name="ideacpa_questionarioecm")
+ * @ORM\Table(name="aim_questionarioecm")
  * @ORM\Entity(repositoryClass="Accreditamenti\CongressiBundle\Entity\QuestionarioEcmRepository")
  */
 class QuestionarioEcm extends Questionario {

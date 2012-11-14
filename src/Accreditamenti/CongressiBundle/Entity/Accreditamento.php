@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Accreditamenti\CongressiBundle\Entity\Accreditamento
  *
- * @ORM\Table(name="ideacpa_accreditamento")
+ * @ORM\Table(name="aim_accreditamento")
  * @ORM\Entity(repositoryClass="Accreditamenti\CongressiBundle\Entity\AccreditamentoRepository")
  */
 class Accreditamento {

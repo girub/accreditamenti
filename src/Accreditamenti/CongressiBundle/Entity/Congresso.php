@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping\OneToMany;
 /**
  * Accreditamenti\CongressiBundle\Entity\Congresso
  *
- * @ORM\Table(name="ideacpa_congresso")
+ * @ORM\Table(name="aim_congresso")
  * @ORM\Entity(repositoryClass="Accreditamenti\CongressiBundle\Entity\CongressoRepository")
  */
 class Congresso {

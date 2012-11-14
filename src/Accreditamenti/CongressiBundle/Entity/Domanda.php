@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping\OneToMany;
 /**
  * Accreditamenti\CongressiBundle\Entity\Domanda
  *
- * @ORM\Table(name="ideacpa_domanda")
+ * @ORM\Table(name="aim_domanda")
  * @ORM\Entity(repositoryClass="Accreditamenti\CongressiBundle\Entity\DomandaRepository")
  */
 class Domanda {

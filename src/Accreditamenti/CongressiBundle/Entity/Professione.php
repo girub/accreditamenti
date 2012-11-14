@@ -10,7 +10,7 @@ use Accreditamenti\CongressiBundle\Entity\Disciplina;
 /**
  * Accreditamenti\CongressiBundle\Entity\Professione
  *
- * @ORM\Table()
+ * @ORM\Table(name="aim_professione")
  * @ORM\Entity(repositoryClass="Accreditamenti\CongressiBundle\Entity\ProfessioneRepository")
  */
 class Professione {

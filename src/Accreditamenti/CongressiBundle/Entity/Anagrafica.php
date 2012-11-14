@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping\JoinColumn;
 /**
  * Accreditamenti\CongressiBundle\Entity\Anagrafica
  *
- * @ORM\Table(name="ideacpa_anagrafica")
+ * @ORM\Table(name="aim_anagrafica")
  * @ORM\Entity(repositoryClass="Accreditamenti\CongressiBundle\Entity\AnagraficaRepository")
  */
 class Anagrafica {
