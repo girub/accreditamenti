@@ -198,14 +198,14 @@ class Anagrafica {
     /**
      * @var string $professione
      *
-     * @ORM\Column(name="professione", type="string", length=255)
+     * @ORM\Column(name="professione", type="integer")
      */
     private $professione;
 
     /**
      * @var string $disciplina
      *
-     * @ORM\Column(name="disciplina", type="string", length=255)
+     * @ORM\Column(name="disciplina", type="integer")
      */
     private $disciplina;
 

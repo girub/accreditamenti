@@ -45,6 +45,10 @@ class Disciplina {
     private $professione;
     
     
+   public function __toString() {
+        return $this->nome;
+    }
+    
 
     /**
      * Get id
