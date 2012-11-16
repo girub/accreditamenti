@@ -2,11 +2,16 @@
 
 
 
-    
-    
-    
+
+
+
 
 {% block body %}
+<div class="progress" style="width: 300px;">cxvg
+  <div class="bar bar-success" style="width: 25%;">ddd</div>
+  <div class="bar bar-warning" style="width: 20%;">sss</div>
+  <div class="bar bar-danger" style="width: 10%;"></div>
+</div>
 <h1>Anagrafica</h1>
 I dati di seguito richiesti verranno utilizzati solo e soltanto per fini relativi <br>all’accreditamento ECM. 
 La preghiamo gentilmente di compilare tutti i campi. <br><br>
@@ -14,7 +19,7 @@ Dopo aver cliccato su “continua” si aprirà la pagina dove potrà compilare 
 accedervi è necessario compilare i dati in questa pagina. <br>
 Per qualsiasi necessità o informazione, le ricordiamo che la segreteria organizzativa è <br>a sua 
 completa disposizione.<br> Può scrivere a f.prayer@aimgroup.eu o chiamare il numero 055.2338823.  
-
+<br><br>
 
  <h3>Dati Personali</h3> 
 
@@ -28,6 +33,12 @@ completa disposizione.<br> Può scrivere a f.prayer@aimgroup.eu o chiamare il nu
             {{ form_errors(form.tipo_iscrizione) }}
             {{ form_widget(form.tipo_iscrizione) }}
         </div>    
+        
+           <div style="display: none">
+            {{ form_label(form.accreditamento) }}
+            {{ form_errors(form.accreditamento) }}
+            {{ form_widget(form.accreditamento) }}
+        </div>  
         
         <div>
             {{ form_label(form.nome) }}
@@ -137,7 +148,7 @@ completa disposizione.<br> Può scrivere a f.prayer@aimgroup.eu o chiamare il nu
             {{ form_widget(form.qualifica) }}
         </div> 
         
-        
+        <br>
         <h3>Dati Ente di appartenenza</h3> 
         <div>
             {{ form_label(form.ente_appartenenza) }}
@@ -182,7 +193,7 @@ completa disposizione.<br> Può scrivere a f.prayer@aimgroup.eu o chiamare il nu
             {{ form_errors(form.ente_telefono) }}
             {{ form_widget(form.ente_telefono) }}
         </div>
-          
+          <br>
         <h3>Dati relativi congresso</h3>
         
         
@@ -200,7 +211,7 @@ completa disposizione.<br> Può scrivere a f.prayer@aimgroup.eu o chiamare il nu
             {{ form_widget(form.iscritto_in_modo_autonomo) }}
         </div>
         
-        
+        <br>
         <h3>Reclutamento diretto da parte di azienda sponsor</h3>
 <div>
             {{ form_label(form.dichiara_sponsor_azienda,'Di essere stato Invitato da') }}
@@ -221,18 +232,17 @@ completa disposizione.<br> Può scrivere a f.prayer@aimgroup.eu o chiamare il nu
             {{ form_widget(form.dichiara_informato_dal_provider) }}
         </div>
         
+        <BR>
+        Informativa ai sensi del D. Lgs. 30 giugno 2003, n. 196.
         <textarea name="textarea2" cols="100" style="width: 700px" rows="5" wrap="VIRTUAL" readonly>
-Informativa ai sensi del D. Lgs. 30 giugno 2003, n. 196. 
-AIM GROUP INTERNATIONAL -  AIM Education Srl, in qualità di Titolare del trattamento, La informa che i dati personali da Lei forniti ovvero acquisiti da terzi, sono trattati per finalità connesse all’esecuzione degli adempimenti relativi alla Sua partecipazione all’evento, nonché per l’invio 
+ AIM GROUP INTERNATIONAL -  AIM Education Srl, in qualità di Titolare del trattamento, La informa che i dati personali da Lei forniti ovvero acquisiti da terzi, sono trattati per finalità connesse all’esecuzione degli adempimenti relativi alla Sua partecipazione all’evento, nonché per l’invio 
 gratuito di documentazione relativa ad altre sue iniziative o di altre società del gruppo AIM nell’ambito ECM.
 I trattamenti sono effettuati mediante elaborazioni manuali o strumenti elettronici o automatizzati, in modo da garantire la riservatezza e la sicurezza dei dati personali.  Il Titolare del trattamento può avvalersi di altre società del gruppo e/o di altri soggetti quali associazioni scientifiche, 
 enti pubblici o privati preposti alle attività formative ECM,  sempre in relazione all’espletamento delle attività relative alla formazione.
 Il conferimento dei Suoi dati personali è facoltativo ma in difetto Le sarà preclusa la partecipazione all’evento.  
 Lei potrà esercitare i diritti di cui all’articolo 7 del D. Lgs. n. 196 del 2003 e di opporsi sia al trattamento dei Suoi dati personali, ancorché pertinenti allo scopo della raccolta, sia al trattamento degli stessi ai fini di invio di materiale pubblicitario, di vendita diretta o di ricerche di mercato, inoltrando 
 apposita istanza a: AIM GROUP INTERNATIONAL -  AIM Education Srl - Via G. Ripamonti, 129  20141  Milano.
-Per il consenso ai trattamenti e alle comunicazioni descritte nell’informativa.
-
-</textarea>
+Per il consenso ai trattamenti e alle comunicazioni descritte nell’informativa.</textarea>
         <div>
             {{ form_label(form.privacy, 'Accetto si/no') }}
             {{ form_errors(form.privacy) }}
@@ -243,17 +253,9 @@ Per il consenso ai trattamenti e alle comunicazioni descritte nell’informativa
         {{ form_rest(form) }}
         
     <p>
-        <button type="submit">Salva Anagrafica</button>
+        <button type="submit">Continua</button>
     </p>
 </form>
-
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('anagrafica') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
 
 
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/ui-lightness/jquery-ui.css" type="text/css" media="all"/>

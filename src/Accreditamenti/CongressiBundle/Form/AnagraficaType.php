@@ -53,6 +53,7 @@ class AnagraficaType extends AbstractType {
                 )
                 ->add('disciplina', 'choice', array(
                     'choices' => array(
+                        '' => 'Seleziona',
                         '1' => 'Allergologia ed immunologia clinica',
                         '3' => 'Cardiologia',
                         '4' => 'Dermatologia e venereologia',
@@ -95,6 +96,7 @@ class AnagraficaType extends AbstractType {
 //                )
                 ->add('qualifica', 'choice', array(
                     'choices' => array(
+                        '' => 'Seleziona',
                         'D' => 'Dipendente',
                         'L' => 'Libero Professionista',
                         'C' => 'Convenzionato',
@@ -102,7 +104,7 @@ class AnagraficaType extends AbstractType {
                 ))
                 ->add('iscritto_in_modo_autonomo', 'choice', array(
                     'choices' => array(
-                            '' => 'Seleziona',
+                        '' => 'Seleziona',
                         'Si' => 'Si',
                         'No' => 'No',
                     )
@@ -112,7 +114,7 @@ class AnagraficaType extends AbstractType {
                 ->add('dichiara_autorizzazione_struttura', 'choice', array(
                     'required' => false,
                     'choices' => array(
-                           '' => 'Seleziona',
+                        '' => 'Seleziona',
                         'Si' => 'Si',
                         'No' => 'No',
                     )
