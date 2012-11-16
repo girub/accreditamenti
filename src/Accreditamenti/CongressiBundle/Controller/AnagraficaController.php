@@ -83,28 +83,38 @@ class AnagraficaController extends Controller {
 
         //cotrollo lato server dei dati compilati in anagrafica
         $data_nascita = $form['data_nascita']->getData();
-        if ($data_nascita==null) {
-               $campi_obbligatori="Data di nascita";
-          
-            $this->get('session')->setFlash('notice', "<br>Attenzione  " . $campi_obbligatori . " è obbligatoria!");
-            return $this->redirect($this->generateUrl('compila_anagrafica', 
-                    array(
-                           'nome' => $form['nome']->getData(),
-                           'cognome'=> $form['cognome']->getData(),
-                             
-                           'codice_fiscale' => $form['codice_fiscale']->getData(),
-                           'accreditamento_id' => $accreditamento_id,
-                        
-                        )
-                    
-                    ));
+        $luogo_nascita = $form['luogo_nascita']->getData();
+        $ordine_numero = $form['ordine_numero']->getData();
+        $ordine_citta = $form['ordine_citta']->getData();
+        $indirizzo_via = $form['indirizzo_via']->getData();
+        $indirizzo_numero_civico = $form['indirizzo_numero_civico']->getData();
+        $indirizzo_cap = $form['indirizzo_cap']->getData();
+        $indirizzo_citta = $form['indirizzo_citta']->getData();
+        $indirizzo_provincia = $form['indirizzo_provincia']->getData();
+        $telefono = $form['telefono']->getData();
+       $email = $form['email']->getData();
+         $privacy = $form['privacy']->getData();
+       
+        if ($data_nascita == null || $luogo_nascita == null || $ordine_numero == null || $ordine_citta == null ||
+            $indirizzo_via == null || $indirizzo_numero_civico == null || $indirizzo_cap == null || $indirizzo_citta == null
+            || $indirizzo_provincia == null || $telefono == null || $email == null  || $privacy == null) {
+            //$campi_obbligatori="Data di nascita";
+
+            $this->get('session')->setFlash('notice', "Attenzione i campi con asterisco sono obbligatori!");
+            return $this->redirect($this->generateUrl('compila_anagrafica', array(
+                                'nome' => $form['nome']->getData(),
+                                'cognome' => $form['cognome']->getData(),
+                                'codice_fiscale' => $form['codice_fiscale']->getData(),
+                                'accreditamento_id' => $accreditamento_id,
+                                 )
+                            ));
         }
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();

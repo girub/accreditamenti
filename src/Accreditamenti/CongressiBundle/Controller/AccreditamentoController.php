@@ -755,6 +755,24 @@ class AccreditamentoController extends Controller {
         $form->bindRequest($this->getRequest());
         $data = $form->getData();
 
+        
+        //controllo se utente ha compilato questionario valutazione
+        if($data['rilevanza_degli_argomenti']==null || $data['qualita_educativa']==null || $data['utilita_evento']==null
+                || $data['influenza_sponsor']==null){
+        
+            $this->get('session')->setFlash('notice', 'Attenzione è obbligatorio ripondere tutte le domande!');
+            return $this->redirect($this->generateUrl('compila_valutazione', array(
+                                'accreditamento_id' => $accreditamento_id,
+                                'anagrafica_id' => $anagrafica_id,
+                            )));
+        
+        
+           }
+        
+        
+        
+        
+        
         $risposteValutazione = new \Accreditamenti\CongressiBundle\Entity\RisposteUtentiQuestionarioValutazione;
         $risposteValutazione->setAnagraficaId($anagrafica_id);
         $risposteValutazione->setAccreditamentoId($accreditamento_id);
