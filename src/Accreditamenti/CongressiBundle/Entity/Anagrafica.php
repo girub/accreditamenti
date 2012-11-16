@@ -31,55 +31,6 @@ class Anagrafica {
     private $tipo_iscrizione;
 
     /**
-     * @var string $ente_appartenenza
-     *
-     * @ORM\Column(name="ente_appartenenza", nullable=true, type="string", length=255)
-     */
-    private $ente_appartenenza;
-
-    /**
-     * @var string $ente_citta
-     *
-     * @ORM\Column(name="ente_citta", nullable=true, type="string", length=255)
-     */
-    private $ente_citta;
-
-    /**
-     * @var string $ente_provincia
-     *
-     * @ORM\Column(name="ente_provincia", nullable=true, type="string", length=255)
-     */
-    private $ente_provincia;
-
-    /**
-     * @var string $ente_cap
-     *
-     * @ORM\Column(name="ente_cap", nullable=true, type="string", length=255)
-     */
-    private $ente_cap;
-
-    /**
-     * @var string $ente_via
-     *
-     * @ORM\Column(name="ente_via", nullable=true, type="string", length=255)
-     */
-    private $ente_via;
-
-    /**
-     * @var string $ente_numero_civico
-     *
-     * @ORM\Column(name="ente_numero_civico", nullable=true, type="string", length=255)
-     */
-    private $ente_numero_civico;
-
-    /**
-     * @var string $ente_telefono
-     *
-     * @ORM\Column(name="ente_telefono", nullable=true, type="string", length=255)
-     */
-    private $ente_telefono;
-
-    /**
      * @var string $nome
      *
      * @ORM\Column(name="nome", type="string", length=255)
@@ -94,18 +45,18 @@ class Anagrafica {
     private $cognome;
 
     /**
-     * @var date $data_nascita
-     *
-     * @ORM\Column(name="data_nascita", type="date")
-     */
-    private $data_nascita;
-
-    /**
      * @var string $luogo_nascita
      *
      * @ORM\Column(name="luogo_nascita", type="string", length=255)
      */
     private $luogo_nascita;
+
+    /**
+     * @var date $data_nascita
+     *
+     * @ORM\Column(name="data_nascita", type="date")
+     */
+    private $data_nascita;
 
     /**
      * @var string $codice_fiscale
@@ -173,7 +124,7 @@ class Anagrafica {
     /**
      * @var string $cellulare
      *
-     * @ORM\Column(name="cellulare", type="string", length=255)
+     * @ORM\Column(name="cellulare", nullable=true, type="string", length=255)
      */
     private $cellulare;
 
@@ -206,18 +157,53 @@ class Anagrafica {
     private $qualifica;
 
     /**
-     * @var boolean $iscritto_in_modo_autonomo
+     * @var string $ente_appartenenza
      *
-     * @ORM\Column(name="iscritto_in_modo_autonomo", type="string", length=255)
-     */
-    private $iscritto_in_modo_autonomo;
+     * @ORM\Column(name="ente_appartenenza", nullable=true, type="string", length=255)
+    */
+    private $ente_appartenenza;
 
     /**
-     * @var string $sponsor_azienda
+     * @var string $ente_citta
      *
-     * @ORM\Column(name="sponsor_azienda", type="string", length=255)
+     * @ORM\Column(name="ente_citta", nullable=true, type="string", length=255)
      */
-    private $sponsor_azienda;
+    private $ente_citta;
+
+    /**
+     * @var string $ente_provincia
+     *
+     * @ORM\Column(name="ente_provincia", nullable=true, type="string", length=255)
+     */
+    private $ente_provincia;
+
+    /**
+     * @var string $ente_cap
+     *
+     * @ORM\Column(name="ente_cap", nullable=true, type="string", length=255)
+     */
+    private $ente_cap;
+
+    /**
+     * @var string $ente_via
+     *
+     * @ORM\Column(name="ente_via", nullable=true, type="string", length=255)
+     */
+    private $ente_via;
+
+    /**
+     * @var string $ente_numero_civico
+     *
+     * @ORM\Column(name="ente_numero_civico", nullable=true, type="string", length=255)
+     */
+    private $ente_numero_civico;
+
+    /**
+     * @var string $ente_telefono
+     *
+     * @ORM\Column(name="ente_telefono", nullable=true, type="string", length=255)
+     */
+    private $ente_telefono;
 
     /**
      * @var string $dichiara_sponsor_azienda
@@ -232,17 +218,13 @@ class Anagrafica {
      * @ORM\Column(name="dichiara_autorizzazione_struttura", type="string", length=255))
      */
     private $dichiara_autorizzazione_struttura;
-    
+
     /**
      * @var boolean $dichiara_informato_dal_provider
      *
      * @ORM\Column(name="dichiara_informato_dal_provider", type="string", length=255))
      */
     private $dichiara_informato_dal_provider;
-    
-    
-    
-    
 
     /**
      * @var boolean $privacy
@@ -608,23 +590,7 @@ class Anagrafica {
         return $this->sponsor;
     }
 
-    /**
-     * Set sponsor_azienda
-     *
-     * @param string $sponsorAzienda
-     */
-    public function setSponsorAzienda($sponsorAzienda) {
-        $this->sponsor_azienda = $sponsorAzienda;
-    }
-
-    /**
-     * Get sponsor_azienda
-     *
-     * @return string 
-     */
-    public function getSponsorAzienda() {
-        return $this->sponsor_azienda;
-    }
+ 
 
     /**
      * Set privacy
@@ -878,24 +844,8 @@ class Anagrafica {
         return $this->indirizzo_via;
     }
 
-    /**
-     * Set iscritto_in_modo_autonomo
-     *
-     * @param boolean $iscrittoInModoAutonomo
-     */
-    public function setIscrittoInModoAutonomo($iscrittoInModoAutonomo) {
-        $this->iscritto_in_modo_autonomo = $iscrittoInModoAutonomo;
-    }
 
-    /**
-     * Get iscritto_in_modo_autonomo
-     *
-     * @return boolean 
-     */
-    public function getIscrittoInModoAutonomo() {
-        return $this->iscritto_in_modo_autonomo;
-    }
-
+    
     /**
      * Set indirizzo_numero_civico
      *
@@ -914,14 +864,12 @@ class Anagrafica {
         return $this->indirizzo_numero_civico;
     }
 
-
     /**
      * Set dichiara_sponsor_azienda
      *
      * @param string $dichiaraSponsorAzienda
      */
-    public function setDichiaraSponsorAzienda($dichiaraSponsorAzienda)
-    {
+    public function setDichiaraSponsorAzienda($dichiaraSponsorAzienda) {
         $this->dichiara_sponsor_azienda = $dichiaraSponsorAzienda;
     }
 
@@ -930,8 +878,7 @@ class Anagrafica {
      *
      * @return string 
      */
-    public function getDichiaraSponsorAzienda()
-    {
+    public function getDichiaraSponsorAzienda() {
         return $this->dichiara_sponsor_azienda;
     }
 
@@ -940,8 +887,7 @@ class Anagrafica {
      *
      * @param string $dichiaraAutorizzazioneStruttura
      */
-    public function setDichiaraAutorizzazioneStruttura($dichiaraAutorizzazioneStruttura)
-    {
+    public function setDichiaraAutorizzazioneStruttura($dichiaraAutorizzazioneStruttura) {
         $this->dichiara_autorizzazione_struttura = $dichiaraAutorizzazioneStruttura;
     }
 
@@ -950,8 +896,7 @@ class Anagrafica {
      *
      * @return string 
      */
-    public function getDichiaraAutorizzazioneStruttura()
-    {
+    public function getDichiaraAutorizzazioneStruttura() {
         return $this->dichiara_autorizzazione_struttura;
     }
 
@@ -960,8 +905,7 @@ class Anagrafica {
      *
      * @param string $dichiaraInformatoDalProvider
      */
-    public function setDichiaraInformatoDalProvider($dichiaraInformatoDalProvider)
-    {
+    public function setDichiaraInformatoDalProvider($dichiaraInformatoDalProvider) {
         $this->dichiara_informato_dal_provider = $dichiaraInformatoDalProvider;
     }
 
@@ -970,8 +914,8 @@ class Anagrafica {
      *
      * @return string 
      */
-    public function getDichiaraInformatoDalProvider()
-    {
+    public function getDichiaraInformatoDalProvider() {
         return $this->dichiara_informato_dal_provider;
     }
+
 }

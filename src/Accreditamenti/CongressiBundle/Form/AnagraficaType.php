@@ -9,13 +9,26 @@ class AnagraficaType extends AbstractType {
 
     public function buildForm(FormBuilder $builder, array $options) {
         $builder
-                ->add('ente_appartenenza')
-                ->add('ente_citta')
-                ->add('ente_provincia')
-                ->add('ente_cap')
-                ->add('ente_via')
-                ->add('ente_numero_civico')
-                ->add('ente_telefono')
+                ->add('ente_appartenenza', 'text', array(
+                    'required' => false,))
+                ->add('ente_citta', 'text', array(
+                    'required' => false,)
+                )
+                ->add('ente_provincia', 'text', array(
+                    'required' => false,)
+                )
+                ->add('ente_cap', 'text', array(
+                    'required' => false,)
+                )
+                ->add('ente_via', 'text', array(
+                    'required' => false,)
+                )
+                ->add('ente_numero_civico', 'text', array(
+                    'required' => false,)
+                )
+                ->add('ente_telefono', 'text', array(
+                    'required' => false,)
+                )
                 ->add('tipo_iscrizione', 'choice', array(
                     'choices' => array(
                         'P' => 'Partecipante',
@@ -43,7 +56,9 @@ class AnagraficaType extends AbstractType {
                 ->add('indirizzo_citta')
                 ->add('indirizzo_provincia')
                 ->add('telefono')
-                ->add('cellulare')
+                ->add('cellulare', 'text', array(
+                    'required' => false,)
+                )
                 ->add('email')
                 ->add('professione', 'choice', array(
                     'choices' => array(
@@ -102,15 +117,10 @@ class AnagraficaType extends AbstractType {
                         'C' => 'Convenzionato',
                     )
                 ))
-                ->add('iscritto_in_modo_autonomo', 'choice', array(
-                    'choices' => array(
-                        '' => 'Seleziona',
-                        'Si' => 'Si',
-                        'No' => 'No',
-                    )
-                ))
-                ->add('sponsor_azienda')
-                ->add('dichiara_sponsor_azienda')
+                
+                ->add('dichiara_sponsor_azienda', 'text', array(
+                    'required' => false,)
+                )
                 ->add('dichiara_autorizzazione_struttura', 'choice', array(
                     'required' => false,
                     'choices' => array(

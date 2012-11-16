@@ -82,20 +82,29 @@ class AnagraficaController extends Controller {
         $form->bindRequest($request);
 
         //cotrollo lato server dei dati compilati in anagrafica
-        $ente_appartenenza = $form['ente_appartenenza']->getData();
-        $ente_citta = $form['ente_citta']->getData();
-
-        if ($ente_appartenenza == "") {
-                
-           
-           
-        }elseif($ente_citta==""){
-            
-            
-            
-            $this->get('session')->setFlash('notice', '<br>Attenzione i campi con asterisco sono obbligatori!');
-            return $this->redirect($this->generateUrl('form_login_iscritto', array('id' => $accreditamento_id)));
+        $data_nascita = $form['data_nascita']->getData();
+        if ($data_nascita==null) {
+               $campi_obbligatori="Data di nascita";
+          
+            $this->get('session')->setFlash('notice', "<br>Attenzione  " . $campi_obbligatori . " è obbligatoria!");
+            return $this->redirect($this->generateUrl('compila_anagrafica', 
+                    array(
+                           'nome' => $form['nome']->getData(),
+                           'cognome'=> $form['cognome']->getData(),
+                             
+                           'codice_fiscale' => $form['codice_fiscale']->getData(),
+                           'accreditamento_id' => $accreditamento_id,
+                        
+                        )
+                    
+                    ));
         }
+        
+        
+        
+        
+        
+        
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
