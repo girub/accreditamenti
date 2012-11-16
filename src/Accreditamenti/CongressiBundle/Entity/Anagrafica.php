@@ -208,21 +208,21 @@ class Anagrafica {
     /**
      * @var string $dichiara_sponsor_azienda
      *
-     * @ORM\Column(name="dichiara_sponsor_azienda", type="string", length=255)
+     * @ORM\Column(name="dichiara_sponsor_azienda", nullable=true, type="string", length=255)
      */
     private $dichiara_sponsor_azienda;
 
     /**
      * @var boolean $dichiara_autorizzazione_struttura
      *
-     * @ORM\Column(name="dichiara_autorizzazione_struttura", type="string", length=255))
+     * @ORM\Column(name="dichiara_autorizzazione_struttura",  nullable=true, type="string", length=255))
      */
     private $dichiara_autorizzazione_struttura;
 
     /**
      * @var boolean $dichiara_informato_dal_provider
      *
-     * @ORM\Column(name="dichiara_informato_dal_provider", type="string", length=255))
+     * @ORM\Column(name="dichiara_informato_dal_provider", nullable=true, type="string", length=255))
      */
     private $dichiara_informato_dal_provider;
 
