@@ -53,45 +53,102 @@ class LoadAccreditamenti implements FixtureInterface {
         $questionarioECM->setNumeroTentativiCompilazione(3);
         $manager->persist($questionarioECM);
 
+        // ---------------------------
         $primaDomanda = new Domanda();
-        $primaDomanda->setDescrizione("Di che colore era il cavallo bianco di Napoleone");
+        $primaDomanda->setDescrizione("L\’equilibrio ottimale fra acido linoleico e acido alfa-linolenico nella dieta dovrebbe essere intorno a:");
         $primaDomanda->setQuestionarioecm($questionarioECM);
         $manager->persist($primaDomanda);
 
         $primaRisposta = new Risposta();
         $primaRisposta->setDomanda($primaDomanda);
-        $primaRisposta->setDescrizione("Bianco");
-        $primaRisposta->setVero(true);
+        $primaRisposta->setDescrizione("100:1");
+        $primaRisposta->setVero(false);
         $manager->persist($primaRisposta);
 
         $secondaRisposta = new Risposta();
         $secondaRisposta->setDomanda($primaDomanda);
-        $secondaRisposta->setDescrizione("Verde");
+        $secondaRisposta->setDescrizione("50:1");
         $secondaRisposta->setVero(false);
         $manager->persist($secondaRisposta);
 
-        
-        
-        
-        
-        
-        
+        $terzaRisposta = new Risposta();
+        $terzaRisposta->setDomanda($primaDomanda);
+        $terzaRisposta->setDescrizione("20:1");
+        $terzaRisposta->setVero(false);
+        $manager->persist($terzaRisposta);
+
+        $quartaRisposta = new Risposta();
+        $quartaRisposta->setDomanda($primaDomanda);
+        $quartaRisposta->setDescrizione("5/10:1");
+        $quartaRisposta->setVero(true);
+        $manager->persist($quartaRisposta);
+        //-------------2 -----------------
         $secondaDomanda = new Domanda();
-        $secondaDomanda->setDescrizione("Quanti sono i sette nani");
+        $secondaDomanda->setDescrizione("Il fattore limitante di maggiore importanza per i livelli circolanti degli LCPUFA è rappresentato da:");
         $secondaDomanda->setQuestionarioecm($questionarioECM);
         $manager->persist($secondaDomanda);
 
         $primaRispostaSecondaDomanda = new Risposta();
         $primaRispostaSecondaDomanda->setDomanda($secondaDomanda);
-        $primaRispostaSecondaDomanda->setDescrizione("Sono 7");
-        $primaRispostaSecondaDomanda->setVero(true);
+        $primaRispostaSecondaDomanda->setDescrizione("genetica");
+        $primaRispostaSecondaDomanda->setVero(false);
         $manager->persist($primaRispostaSecondaDomanda);
 
         $secondaRispostaSecondaDomanda = new Risposta();
         $secondaRispostaSecondaDomanda->setDomanda($secondaDomanda);
-        $secondaRispostaSecondaDomanda->setDescrizione("49");
-        $secondaRispostaSecondaDomanda->setVero(false);
+        $secondaRispostaSecondaDomanda->setDescrizione("presenza nella dieta");
+        $secondaRispostaSecondaDomanda->setVero(true);
         $manager->persist($secondaRispostaSecondaDomanda);
+
+        $terzaRispostaSecondaDomanda = new Risposta();
+        $terzaRispostaSecondaDomanda->setDomanda($secondaDomanda);
+        $terzaRispostaSecondaDomanda->setDescrizione("assunzione di alcool");
+        $terzaRispostaSecondaDomanda->setVero(false);
+        $manager->persist($terzaRispostaSecondaDomanda);
+
+        $quartaRispostaSecondaDomanda = new Risposta();
+        $quartaRispostaSecondaDomanda->setDomanda($secondaDomanda);
+        $quartaRispostaSecondaDomanda->setDescrizione("rapporto tra i precursori");
+        $quartaRispostaSecondaDomanda->setVero(false);
+        $manager->persist($quartaRispostaSecondaDomanda);
+
+
+        // TERZA DOMANDA
+        $terzaDomanda = new Domanda();
+        $terzaDomanda->setDescrizione("Gli esiti a distanza correlati alla nascita pretermine comprendono:");
+        $terzaDomanda->setQuestionarioecm($questionarioECM);
+        $manager->persist($terzaDomanda);
+
+        $primaRispostaTerzaDomanda = new Risposta();
+        $primaRispostaTerzaDomanda->setDomanda($terzaDomanda);
+        $primaRispostaTerzaDomanda->setDescrizione("Deficit neurosensoriali");
+        $primaRispostaTerzaDomanda->setVero(false);
+        $manager->persist($primaRispostaTerzaDomanda);
+
+        $secondaRispostaTerzaDomanda = new Risposta();
+        $secondaRispostaTerzaDomanda->setDomanda($terzaDomanda);
+        $secondaRispostaTerzaDomanda->setDescrizione("Malattia polmonare cronica");
+        $secondaRispostaTerzaDomanda->setVero(false);
+        $manager->persist($secondaRispostaTerzaDomanda);
+
+        $terzaRispostaTerzaDomanda = new Risposta();
+        $terzaRispostaTerzaDomanda->setDomanda($terzaDomanda);
+        $terzaRispostaTerzaDomanda->setDescrizione("Paralisi cerebrale infantile");
+        $terzaRispostaTerzaDomanda->setVero(false);
+        $manager->persist($terzaRispostaTerzaDomanda);
+
+        $quartaRispostaTerzaDomanda = new Risposta();
+        $quartaRispostaTerzaDomanda->setDomanda($terzaDomanda);
+        $quartaRispostaTerzaDomanda->setDescrizione("Tutte le precedenti");
+        $quartaRispostaTerzaDomanda->setVero(true);
+        $manager->persist($quartaRispostaTerzaDomanda);
+
+        $quintaRispostaTerzaDomanda = new Risposta();
+        $quintaRispostaTerzaDomanda->setDomanda($terzaDomanda);
+        $quintaRispostaTerzaDomanda->setDescrizione("Nessuna delle precedenti");
+        $quintaRispostaTerzaDomanda->setVero(false);
+        $manager->persist($quintaRispostaTerzaDomanda );
+
 
         $primoIscritto = new Iscritti();
         $primoIscritto->setAccreditamento($accreditamentoDellaPigna);
@@ -108,8 +165,6 @@ class LoadAccreditamenti implements FixtureInterface {
         $secondoIscritto->setCodiceFiscale('GNTSMN82P10C573Q');
         $secondoIscritto->setTipologiaIscritto(Iscritti::PARTECIPANTE);
         $manager->persist($secondoIscritto);
-
-
 
         $medico_chirurgo = new Professione();
         $medico_chirurgo->setCodice(1);
@@ -817,13 +872,13 @@ class LoadAccreditamenti implements FixtureInterface {
         $terapista_occupazionale_disciplina->setProfessione($terapista_occupazionale);
         $terapista_occupazionale_disciplina->setNome('Terapista occupazionale');
         $manager->persist($terapista_occupazionale_disciplina);
-        
+
         $tecnico_prevenzione_disciplina = new Disciplina();
         $tecnico_prevenzione_disciplina->setCodice(105);
         $tecnico_prevenzione_disciplina->setProfessione($tecnico_prevenzione);
         $tecnico_prevenzione_disciplina->setNome('Tecnico della prevenzione nell\'ambiente e nei luoghi di lavoro');
         $manager->persist($tecnico_prevenzione_disciplina);
-               
+
         //MEDICO
         $scienza_alimentazione = new Disciplina();
         $scienza_alimentazione->setCodice(106);

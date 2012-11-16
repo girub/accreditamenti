@@ -49,7 +49,7 @@ class AnagraficaType extends AbstractType {
                     'choices' => array(
                         '1' => 'Medico Chirurgo',
                     ),
-                        )
+                 )
                 )
                 ->add('disciplina', 'choice', array(
                     'choices' => array(
