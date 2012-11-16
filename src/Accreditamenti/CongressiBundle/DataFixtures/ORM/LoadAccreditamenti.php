@@ -40,7 +40,7 @@ class LoadAccreditamenti implements FixtureInterface {
         $accreditamentoDellaPigna->setOreFormative(123);
         $accreditamentoDellaPigna->setObiettivoFormativo('Obiettivo formativo');
         $accreditamentoDellaPigna->setNumeroCrediti(33);
-        $accreditamentoDellaPigna->setSupportoAziendeSponsor('Mellin, Plasmon, Humana');
+        $accreditamentoDellaPigna->setSupportoAziendeSponsor('INLINEA SRL , VALEAS S.P.A. , STEVE JONES SRL , STEWART ITALIA CHEMICAL & PHARMACEUTICAL INDUSTRIES SRL , STERIL PHARMA SRL ,  SCHARPER THERAPEUTICS S.R.L. , SANOFI PASTEUR MSD S.P.A. , RECKITT BENKISER HEALTHCARE INTERNATIONAL LTD. , PLUSOPTIX GMBH , PEDIATRICA SRL , NOVARTIS VACCINES AND DIAGNOSTICS S.R.L. , NOOS S.R.L. , NESTLÉ ITALIANA SPA , MILTE ITALIA SPA , MELLIN SPA BRAND APTAMIL MILUPA , MELLIN SPA , ISTITUTO LUSO FARMACO D\'ITALIA S.P.A. , ITALCHIMICI S.P.A. , HUMANA ITALIA SPA , HEINZ ITALIA SPA (PLASMON) , GLAXOSMITHKLINE S.P.A. , ENVICON SRL , E MEETING & CONSULTING (IN NOME E PER CONTO DI DICOFARM) , DOCTOR SHOP S.R.L. , DMG ITALIA S.R.L. , DIGIBEL MEDICAL DEVICES DI MAURIZIO FARINELLA , CONNEXT SRL , AR FITOFARMA S.R.L. , AL.PRE.TEC. S.R.L. , ALERE SRL , ABS ADVANCED BIOMEDICAL SYSTEMS S.R.L. , A. MENARINI INDUSTRIE FARMACEUTICHE RIUNITE S.R.L');
         $manager->persist($accreditamentoDellaPigna);
 
         $questionarioECM = new QuestionarioEcm();
@@ -70,6 +70,12 @@ class LoadAccreditamenti implements FixtureInterface {
         $secondaRisposta->setVero(false);
         $manager->persist($secondaRisposta);
 
+        
+        
+        
+        
+        
+        
         $secondaDomanda = new Domanda();
         $secondaDomanda->setDescrizione("Quanti sono i sette nani");
         $secondaDomanda->setQuestionarioecm($questionarioECM);

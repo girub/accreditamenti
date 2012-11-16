@@ -31,11 +31,8 @@ class AnagraficaType extends AbstractType {
                     'label' => 'Data Nascita',
                     'widget' => 'single_text',
                     'format' => 'dd-MM-yyyy'
-                    )
                         )
-                
-                
-                
+                )
                 ->add('luogo_nascita')
                 ->add('codice_fiscale')
                 ->add('ordine_numero')
@@ -51,51 +48,51 @@ class AnagraficaType extends AbstractType {
                 ->add('professione', 'choice', array(
                     'choices' => array(
                         '1' => 'Medico Chirurgo',
-                        '2' => 'ODONTOIATRA',
-                        '3' => 'FARMACISTA',
-                        '14' => 'INFERMIERE',
-                        '15' => 'INFERMIERE PEDIATRICO',
-                        '18' => 'OSTETRICA/O',
-                     
-                    ),                   
-                    'attr' => array('disabled' => true,)
-                    
-                    
+                    ),
+                        )
+                )
+                ->add('disciplina', 'choice', array(
+                    'choices' => array(
+                        '1' => 'Allergologia ed immunologia clinica',
+                        '3' => 'Cardiologia',
+                        '4' => 'Dermatologia e venereologia',
+                        '6' => 'Endocrinologia',
+                        '10' => 'Malattie metaboliche e diabetologia',
+                        '11' => 'Malattie dell\'apparato respiratorio',
+                        '12' => 'Malattie infettive',
+                        '18' => 'Medicina dello sport',
+                        '20' => 'Neonatologia',
+                        '21' => 'Neurologia',
+                        '22' => 'Neuropsichiatria infantile',
+                        '24' => 'Pediatria',
+                        '36' => 'Ginecologia e ostetricia',
+                        '38' => 'Oftalmologia',
+                        '39' => 'Ortopedia e traumatologia',
+                        '40' => 'Otorinolaringoiatria',
+                        '41' => 'Urologia',
+                        '45' => 'Farmacologia e tossicologia clinica',
+                        '55' => 'Igiene, epidemiologia e sanità pubblica',
+                        '56' => 'Igiene degli alimenti e della nutrizione',
+                        '58' => 'Medicina generale (medici di famiglia)',
+                        '59' => 'Continuità assistenziale',
+                        '60' => 'Pediatria (pediatri di libera scelta)',
+                        '106' => 'Scienza dell\'alimentazione e dietetica
+',
+                    ),
                         )
                 )
 
-        ->add('disciplina',
-              'entity',
-               array(
-                     'class'=>'AccreditamentiCongressiBundle:Disciplina',
-                     'property'=>'nome',
-                     'query_builder' => function (\Accreditamenti\CongressiBundle\Entity\DisciplinaRepository $repository)
-                     {
-                         return $repository->createQueryBuilder('s')
-                                ->where('s.professione = 1')
-                                ->add('orderBy', 's.codice');
-                     }
-                    )
-              )
 
-
-                
-                
-//                ->add('disciplina', 'choice', array(
- //
-//                    'choices' => array(
-//                        '42' => 'ANATOMIA PATOLOGICA',
-//                        '32' => 'CHIRURGIA PEDIATRICA',
-//                        '5' => 'EMATOLOGIA',
-//                        '40' => 'OTORINOLARINGOIATRIA',
-//                        '24' => 'PEDIATRIA',
-//                        '60' => 'PEDIATRIA (PEDIATRI DI LIBERA SCELTA)',
-//                        '89' => 'OSTETRICA/O',
-//                    )
-//                ))
-//                
-                
-                
+//                ->add('disciplina', 'entity', array(
+//                    'class' => 'AccreditamentiCongressiBundle:Disciplina',
+//                    'property' => 'nome',
+//                    'query_builder' => function (\Accreditamenti\CongressiBundle\Entity\DisciplinaRepository $repository) {
+//                        return $repository->createQueryBuilder('s')
+//                                ->where('s.professione = 1')
+//                                ->add('orderBy', 's.codice');
+//                    }
+//                        )
+//                )
                 ->add('qualifica', 'choice', array(
                     'choices' => array(
                         'D' => 'Dipendente',
