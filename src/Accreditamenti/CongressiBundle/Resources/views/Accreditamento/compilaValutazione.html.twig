@@ -2,12 +2,12 @@
 
 {% block body %}
 <h2>Compila il questionario di valutazione</h2>
-
+<br>
 
 <form action="{{ path('valutazione_save', {'accreditamento_id': accreditamento_id,'anagrafica_id': anagrafica_id}) }}" method="post">
     {# form_widget(form) #}
 
-            <div>
+        <div style="width: 450px;">
             {{ form_label(form.rilevanza_degli_argomenti,'1) Come valuta la rilevanza degli argomenti trattati rispetto alla sua necessità di aggiornamento?') }}
             {{ form_errors(form.rilevanza_degli_argomenti) }}
             {{ form_widget(form.rilevanza_degli_argomenti) }}

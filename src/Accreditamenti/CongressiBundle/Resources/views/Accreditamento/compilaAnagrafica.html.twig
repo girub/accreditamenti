@@ -8,17 +8,20 @@
 
 {% block body %}
 
-<h1>Anagrafica</h1>
+<h1>Anagrafica</h1><br>
 I dati di seguito richiesti verranno utilizzati solo e soltanto per fini relativi <br>all’accreditamento ECM. 
 La preghiamo gentilmente di compilare tutti i campi. <br><br>
 Dopo aver cliccato su “continua” si aprirà la pagina dove potrà compilare il <br>questionario ECM. Per 
-accedervi è necessario compilare i dati in questa pagina. <br>
-Per qualsiasi necessità o informazione, le ricordiamo che la segreteria organizzativa è <br>a sua 
-completa disposizione.<br> Può scrivere a f.prayer@aimgroup.eu o chiamare il numero 055.2338823.  
+accedervi è necessario compilare i dati in questa pagina. <br><br>
+<span style="color:#0064af;">
+Per qualsiasi necessità o informazione, le ricordiamo che la segreteria organizzativa è a sua <br>
+completa disposizione.Può scrivere a f.prayer@aimgroup.eu o chiamare il numero 055.2338823. 
+</span>
 <br><br>
 
  <h3>Dati Personali</h3> 
-
+ <br>
+I campi con l'asterisco sono obbligatori
 <form action="{{ path('anagrafica_create', {'accreditamento_id': accreditamento_id}) }}" method="post" {{ form_enctype(form) }}>
     {# form_widget(form) #}
         
@@ -37,69 +40,70 @@ completa disposizione.<br> Può scrivere a f.prayer@aimgroup.eu o chiamare il nu
         </div>  
         
         <div>
-            {{ form_label(form.nome) }}
+            {{ form_label(form.nome, 'Nome       *') }}
             {{ form_errors(form.nome) }}
             {{ form_widget(form.nome) }}
+               
         </div>  
         
         <div>
-            {{ form_label(form.cognome) }}
+            {{ form_label(form.cognome, 'Cognome        *') }}
             {{ form_errors(form.cognome) }}
             {{ form_widget(form.cognome) }}
         </div>  
                 
          <div>
-            {{ form_label(form.luogo_nascita,  'Nato a') }}
+            {{ form_label(form.luogo_nascita,  'Nato a        *') }}
             {{ form_errors(form.luogo_nascita) }}
             {{ form_widget(form.luogo_nascita) }}
         </div> 
         
          <div>
-            {{ form_label(form.data_nascita,'il') }}
+            {{ form_label(form.data_nascita,'il        *') }}
             {{ form_errors(form.data_nascita) }}
             {{ form_widget(form.data_nascita) }}
         </div> 
          <div>
-            {{ form_label(form.codice_fiscale,'Codice fiscale') }}
+            {{ form_label(form.codice_fiscale,'Codice fiscale        *') }}
             {{ form_errors(form.codice_fiscale) }}
             {{ form_widget(form.codice_fiscale) }}
         </div>
         
         
          <div>
-            {{ form_label(form.indirizzo_citta, 'Residente in') }}
+            {{ form_label(form.indirizzo_citta, 'Residente in        *') }}
             {{ form_errors(form.indirizzo_citta) }}
             {{ form_widget(form.indirizzo_citta) }}
         </div> 
         
          <div>
-            {{ form_label(form.indirizzo_provincia, 'Provincia') }}
+            {{ form_label(form.indirizzo_provincia, 'Provincia        *') }}
             {{ form_errors(form.indirizzo_provincia) }}
             {{ form_widget(form.indirizzo_provincia) }}
         </div> 
         
         <div>
-            {{ form_label(form.indirizzo_cap, 'Cap') }}
+            {{ form_label(form.indirizzo_cap, 'Cap        *') }}
             {{ form_errors(form.indirizzo_cap) }}
             {{ form_widget(form.indirizzo_cap) }}
         </div> 
         
          <div>
-            {{ form_label(form.indirizzo_via, 'Via') }}
+            {{ form_label(form.indirizzo_via, 'Via        *') }}
             {{ form_errors(form.indirizzo_via) }}
             {{ form_widget(form.indirizzo_via) }}
         </div> 
         
         
          <div>
-            {{ form_label(form.indirizzo_numero_civico, 'N° civico') }}
+            {{ form_label(form.indirizzo_numero_civico, 'N° civico        *') }}
             {{ form_errors(form.indirizzo_numero_civico) }}
             {{ form_widget(form.indirizzo_numero_civico) }}
         </div> 
         
         
         <div>
-            {{ form_label(form.telefono) }}
+            {{ form_label(form.telefono,'Telefono        *') }}
             {{ form_errors(form.telefono) }}
             {{ form_widget(form.telefono) }}
         </div> 
@@ -110,36 +114,36 @@ completa disposizione.<br> Può scrivere a f.prayer@aimgroup.eu o chiamare il nu
             {{ form_widget(form.cellulare) }}
         </div> 
            <div>
-            {{ form_label(form.email) }}
+            {{ form_label(form.email,'email        *') }}
             {{ form_errors(form.email) }}
             {{ form_widget(form.email) }}
         </div> 
         
         
           <div>
-            {{ form_label(form.professione) }}
+            {{ form_label(form.professione,'Professione        *') }}
             {{ form_errors(form.professione) }}
             {{ form_widget(form.professione) }}
         </div> 
         
           <div>
-            {{ form_label(form.disciplina) }}
+            {{ form_label(form.disciplina,'Disciplina        *') }}
             {{ form_errors(form.disciplina) }}
             {{ form_widget(form.disciplina) }}
         </div> 
             <div>
-            {{ form_label(form.ordine_numero,'Nr. Iscrizione Ordine/Collegio Ass. prof.le') }}
+            {{ form_label(form.ordine_numero,'Nr. Iscrizione Ordine/Collegio Ass. prof.le        *') }}
             {{ form_errors(form.ordine_numero) }}
             {{ form_widget(form.ordine_numero) }}
         </div> 
           <div>
-            {{ form_label(form.ordine_citta,'di') }}
+            {{ form_label(form.ordine_citta,'di        *') }}
             {{ form_errors(form.ordine_citta) }}
             {{ form_widget(form.ordine_citta) }}
         </div> 
         
             <div>
-            {{ form_label(form.qualifica) }}
+            {{ form_label(form.qualifica,'Qualifica        *') }}
             {{ form_errors(form.qualifica) }}
             {{ form_widget(form.qualifica) }}
         </div> 
@@ -192,7 +196,7 @@ completa disposizione.<br> Può scrivere a f.prayer@aimgroup.eu o chiamare il nu
           <br>
           il sottoscritto, consapevole che le dichiarazioni mendaci sono punite dalla legge dello Stato Italiano, sotto la propria responsabilità DICHIARA che le suddette informazioni sono veritiere.
             <div>
-            {{ form_label(form.informazioni_veritiere, 'Si') }}
+            {{ form_label(form.informazioni_veritiere, 'Si        *') }}
             {{ form_errors(form.informazioni_veritiere) }}
             {{ form_widget(form.informazioni_veritiere) }}
         </div>
@@ -249,7 +253,7 @@ Lei potrà esercitare i diritti di cui all’articolo 7 del D. Lgs. n. 196 del 2
 apposita istanza a: AIM GROUP INTERNATIONAL -  AIM Education Srl - Via G. Ripamonti, 129  20141  Milano.
 Per il consenso ai trattamenti e alle comunicazioni descritte nell’informativa.</textarea>
         <div>
-            {{ form_label(form.privacy, 'Accetto si/no') }}
+            {{ form_label(form.privacy, 'Accetto si/no        *') }}
             {{ form_errors(form.privacy) }}
             {{ form_widget(form.privacy) }}
         </div>

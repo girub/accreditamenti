@@ -92,12 +92,14 @@ class AnagraficaController extends Controller {
         $indirizzo_citta = $form['indirizzo_citta']->getData();
         $indirizzo_provincia = $form['indirizzo_provincia']->getData();
         $telefono = $form['telefono']->getData();
-       $email = $form['email']->getData();
-         $privacy = $form['privacy']->getData();
-       
+        $email = $form['email']->getData();
+        $informazioni_veritiere = $form['informazioni_veritiere']->getData();
+        
+        $privacy = $form['privacy']->getData();
+
         if ($data_nascita == null || $luogo_nascita == null || $ordine_numero == null || $ordine_citta == null ||
-            $indirizzo_via == null || $indirizzo_numero_civico == null || $indirizzo_cap == null || $indirizzo_citta == null
-            || $indirizzo_provincia == null || $telefono == null || $email == null  || $privacy == null) {
+                $indirizzo_via == null || $indirizzo_numero_civico == null || $indirizzo_cap == null || $indirizzo_citta == null
+                || $indirizzo_provincia == null || $telefono == null || $email == null || $privacy == null || $informazioni_veritiere==null) {
             //$campi_obbligatori="Data di nascita";
 
             $this->get('session')->setFlash('notice', "Attenzione i campi con asterisco sono obbligatori!");
@@ -106,7 +108,7 @@ class AnagraficaController extends Controller {
                                 'cognome' => $form['cognome']->getData(),
                                 'codice_fiscale' => $form['codice_fiscale']->getData(),
                                 'accreditamento_id' => $accreditamento_id,
-                                 )
+                                    )
                             ));
         }
 
