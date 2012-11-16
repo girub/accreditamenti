@@ -9,7 +9,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Accreditamenti\CongressiBundle\Entity\Anagrafica;
 use Accreditamenti\CongressiBundle\Form\AnagraficaType;
 
-
 /**
  * Anagrafica controller.
  *
@@ -82,16 +81,34 @@ class AnagraficaController extends Controller {
         $form = $this->createForm(new AnagraficaType(), $anagrafica);
         $form->bindRequest($request);
 
+        //cotrollo lato server dei dati compilati in anagrafica
+        $ente_appartenenza = $form['ente_appartenenza']->getData();
+        $ente_citta = $form['ente_citta']->getData();
+
+        if ($ente_appartenenza == "") {
+                
+           
+           
+        }elseif($ente_citta==""){
+            
+            
+            
+            $this->get('session')->setFlash('notice', '<br>Attenzione i campi con asterisco sono obbligatori!');
+            return $this->redirect($this->generateUrl('form_login_iscritto', array('id' => $accreditamento_id)));
+        }
+
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
             $em->persist($anagrafica);
             $em->flush();
 
             return $this->redirect($this->generateUrl('compila_ecm', array(
-                'anagrafica_id' => $anagrafica->getId(),
-                 'accreditamento_id' => $accreditamento_id,   
-                 )));
+                                'anagrafica_id' => $anagrafica->getId(),
+                                'accreditamento_id' => $accreditamento_id,
+                            )));
         }
+
+
 
         return array(
             'entity' => $anagrafica,

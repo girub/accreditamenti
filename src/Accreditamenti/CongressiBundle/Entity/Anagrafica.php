@@ -33,49 +33,49 @@ class Anagrafica {
     /**
      * @var string $ente_appartenenza
      *
-     * @ORM\Column(name="ente_appartenenza", type="string", length=255)
+     * @ORM\Column(name="ente_appartenenza", nullable=true, type="string", length=255)
      */
     private $ente_appartenenza;
 
     /**
      * @var string $ente_citta
      *
-     * @ORM\Column(name="ente_citta", type="string", length=255)
+     * @ORM\Column(name="ente_citta", nullable=true, type="string", length=255)
      */
     private $ente_citta;
 
     /**
      * @var string $ente_provincia
      *
-     * @ORM\Column(name="ente_provincia", type="string", length=255)
+     * @ORM\Column(name="ente_provincia", nullable=true, type="string", length=255)
      */
     private $ente_provincia;
 
     /**
      * @var string $ente_cap
      *
-     * @ORM\Column(name="ente_cap", type="string", length=255)
+     * @ORM\Column(name="ente_cap", nullable=true, type="string", length=255)
      */
     private $ente_cap;
 
     /**
      * @var string $ente_via
      *
-     * @ORM\Column(name="ente_via", type="string", length=255)
+     * @ORM\Column(name="ente_via", nullable=true, type="string", length=255)
      */
     private $ente_via;
 
     /**
      * @var string $ente_numero_civico
      *
-     * @ORM\Column(name="ente_numero_civico", type="string", length=255)
+     * @ORM\Column(name="ente_numero_civico", nullable=true, type="string", length=255)
      */
     private $ente_numero_civico;
 
     /**
      * @var string $ente_telefono
      *
-     * @ORM\Column(name="ente_telefono", type="string", length=255)
+     * @ORM\Column(name="ente_telefono", nullable=true, type="string", length=255)
      */
     private $ente_telefono;
 
