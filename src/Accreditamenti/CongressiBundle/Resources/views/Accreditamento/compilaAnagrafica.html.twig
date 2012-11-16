@@ -201,6 +201,25 @@ completa disposizione.<br> Può scrivere a f.prayer@aimgroup.eu o chiamare il nu
         </div>
         
         
+        <h3>Reclutamento diretto da parte di azienda sponsor</h3>
+<div>
+            {{ form_label(form.dichiara_sponsor_azienda,'Di essere stato Invitato da') }}
+            {{ form_errors(form.dichiara_sponsor_azienda) }}
+            {{ form_widget(form.dichiara_sponsor_azienda) }}
+        </div>
+
+    <div>
+            {{ form_label(form.dichiara_autorizzazione_struttura,'Di aver ottenuto, se necessario, regolare autorizzazione a partecipare all\’evento di cui sopra dalla Struttura dove svolge la propria attività professionale') }}
+            {{ form_errors(form.dichiara_autorizzazione_struttura) }}
+            {{ form_widget(form.dichiara_autorizzazione_struttura) }}
+        </div>    
+        
+        
+        <div>
+            {{ form_label(form.dichiara_informato_dal_provider,'Di essere stato informato dal Provider del limite massimo di 1/3 (50 crediti) dei crediti formativi ricondotti al triennio 2011-2013 acquisibili mediante reclutamento diretto') }}
+            {{ form_errors(form.dichiara_informato_dal_provider) }}
+            {{ form_widget(form.dichiara_informato_dal_provider) }}
+        </div>
         
         <textarea name="textarea2" cols="100" style="width: 700px" rows="5" wrap="VIRTUAL" readonly>
 Informativa ai sensi del D. Lgs. 30 giugno 2003, n. 196. 

@@ -49,7 +49,7 @@ class AnagraficaType extends AbstractType {
                     'choices' => array(
                         '1' => 'Medico Chirurgo',
                     ),
-                 )
+                        )
                 )
                 ->add('disciplina', 'choice', array(
                     'choices' => array(
@@ -100,8 +100,31 @@ class AnagraficaType extends AbstractType {
                         'C' => 'Convenzionato',
                     )
                 ))
-                ->add('iscritto_in_modo_autonomo')
+                ->add('iscritto_in_modo_autonomo', 'choice', array(
+                    'choices' => array(
+                            '' => 'Seleziona',
+                        'Si' => 'Si',
+                        'No' => 'No',
+                    )
+                ))
                 ->add('sponsor_azienda')
+                ->add('dichiara_sponsor_azienda')
+                ->add('dichiara_autorizzazione_struttura', 'choice', array(
+                    'required' => false,
+                    'choices' => array(
+                           '' => 'Seleziona',
+                        'Si' => 'Si',
+                        'No' => 'No',
+                    )
+                ))
+                ->add('dichiara_informato_dal_provider', 'choice', array(
+                    'required' => false,
+                    'choices' => array(
+                        '' => 'Seleziona',
+                        'Si' => 'Si',
+                        'No' => 'No',
+                    )
+                ))
                 ->add('privacy')
         ;
     }

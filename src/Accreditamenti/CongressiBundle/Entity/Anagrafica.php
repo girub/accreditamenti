@@ -57,15 +57,13 @@ class Anagrafica {
      * @ORM\Column(name="ente_cap", type="string", length=255)
      */
     private $ente_cap;
-    
-    
-      /**
+
+    /**
      * @var string $ente_via
      *
      * @ORM\Column(name="ente_via", type="string", length=255)
      */
     private $ente_via;
-    
 
     /**
      * @var string $ente_numero_civico
@@ -74,15 +72,13 @@ class Anagrafica {
      */
     private $ente_numero_civico;
 
-    
     /**
      * @var string $ente_telefono
      *
      * @ORM\Column(name="ente_telefono", type="string", length=255)
      */
     private $ente_telefono;
-    
-    
+
     /**
      * @var string $nome
      *
@@ -139,8 +135,6 @@ class Anagrafica {
      */
     private $indirizzo_via;
 
-    
-    
     /**
      * @var string $indirizzo_numero_civico
      *
@@ -148,8 +142,6 @@ class Anagrafica {
      */
     private $indirizzo_numero_civico;
 
-    
-    
     /**
      * @var string $indirizzo_cap
      *
@@ -157,8 +149,6 @@ class Anagrafica {
      */
     private $indirizzo_cap;
 
-    
-    
     /**
      * @var string $indirizzo_citta
      *
@@ -166,7 +156,6 @@ class Anagrafica {
      */
     private $indirizzo_citta;
 
-    
     /**
      * @var string $indirizzo_provincia
      *
@@ -219,7 +208,7 @@ class Anagrafica {
     /**
      * @var boolean $iscritto_in_modo_autonomo
      *
-     * @ORM\Column(name="iscritto_in_modo_autonomo", type="boolean")
+     * @ORM\Column(name="iscritto_in_modo_autonomo", type="string", length=255)
      */
     private $iscritto_in_modo_autonomo;
 
@@ -229,6 +218,31 @@ class Anagrafica {
      * @ORM\Column(name="sponsor_azienda", type="string", length=255)
      */
     private $sponsor_azienda;
+
+    /**
+     * @var string $dichiara_sponsor_azienda
+     *
+     * @ORM\Column(name="dichiara_sponsor_azienda", type="string", length=255)
+     */
+    private $dichiara_sponsor_azienda;
+
+    /**
+     * @var boolean $dichiara_autorizzazione_struttura
+     *
+     * @ORM\Column(name="dichiara_autorizzazione_struttura", type="string", length=255))
+     */
+    private $dichiara_autorizzazione_struttura;
+    
+    /**
+     * @var boolean $dichiara_informato_dal_provider
+     *
+     * @ORM\Column(name="dichiara_informato_dal_provider", type="string", length=255))
+     */
+    private $dichiara_informato_dal_provider;
+    
+    
+    
+    
 
     /**
      * @var boolean $privacy
@@ -648,14 +662,12 @@ class Anagrafica {
         return $this->accreditamento;
     }
 
-
     /**
      * Set ente_appartenenza
      *
      * @param string $enteAppartenenza
      */
-    public function setEnteAppartenenza($enteAppartenenza)
-    {
+    public function setEnteAppartenenza($enteAppartenenza) {
         $this->ente_appartenenza = $enteAppartenenza;
     }
 
@@ -664,8 +676,7 @@ class Anagrafica {
      *
      * @return string 
      */
-    public function getEnteAppartenenza()
-    {
+    public function getEnteAppartenenza() {
         return $this->ente_appartenenza;
     }
 
@@ -674,8 +685,7 @@ class Anagrafica {
      *
      * @param string $citta
      */
-    public function setCitta($citta)
-    {
+    public function setCitta($citta) {
         $this->citta = $citta;
     }
 
@@ -684,8 +694,7 @@ class Anagrafica {
      *
      * @return string 
      */
-    public function getCitta()
-    {
+    public function getCitta() {
         return $this->citta;
     }
 
@@ -694,8 +703,7 @@ class Anagrafica {
      *
      * @param string $provincia
      */
-    public function setProvincia($provincia)
-    {
+    public function setProvincia($provincia) {
         $this->provincia = $provincia;
     }
 
@@ -704,8 +712,7 @@ class Anagrafica {
      *
      * @return string 
      */
-    public function getProvincia()
-    {
+    public function getProvincia() {
         return $this->provincia;
     }
 
@@ -714,8 +721,7 @@ class Anagrafica {
      *
      * @param string $cap
      */
-    public function setCap($cap)
-    {
+    public function setCap($cap) {
         $this->cap = $cap;
     }
 
@@ -724,8 +730,7 @@ class Anagrafica {
      *
      * @return string 
      */
-    public function getCap()
-    {
+    public function getCap() {
         return $this->cap;
     }
 
@@ -734,8 +739,7 @@ class Anagrafica {
      *
      * @param string $numeroCivico
      */
-    public function setNumeroCivico($numeroCivico)
-    {
+    public function setNumeroCivico($numeroCivico) {
         $this->numero_civico = $numeroCivico;
     }
 
@@ -744,8 +748,7 @@ class Anagrafica {
      *
      * @return string 
      */
-    public function getNumeroCivico()
-    {
+    public function getNumeroCivico() {
         return $this->numero_civico;
     }
 
@@ -754,8 +757,7 @@ class Anagrafica {
      *
      * @param string $enteCitta
      */
-    public function setEnteCitta($enteCitta)
-    {
+    public function setEnteCitta($enteCitta) {
         $this->ente_citta = $enteCitta;
     }
 
@@ -764,8 +766,7 @@ class Anagrafica {
      *
      * @return string 
      */
-    public function getEnteCitta()
-    {
+    public function getEnteCitta() {
         return $this->ente_citta;
     }
 
@@ -774,8 +775,7 @@ class Anagrafica {
      *
      * @param string $enteProvincia
      */
-    public function setEnteProvincia($enteProvincia)
-    {
+    public function setEnteProvincia($enteProvincia) {
         $this->ente_provincia = $enteProvincia;
     }
 
@@ -784,8 +784,7 @@ class Anagrafica {
      *
      * @return string 
      */
-    public function getEnteProvincia()
-    {
+    public function getEnteProvincia() {
         return $this->ente_provincia;
     }
 
@@ -794,8 +793,7 @@ class Anagrafica {
      *
      * @param string $enteCap
      */
-    public function setEnteCap($enteCap)
-    {
+    public function setEnteCap($enteCap) {
         $this->ente_cap = $enteCap;
     }
 
@@ -804,8 +802,7 @@ class Anagrafica {
      *
      * @return string 
      */
-    public function getEnteCap()
-    {
+    public function getEnteCap() {
         return $this->ente_cap;
     }
 
@@ -814,8 +811,7 @@ class Anagrafica {
      *
      * @param string $enteVia
      */
-    public function setEnteVia($enteVia)
-    {
+    public function setEnteVia($enteVia) {
         $this->ente_via = $enteVia;
     }
 
@@ -824,8 +820,7 @@ class Anagrafica {
      *
      * @return string 
      */
-    public function getEnteVia()
-    {
+    public function getEnteVia() {
         return $this->ente_via;
     }
 
@@ -834,8 +829,7 @@ class Anagrafica {
      *
      * @param string $enteNumeroCivico
      */
-    public function setEnteNumeroCivico($enteNumeroCivico)
-    {
+    public function setEnteNumeroCivico($enteNumeroCivico) {
         $this->ente_numero_civico = $enteNumeroCivico;
     }
 
@@ -844,8 +838,7 @@ class Anagrafica {
      *
      * @return string 
      */
-    public function getEnteNumeroCivico()
-    {
+    public function getEnteNumeroCivico() {
         return $this->ente_numero_civico;
     }
 
@@ -854,8 +847,7 @@ class Anagrafica {
      *
      * @param string $enteTelefono
      */
-    public function setEnteTelefono($enteTelefono)
-    {
+    public function setEnteTelefono($enteTelefono) {
         $this->ente_telefono = $enteTelefono;
     }
 
@@ -864,8 +856,7 @@ class Anagrafica {
      *
      * @return string 
      */
-    public function getEnteTelefono()
-    {
+    public function getEnteTelefono() {
         return $this->ente_telefono;
     }
 
@@ -874,8 +865,7 @@ class Anagrafica {
      *
      * @param string $indirizzoVia
      */
-    public function setIndirizzoVia($indirizzoVia)
-    {
+    public function setIndirizzoVia($indirizzoVia) {
         $this->indirizzo_via = $indirizzoVia;
     }
 
@@ -884,8 +874,7 @@ class Anagrafica {
      *
      * @return string 
      */
-    public function getIndirizzoVia()
-    {
+    public function getIndirizzoVia() {
         return $this->indirizzo_via;
     }
 
@@ -894,8 +883,7 @@ class Anagrafica {
      *
      * @param boolean $iscrittoInModoAutonomo
      */
-    public function setIscrittoInModoAutonomo($iscrittoInModoAutonomo)
-    {
+    public function setIscrittoInModoAutonomo($iscrittoInModoAutonomo) {
         $this->iscritto_in_modo_autonomo = $iscrittoInModoAutonomo;
     }
 
@@ -904,8 +892,7 @@ class Anagrafica {
      *
      * @return boolean 
      */
-    public function getIscrittoInModoAutonomo()
-    {
+    public function getIscrittoInModoAutonomo() {
         return $this->iscritto_in_modo_autonomo;
     }
 
@@ -914,8 +901,7 @@ class Anagrafica {
      *
      * @param string $indirizzoNumeroCivico
      */
-    public function setIndirizzoNumeroCivico($indirizzoNumeroCivico)
-    {
+    public function setIndirizzoNumeroCivico($indirizzoNumeroCivico) {
         $this->indirizzo_numero_civico = $indirizzoNumeroCivico;
     }
 
@@ -924,8 +910,68 @@ class Anagrafica {
      *
      * @return string 
      */
-    public function getIndirizzoNumeroCivico()
-    {
+    public function getIndirizzoNumeroCivico() {
         return $this->indirizzo_numero_civico;
+    }
+
+
+    /**
+     * Set dichiara_sponsor_azienda
+     *
+     * @param string $dichiaraSponsorAzienda
+     */
+    public function setDichiaraSponsorAzienda($dichiaraSponsorAzienda)
+    {
+        $this->dichiara_sponsor_azienda = $dichiaraSponsorAzienda;
+    }
+
+    /**
+     * Get dichiara_sponsor_azienda
+     *
+     * @return string 
+     */
+    public function getDichiaraSponsorAzienda()
+    {
+        return $this->dichiara_sponsor_azienda;
+    }
+
+    /**
+     * Set dichiara_autorizzazione_struttura
+     *
+     * @param string $dichiaraAutorizzazioneStruttura
+     */
+    public function setDichiaraAutorizzazioneStruttura($dichiaraAutorizzazioneStruttura)
+    {
+        $this->dichiara_autorizzazione_struttura = $dichiaraAutorizzazioneStruttura;
+    }
+
+    /**
+     * Get dichiara_autorizzazione_struttura
+     *
+     * @return string 
+     */
+    public function getDichiaraAutorizzazioneStruttura()
+    {
+        return $this->dichiara_autorizzazione_struttura;
+    }
+
+    /**
+     * Set dichiara_informato_dal_provider
+     *
+     * @param string $dichiaraInformatoDalProvider
+     */
+    public function setDichiaraInformatoDalProvider($dichiaraInformatoDalProvider)
+    {
+        $this->dichiara_informato_dal_provider = $dichiaraInformatoDalProvider;
+    }
+
+    /**
+     * Get dichiara_informato_dal_provider
+     *
+     * @return string 
+     */
+    public function getDichiaraInformatoDalProvider()
+    {
+        return $this->dichiara_informato_dal_provider;
     }
 }
