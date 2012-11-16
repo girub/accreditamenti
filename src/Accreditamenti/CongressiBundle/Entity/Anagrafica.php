@@ -205,6 +205,18 @@ class Anagrafica {
      */
     private $ente_telefono;
 
+    
+    
+    /**
+     * @var boolean $informazioni_veritiere
+     *
+     * @ORM\Column(name="informazioni_veritiere", type="boolean")
+     */
+    private $informazioni_veritiere;
+
+    
+
+    
     /**
      * @var string $dichiara_sponsor_azienda
      *
@@ -918,4 +930,24 @@ class Anagrafica {
         return $this->dichiara_informato_dal_provider;
     }
 
+
+    /**
+     * Set informazioni_veritiere
+     *
+     * @param boolean $informazioniVeritiere
+     */
+    public function setInformazioniVeritiere($informazioniVeritiere)
+    {
+        $this->informazioni_veritiere = $informazioniVeritiere;
+    }
+
+    /**
+     * Get informazioni_veritiere
+     *
+     * @return boolean 
+     */
+    public function getInformazioniVeritiere()
+    {
+        return $this->informazioni_veritiere;
+    }
 }

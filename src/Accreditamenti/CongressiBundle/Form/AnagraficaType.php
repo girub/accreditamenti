@@ -118,6 +118,10 @@ class AnagraficaType extends AbstractType {
                     )
                 ))
                 
+                 ->add('informazioni_veritiere')
+                
+                
+                
                 ->add('dichiara_sponsor_azienda', 'text', array(
                     'required' => false,)
                 )
