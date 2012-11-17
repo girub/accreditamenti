@@ -1,6 +1,16 @@
 {% extends '::frontEnd/base.html.twig' %}
 
 {% block body %}
+
+<b>Step 3 di 3</b>
+<table>
+    <tr>
+        <td><img src="/resource/img/1on.png" width="35"></td>
+        <td><img src="/resource/img/2on.png" width="35"></td>
+        <td><img src="/resource/img/3on.png" width="35"></td>
+    </tr>
+</table>
+
 <h2>Compila il questionario di valutazione</h2>
 <br>
 
@@ -22,7 +32,7 @@
 
 
                 <div>
-            {{ form_label(form.utilita_evento,'3) Come valuta la qualità educativa/di aggiornamento fornita da questo evento?') }}
+            {{ form_label(form.utilita_evento,'3) Come valuta la utilità dell\'evento per la sua formazione/aggiornamento?') }}
             {{ form_errors(form.utilita_evento) }}
             {{ form_widget(form.utilita_evento) }}
                     </div>  
@@ -48,7 +58,7 @@
 
 
                         <p>
-                          <button type="submit">Continua</button>
+                          <button type="submit">Termina</button>
                         </p>
                     </form>
 
