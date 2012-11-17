@@ -9,6 +9,9 @@ class AnagraficaType extends AbstractType {
 
     public function buildForm(FormBuilder $builder, array $options) {
         $builder
+                ->add('abilita_stampa','text')
+                
+                
                 ->add('ente_appartenenza', 'text', array(
                     'required' => false,))
                 ->add('ente_citta', 'text', array(
@@ -117,11 +120,7 @@ class AnagraficaType extends AbstractType {
                         'C' => 'Convenzionato',
                     )
                 ))
-                
-                 ->add('informazioni_veritiere')
-                
-                
-                
+                ->add('informazioni_veritiere')
                 ->add('dichiara_sponsor_azienda', 'text', array(
                     'required' => false,)
                 )
@@ -142,6 +141,8 @@ class AnagraficaType extends AbstractType {
                     )
                 ))
                 ->add('privacy')
+
+
         ;
     }
 

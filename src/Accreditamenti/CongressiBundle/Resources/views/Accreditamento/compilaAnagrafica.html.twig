@@ -35,6 +35,15 @@ I campi con l'asterisco sono obbligatori
     {# form_widget(form) #}
 
      {{ form_errors(form) }}
+        
+      
+         <div style="display: none">
+            {{ form_label(form.abilita_stampa) }}
+            {{ form_errors(form.abilita_stampa) }}
+            {{ form_widget(form.abilita_stampa) }}
+            </div>    
+        
+        
 
         <div style="display: none">
             {{ form_label(form.tipo_iscrizione) }}
@@ -266,6 +275,11 @@ Per il consenso ai trattamenti e alle comunicazioni descritte nell’informativa
             {{ form_errors(form.privacy) }}
             {{ form_widget(form.privacy) }}
                                                                                                                                         </div>
+
+                                                               <div>
+           
+                                                                                          
+                                                                                                                                    
 
 
         {{ form_rest(form) }}

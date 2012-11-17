@@ -94,6 +94,7 @@ class AnagraficaController extends Controller {
         $telefono = $form['telefono']->getData();
         $email = $form['email']->getData();
         $informazioni_veritiere = $form['informazioni_veritiere']->getData();
+               
         
         $privacy = $form['privacy']->getData();
 

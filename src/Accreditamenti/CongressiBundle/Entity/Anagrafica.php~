@@ -251,6 +251,17 @@ class Anagrafica {
      */
     private $accreditamento;
 
+    
+    /**
+     * @var boolean $abilita_stampa
+     *
+     * @ORM\Column(name="abilita_stampa", type="boolean")
+     */
+    private $abilita_stampa;
+    
+    
+    
+    
     /**
      * Get id
      *
@@ -930,4 +941,24 @@ class Anagrafica {
         return $this->dichiara_informato_dal_provider;
     }
 
+
+    /**
+     * Set informazioni_veritiere
+     *
+     * @param boolean $informazioniVeritiere
+     */
+    public function setInformazioniVeritiere($informazioniVeritiere)
+    {
+        $this->informazioni_veritiere = $informazioniVeritiere;
+    }
+
+    /**
+     * Get informazioni_veritiere
+     *
+     * @return boolean 
+     */
+    public function getInformazioniVeritiere()
+    {
+        return $this->informazioni_veritiere;
+    }
 }

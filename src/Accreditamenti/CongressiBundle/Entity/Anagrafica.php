@@ -251,6 +251,17 @@ class Anagrafica {
      */
     private $accreditamento;
 
+    
+    /**
+     * @var boolean $abilita_stampa
+     *
+     * @ORM\Column(name="abilita_stampa",  nullable=true, type="integer")
+     */
+    private $abilita_stampa=0;
+    
+    
+    
+    
     /**
      * Get id
      *
@@ -949,5 +960,25 @@ class Anagrafica {
     public function getInformazioniVeritiere()
     {
         return $this->informazioni_veritiere;
+    }
+
+    /**
+     * Set abilita_stampa
+     *
+     * @param boolean $abilitaStampa
+     */
+    public function setAbilitaStampa($abilitaStampa)
+    {
+        $this->abilita_stampa = $abilitaStampa;
+    }
+
+    /**
+     * Get abilita_stampa
+     *
+     * @return boolean 
+     */
+    public function getAbilitaStampa()
+    {
+        return $this->abilita_stampa;
     }
 }
