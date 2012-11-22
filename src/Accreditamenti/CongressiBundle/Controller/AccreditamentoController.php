@@ -38,6 +38,94 @@ class AccreditamentoController extends Controller {
     /**
      * Lists all Accreditamento entities.
      *
+     * @Route("/{accreditamento_id}/elenco/utenti", name="accreditamento_elenco_utenti")
+     * @Template()
+     */
+    public function elencoUtentiAction($accreditamento_id) {
+        $em = $this->getDoctrine()->getEntityManager();
+        // Estraggo anagrafiche memorizzate le passo alla view 
+        $anagrafiche = $em->getRepository('AccreditamentiCongressiBundle:Anagrafica')->findAll();
+
+
+        //echo "<br><br><br>";
+        // INIZIO VEDO RISPOSTE ESATTE
+        // controllo risposte esatte
+        $arrayRisposteEsatte[] = array();
+        $accreditamento = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($accreditamento_id);
+        $questionario = $accreditamento->getQuestionarioEcm();
+        $domande = $em->getRepository('AccreditamentiCongressiBundle:Domanda')
+                ->findDomandeDelQuestionario($questionario[0]);
+        //$percentuale_risposte_esatte = $questionario->getPercentualeRisposteEsatte();
+        $percentuale_risposte_esatte = $questionario[0]->getPercentualeRisposteEsatte();
+        //die($percentuale_risposte_esatte);
+        $totale_risposte_esatte = 0;
+        foreach ($domande as $domanda) {
+            $risposte = $domanda->getRisposta();
+            $idRispostaGiusta = null;
+            //Ciclo tutte le risposte di questa domanda
+            foreach ($risposte as $risposta) {
+                //stampo solo la risposta vera
+                if ($risposta->getVero() === true) {
+                    $idRispostaGiusta = $risposta->getId();
+
+                    $arrayRisposteEsatte[] .=$risposta->getId();
+                }
+            }
+
+            $totale_domande_ecm = count($domande);
+            //echo "Domanda: " . $domanda->getId() . " ha come risposta giusta risposta " . $idRispostaGiusta . "<br>";
+
+            //echo "Risposta----->" . $_POST['form']['domanda_' . $domanda->getId()] . "<BR><BR><BR><HR>";
+            //DEVO SOSTITUIRLO ALLA RIPSOSTA MEMORIZZATA ADA UTENTE
+            //$idRispostaRicevuta = $_POST['form']['domanda_' . $domanda->getId()];
+            //if ($idRispostaGiusta == $idRispostaRicevuta) {
+            //$totale_risposte_esatte += 1;
+            //}
+        }
+
+        //var_dump($arrayRisposteEsatte);
+        // Le ciclo per vedere le varie risposte degli utenti
+        foreach ($anagrafiche as $anagrafica) {
+            $totale_risposte_esatte = 0;
+           // echo "<hr>Anagrafica: " . $anagrafica->getId() . "<BR>";
+
+            $query = $em->createQuery(
+                            'SELECT a.anagrafica_id, a.risposta_id  FROM AccreditamentiCongressiBundle:RisposteUtentiQuestionarioEcm a 
+                         WHERE a.anagrafica_id = :id'
+                    )->setParameter('id', $anagrafica->getId());
+
+            $risposteEcmUtenti = $query->getResult();
+
+            foreach ($risposteEcmUtenti as $rispostaEcmUtente) {
+               // echo "Risposte utenti: " . $rispostaEcmUtente['risposta_id'] . "<BR>";
+
+                if (in_array($rispostaEcmUtente['risposta_id'], $arrayRisposteEsatte)) {
+                    $totale_risposte_esatte += 1;
+                }
+            }
+            //echo "<b>Utente con id: " . $anagrafica->getId() . " ha risposto a " . $totale_risposte_esatte . " risposte esatte!!</b><br>";
+            $percentuale_risposte_esatte = $questionario[0]->getPercentualeRisposteEsatte();
+            $percentuale_da_superare = ($totale_domande_ecm * $percentuale_risposte_esatte) / 100;
+
+            $utenti_abilitati[] = array();
+            if ($totale_risposte_esatte > $percentuale_da_superare) {
+                // Utenti che hanno superato con successo il questionario!!!
+                $utenti_abilitati[] .=$anagrafica->getId();
+            }
+        }
+
+            
+       //echo "<br><br>";
+       //var_dump($utenti_abilitati);
+
+        return array(
+            'entities' => $anagrafiche,
+            'utenti_abilitati' => $utenti_abilitati);
+    }
+
+    /**
+     * Lists all Accreditamento entities.
+     *
      * @Route("/{id}/carica/iscritti", name="carica_iscritti")
      * @Template()
      */
@@ -121,7 +209,13 @@ class AccreditamentoController extends Controller {
 
 
 
+
+
+
+        //$this->get('session')->setFlash('auth', '1');
+
         $this->get('session')->setFlash('notice', 'Benvenuto ' . $iscritto[0]['nome'] . ' ' . $iscritto[0]['cognome'] . ' Login effettuato con successo');
+
         return $this->redirect($this->generateUrl('compila_anagrafica', array(
                             'accreditamento_id' => $accreditamento_id,
                             'nome' => $iscritto[0]['nome'],
@@ -136,17 +230,19 @@ class AccreditamentoController extends Controller {
      * @Route("/{accreditamento_id}/compila/anagrafica/{nome}/{cognome}/{codice_fiscale}", name="compila_anagrafica")
      * @Template()
      */
-    public function compilaAnagraficaAction($accreditamento_id,$nome,$cognome,$codice_fiscale) {
+    public function compilaAnagraficaAction($accreditamento_id, $nome, $cognome, $codice_fiscale) {
+
+
 
         $entityManager = $this->getDoctrine()->getEntityManager();
         $accreditamento = $entityManager->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($accreditamento_id);
         $anagrafica = new Anagrafica();
         $anagrafica->setAccreditamento($accreditamento);
-        
+
         $anagrafica->setNome($nome);
         $anagrafica->setCognome($cognome);
         $anagrafica->setCodiceFiscale($codice_fiscale);
-        
+
         $form = $this->createForm(new AnagraficaType(), $anagrafica);
 
         return array(
@@ -174,7 +270,7 @@ class AccreditamentoController extends Controller {
                         'SELECT a.anagrafica_id FROM AccreditamentiCongressiBundle:RisposteUtentiQuestionarioEcm a 
                          WHERE a.anagrafica_id = :id'
                 )->setParameter('id', $anagrafica_id);
-        
+
         //$test = $em->createQuery(
         //    'SELECT DISTINCT d
         //    FROM AccreditamentiCongressiBundle:RisposteUtentiQuestionarioEcm d
@@ -184,9 +280,9 @@ class AccreditamentoController extends Controller {
         //);
 
         $risposteEcm = $query->getResult();
-      //  die($risposteEcm[0]['anagrafica_id']);
+        //  die($risposteEcm[0]['anagrafica_id']);
         if (isset($risposteEcm[0]['anagrafica_id'])) {
-            
+
             // aggiungere nome e cognome
             $this->get('session')->setFlash('notice', 'Ben tornato continua a compilare il questionario!');
             return $this->redirect($this->generateUrl('compila_valutazione', array(
@@ -630,21 +726,21 @@ class AccreditamentoController extends Controller {
     public function compilaValutazioneAction($accreditamento_id, $anagrafica_id) {
 
         $em = $this->getDoctrine()->getEntityManager();
-        
-        
-        
-         //##################### INIZIO ###################################
+
+
+
+        //##################### INIZIO ###################################
         //controllo se già ha compilato il questionario di valutazione, se si
         //ridirigo l'utente direttamente alla pagina di stampa
         $query = $em->createQuery(
                         'SELECT a.anagrafica_id FROM AccreditamentiCongressiBundle:RisposteUtentiQuestionarioValutazione a 
                          WHERE a.anagrafica_id = :id'
                 )->setParameter('id', $anagrafica_id);
-        
+
         $risposteEcm = $query->getResult();
-      //  die($risposteEcm[0]['anagrafica_id']);
+        //  die($risposteEcm[0]['anagrafica_id']);
         if (isset($risposteEcm[0]['anagrafica_id'])) {
-            
+
             // aggiungere nome e cognome
             $this->get('session')->setFlash('notice', 'Ben tornato continua a compilare il questionario!');
             return $this->redirect($this->generateUrl('certificato', array(
@@ -653,8 +749,8 @@ class AccreditamentoController extends Controller {
                             )));
         }
         //######################## fine ################################
-        
-               
+
+
         $accreditamento = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($accreditamento_id);
         $form = $this->createFormBuilder(null)
                 ->add('rilevanza_degli_argomenti', 'choice', array(
@@ -755,24 +851,22 @@ class AccreditamentoController extends Controller {
         $form->bindRequest($this->getRequest());
         $data = $form->getData();
 
-        
+
         //controllo se utente ha compilato questionario valutazione
-        if($data['rilevanza_degli_argomenti']==null || $data['qualita_educativa']==null || $data['utilita_evento']==null
-                || $data['influenza_sponsor']==null){
-        
+        if ($data['rilevanza_degli_argomenti'] == null || $data['qualita_educativa'] == null || $data['utilita_evento'] == null
+                || $data['influenza_sponsor'] == null) {
+
             $this->get('session')->setFlash('notice', 'Attenzione è obbligatorio ripondere tutte le domande!');
             return $this->redirect($this->generateUrl('compila_valutazione', array(
                                 'accreditamento_id' => $accreditamento_id,
                                 'anagrafica_id' => $anagrafica_id,
                             )));
-        
-        
-           }
-        
-        
-        
-        
-        
+        }
+
+
+
+
+
         $risposteValutazione = new \Accreditamenti\CongressiBundle\Entity\RisposteUtentiQuestionarioValutazione;
         $risposteValutazione->setAnagraficaId($anagrafica_id);
         $risposteValutazione->setAccreditamentoId($accreditamento_id);

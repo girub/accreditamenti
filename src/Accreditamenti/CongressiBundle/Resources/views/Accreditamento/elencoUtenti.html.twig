@@ -1,0 +1,77 @@
+{% extends '::backEnd/base.html.twig' %}
+
+{% block body %}
+
+<h1>Elenco Utenti che hanno compilato il quiz</h1>
+<!--
+<table class="table table-bordered table-condensed table-striped">
+    -->
+    
+    <table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Cognome</th>
+            <th>Nome</th>
+            <th>Codice Fiscale</th>
+             <th>Status</th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        {% for entity in entities %}
+            
+
+                 {% set coloreriga = 'error' %}
+                    {% for za in utenti_abilitati %}
+                        {% if za==entity.id %}
+                            {% set riga = 'success' %}
+                        {% endif %}             
+                    {% endfor %}
+ 
+                    
+            
+                <tr  class="{{ coloreriga }}">
+                 
+                 <td>
+                
+{{ entity.id }}</td>
+                <td>{{ entity.cognome }}</td>
+                <td>{{ entity.nome }}</td>
+                <td>{{ entity.codiceFiscale }}</td>
+                
+                <td>
+                    {% if coloreriga == 'succes' %}
+                         Abilitato alla stampa
+                    {% else %}
+                        Success
+                    {% endif %}
+               </td>
+                  
+                
+                <td>
+                    
+                  
+                    
+                    {% for za in utenti_abilitati %}
+                       {% if za==entity.id %}
+                          <span class="label label-success">Success</span>
+                       {% endif %}             
+                    {% endfor %}
+ 
+                    <a href="{{ path('accreditamento_show', { 'id': entity.id }) }}"><span class="icon-eye-open"></span></a><br />
+                    <a href="{{ path('accreditamento_edit', { 'id': entity.id }) }}"><span class="icon-edit"></span></a><br />
+                    <a href="{{ path('accreditamento_elenco_utenti', { 'accreditamento_id': entity.id }) }}"><span class="icon-user"></span></a><br />
+               
+                
+                
+                </td>
+            </tr>
+           {% set coloreriga = '' %}
+        {% endfor %}
+        </tbody>
+    </table>
+    
+ 
+
+{% endblock %}

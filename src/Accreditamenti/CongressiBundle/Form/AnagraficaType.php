@@ -50,7 +50,12 @@ class AnagraficaType extends AbstractType {
                         )
                 )
                 ->add('luogo_nascita')
-                ->add('codice_fiscale')
+//                ->add('codice_fiscale', 'text', array(
+//                    'read_only' => true,
+//                ))
+                
+               ->add('codice_fiscale', 'text', array('attr' => array('readonly' => 'readonly'))) 
+                
                 ->add('ordine_numero')
                 ->add('ordine_citta')
                 ->add('indirizzo_via')
