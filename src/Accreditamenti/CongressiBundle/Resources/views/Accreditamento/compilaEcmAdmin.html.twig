@@ -1,0 +1,58 @@
+{% extends '::backEnd/base.html.twig' %}
+
+{% block body %}
+
+<h3>Compila il questionario ECM</h3><BR>
+Si ricorda che è possibile compilare il questionario ECM solo una volta<BR>
+<BR>
+<form action="{{ path('controlla_questionario_ecm', {'accreditamento_id': accreditamento_id,'anagrafica_id': anagrafica_id}) }}" method="post">
+        {{form_widget(formDomande, { 'attr' : { 'class' : 'myForm' } })}}
+        <button type="submit">Continua</button>
+ </form>
+
+
+    <style type="text/css">
+            .myForm {
+                border:0px solid red;
+                width: 600px;
+            }
+            
+
+            
+            .myForm div {
+                border:0px solid blue;
+                width: 350px; 
+                padding-bottom: 8px;    
+            }
+            
+            /* domanda */
+            .myForm div label {
+                border:0px solid green;
+                width: 500px;
+                font-weight: bold;
+                
+            }
+            
+             /* risposta */
+            .myForm div div label {
+                border:0px solid green;
+                font-weight: normal;
+                padding-left: 25px;
+                
+            }
+            
+            
+            .myForm input {
+                border:0px solid pink;
+                clear: both;
+                float:left;
+                padding: 1px
+            }
+
+        </style>
+
+
+
+{%endblock%}
+
+

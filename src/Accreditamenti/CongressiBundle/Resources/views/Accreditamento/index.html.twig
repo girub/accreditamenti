@@ -15,6 +15,9 @@
         {% for entity in entities %}
             <tr>
                 <td>
+                    
+                    
+                    
                     <h2>{{ entity.titolo }}</h2>
                     <span class="icon-book"></span> <a href="{{ path('accreditamento_show', { 'id': entity.id }) }}">{{ entity.numeroaccreditamento }}</a><br />
                     <span class="icon-road"></span> {{ entity.luogo }}<br />
@@ -29,7 +32,12 @@
                 <td>
                     <a href="{{ path('accreditamento_show', { 'id': entity.id }) }}"><span class="icon-eye-open"></span></a><br />
                     <a href="{{ path('accreditamento_edit', { 'id': entity.id }) }}"><span class="icon-edit"></span></a><br />
-                     <a href="{{ path('accreditamento_elenco_utenti', { 'accreditamento_id': entity.id }) }}"><span class="icon-user"></span></a><br />
+                     
+                                  
+        {% render "AccreditamentiCongressiBundle:Accreditamento:checkUtenti" with { 'accreditamento_id' : entity.id }  %}    
+      
+                    
+                    
                 </td>
             </tr>
             <tr>

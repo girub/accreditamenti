@@ -1,0 +1,9 @@
+
+
+{% block body %}
+{% if(utenti > 0) %}
+
+<a href="{{ path('accreditamento_elenco_utenti', { 'accreditamento_id': accreditamento_id }) }}"><span class="icon-user"></span></a><br />
+{% endif %}
+
+{% endblock %}

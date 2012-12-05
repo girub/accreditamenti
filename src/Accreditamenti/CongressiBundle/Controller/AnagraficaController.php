@@ -76,11 +76,14 @@ class AnagraficaController extends Controller {
      * @Template("AccreditamentiCongressiBundle:Anagrafica:new.html.twig")
      */
     public function createAction($accreditamento_id) {
+        
+        
         $anagrafica = new Anagrafica();
         $request = $this->getRequest();
         $form = $this->createForm(new AnagraficaType(), $anagrafica);
+               
         $form->bindRequest($request);
-
+   
         //cotrollo lato server dei dati compilati in anagrafica
         $data_nascita = $form['data_nascita']->getData();
         $luogo_nascita = $form['luogo_nascita']->getData();
@@ -94,23 +97,16 @@ class AnagraficaController extends Controller {
         $telefono = $form['telefono']->getData();
         $email = $form['email']->getData();
         $informazioni_veritiere = $form['informazioni_veritiere']->getData();
-               
-        
         $privacy = $form['privacy']->getData();
 
+        // In caso di campi lasciati vuoti (con Internet Explorer) faccio il render di 
+        // una pagina che mi fa tornare indietro con  history.go(-1)
         if ($data_nascita == null || $luogo_nascita == null || $ordine_numero == null || $ordine_citta == null ||
                 $indirizzo_via == null || $indirizzo_numero_civico == null || $indirizzo_cap == null || $indirizzo_citta == null
                 || $indirizzo_provincia == null || $telefono == null || $email == null || $privacy == null || $informazioni_veritiere==null) {
-            //$campi_obbligatori="Data di nascita";
-
-            $this->get('session')->setFlash('notice', "Attenzione i campi con asterisco sono obbligatori!");
-            return $this->redirect($this->generateUrl('compila_anagrafica', array(
-                                'nome' => $form['nome']->getData(),
-                                'cognome' => $form['cognome']->getData(),
-                                'codice_fiscale' => $form['codice_fiscale']->getData(),
-                                'accreditamento_id' => $accreditamento_id,
-                                    )
-                            ));
+          
+            return $this->render('AccreditamentiCongressiBundle:Accreditamento:compilaAnagraficaError.html.twig');
+            
         }
 
 
@@ -118,7 +114,7 @@ class AnagraficaController extends Controller {
 
 
 
-
+/*
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
             $em->persist($anagrafica);
@@ -129,7 +125,7 @@ class AnagraficaController extends Controller {
                                 'accreditamento_id' => $accreditamento_id,
                             )));
         }
-
+*/
 
 
         return array(
@@ -141,10 +137,11 @@ class AnagraficaController extends Controller {
     /**
      * Displays a form to edit an existing Anagrafica entity.
      *
-     * @Route("/{id}/edit", name="anagrafica_edit")
+     * @Route("/{id}/edit/{accreditamento_id}", name="anagrafica_edit")
      * @Template()
      */
-    public function editAction($id) {
+    
+    public function editAction($accreditamento_id, $id) {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('AccreditamentiCongressiBundle:Anagrafica')->find($id);
@@ -157,8 +154,9 @@ class AnagraficaController extends Controller {
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
+            'accreditamento_id' => $accreditamento_id,         
             'entity' => $entity,
-            'edit_form' => $editForm->createView(),
+            'form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -166,11 +164,11 @@ class AnagraficaController extends Controller {
     /**
      * Edits an existing Anagrafica entity.
      *
-     * @Route("/{id}/update", name="anagrafica_update")
+     * @Route("/{id}/update/{accreditamento_id}", name="anagrafica_update")
      * @Method("post")
      * @Template("AccreditamentiCongressiBundle:Anagrafica:edit.html.twig")
      */
-    public function updateAction($id) {
+    public function updateAction($accreditamento_id, $id) {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('AccreditamentiCongressiBundle:Anagrafica')->find($id);
@@ -190,12 +188,17 @@ class AnagraficaController extends Controller {
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('anagrafica_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('anagrafica_edit', 
+                    array(
+                        'id' => $id,
+                         'accreditamento_id' => $accreditamento_id, 
+                        
+                        )));
         }
 
         return array(
             'entity' => $entity,
-            'edit_form' => $editForm->createView(),
+            'form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }

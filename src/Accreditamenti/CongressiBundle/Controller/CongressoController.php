@@ -180,10 +180,11 @@ class CongressoController extends Controller {
      * @Template()
      */
     public function editAction($id) {
+        
         $em = $this->getDoctrine()->getEntityManager();
-
         $entity = $em->getRepository('AccreditamentiCongressiBundle:Congresso')->find($id);
 
+        
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Congresso entity.');
         }

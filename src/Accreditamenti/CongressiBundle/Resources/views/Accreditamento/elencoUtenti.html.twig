@@ -1,77 +1,131 @@
 {% extends '::backEnd/base.html.twig' %}
 
+
+
 {% block body %}
 
-<h1>Elenco Utenti che hanno compilato il quiz</h1>
-<!--
-<table class="table table-bordered table-condensed table-striped">
-    -->
-    
-    <table class="table">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Cognome</th>
-            <th>Nome</th>
-            <th>Codice Fiscale</th>
-             <th>Status</th>
-        </tr>
-    </thead>
-    
-    <tbody>
-        {% for entity in entities %}
-            
+<form action="{{ path('operazioni_utente', {'accreditamento_id': accreditamento_id}) }}" name="modulo" method="post">
 
-                 {% set coloreriga = 'error' %}
-                    {% for za in utenti_abilitati %}
-                        {% if za==entity.id %}
-                            {% set riga = 'success' %}
-                        {% endif %}             
-                    {% endfor %}
- 
-                    
-            
-                <tr  class="{{ coloreriga }}">
-                 
-                 <td>
-                
-{{ entity.id }}</td>
-                <td>{{ entity.cognome }}</td>
-                <td>{{ entity.nome }}</td>
-                <td>{{ entity.codiceFiscale }}</td>
-                
-                <td>
-                    {% if coloreriga == 'succes' %}
-                         Abilitato alla stampa
-                    {% else %}
-                        Success
-                    {% endif %}
-               </td>
-                  
-                
-                <td>
-                    
-                  
-                    
-                    {% for za in utenti_abilitati %}
-                       {% if za==entity.id %}
-                          <span class="label label-success">Success</span>
-                       {% endif %}             
-                    {% endfor %}
- 
-                    <a href="{{ path('accreditamento_show', { 'id': entity.id }) }}"><span class="icon-eye-open"></span></a><br />
-                    <a href="{{ path('accreditamento_edit', { 'id': entity.id }) }}"><span class="icon-edit"></span></a><br />
-                    <a href="{{ path('accreditamento_elenco_utenti', { 'accreditamento_id': entity.id }) }}"><span class="icon-user"></span></a><br />
-               
-                
-                
-                </td>
+
+    <div class="navbar" style="text-align: right; float: right; margin-left: 5px;">  <button class="btn" type="submit">Abilita</button></div>
+    <div class="navbar" style="text-align: right;">  <button class="btn" type="submit">Abilita ed invia email</button></div>
+
+    <h2>Elenco Utenti</h2>  
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Cognome</th>
+                <th>Nome</th>
+                <th>Codice Fiscale</th>
+                <th>Status</th>
+                <th>
+
+                    <input type="checkbox" id="selezionaTutto" onclick="seleziona(this.form)">Seleziona/Deseleziona
+
+                </th>
+
             </tr>
-           {% set coloreriga = '' %}
+        </thead>
+
+        <tbody>
+
+
+                        
+        {% set coloreriga ="" %}
+            {% for entity in entities %}
+         
+              {% if entity.abilitaStampa==1 %}    
+                    {% set coloreriga ="class=success" %}
+              {% else %}
+                    
+                    {% if entity.id in utenti_abilitati %}
+                         {% set coloreriga = "class=warning"%}  
+                    {% else %} 
+                         {% set coloreriga = "class=error"%}  
+                    {% endif %} 
+             {% endif %}             
+
+
+<tr {{ coloreriga }}>
+        <td>
+
+{{ entity.id }} --- --   {{ entity.abilitaStampa }}</td>
+        <td>{{ entity.cognome }}</td>
+        <td>{{ entity.nome }}</td>
+        <td>{{ entity.codiceFiscale }}</td>
+        <td>
+
+
+
+
+           {% if entity.id in utenti_abilitati %}
+                      Ha superato i quiz
+            {% else %} 
+                      
+                        Non ha superato i quiz
+            {% endif %} 
+
+
+
+
+
+
+
+
+
+
+
+        </td>
+        <td>
+
+            {% if entity.id in utenti_abilitati %}
+                 {% if entity.abilitaStampa==0 %}    
+                        <input type="checkbox" name="anagrafica[]" value="{{ entity.id }}">
+                 {% else %}       
+                        <input type="checkbox" name="anagrafica[]" value="{{ entity.id }}">  
+                  {% endif %}
+            {% endif %} 
+                            
+
+                    {#
+                    
+                    <a href="{{ path('accreditamento_show', { 'id': entity.id }) }}"><span class="icon-eye-open"></span></a><br />
+                    <a href="{{ path('accreditamento_elenco_utenti', { 'accreditamento_id': entity.id }) }}"><span class="icon-user"></span></a><br />
+                    
+                    #}
+
+
+        </td>
+        <td>
+        <a href="{{ path('anagrafica_edit', { 'id': entity.id, 'accreditamento_id': entity.getAccreditamento.id }) }}"><span class="icon-edit"></span></a><br />
+        
+        </td>
+        
+        </tr>
+
         {% endfor %}
         </tbody>
     </table>
-    
- 
 
+</form>
+
+
+<script type="text/javascript">
+    var selezionato=false;   
+  function seleziona(f) {   
+   if (selezionato == false){   
+    selezionato = true;   
+    }   
+   else{   
+   selezionato = false;   
+   }// per ogni elemento della form si selezioniamo/deselezioniamo i checkbox   
+   for (var i = 0; i < f.elements.length; i++)   
+   {   
+   f.elements[i].checked = selezionato;   
+   }   
+  }   
+    </script>
 {% endblock %}

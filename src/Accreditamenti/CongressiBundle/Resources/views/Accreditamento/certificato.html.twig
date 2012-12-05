@@ -1,26 +1,28 @@
 {% extends '::frontEnd/base.html.twig' %}
 
 {% block body %}
-<h2>Grazie per aver compilato il kit ECM.</h2>
-<br>
-
-
-Entro 90 giorni dal termine dell’evento sarà possibile stampare il proprio <br>attestato ECM da questo 
-stesso portale. I partecipanti riceveranno una email <br>con tutte le informazioni su come fare a 
-stampare l’attestato. <br><br>
-<span style="color:#0064af;">
-Per qualsiasi necessità o informazione, le ricordiamo che la segreteria organizzativa <br>è a sua 
-completa disposizione. Può scrivere a f.prayer@aimgroup.eu o <br>chiamare il numero 055.2338823.
-</span>
-<br><br>
-Aim Group International
-
-{#
-<form action="{{ path('pdf_create', {'accreditamento_id': accreditamento_id,'anagrafica_id': anagrafica_id}) }}" method="post" >
-    <p>
-        <button type="submit">Stampa il certificato</button>
-    </p>
-</form>
-#}
+        {% if(anagrafica.getAbilitaStampa==0) %}
+                <h2>Grazie per aver compilato il kit ECM.</h2>
+                <br>
+                Entro 90 giorni dal termine dell’evento sarà possibile stampare il proprio <br>attestato ECM da questo 
+                stesso portale. I partecipanti riceveranno una email <br>con tutte le informazioni su come fare a 
+                stampare l’attestato. <br><br>
+                <span style="color:#0064af;">
+                    Per qualsiasi necessità o informazione, le ricordiamo che la segreteria organizzativa <br>è a sua 
+                    completa disposizione. Può scrivere a f.prayer@aimgroup.eu o <br>chiamare il numero 055.2338823.
+                </span>
+                <br><br>
+                Aim Group International
+        {% else %}
+                Scarica il suo attesta ecm
+                <br><br>
+                <form action="{{ path('pdf_create', {'accreditamento_id': accreditamento_id,'anagrafica_id': anagrafica_id}) }}" method="post" >
+                    <p>
+                        <button type="submit">Stampa il certificato</button>
+                    </p>
+                </form>
+        {% endif %}
 
 {% endblock %}
+
+

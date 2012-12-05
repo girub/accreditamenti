@@ -97,15 +97,16 @@ Scenario: Voglio scegliere un congresso da un elenco e un relativo suo accredita
     And I fill in "form[codice_fiscale]" with "RBNGPP74B15E882U"
     Given I press "Accedi"
 
+
+
+
     Then the response should contain "Benvenuto Rubino Giuseppe Login effettuato con successo"
     And I fill in "accreditamenti_congressibundle_anagraficatype_tipo_iscrizione" with "P"
     And I fill in "accreditamenti_congressibundle_anagraficatype_nome" with "Giuseppe"
     And I fill in "accreditamenti_congressibundle_anagraficatype_cognome" with "Rubino"
-    And I fill in "accreditamenti_congressibundle_anagraficatype_data_nascita" with "15-02-1974"
     And I fill in "accreditamenti_congressibundle_anagraficatype_luogo_nascita" with "Manduria (TA)"
+    And I fill in "accreditamenti_congressibundle_anagraficatype_data_nascita" with "15-02-1974"
     And I fill in "accreditamenti_congressibundle_anagraficatype_codice_fiscale" with "RBNGPP74B15E882U"
-    And I fill in "accreditamenti_congressibundle_anagraficatype_ordine_numero" with "12312"
-    And I fill in "accreditamenti_congressibundle_anagraficatype_ordine_citta" with "Roma"
     And I fill in "accreditamenti_congressibundle_anagraficatype_indirizzo_via" with "Piazzale delle province"
     And I fill in "accreditamenti_congressibundle_anagraficatype_indirizzo_numero_civico" with "9"
     And I fill in "accreditamenti_congressibundle_anagraficatype_indirizzo_cap" with "00159"
@@ -116,9 +117,10 @@ Scenario: Voglio scegliere un congresso da un elenco e un relativo suo accredita
     And I fill in "accreditamenti_congressibundle_anagraficatype_email" with "giuseppe.rubino@gmail.com"
     And I fill in "accreditamenti_congressibundle_anagraficatype_professione" with "1"
     And I fill in "accreditamenti_congressibundle_anagraficatype_disciplina" with "24"
+    And I fill in "accreditamenti_congressibundle_anagraficatype_ordine_numero" with "12312"
+    And I fill in "accreditamenti_congressibundle_anagraficatype_ordine_citta" with "Roma"
     And I fill in "accreditamenti_congressibundle_anagraficatype_qualifica" with "L"
-    And I check "accreditamenti_congressibundle_anagraficatype_iscritto_in_modo_autonomo"
-    And I fill in "accreditamenti_congressibundle_anagraficatype_sponsor_azienda" with "Nestlè"
+    #Then show last response
     And I fill in "accreditamenti_congressibundle_anagraficatype_ente_appartenenza" with "nome ente di appartenenza test"
     And I fill in "accreditamenti_congressibundle_anagraficatype_ente_citta" with "citta ente di appartenenza test"
     And I fill in "accreditamenti_congressibundle_anagraficatype_ente_provincia" with "provincia ente di appartenenza test"
@@ -126,8 +128,13 @@ Scenario: Voglio scegliere un congresso da un elenco e un relativo suo accredita
     And I fill in "accreditamenti_congressibundle_anagraficatype_ente_via" with "via ente di appartenenza test" 
     And I fill in "accreditamenti_congressibundle_anagraficatype_ente_numero_civico" with "numero civico ente di appartenenza test"     
     And I fill in "accreditamenti_congressibundle_anagraficatype_ente_telefono" with "telefono ente di appartenenza test"     
+
+    And I check "accreditamenti_congressibundle_anagraficatype_informazioni_veritiere"
+    And I fill in "accreditamenti_congressibundle_anagraficatype_dichiara_sponsor_azienda" with "Nestlè"
+    And I fill in "accreditamenti_congressibundle_anagraficatype_dichiara_autorizzazione_struttura" with "Si"
+    And I fill in "accreditamenti_congressibundle_anagraficatype_dichiara_informato_dal_provider" with "Si"
     And I check "accreditamenti_congressibundle_anagraficatype_privacy"
-    #Then show last response
-    Given I press "Salva Anagrafica"
+    Then show last response
+    Given I press "Avanti"
     #Then show last response
     Then the response should contain "Compila il questionario ECM"

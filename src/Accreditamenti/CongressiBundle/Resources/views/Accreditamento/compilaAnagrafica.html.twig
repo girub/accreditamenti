@@ -10,22 +10,15 @@
 <b>Step 1 di 3</b>
 <table>
     <tr>
-        <td><img src="/resource/img/1on.png" width="35"></td>
-        <td><img src="/resource/img/2off.png" width="35"></td>
-        <td><img src="/resource/img/3off.png" width="35"></td>
+        <td><img src="http://modulisticaecm.it/resource/img/1on.png" width="35"></td>
+        <td><img src="http://modulisticaecm.it/resource/img/2off.png" width="35"></td>
+        <td><img src="http://modulisticaecm.it/resource/img/3off.png" width="35"></td>
     </tr>
 </table>
 
 
 <h1>Anagrafica</h1><br>
-I dati di seguito richiesti verranno utilizzati solo e soltanto per fini relativi <br>all’accreditamento ECM. 
-La preghiamo gentilmente di compilare tutti i campi. <br><br>
-Dopo aver cliccato su “continua” si aprirà la pagina dove potrà compilare il <br>questionario ECM. Per 
-accedervi è necessario compilare i dati in questa pagina. <br><br>
-<span style="color:#0064af;">
-    Per qualsiasi necessità o informazione, le ricordiamo che la segreteria organizzativa è a sua <br>
-    completa disposizione.Può scrivere a f.prayer@aimgroup.eu o chiamare il numero 055.2338823. 
-</span>
+
 <br><br>
 
 <h3>Dati Personali</h3> 
@@ -84,7 +77,7 @@ I campi con l'asterisco sono obbligatori
                                 <div>
             {{ form_label(form.codice_fiscale,'Codice fiscale        *') }}
             {{ form_errors(form.codice_fiscale) }}
-            {{ form_widget(form.codice_fiscale) }}
+            {{ form_widget(form.codice_fiscale, { 'attr': { 'readonly': 'true' } }) }}
                                     </div>
 
 

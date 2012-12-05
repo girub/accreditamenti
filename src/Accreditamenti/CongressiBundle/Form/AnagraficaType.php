@@ -54,7 +54,7 @@ class AnagraficaType extends AbstractType {
 //                    'read_only' => true,
 //                ))
                 
-               ->add('codice_fiscale', 'text', array('attr' => array('readonly' => 'readonly'))) 
+                ->add('codice_fiscale', 'text') 
                 
                 ->add('ordine_numero')
                 ->add('ordine_citta')

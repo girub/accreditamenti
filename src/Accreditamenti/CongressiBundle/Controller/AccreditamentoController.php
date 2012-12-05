@@ -29,10 +29,30 @@ class AccreditamentoController extends Controller {
      */
     public function indexAction() {
         $em = $this->getDoctrine()->getEntityManager();
+        $accreditamento = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')->findAll();
 
-        $entities = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')->findAll();
+        return array('entities' => $accreditamento);
+    }
 
-        return array('entities' => $entities);
+    /**
+     * Ho creato questo metodo e relativa wview anche un po 
+     * per esperimento, mi serve per far vedere o meno il 
+     * link che porta all'elenco utenti 
+     *
+     * @Route()
+     * @Template()
+     */
+    public function checkUtentiAction($accreditamento_id) {
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $anagrafiche = $em->getRepository('AccreditamentiCongressiBundle:Anagrafica')->findBy(
+                array(
+                    'accreditamento' => $accreditamento_id,
+                ));
+        $utenti = count($anagrafiche);
+        return array(
+            'utenti' => $utenti,
+            'accreditamento_id' => $accreditamento_id);
     }
 
     /**
@@ -44,7 +64,17 @@ class AccreditamentoController extends Controller {
     public function elencoUtentiAction($accreditamento_id) {
         $em = $this->getDoctrine()->getEntityManager();
         // Estraggo anagrafiche memorizzate le passo alla view 
-        $anagrafiche = $em->getRepository('AccreditamentiCongressiBundle:Anagrafica')->findAll();
+        $anagrafiche = $em->getRepository('AccreditamentiCongressiBundle:Anagrafica')->findBy(
+                array(
+                    'accreditamento' => $accreditamento_id,
+                ));
+
+        if (!$anagrafiche) {
+            throw $this->createNotFoundException('Attenzione: Nessuna anagrafica con questo accreditamento!');
+        }
+
+
+
 
 
         //echo "<br><br><br>";
@@ -73,21 +103,16 @@ class AccreditamentoController extends Controller {
             }
 
             $totale_domande_ecm = count($domande);
-            //echo "Domanda: " . $domanda->getId() . " ha come risposta giusta risposta " . $idRispostaGiusta . "<br>";
-
-            //echo "Risposta----->" . $_POST['form']['domanda_' . $domanda->getId()] . "<BR><BR><BR><HR>";
-            //DEVO SOSTITUIRLO ALLA RIPSOSTA MEMORIZZATA ADA UTENTE
-            //$idRispostaRicevuta = $_POST['form']['domanda_' . $domanda->getId()];
-            //if ($idRispostaGiusta == $idRispostaRicevuta) {
-            //$totale_risposte_esatte += 1;
-            //}
         }
 
+
+
+        $utenti_abilitati[] = array();
         //var_dump($arrayRisposteEsatte);
         // Le ciclo per vedere le varie risposte degli utenti
         foreach ($anagrafiche as $anagrafica) {
             $totale_risposte_esatte = 0;
-           // echo "<hr>Anagrafica: " . $anagrafica->getId() . "<BR>";
+            // echo "<hr>Anagrafica: " . $anagrafica->getId() . "<BR>";
 
             $query = $em->createQuery(
                             'SELECT a.anagrafica_id, a.risposta_id  FROM AccreditamentiCongressiBundle:RisposteUtentiQuestionarioEcm a 
@@ -97,7 +122,7 @@ class AccreditamentoController extends Controller {
             $risposteEcmUtenti = $query->getResult();
 
             foreach ($risposteEcmUtenti as $rispostaEcmUtente) {
-               // echo "Risposte utenti: " . $rispostaEcmUtente['risposta_id'] . "<BR>";
+                // echo "Risposte utenti: " . $rispostaEcmUtente['risposta_id'] . "<BR>";
 
                 if (in_array($rispostaEcmUtente['risposta_id'], $arrayRisposteEsatte)) {
                     $totale_risposte_esatte += 1;
@@ -107,20 +132,66 @@ class AccreditamentoController extends Controller {
             $percentuale_risposte_esatte = $questionario[0]->getPercentualeRisposteEsatte();
             $percentuale_da_superare = ($totale_domande_ecm * $percentuale_risposte_esatte) / 100;
 
-            $utenti_abilitati[] = array();
+
             if ($totale_risposte_esatte > $percentuale_da_superare) {
                 // Utenti che hanno superato con successo il questionario!!!
                 $utenti_abilitati[] .=$anagrafica->getId();
             }
         }
 
-            
-       //echo "<br><br>";
-       //var_dump($utenti_abilitati);
-
         return array(
             'entities' => $anagrafiche,
-            'utenti_abilitati' => $utenti_abilitati);
+            'utenti_abilitati' => $utenti_abilitati,
+            'accreditamento_id' => $accreditamento_id
+        );
+    }
+
+    /**
+     * Lists all Accreditamento entities.
+     *
+     * @Route("/{accreditamento_id}/operazioni/utenti", name="operazioni_utente")
+     * @Template()
+     */
+    public function operazioniUtenteAction($accreditamento_id) {
+
+        $entityManager = $this->getDoctrine()->getEntityManager();
+
+        $request = $this->get('request');
+        $id = $request->request->get('anagrafica');
+
+        if (is_array($id)) {
+            foreach ($id as $anagrafica_id) {
+                echo $anagrafica_id . "<br>";
+
+                $anagrafica = $entityManager->getRepository('AccreditamentiCongressiBundle:Anagrafica')->find($anagrafica_id);
+                $anagrafica->setAbilitaStampa(1);
+                $entityManager->persist($anagrafica);
+
+                $nome = "GIUSEPPE";
+                $messaggio = \Swift_Message::newInstance()
+                        ->setContentType("text/html")
+                        ->setSubject('Test invio Email')
+                        ->setFrom('mittente@example.com')
+                        ->setTo('giuseppe.rubino@gmail.com')
+                        ->setBody($this->renderView('AccreditamentiCongressiBundle:Accreditamento:email.html.twig', array('nome' => $nome)))
+                ;
+                if ($this->get('mailer')->send($messaggio)) {
+                    $send = 'ok';
+                }
+            }
+            $entityManager->flush();
+        }
+
+
+
+        if ($send == 'ok') {
+            $this->get('session')->setFlash('notice', 'Invio email!!');
+        }
+
+        return $this->redirect($this->generateUrl('accreditamento_elenco_utenti', array(
+                            'accreditamento_id' => $accreditamento_id,
+                                )
+                        ));
     }
 
     /**
@@ -208,10 +279,6 @@ class AccreditamentoController extends Controller {
         }
 
 
-
-
-
-
         //$this->get('session')->setFlash('auth', '1');
 
         $this->get('session')->setFlash('notice', 'Benvenuto ' . $iscritto[0]['nome'] . ' ' . $iscritto[0]['cognome'] . ' Login effettuato con successo');
@@ -232,8 +299,6 @@ class AccreditamentoController extends Controller {
      */
     public function compilaAnagraficaAction($accreditamento_id, $nome, $cognome, $codice_fiscale) {
 
-
-
         $entityManager = $this->getDoctrine()->getEntityManager();
         $accreditamento = $entityManager->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($accreditamento_id);
         $anagrafica = new Anagrafica();
@@ -251,8 +316,11 @@ class AccreditamentoController extends Controller {
             'form' => $form->createView()
         );
     }
+    
+    
+    
 
-    /**
+   /**
      * Pagina compilo ecm.
      *
      * @Route("/{accreditamento_id}/{anagrafica_id}/compila/ecm", name="compila_ecm")
@@ -307,6 +375,27 @@ class AccreditamentoController extends Controller {
             'anagrafica_id' => $anagrafica_id,
         );
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     /**
      * Upload iscritti dal csv.
@@ -441,11 +530,6 @@ class AccreditamentoController extends Controller {
                 $form['certificato_ecm']->getData()->move($dir, $certificato);
                 $entity->setCertificatoEcm($certificato);
             }
-
-
-
-
-
 
 
             $em->persist($entity);
@@ -682,10 +766,11 @@ class AccreditamentoController extends Controller {
         foreach ($domande as $domanda) {
 
             if (!isset($_POST['form']['domanda_' . $domanda->getId()])) {
-                return $this->redirect($this->generateUrl('compila_ecm', array(
-                                    'accreditamento_id' => $accreditamento_id,
-                                    'anagrafica_id' => $anagrafica_id
-                                )));
+                return $this->render('AccreditamentiCongressiBundle:Accreditamento:compilaEcmError.html.twig');
+//                return $this->redirect($this->generateUrl('compila_ecm', array(
+//                                    'accreditamento_id' => $accreditamento_id,
+//                                    'anagrafica_id' => $anagrafica_id
+//                                )));
             }
 
             $risposte = $domanda->getRisposta();
@@ -853,14 +938,16 @@ class AccreditamentoController extends Controller {
 
 
         //controllo se utente ha compilato questionario valutazione
-        if ($data['rilevanza_degli_argomenti'] == null || $data['qualita_educativa'] == null || $data['utilita_evento'] == null
-                || $data['influenza_sponsor'] == null) {
+        if ($data['rilevanza_degli_argomenti'] == null || $data['qualita_educativa'] == null || $data['utilita_evento'] == null || $data['influenza_sponsor'] == null) {
 
-            $this->get('session')->setFlash('notice', 'Attenzione è obbligatorio ripondere tutte le domande!');
-            return $this->redirect($this->generateUrl('compila_valutazione', array(
-                                'accreditamento_id' => $accreditamento_id,
-                                'anagrafica_id' => $anagrafica_id,
-                            )));
+            //$this->get('session')->setFlash('notice', 'Attenzione è obbligatorio ripondere tutte le domande!');
+            return $this->render('AccreditamentiCongressiBundle:Accreditamento:compilaEcmError.html.twig');
+
+            
+//            return $this->redirect($this->generateUrl('compila_valutazione', array(
+//                                'accreditamento_id' => $accreditamento_id,
+//                                'anagrafica_id' => $anagrafica_id,
+//                            )));
         }
 
 
@@ -894,8 +981,20 @@ class AccreditamentoController extends Controller {
      */
     public function certificatoAction($accreditamento_id, $anagrafica_id) {
 
+        $em = $this->getDoctrine()->getEntityManager();
+        $anagrafica = $em->getRepository('AccreditamentiCongressiBundle:Anagrafica')->find($anagrafica_id);
+        if (!$anagrafica) {
+            throw $this->createNotFoundException('Unable to find Anagrafica entity.');
+        }
+
+
+
+
+
+
 
         return array(
+            'anagrafica' => $anagrafica,
             'accreditamento_id' => $accreditamento_id,
             'anagrafica_id' => $anagrafica_id,);
     }

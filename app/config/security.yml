@@ -40,6 +40,8 @@ security:
         - { path: ^/admin/, role: ROLE_ADMIN }
         - { path: ^/congresso/([0-9]+)/edit, role: ROLE_USER }
         - { path: ^/congresso, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: accreditamento/1/elenco/utenti, role: ROLE_USER }
+        
         
         # PER ISCRITTI CHE ENTRANO CON CODICE FISCALE
         #- { path: ^/accreditamento/([0-9]+)/compila/(anagrafica), role: ROLE_ISCRITTO }
