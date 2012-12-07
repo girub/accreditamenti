@@ -58,10 +58,13 @@ class AccreditamentoController extends Controller {
     /**
      * Lists all Accreditamento entities.
      *
-     * @Route("/{accreditamento_id}/elenco/utenti", name="accreditamento_elenco_utenti")
+     * @Route("/{accreditamento_id}/elenco/utenti/{vista}", name="accreditamento_elenco_utenti")
      * @Template()
      */
-    public function elencoUtentiAction($accreditamento_id) {
+    public function elencoUtentiAction($accreditamento_id, $vista) {
+
+
+
         $em = $this->getDoctrine()->getEntityManager();
         // Estraggo anagrafiche memorizzate le passo alla view 
         $anagrafiche = $em->getRepository('AccreditamentiCongressiBundle:Anagrafica')->findBy(
@@ -75,10 +78,6 @@ class AccreditamentoController extends Controller {
 
 
 
-
-
-        //echo "<br><br><br>";
-        // INIZIO VEDO RISPOSTE ESATTE
         // controllo risposte esatte
         $arrayRisposteEsatte[] = array();
         $accreditamento = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($accreditamento_id);
@@ -107,7 +106,7 @@ class AccreditamentoController extends Controller {
 
 
 
-        $utenti_abilitati[] = array();
+        $utenti[] = array();
         //var_dump($arrayRisposteEsatte);
         // Le ciclo per vedere le varie risposte degli utenti
         foreach ($anagrafiche as $anagrafica) {
@@ -135,14 +134,19 @@ class AccreditamentoController extends Controller {
 
             if ($totale_risposte_esatte > $percentuale_da_superare) {
                 // Utenti che hanno superato con successo il questionario!!!
-                $utenti_abilitati[] .=$anagrafica->getId();
+                $utenti[] .=$anagrafica->getId();
             }
         }
 
+
+
+
+
         return array(
             'entities' => $anagrafiche,
-            'utenti_abilitati' => $utenti_abilitati,
-            'accreditamento_id' => $accreditamento_id
+            'utenti_abilitati' => $utenti,
+            'accreditamento_id' => $accreditamento_id,
+            'vista' => $vista
         );
     }
 
@@ -154,12 +158,19 @@ class AccreditamentoController extends Controller {
      */
     public function operazioniUtenteAction($accreditamento_id) {
 
-        $entityManager = $this->getDoctrine()->getEntityManager();
 
+        $entityManager = $this->getDoctrine()->getEntityManager();
         $request = $this->get('request');
         $id = $request->request->get('anagrafica');
+        $vista = $request->request->get('vista');
+
+
+
+        $send = '';
+
 
         if (is_array($id)) {
+
             foreach ($id as $anagrafica_id) {
                 echo $anagrafica_id . "<br>";
 
@@ -188,8 +199,12 @@ class AccreditamentoController extends Controller {
             $this->get('session')->setFlash('notice', 'Invio email!!');
         }
 
+
+
+
         return $this->redirect($this->generateUrl('accreditamento_elenco_utenti', array(
                             'accreditamento_id' => $accreditamento_id,
+                            'vista' => $vista,
                                 )
                         ));
     }
@@ -222,6 +237,31 @@ class AccreditamentoController extends Controller {
                 ->add('codice_fiscale', 'text')
                 ->getForm()
                 ->createView();
+
+        $em = $this->getDoctrine()->getEntityManager();
+        //recupero giorno temine compilazione, se la data è passata carico altra view
+        $accreditamento = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($id);
+        $questionario = $accreditamento->getQuestionarioEcm();
+
+        //echo($questionario[0]->getDataFineCompilazione());die();
+        //$startDate = DateTime::createFromFormat('Y-m-d', $questionario[0]->getDataFineCompilazione());
+
+
+        $data_fine=  $questionario[0]->getDataFineCompilazione();
+        //echo $data_fine->format('Ymd') . "<hr>";
+        
+        //$date = \DateTime::createFromFormat('j-M-Y', '15-Feb-2009');
+        //$date_fine = \DateTime::createFromFormat('Y-m-d', '2012-12-07');
+        //echo $date_fine->format('Ymd') . "<br><br><br>";
+
+        $data_oggi  = \DateTime::createFromFormat('Y-m-d',  date('Y-m-d'));
+        //echo $data_oggi->format('Ymd');
+        //echo "<br><hr>";
+   
+        if ($data_oggi->format('Ymd') > $data_fine->format('Ymd') ) {
+            return $this->render('AccreditamentiCongressiBundle:Accreditamento:formLoginIscrittoChiuso.html.twig');
+        }
+
 
         return array('form' => $form, 'id' => $id);
     }
@@ -316,11 +356,8 @@ class AccreditamentoController extends Controller {
             'form' => $form->createView()
         );
     }
-    
-    
-    
 
-   /**
+    /**
      * Pagina compilo ecm.
      *
      * @Route("/{accreditamento_id}/{anagrafica_id}/compila/ecm", name="compila_ecm")
@@ -375,27 +412,6 @@ class AccreditamentoController extends Controller {
             'anagrafica_id' => $anagrafica_id,
         );
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
     /**
      * Upload iscritti dal csv.
@@ -943,7 +959,7 @@ class AccreditamentoController extends Controller {
             //$this->get('session')->setFlash('notice', 'Attenzione è obbligatorio ripondere tutte le domande!');
             return $this->render('AccreditamentiCongressiBundle:Accreditamento:compilaEcmError.html.twig');
 
-            
+
 //            return $this->redirect($this->generateUrl('compila_valutazione', array(
 //                                'accreditamento_id' => $accreditamento_id,
 //                                'anagrafica_id' => $anagrafica_id,

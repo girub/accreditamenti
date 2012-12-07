@@ -114,7 +114,7 @@ class AnagraficaController extends Controller {
 
 
 
-/*
+
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
             $em->persist($anagrafica);
@@ -125,7 +125,7 @@ class AnagraficaController extends Controller {
                                 'accreditamento_id' => $accreditamento_id,
                             )));
         }
-*/
+
 
 
         return array(
