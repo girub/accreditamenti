@@ -13,8 +13,18 @@ class AccreditamentoType extends AbstractType
             ->add('numero_accreditamento')
             ->add('titolo')
             ->add('luogo')
-            ->add('data_inizio')
-            ->add('data_fine')
+            //->add('data_inizio')
+            //->add('data_fine')
+              ->add('data_inizio', 'date', array(
+                    'label' => 'Data Inizio',
+                    'widget' => 'single_text',
+                    'format' => 'dd-MM-yyyy')
+                )    
+               ->add('data_fine', 'date', array(
+                    'label' => 'Data Fine',
+                    'widget' => 'single_text',
+                    'format' => 'dd-MM-yyyy')
+                )
             ->add('ore_formative')
             ->add('obiettivo_formativo')
             ->add('numero_crediti')
