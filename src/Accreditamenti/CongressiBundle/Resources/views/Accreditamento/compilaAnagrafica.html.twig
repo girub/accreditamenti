@@ -3,9 +3,6 @@
 
 
 
-
-
-
 {% block body %}
 <b>Step 1 di 3</b>
 <table>
@@ -63,59 +60,59 @@ I campi con l'asterisco sono obbligatori
             {{ form_widget(form.cognome) }}
                         </div>  
 
-                        <div>
+            <div>
             {{ form_label(form.luogo_nascita,  'Nato a        *') }}
-            {{ form_errors(form.luogo_nascita) }}
-            {{ form_widget(form.luogo_nascita) }}
-                            </div> 
+            <div class="errore"> {{ form_errors(form.luogo_nascita) }} </div>
+            {{ form_widget(form.luogo_nascita) }} 
+            </div> 
 
                             <div>
             {{ form_label(form.data_nascita,'il        *') }}
-            {{ form_errors(form.data_nascita) }}
+            <div class="errore">  {{ form_errors(form.data_nascita) }}</div>
             {{ form_widget(form.data_nascita) }}
                                 </div> 
                                 <div>
             {{ form_label(form.codice_fiscale,'Codice fiscale        *') }}
-            {{ form_errors(form.codice_fiscale) }}
+            <div class="errore">{{ form_errors(form.codice_fiscale) }}</div>
             {{ form_widget(form.codice_fiscale, { 'attr': { 'readonly': 'true' } }) }}
                                     </div>
 
 
                                     <div>
             {{ form_label(form.indirizzo_citta, 'Residente in        *') }}
-            {{ form_errors(form.indirizzo_citta) }}
+            <div class="errore"> {{ form_errors(form.indirizzo_citta) }} </div>
             {{ form_widget(form.indirizzo_citta) }}
                                         </div> 
 
                                         <div>
             {{ form_label(form.indirizzo_provincia, 'Provincia        *') }}
-            {{ form_errors(form.indirizzo_provincia) }}
+             <div class="errore"> {{ form_errors(form.indirizzo_provincia) }}</div>
             {{ form_widget(form.indirizzo_provincia) }}
                                             </div> 
 
                                             <div>
             {{ form_label(form.indirizzo_cap, 'Cap        *') }}
-            {{ form_errors(form.indirizzo_cap) }}
+             <div class="errore"> {{ form_errors(form.indirizzo_cap) }} </div>
             {{ form_widget(form.indirizzo_cap) }}
                                                 </div> 
 
                                                 <div>
             {{ form_label(form.indirizzo_via, 'Via        *') }}
-            {{ form_errors(form.indirizzo_via) }}
+          <div class="errore">   {{ form_errors(form.indirizzo_via) }} </div>
             {{ form_widget(form.indirizzo_via) }}
                                                     </div> 
 
 
                                                     <div>
             {{ form_label(form.indirizzo_numero_civico, 'N° civico        *') }}
-            {{ form_errors(form.indirizzo_numero_civico) }}
+             <div class="errore"> {{ form_errors(form.indirizzo_numero_civico) }} </div>
             {{ form_widget(form.indirizzo_numero_civico) }}
                                                         </div> 
 
 
                                                         <div>
             {{ form_label(form.telefono,'Telefono        *') }}
-            {{ form_errors(form.telefono) }}
+            <div class="errore"> {{ form_errors(form.telefono) }}</div>
             {{ form_widget(form.telefono) }}
                                                             </div> 
 
@@ -126,7 +123,7 @@ I campi con l'asterisco sono obbligatori
                                                                 </div> 
                                                                 <div>
             {{ form_label(form.email,'email        *') }}
-            {{ form_errors(form.email) }}
+           <div class="errore">  {{ form_errors(form.email) }}</div>
             {{ form_widget(form.email) }}
                                                                     </div> 
 
@@ -144,12 +141,12 @@ I campi con l'asterisco sono obbligatori
                                                                             </div> 
                                                                             <div>
             {{ form_label(form.ordine_numero,'Nr. Iscrizione Ordine/Collegio Ass. prof.le        *') }}
-            {{ form_errors(form.ordine_numero) }}
+            <div class="errore"> {{ form_errors(form.ordine_numero) }}</div>
             {{ form_widget(form.ordine_numero) }}
                                                                                 </div> 
                                                                                 <div>
             {{ form_label(form.ordine_citta,'di        *') }}
-            {{ form_errors(form.ordine_citta) }}
+            <div class="errore">{{ form_errors(form.ordine_citta) }}</div>
             {{ form_widget(form.ordine_citta) }}
                                                                                     </div> 
 

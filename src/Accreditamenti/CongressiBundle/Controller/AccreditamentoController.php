@@ -247,7 +247,7 @@ class AccreditamentoController extends Controller {
         //$startDate = DateTime::createFromFormat('Y-m-d', $questionario[0]->getDataFineCompilazione());
 
 
-        $data_fine=  $questionario[0]->getDataFineCompilazione();
+        $data_fine =  $questionario[0]->getDataFineCompilazione();
         //echo $data_fine->format('Ymd') . "<hr>";
         
         //$date = \DateTime::createFromFormat('j-M-Y', '15-Feb-2009');

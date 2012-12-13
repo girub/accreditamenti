@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Accreditamenti\CongressiBundle\Entity\Anagrafica;
 use Accreditamenti\CongressiBundle\Form\AnagraficaType;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Anagrafica controller.
@@ -68,71 +69,100 @@ class AnagraficaController extends Controller {
         );
     }
 
+    //"AccreditamentiCongressiBundle:Anagrafica:new.html.twig"
+
     /**
      * Creates a new Anagrafica entity.
      *
      * @Route("/create/{accreditamento_id}", name="anagrafica_create")
      * @Method("post")
-     * @Template("AccreditamentiCongressiBundle:Anagrafica:new.html.twig")
+     * @Template()
      */
     public function createAction($accreditamento_id) {
-        
-        
         $anagrafica = new Anagrafica();
         $request = $this->getRequest();
         $form = $this->createForm(new AnagraficaType(), $anagrafica);
-               
-        $form->bindRequest($request);
-   
-        //cotrollo lato server dei dati compilati in anagrafica
-        $data_nascita = $form['data_nascita']->getData();
-        $luogo_nascita = $form['luogo_nascita']->getData();
-        $ordine_numero = $form['ordine_numero']->getData();
-        $ordine_citta = $form['ordine_citta']->getData();
-        $indirizzo_via = $form['indirizzo_via']->getData();
-        $indirizzo_numero_civico = $form['indirizzo_numero_civico']->getData();
-        $indirizzo_cap = $form['indirizzo_cap']->getData();
-        $indirizzo_citta = $form['indirizzo_citta']->getData();
-        $indirizzo_provincia = $form['indirizzo_provincia']->getData();
-        $telefono = $form['telefono']->getData();
-        $email = $form['email']->getData();
-        $informazioni_veritiere = $form['informazioni_veritiere']->getData();
-        $privacy = $form['privacy']->getData();
+        
+        
+       //if ($request->isMethod('POST')) {
+       // $form->bind($request);    
+        
+        if('POST' === $request->getMethod()) {
+             $form->bindRequest($request);
 
-        // In caso di campi lasciati vuoti (con Internet Explorer) faccio il render di 
-        // una pagina che mi fa tornare indietro con  history.go(-1)
-        if ($data_nascita == null || $luogo_nascita == null || $ordine_numero == null || $ordine_citta == null ||
-                $indirizzo_via == null || $indirizzo_numero_civico == null || $indirizzo_cap == null || $indirizzo_citta == null
-                || $indirizzo_provincia == null || $telefono == null || $email == null || $privacy == null || $informazioni_veritiere==null) {
-          
-            return $this->render('AccreditamentiCongressiBundle:Accreditamento:compilaAnagraficaError.html.twig');
-            
+            if ($form->isValid()) {
+                // validazione passata, fare qualcosa con l'oggetto $author
+                $em = $this->getDoctrine()->getEntityManager();
+                $em->persist($anagrafica);
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('compila_ecm', array(
+                                    'anagrafica_id' => $anagrafica->getId(),
+                                    'accreditamento_id' => $accreditamento_id,
+                                )));
+            }
         }
 
+        return $this->render('AccreditamentiCongressiBundle:Accreditamento:compilaAnagrafica.html.twig', array(
+                    'entity' => $anagrafica,
+                    'accreditamento_id' => $accreditamento_id,
+                    'form' => $form->createView()
+                ));
 
-
-
-
-
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
-            $em->persist($anagrafica);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('compila_ecm', array(
-                                'anagrafica_id' => $anagrafica->getId(),
-                                'accreditamento_id' => $accreditamento_id,
-                            )));
-        }
-
-
-
-        return array(
-            'entity' => $anagrafica,
-            'form' => $form->createView()
-        );
     }
+
+
+        /*
+          $anagrafica = new Anagrafica();
+          $request = $this->getRequest();
+          $form = $this->createForm(new AnagraficaType(), $anagrafica);
+
+          $form->bindRequest($request);
+
+          //cotrollo lato server dei dati compilati in anagrafica
+          $data_nascita = $form['data_nascita']->getData();
+          $luogo_nascita = $form['luogo_nascita']->getData();
+          $ordine_numero = $form['ordine_numero']->getData();
+          $ordine_citta = $form['ordine_citta']->getData();
+          $indirizzo_via = $form['indirizzo_via']->getData();
+          $indirizzo_numero_civico = $form['indirizzo_numero_civico']->getData();
+          $indirizzo_cap = $form['indirizzo_cap']->getData();
+          $indirizzo_citta = $form['indirizzo_citta']->getData();
+          $indirizzo_provincia = $form['indirizzo_provincia']->getData();
+          $telefono = $form['telefono']->getData();
+          $email = $form['email']->getData();
+          $informazioni_veritiere = $form['informazioni_veritiere']->getData();
+          $privacy = $form['privacy']->getData();
+
+          // In caso di campi lasciati vuoti (con Internet Explorer) faccio il render di
+          // una pagina che mi fa tornare indietro con  history.go(-1)
+          if ($data_nascita == null || $luogo_nascita == null || $ordine_numero == null || $ordine_citta == null ||
+          $indirizzo_via == null || $indirizzo_numero_civico == null || $indirizzo_cap == null || $indirizzo_citta == null
+          || $indirizzo_provincia == null || $telefono == null || $email == null || $privacy == null || $informazioni_veritiere==null) {
+
+          return $this->render('AccreditamentiCongressiBundle:Accreditamento:compilaAnagraficaError.html.twig');
+
+          }
+
+
+          if ($form->isValid()) {
+          $em = $this->getDoctrine()->getEntityManager();
+          $em->persist($anagrafica);
+          $em->flush();
+
+          return $this->redirect($this->generateUrl('compila_ecm', array(
+          'anagrafica_id' => $anagrafica->getId(),
+          'accreditamento_id' => $accreditamento_id,
+          )));
+          }
+
+          return array(
+          'entity' => $anagrafica,
+          'form' => $form->createView()
+          );
+
+         */
+       //} fine
 
     /**
      * Displays a form to edit an existing Anagrafica entity.
@@ -140,7 +170,6 @@ class AnagraficaController extends Controller {
      * @Route("/{id}/edit/{accreditamento_id}", name="anagrafica_edit")
      * @Template()
      */
-    
     public function editAction($accreditamento_id, $id) {
         $em = $this->getDoctrine()->getEntityManager();
 
@@ -154,7 +183,7 @@ class AnagraficaController extends Controller {
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'accreditamento_id' => $accreditamento_id,         
+            'accreditamento_id' => $accreditamento_id,
             'entity' => $entity,
             'form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -188,12 +217,10 @@ class AnagraficaController extends Controller {
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('anagrafica_edit', 
-                    array(
-                        'id' => $id,
-                         'accreditamento_id' => $accreditamento_id, 
-                        
-                        )));
+            return $this->redirect($this->generateUrl('anagrafica_edit', array(
+                                'id' => $id,
+                                'accreditamento_id' => $accreditamento_id,
+                            )));
         }
 
         return array(

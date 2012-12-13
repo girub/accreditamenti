@@ -5,7 +5,7 @@ namespace Accreditamenti\CongressiBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\JoinColumn;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Accreditamenti\CongressiBundle\Entity\Anagrafica
  *
@@ -46,77 +46,65 @@ class Anagrafica {
 
     /**
      * @var string $luogo_nascita
-     *
+     * @Assert\NotNull()
      * @ORM\Column(name="luogo_nascita", type="string", length=255)
      */
     private $luogo_nascita;
 
     /**
      * @var date $data_nascita
-     *
+     * @Assert\NotNull()
      * @ORM\Column(name="data_nascita", type="date")
      */
     private $data_nascita;
 
     /**
      * @var string $codice_fiscale
-     *
+     * @Assert\NotNull()
      * @ORM\Column(name="codice_fiscale", type="string", length=255)
      */
     private $codice_fiscale;
 
-    /**
-     * @var string $ordine_numero
-     *
-     * @ORM\Column(name="ordine_numero", type="string", length=255)
+     /**
+     * @var string $indirizzo_citta
+     * @Assert\NotNull()
+     * @ORM\Column(name="indirizzo_citta", type="string", length=255)
      */
-    private $ordine_numero;
-
+    private $indirizzo_citta;
+    
+    
     /**
-     * @var string $ordine_citta
-     *
-     * @ORM\Column(name="ordine_citta", type="string", length=255)
+     * @var string $indirizzo_provincia
+     * @Assert\NotNull()
+     * @ORM\Column(name="indirizzo_provincia", type="string", length=255)
      */
-    private $ordine_citta;
-
+    private $indirizzo_provincia;
+    
+    /**
+     * @var string $indirizzo_cap
+     * @Assert\NotNull()
+     * @ORM\Column(name="indirizzo_cap", type="string", length=255)
+     */
+    private $indirizzo_cap;
+ 
+    
     /**
      * @var string $indirizzo_via
-     *
+     * @Assert\NotNull()
      * @ORM\Column(name="indirizzo_via", type="string", length=255)
      */
     private $indirizzo_via;
 
     /**
      * @var string $indirizzo_numero_civico
-     *
+     * @Assert\NotNull()
      * @ORM\Column(name="indirizzo_numero_civico", type="string", length=255)
      */
     private $indirizzo_numero_civico;
 
     /**
-     * @var string $indirizzo_cap
-     *
-     * @ORM\Column(name="indirizzo_cap", type="string", length=255)
-     */
-    private $indirizzo_cap;
-
-    /**
-     * @var string $indirizzo_citta
-     *
-     * @ORM\Column(name="indirizzo_citta", type="string", length=255)
-     */
-    private $indirizzo_citta;
-
-    /**
-     * @var string $indirizzo_provincia
-     *
-     * @ORM\Column(name="indirizzo_provincia", type="string", length=255)
-     */
-    private $indirizzo_provincia;
-
-    /**
      * @var string $telefono
-     *
+     * @Assert\NotNull()
      * @ORM\Column(name="telefono", type="string", length=255)
      */
     private $telefono;
@@ -130,25 +118,41 @@ class Anagrafica {
 
     /**
      * @var string $email
-     *
+     * @Assert\NotNull()
      * @ORM\Column(name="email", type="string", length=255)
      */
     private $email;
 
     /**
      * @var string $professione
-     *
+     * @Assert\NotNull()
      * @ORM\Column(name="professione", type="integer")
      */
     private $professione;
 
     /**
      * @var string $disciplina
-     *
+     * @Assert\NotNull()
      * @ORM\Column(name="disciplina", type="integer")
      */
     private $disciplina;
 
+    
+     /**
+     * @var string $ordine_numero
+     * @Assert\NotNull()
+     * @ORM\Column(name="ordine_numero", type="string", length=255)
+     */
+    private $ordine_numero;
+
+    /**
+     * @var string $ordine_citta
+     * @Assert\NotNull()
+     * @ORM\Column(name="ordine_citta", type="string", length=255)
+     */
+    private $ordine_citta;
+    
+    
     /**
      * @var string $qualifica
      *
@@ -209,7 +213,7 @@ class Anagrafica {
     
     /**
      * @var boolean $informazioni_veritiere
-     *
+     * 
      * @ORM\Column(name="informazioni_veritiere", type="boolean")
      */
     private $informazioni_veritiere;
