@@ -12,7 +12,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class CongressoRepository extends EntityRepository {
 
-    public function getCongressiFuturiAbilitati() {
+    public function getCongressiFuturiAbilitati(){
         return $this->createQueryBuilder('c')
                         ->where('c.abilitato = :abilitato')
                         ->andWhere('c.data_inizio >= :data_inizio')
@@ -23,8 +23,8 @@ class CongressoRepository extends EntityRepository {
                         ->getResult();
     }
 
-    public function getCongressiFuturiTutti() {
-        return $this->createQueryBuilder('c')
+    public function getCongressiFuturiTutti(){
+       return $this->createQueryBuilder('c')
                         ->andWhere('c.data_inizio >= :data_inizio')
                         ->setParameter('data_inizio', new \DateTime())
                         ->orderBy('c.data_inizio', 'asc')

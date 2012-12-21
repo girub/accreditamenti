@@ -1,0 +1,15 @@
+{% extends '::frontEnd/base.html.twig' %}
+
+{% block body %}
+      
+                Scarica il suo attesta ecm
+                <br><br>
+                <form action="{{ path('pdf_create', {'accreditamento_id': accreditamento_id,'anagrafica_id': anagrafica_id}) }}" method="post" >
+                    <p>
+                        <button type="submit">Stampa il certificato</button>
+                    </p>
+                </form>
+    
+{% endblock %}
+
+

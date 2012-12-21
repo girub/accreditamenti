@@ -1,7 +1,7 @@
 {% extends '::frontEnd/base.html.twig' %}
 
 {% block body %}
-        {% if(anagrafica.getAbilitaStampa==0) %}
+      
                 <h2>Grazie per aver compilato il kit ECM.</h2>
                 <br>
                 Entro 90 giorni dal termine dell’evento sarà possibile stampare il proprio <br>attestato ECM da questo 
@@ -13,16 +13,7 @@
                 </span>
                 <br><br>
                 Aim Group International
-        {% else %}
-                Scarica il suo attesta ecm
-                <br><br>
-                <form action="{{ path('pdf_create', {'accreditamento_id': accreditamento_id,'anagrafica_id': anagrafica_id}) }}" method="post" >
-                    <p>
-                        <button type="submit">Stampa il certificato</button>
-                    </p>
-                </form>
-        {% endif %}
-
+    
 {% endblock %}
 
 

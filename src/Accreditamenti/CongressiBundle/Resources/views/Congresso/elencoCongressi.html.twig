@@ -1,18 +1,35 @@
-{% extends '::backEnd/base.html.twig' %}
+{% extends '::frontEnd/base.html.twig' %}
 
 {% block body %}
 
-<h2>Pagina elenco congressi</h2>
+<h1>Lista Congressi con questionari attivi</h1>
+    <BR><BR><BR>
+{% for congresso in congressi %}
 
-    {% for congresso in congressi %}
+    <div style="border:0px solid red;height: 150px;">
+           {% if congresso.manifesto|length > 0 %}
+                <div style="float:left;">
+                  <a href="{{ path('accreditamenti_congresso', { 'id': congresso.id }) }}">
+                    <img src="/resource/img/{{ congresso.id }}/{{ congresso.manifesto }}" width="100" style="border:0px solid #333333;"></div>                 
+                 </a>
+          {% endif %}
 
-     {#<a href="{{ path('accreditamenti_congresso', { 'id': congresso.id }) }}" id="link_accreditamenti_congresso">#}
-<a href="{{ path('accreditamenti_congresso', { 'id': congresso.id }) }}" id="link_accreditamenti_congresso{{congresso.id}}">
-{{ congresso.titolo }}
-    </a>
-    <BR>
-        {{ congresso.descrizione }}
+         <div style="float:right;border:0px solid blue; margin-right:12px; width: 580px;padding-top: 30px;">
+             <a href="{{ path('accreditamenti_congresso', { 'id': congresso.id }) }}" id="link_accreditamenti_congresso{{congresso.id}}" style="font-size: 20px;"> 
+           {{ congresso.titolo }} </a>
+           <BR>
+            {{ congresso.descrizione }}
+         </div>  
+    
+    </div>       
+
+    
+    
     <hr/>
+</div>
 
-    {% endfor %}
+{% endfor %}
+
+
 {% endblock %}
+    

@@ -62,9 +62,6 @@ class AccreditamentoController extends Controller {
      * @Template()
      */
     public function elencoUtentiAction($accreditamento_id, $vista) {
-
-
-
         $em = $this->getDoctrine()->getEntityManager();
         // Estraggo anagrafiche memorizzate le passo alla view 
         $anagrafiche = $em->getRepository('AccreditamentiCongressiBundle:Anagrafica')->findBy(
@@ -75,8 +72,6 @@ class AccreditamentoController extends Controller {
         if (!$anagrafiche) {
             throw $this->createNotFoundException('Attenzione: Nessuna anagrafica con questo accreditamento!');
         }
-
-
 
         // controllo risposte esatte
         $arrayRisposteEsatte[] = array();
@@ -121,13 +116,10 @@ class AccreditamentoController extends Controller {
             $risposteEcmUtenti = $query->getResult();
 
             foreach ($risposteEcmUtenti as $rispostaEcmUtente) {
-                // echo "Risposte utenti: " . $rispostaEcmUtente['risposta_id'] . "<BR>";
-
                 if (in_array($rispostaEcmUtente['risposta_id'], $arrayRisposteEsatte)) {
                     $totale_risposte_esatte += 1;
                 }
             }
-            //echo "<b>Utente con id: " . $anagrafica->getId() . " ha risposto a " . $totale_risposte_esatte . " risposte esatte!!</b><br>";
             $percentuale_risposte_esatte = $questionario[0]->getPercentualeRisposteEsatte();
             $percentuale_da_superare = ($totale_domande_ecm * $percentuale_risposte_esatte) / 100;
 
@@ -137,10 +129,6 @@ class AccreditamentoController extends Controller {
                 $utenti[] .=$anagrafica->getId();
             }
         }
-
-
-
-
 
         return array(
             'entities' => $anagrafiche,
@@ -243,24 +231,13 @@ class AccreditamentoController extends Controller {
         $accreditamento = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($id);
         $questionario = $accreditamento->getQuestionarioEcm();
 
-        //echo($questionario[0]->getDataFineCompilazione());die();
-        //$startDate = DateTime::createFromFormat('Y-m-d', $questionario[0]->getDataFineCompilazione());
+        $data_fine = $questionario[0]->getDataFineCompilazione();
+        $data_oggi = \DateTime::createFromFormat('Y-m-d', date('Y-m-d'));
 
 
-        $data_fine =  $questionario[0]->getDataFineCompilazione();
-        //echo $data_fine->format('Ymd') . "<hr>";
-        
-        //$date = \DateTime::createFromFormat('j-M-Y', '15-Feb-2009');
-        //$date_fine = \DateTime::createFromFormat('Y-m-d', '2012-12-07');
-        //echo $date_fine->format('Ymd') . "<br><br><br>";
-
-        $data_oggi  = \DateTime::createFromFormat('Y-m-d',  date('Y-m-d'));
-        //echo $data_oggi->format('Ymd');
-        //echo "<br><hr>";
-   
-        if ($data_oggi->format('Ymd') > $data_fine->format('Ymd') ) {
-            return $this->render('AccreditamentiCongressiBundle:Accreditamento:formLoginIscrittoChiuso.html.twig');
-        }
+//        if ($data_oggi->format('Ymd') > $data_fine->format('Ymd')) {
+//            return $this->render('AccreditamentiCongressiBundle:Accreditamento:formLoginIscrittoChiuso.html.twig');
+//        }
 
 
         return array('form' => $form, 'id' => $id);
@@ -298,7 +275,6 @@ class AccreditamentoController extends Controller {
         }
 
 
-
         // controllo se l'utente ha già compilato l'anagrafica per questo accreditamento
         // se trovo un record vado alla pagina successiva
         $query = $em->createQuery(
@@ -309,6 +285,28 @@ class AccreditamentoController extends Controller {
 
         $anagrafica = $query->getResult();
 
+
+
+        //############################# INIZIO ##################
+        // Se il tempo per la compilazione ecm e termiato,
+        // allora faccio un redirect a stampa_certificato dove vedrò se puo stampare o meno il certificato
+        //$em = $this->getDoctrine()->getEntityManager();
+        //recupero giorno temine compilazione, se la data è passata carico altra view
+        $accreditamento = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($accreditamento_id);
+        $questionario = $accreditamento->getQuestionarioEcm();
+
+        $data_fine = $questionario[0]->getDataFineCompilazione();
+        $data_oggi = \DateTime::createFromFormat('Y-m-d', date('Y-m-d'));
+
+        if ($data_oggi->format('Ymd') > $data_fine->format('Ymd')) {
+
+            return $this->redirect($this->generateUrl('stampa_certificato', array(
+                                'accreditamento_id' => $accreditamento_id,
+                                'anagrafica_id' => $anagrafica[0]['id']
+                            )));
+        }
+        //############################ FINE ################
+        // se ha giaà compilato l'anagrafica, vado nella pagina compila ecm
         if (isset($anagrafica[0]['codice_fiscale'])) {
 
             $this->get('session')->setFlash('notice', 'Ben tornato ' . $iscritto[0]['nome'] . ' ' . $iscritto[0]['cognome'] . ' continua a compilare il questionario!');
@@ -318,11 +316,7 @@ class AccreditamentoController extends Controller {
                             )));
         }
 
-
-        //$this->get('session')->setFlash('auth', '1');
-
         $this->get('session')->setFlash('notice', 'Benvenuto ' . $iscritto[0]['nome'] . ' ' . $iscritto[0]['cognome'] . ' Login effettuato con successo');
-
         return $this->redirect($this->generateUrl('compila_anagrafica', array(
                             'accreditamento_id' => $accreditamento_id,
                             'nome' => $iscritto[0]['nome'],
@@ -375,14 +369,6 @@ class AccreditamentoController extends Controller {
                         'SELECT a.anagrafica_id FROM AccreditamentiCongressiBundle:RisposteUtentiQuestionarioEcm a 
                          WHERE a.anagrafica_id = :id'
                 )->setParameter('id', $anagrafica_id);
-
-        //$test = $em->createQuery(
-        //    'SELECT DISTINCT d
-        //    FROM AccreditamentiCongressiBundle:RisposteUtentiQuestionarioEcm d
-        //    INNER JOIN d.userGruppen ug
-        //    WHERE ug.userId =9
-        //    '
-        //);
 
         $risposteEcm = $query->getResult();
         //  die($risposteEcm[0]['anagrafica_id']);
@@ -1003,12 +989,6 @@ class AccreditamentoController extends Controller {
             throw $this->createNotFoundException('Unable to find Anagrafica entity.');
         }
 
-
-
-
-
-
-
         return array(
             'anagrafica' => $anagrafica,
             'accreditamento_id' => $accreditamento_id,
@@ -1027,13 +1007,7 @@ class AccreditamentoController extends Controller {
         $anagrafica = $em->getRepository('AccreditamentiCongressiBundle:Anagrafica')->find($anagrafica_id);
         //die($anagrafica->getNome());
 
-
-
         $certificato = $accreditamento->getCertificatoEcm();
-
-
-
-
 
         $dir = $_SERVER['DOCUMENT_ROOT'] . "/resource/img/" . $accreditamento->getCongresso()->getId();
         $certificato = $dir . "/" . $certificato;
@@ -1043,6 +1017,81 @@ class AccreditamentoController extends Controller {
         return $this->get('io_tcpdf')
                         ->quick_pdf($html, $file = "html.pdf", $format = "S", $certificato);
     }
+
+    /**
+     * Creo certificato pdf.
+     *
+     * @Route("/{accreditamento_id}/{anagrafica_id}/stampa/certificato/", name="stampa_certificato")
+     * @Template()
+     */
+    public function stampaCertificatoAction($accreditamento_id, $anagrafica_id) {
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $anagrafica = $em->getRepository('AccreditamentiCongressiBundle:Anagrafica')->find($anagrafica_id);
+        if (!$anagrafica) {
+            throw $this->createNotFoundException('Unable to find Anagrafica entity.');
+        }
+
+
+        // controllo risposte esatte
+        $arrayRisposteEsatte[] = array();
+        $accreditamento = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($accreditamento_id);
+
+        $questionario = $accreditamento->getQuestionarioEcm();
+        $domande = $em->getRepository('AccreditamentiCongressiBundle:Domanda')
+                ->findDomandeDelQuestionario($questionario[0]);
+        //$percentuale_risposte_esatte = $questionario->getPercentualeRisposteEsatte();
+
+        $percentuale_risposte_esatte = $questionario[0]->getPercentualeRisposteEsatte();
+        //die($percentuale_risposte_esatte);
+        $totale_risposte_esatte = 0;
+        foreach ($domande as $domanda) {
+            $risposte = $domanda->getRisposta();
+            $idRispostaGiusta = null;
+            //Ciclo tutte le risposte di questa domanda
+            foreach ($risposte as $risposta) {
+                //stampo solo la risposta vera
+                if ($risposta->getVero() === true) {
+                    $idRispostaGiusta = $risposta->getId();
+
+                    $arrayRisposteEsatte[] .=$risposta->getId();
+                }
+            }
+
+            $totale_domande_ecm = count($domande);
+        }
+
+        $totale_risposte_esatte = 0;
+
+        $query = $em->createQuery(
+                        'SELECT a.anagrafica_id, a.risposta_id  FROM AccreditamentiCongressiBundle:RisposteUtentiQuestionarioEcm a 
+                         WHERE a.anagrafica_id = :id'
+                )->setParameter('id', $anagrafica->getId());
+
+        $risposteEcmUtenti = $query->getResult();
+
+        foreach ($risposteEcmUtenti as $rispostaEcmUtente) {
+            if (in_array($rispostaEcmUtente['risposta_id'], $arrayRisposteEsatte)) {
+                $totale_risposte_esatte += 1;
+            }
+        }
+        $percentuale_risposte_esatte = $questionario[0]->getPercentualeRisposteEsatte();
+        $percentuale_da_superare = ($totale_domande_ecm * $percentuale_risposte_esatte) / 100;
+
+        if ($totale_risposte_esatte > $percentuale_da_superare) {
+
+            $esito = "ok";
+        } else {
+
+            $esito = "ko";
+        }
+
+        return array(
+            'anagrafica' => $anagrafica,
+            'accreditamento_id' => $accreditamento_id,
+            'anagrafica_id' => $anagrafica_id,);
+    }
+
 
     /**
      * Cancella il certificato ecm

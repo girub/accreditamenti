@@ -10,21 +10,44 @@ use Accreditamenti\CongressiBundle\Entity\Congresso;
 use Accreditamenti\CongressiBundle\Form\CongressoType;
 
 class CongressoController extends Controller {
-
     /**
      * Lists all Congresso entities.
      * 
      * @Route("congresso/", name="congresso")
      * @Template()
      */
-    public function indexAction() {
-
-        $congresso = $this->getDoctrine()
-                ->getRepository('AccreditamentiCongressiBundle:Congresso');
-
-        return array(
-            'entities' => $congresso->getCongressiFuturiTutti()
+    public function indexAction(){
+//        $congresso = $this->getDoctrine()
+//                ->getRepository('AccreditamentiCongressiBundle:Congresso');
+//        return array(
+//            'entities' => $congresso->getCongressiFuturiTutti()
+//        );
+        
+        $entityManager = $this->getDoctrine()->getEntityManager();
+        $query = $entityManager->createQuery(
+                        'SELECT
+                         
+                            p.id, 
+                            p.titolo,
+                            p.luogo, 
+                            p.descrizione, 
+                            p.codice_congresso,
+                            p.email_referente,
+                            p.data_inizio,
+                            p.data_fine,
+                            p.abilitato
+                            
+                            FROM AccreditamentiCongressiBundle:Congresso p 
+                         WHERE p.abilitato = :abilitato'
+                )->setParameter('abilitato', 1);
+        $congressi = $query->getResult();
+        
+        //var_dump($congressi);die();
+        
+         return array(
+            'entities' => $congressi
         );
+        
     }
 
     /**
@@ -34,12 +57,21 @@ class CongressoController extends Controller {
      * @Template()
      */
     public function elencoCongressiAction() {
-
+        
+//        $entityManager = $this->getDoctrine()->getEntityManager();
+//        $congressi = $entityManager
+//                ->getRepository('AccreditamentiCongressiBundle:Congresso')
+//               ->findAll();
+        
+        
         $entityManager = $this->getDoctrine()->getEntityManager();
-        $congressi = $entityManager
-                ->getRepository('AccreditamentiCongressiBundle:Congresso')
-                ->findAll();
-
+        $query = $entityManager->createQuery(
+                        'SELECT p.id, p.titolo, p.manifesto, p.descrizione FROM AccreditamentiCongressiBundle:Congresso p 
+                         WHERE p.abilitato = :abilitato'
+                )->setParameter('abilitato', 1);
+        $congressi = $query->getResult();
+        
+        
         return array(
             'congressi' => $congressi
         );
