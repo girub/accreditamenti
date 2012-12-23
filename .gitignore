@@ -12,7 +12,7 @@ app/logs/**
 app/config/parameters.ini
 
 # Generated files
-src/**/**/Resources/doc/index.pdf
+#src/**/**/Resources/doc/index.pdf
 app/Resources/doc/*.pdf
 
 # upload files
