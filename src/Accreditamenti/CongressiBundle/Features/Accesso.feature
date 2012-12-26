@@ -1,8 +1,10 @@
 Feature: Registrazione ad un accreditamento login e compilo anagrafica
 
 Scenario: Voglio scegliere un congresso da un elenco e un relativo suo accreditamento
-    Given I go to "/"
-    And I follow "Login"
+    #Given I go to "/"
+    #And I follow "Login"
+
+    Given I go to "/login"
     When I fill in "_username" with "giuseppe"
     And I fill in "_password" with "giuseppe"
     Given I press "Login"
@@ -12,12 +14,8 @@ Scenario: Voglio scegliere un congresso da un elenco e un relativo suo accredita
     And I fill in "Url" with "http://www.google.com"
     And I fill in "Titolo" with "68° Congresso Nazionale SIP"
     And I fill in "Descrizione" with "mia descrizione"
-    And I fill in "accreditamenti_congressibundle_congressotype_data_inizio_date_day" with "01"
-    And I fill in "accreditamenti_congressibundle_congressotype_data_inizio_date_month" with "11"
-    And I fill in "accreditamenti_congressibundle_congressotype_data_inizio_date_year" with "2012"
-    And I fill in "accreditamenti_congressibundle_congressotype_data_fine_date_day" with "11"
-    And I fill in "accreditamenti_congressibundle_congressotype_data_fine_date_month" with "11"
-    And I fill in "accreditamenti_congressibundle_congressotype_data_fine_date_year" with "2012"
+    And I fill in "accreditamenti_congressibundle_congressotype_data_inizio" with "12-12-2012"
+    And I fill in "accreditamenti_congressibundle_congressotype_data_fine" with "13-12-2012"
     And I fill in "Luogo" with "Roma"
     And I fill in "accreditamenti_congressibundle_congressotype_manifesto" with "/manifeso.jpg"
     And I fill in "accreditamenti_congressibundle_congressotype_path_pdf_programma" with "/home/programma.pdf"
@@ -32,12 +30,8 @@ Scenario: Voglio scegliere un congresso da un elenco e un relativo suo accredita
     And I fill in "accreditamenti_congressibundle_accreditamentotype_numero_accreditamento" with "33"
     And I fill in "accreditamenti_congressibundle_accreditamentotype_titolo" with "TitoloAccreditamento"
     And I fill in "accreditamenti_congressibundle_accreditamentotype_luogo" with "Cesena"
-    And I fill in "accreditamenti_congressibundle_accreditamentotype_data_inizio_day" with "01"
-    And I fill in "accreditamenti_congressibundle_accreditamentotype_data_inizio_month" with "11"
-    And I fill in "accreditamenti_congressibundle_accreditamentotype_data_inizio_year" with "2012"
-    And I fill in "accreditamenti_congressibundle_accreditamentotype_data_fine_day" with "11"
-    And I fill in "accreditamenti_congressibundle_accreditamentotype_data_fine_month" with "11"
-    And I fill in "accreditamenti_congressibundle_accreditamentotype_data_fine_year" with "2012"
+    And I fill in "accreditamenti_congressibundle_accreditamentotype_data_inizio" with "12-12-2012"
+    And I fill in "accreditamenti_congressibundle_accreditamentotype_data_fine" with "13-12-2012"
     And I fill in "accreditamenti_congressibundle_accreditamentotype_ore_formative" with "2012"
     And I fill in "accreditamenti_congressibundle_accreditamentotype_obiettivo_formativo" with "Descrizione dell'obiettivo ..."
     And I fill in "accreditamenti_congressibundle_accreditamentotype_numero_crediti" with "2012"
@@ -47,12 +41,8 @@ Scenario: Voglio scegliere un congresso da un elenco e un relativo suo accredita
     
     When I follow "Quest. ecm"
     And I fill in "accreditamenti_congressibundle_questionarioecmtype_descrizione" with "Esempio Questionario ECM"
-    And I fill in "accreditamenti_congressibundle_questionarioecmtype_data_inizio_compilazione_day" with "01"
-    And I fill in "accreditamenti_congressibundle_questionarioecmtype_data_inizio_compilazione_month" with "11"
-    And I fill in "accreditamenti_congressibundle_questionarioecmtype_data_inizio_compilazione_year" with "2012"
-    And I fill in "accreditamenti_congressibundle_questionarioecmtype_data_fine_compilazione_day" with "11"
-    And I fill in "accreditamenti_congressibundle_questionarioecmtype_data_fine_compilazione_month" with "11"   
-    And I fill in "accreditamenti_congressibundle_questionarioecmtype_data_fine_compilazione_year" with "2012"
+    And I fill in "accreditamenti_congressibundle_questionarioecmtype_data_inizio_compilazione" with "12-01-2013"
+    And I fill in "accreditamenti_congressibundle_questionarioecmtype_data_fine_compilazione" with "13-01-2013"
     And I fill in "accreditamenti_congressibundle_questionarioecmtype_percentuale_risposte_esatte" with "70"
     And I fill in "accreditamenti_congressibundle_questionarioecmtype_numero_tentativi_compilazione" with "10"
     Given I press "Create"
@@ -134,7 +124,7 @@ Scenario: Voglio scegliere un congresso da un elenco e un relativo suo accredita
     And I fill in "accreditamenti_congressibundle_anagraficatype_dichiara_autorizzazione_struttura" with "Si"
     And I fill in "accreditamenti_congressibundle_anagraficatype_dichiara_informato_dal_provider" with "Si"
     And I check "accreditamenti_congressibundle_anagraficatype_privacy"
-    Then show last response
-    Given I press "Avanti"
+    #Then show last response
+    Given I press "Continua"
     #Then show last response
     Then the response should contain "Compila il questionario ECM"

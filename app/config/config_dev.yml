@@ -22,7 +22,7 @@ monolog:
 assetic:
     use_controller: true
     
-swiftmailer:
-    transport: gmail
-    username:  giuseppe.rubino@gmail.com
-    password:  formaggino_882u
+#swiftmailer:
+#    transport: gmail
+#    username:  giuseppe.rubino@gmail.com
+#    password:  formaggino_882u

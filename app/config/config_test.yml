@@ -12,6 +12,9 @@ web_profiler:
 
 swiftmailer:
     disable_delivery: true
+  
+    
+    
     
 mink:
     show_cmd: chromium-browser %s
