@@ -5,11 +5,6 @@
 </head>
 
 <body>
-
-    
-
-<br>
-<br>
 <br>
 <br>
 <br>
@@ -41,37 +36,33 @@
 <br>
 <br>
 
-<table border="0" bordercolor="#000">
-    <tr><td height="80">
-        <div align="center" style="color:#006;font-weight: bold;font-size: 68px;">
-        {{ anagrafica.getNome}} {{ anagrafica.getCognome}} 
+
+
+<table border="0" bordercolor="#FF00" cellpadding="0" cellspacing="0" height="400">
+    <tr><td height="67">
+            <div align="center" style="color:#000000;font-weight: bold;font-size: 75px;font-family: 'Times New Roman',Georgia,Serif;">
+        {{ anagrafica.getNome}} {{ anagrafica.getCognome}}
         </div>
     </td></tr>
-    <tr><td style="color:#006;font-weight: bold;font-size: 33px">
-            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-        {{ anagrafica.getLuogoNascita }} 
+    
+    <tr><td height="10">
+
+
+            <div align="center" style="color:#000000;font-size: 35px;font-family: 'Times New Roman',Georgia,Serif;">
+               nato/a a  {{ anagrafica.getLuogoNascita }}
+            </div>
+
     </td></tr>
-    
-    <tr><td style="color:#006;font-weight: bold;font-size: 33px">        
-            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-{{ anagrafica.getOrdineNumero }} di {{ anagrafica.getOrdineCitta }}
-
-        </td></tr>
-    
-</table>
-
+    <tr><td height="20" style="text-align: center; color:#000000;font-size: 35px;font-family: 'Times New Roman',Georgia,Serif;">
+                  il {{ anagrafica.dataNascita|date('d/m/Y') }}
+            
+        
+        
+        
+        
+        </td>
+    </tr>
+    <tr><td height="2" style="text-align: center; color:#000000;font-size: 35px;font-family: 'Times New Roman',Georgia,Serif;">
+                                             iscritto all’Ordine/Collegio/ASS. prof.li  num {{ anagrafica.getOrdineNumero }} di {{ anagrafica.getOrdineCitta }}</td></tr></table>
 </body>
 </html>

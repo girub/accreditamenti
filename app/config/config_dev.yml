@@ -26,3 +26,11 @@ assetic:
 #    transport: gmail
 #    username:  giuseppe.rubino@gmail.com
 #    password:  formaggino_882u
+
+
+#twig:
+#    debug: 1
+#services:
+#    debug.twig.extension:
+#        class: Twig_Extensions_Extension_Debug
+#        tags: [{ name: 'twig.extension' }]

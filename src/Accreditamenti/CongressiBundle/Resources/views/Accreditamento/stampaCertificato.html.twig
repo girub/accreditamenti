@@ -1,15 +1,44 @@
 {% extends '::frontEnd/base.html.twig' %}
 
 {% block body %}
-      
-                Scarica il suo attesta ecm
-                <br><br>
-                <form action="{{ path('pdf_create', {'accreditamento_id': accreditamento_id,'anagrafica_id': anagrafica_id}) }}" method="post" >
-                    <p>
-                        <button type="submit">Stampa il certificato</button>
-                    </p>
-                </form>
+
+<br><br><br><br>
+
+    {% if anagrafica.AbilitaStampa == 1 %}
+
+        Gentile Partecipante,<br>
+        essendo in possesso di tutti i requisiti richiesti dalla normativa, ti confermiamo <br>l’assegnazione dei crediti ECM.
+
+        <br><br>
+        <form action="{{ path('pdf_create', {'accreditamento_id': accreditamento_id,'anagrafica_id': anagrafica_id}) }}" method="post" >
+            <p>
+                <button type="submit">Stampa il certificato</button>
+            </p>
+        </form>
     
+{% else %}
+
+    Gentile Partecipante,<br>
+    non essendo in possesso di tutti i requisiti richiesti dalla normativa,<br> non è possibile assegnarti i crediti ECM.
+    <br><br>
+
+
+
+    <span style="color:#0064af;">
+
+ Contattare la segreteria organizzativa all’indirizzo e-mail f.prayer@aimgroup.eu o <br>chiamare il numero 055.2338823. Grazie
+
+</span>
+
+
+{% endif %}
+
+    <br><br><br><br><br><br><br><br>
+    Grazie per la cortese attenzione. <br><br>
+    La Segreteria Organizzativa
+    Aim Group International
+
+
 {% endblock %}
 
 

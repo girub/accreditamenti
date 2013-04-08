@@ -166,6 +166,7 @@ class AccreditamentoController extends Controller {
                 $anagrafica->setAbilitaStampa(1);
                 $entityManager->persist($anagrafica);
 
+                /*
                 $nome = "GIUSEPPE";
                 $messaggio = \Swift_Message::newInstance()
                         ->setContentType("text/html")
@@ -177,6 +178,11 @@ class AccreditamentoController extends Controller {
                 if ($this->get('mailer')->send($messaggio)) {
                     $send = 'ok';
                 }
+                */
+
+
+
+
             }
             $entityManager->flush();
         }
@@ -264,8 +270,12 @@ class AccreditamentoController extends Controller {
                 ->setParameter('id', $accreditamento_id);
         $iscritto = $query->getResult();
 
+
+
+
+        // codice fiscale non caricato per questo accreditamento
         if (!isset($iscritto[0]['nome'])) {
-            $this->get('session')->setFlash('notice', 'Codice_fiscale non presente per questo accreditamento');
+            $this->get('session')->setFlash('notice', "Utente non riconosciuto. Contattare la segreteria organizzativa all’indirizzo e-mail f.prayer@aimgroup.eu o chiamare il numero 055.2338823. Grazie");
             return $this->redirect($this->generateUrl('form_login_iscritto', array('id' => $accreditamento_id)));
         }
 
@@ -278,13 +288,12 @@ class AccreditamentoController extends Controller {
         // controllo se l'utente ha già compilato l'anagrafica per questo accreditamento
         // se trovo un record vado alla pagina successiva
         $query = $em->createQuery(
-                        'SELECT a.id, a.codice_fiscale FROM AccreditamentiCongressiBundle:Anagrafica a 
+                        'SELECT a.id, a.codice_fiscale FROM AccreditamentiCongressiBundle:Anagrafica a
                          WHERE a.codice_fiscale = :codice_fiscale and a.accreditamento = :id'
                 )->setParameter('codice_fiscale', $codice_fiscale)
                 ->setParameter('id', $accreditamento_id);
 
         $anagrafica = $query->getResult();
-
 
 
         //############################# INIZIO ##################
@@ -298,13 +307,38 @@ class AccreditamentoController extends Controller {
         $data_fine = $questionario[0]->getDataFineCompilazione();
         $data_oggi = \DateTime::createFromFormat('Y-m-d', date('Y-m-d'));
 
+
+
+        //commento - devo verificare perche da errore
         if ($data_oggi->format('Ymd') > $data_fine->format('Ymd')) {
 
-            return $this->redirect($this->generateUrl('stampa_certificato', array(
-                                'accreditamento_id' => $accreditamento_id,
-                                'anagrafica_id' => $anagrafica[0]['id']
-                            )));
+            //Puo succedere che sia oltrepasssata la data
+            //compilazione ma che l'utente sia presente nella tabella iscritti
+            if(!isset($anagrafica[0]['id']) && $iscritto[0]['nome']!=""){
+
+                $this->get('session')->setFlash('notice', 'Attenzion è terminato il periodo per la compilazione del questionario ecm');
+                return $this->redirect($this->generateUrl('form_login_iscritto', array('id' => $accreditamento_id)));
+
+
+            }else{
+
+                return $this->redirect($this->generateUrl('stampa_certificato', array(
+                    'accreditamento_id' => $accreditamento_id,
+                    'anagrafica_id' => $anagrafica[0]['id']
+                )));
+
+            }
+
+
+
         }
+
+
+
+
+
+
+
         //############################ FINE ################
         // se ha giaà compilato l'anagrafica, vado nella pagina compila ecm
         if (isset($anagrafica[0]['codice_fiscale'])) {
@@ -607,6 +641,7 @@ class AccreditamentoController extends Controller {
                 }
                 //cambiare
                 $certificato = $entity->getNumeroAccreditamento() . '.' . $extension;
+                //die($_SERVER['DOCUMENT_ROOT']);
                 $dir = $_SERVER['DOCUMENT_ROOT'] . "/resource/img/" . $entity->getCongresso()->getId();
                 @mkdir($dir, 0775);
                 $editForm['certificato_ecm']->getData()->move($dir, $certificato);
@@ -1075,21 +1110,30 @@ class AccreditamentoController extends Controller {
                 $totale_risposte_esatte += 1;
             }
         }
+
         $percentuale_risposte_esatte = $questionario[0]->getPercentualeRisposteEsatte();
         $percentuale_da_superare = ($totale_domande_ecm * $percentuale_risposte_esatte) / 100;
 
-        if ($totale_risposte_esatte > $percentuale_da_superare) {
+        die($percentuale_da_superare);
 
+
+
+        if ($totale_risposte_esatte > $percentuale_da_superare) {
             $esito = "ok";
         } else {
-
-            $esito = "ko";
+         $esito = "ko";
         }
+
+        //var_dump($anagrafica);
+
+
 
         return array(
             'anagrafica' => $anagrafica,
             'accreditamento_id' => $accreditamento_id,
-            'anagrafica_id' => $anagrafica_id,);
+            'anagrafica_id' => $anagrafica_id,
+            'esito' => $esito,
+        );
     }
 
 

@@ -6,26 +6,22 @@
 
 <form action="{{ path('operazioni_utente', {'accreditamento_id': accreditamento_id, 'vista': vista }) }}" name="modulo" method="post">
 
-<button class="btn" type="submit">Abilita</button>
+    <table  style="width: 350px; border: 0px solid red;height: 20px;" >
+        <tr><td style="vertical-align: text-top;"><button class="btn" type="submit">Abilita</button>
+        </td>
+        <td style="vertical-align: text-top; margin: 70px;">
+            <select style="margin: 20px" name="vista" onchange="javascript:document.modulo.submit()" >
+            <option value="3" >- - - - - - - - - - - - - - - </option>
+            <option value="1" {% if vista == 1 %} selected="selected" {% endif %} >Hanno superato il test</option>
+            <option value="0" {% if vista == 0 %} selected="selected" {% endif %} >Non Hanno superato il test</option>
+            <option value="2" {% if vista == 2 %} selected="selected" {% endif %} >Abilitati alla stampa</option>
+        </select></td></tr>
+    </table>
 
-<button class="btn" type="submit">Abilita ed invia email</button> 
- <select class="span3" name="vista" onchange="javascript:document.modulo.submit()" >
-      <option value="3" >- - - - - - - - - - - - - - - </option>   
-      <option value="3" {% if vista == 3 %} selected="selected" {% endif %} >Tutti</option>
-        <option value="1" {% if vista == 1 %} selected="selected" {% endif %} >Hanno superato il test</option>
-        <option value="0" {% if vista == 0 %} selected="selected" {% endif %} >Non Hanno superato il test</option>
-        <option value="2" {% if vista == 2 %} selected="selected" {% endif %} >Abilitati alla stampa</option>
-</select>
-
-<!--
-    <div class="navbar" style="text-align: right; float: right; margin-left:50px;">  
-    
-    </div>
-    -->
 
     <h2>Elenco Utenti</h2>  
 
-    <table class="table">
+    <table class="table"  style="font-size: 12px;">
         <thead>
             <tr>
                 <th>Id</th>
@@ -33,8 +29,8 @@
                 <th>Nome</th>
                 <th>Codice Fiscale</th>
                 <th>Status</th>
-                <th>stampa</th>
-                <th><input type="checkbox" id="selezionaTutto" onclick="seleziona(this.form)">Sel/Des</th>
+                <th style="width: 50px;">stampa</th>
+                <th style="font-size: 9px;width: 10px; text-align: center"><br><input type="checkbox" id="selezionaTutto" onclick="seleziona(this.form)"></th>
 
             </tr>
         </thead>
@@ -48,12 +44,15 @@
 {% for entity in entities %}
                 
             {% if entity.abilitaStampa==1 %}    
-                    {% set coloreriga ="class=success" %}
-                   {% else %}
+                    {% set coloreriga ="class=abilitati_stampa" %}
+              {% else %}
                     {% if entity.id in utenti_abilitati %}
-                         {% set coloreriga = "class=warning"%}  
-                    {% else %} 
-                         {% set coloreriga = "class=error"%}  
+                        {% set quiz = 'ok' %}
+                         {% set coloreriga = "class=quiz_superato"%}
+                    {% else %}
+                        {% set quiz = 'ok' %}
+
+                        {% set coloreriga = "class=quiz_non_superato"%}
                     {% endif %} 
              {% endif %}         
                 
@@ -70,41 +69,41 @@
                           <td>{{ entity.cognome }}</td>
                           <td>{{ entity.nome }}</td>
                           <td>{{ entity.codiceFiscale }}</td>
-                          <td>Ha superato i quiz </td>
-                          <td>abilitato </td>
-                        
+                          <td>Test superato</td>
+                         {% if entity.abilitaStampa==0 %}
+                            <td>non abilitato </td>
+                        {% else %}
+                            <td>abilitato</td>
+                        {% endif %}
+                          <td>
+                          <input type="checkbox" name="anagrafica[]" value="{{ entity.id }}">
+                          </td>
 
-                         {# if entity.abilitaStampa==0 #}   
-                              <td>
-                              <input type="checkbox" name="anagrafica[]" value="{{ entity.id }}">
-                              </td>
-                          {# else #}       
-                              <!--  <td>abilitato</td> -->
-                          {# endif #}
-
-                     
-                          <td> <a href="{{ path('anagrafica_edit', { 'id': entity.id, 'accreditamento_id': entity.getAccreditamento.id }) }}"><span class="icon-edit"></span></a><br />
-                     </td>
                  </tr>
             {% endif %} 
    <!-- Solo utenti abilitati alla stampa -->
    {% elseif vista == 2 %}             
                 {% if entity.abilitaStampa==1 %}    
                         <tr {{ coloreriga }}>
+
                          <td>{{ entity.id }}</td>
                           <td>{{ entity.cognome }}</td>
                           <td>{{ entity.nome }}</td>
                           <td>{{ entity.codiceFiscale }}</td>
-                          <td>Ha superato i quiz </td>
+                            <td>Test superato</td>
                           {% if entity.abilitaStampa==0 %}   
                               <td>non abilitato </td>
                           {% else %}       
                                <td>abilitato</td>
                           {% endif %}
 
-                             <td>ccc </td>
-                          <td> <a href="{{ path('anagrafica_edit', { 'id': entity.id, 'accreditamento_id': entity.getAccreditamento.id }) }}"><span class="icon-edit"></span></a><br />
-                          </td>
+
+                            <td>
+                                <input type="checkbox" name="anagrafica[]" value="{{ entity.id }}">
+                            </td>
+
+
+
                         </tr>
                 {% endif %}
      {% elseif vista == 0 %}             
@@ -114,36 +113,21 @@
                           <td>{{ entity.cognome }}</td>
                           <td>{{ entity.nome }}</td>
                           <td>{{ entity.codiceFiscale }}</td>
-                          <td>Non ha superato i quiz </td>
-                           
-                               <td>non abilitato</td>
-                         
-                             <td>  </td>
-                          <td> <a href="{{ path('anagrafica_edit', { 'id': entity.id, 'accreditamento_id': entity.getAccreditamento.id }) }}"><span class="icon-edit"></span></a><br />
-                          </td>
+                            <td>Test NON superato</td>
+
+                            {% if entity.abilitaStampa==0 %}
+                                <td>non abilitato </td>
+                            {% else %}
+                                <td>abilitato</td>
+                            {% endif %}
+
+                            <td>
+                                <input type="checkbox" name="anagrafica[]" value="{{ entity.id }}">
+                            </td>
+
                         </tr>
                 {% endif %}
-          {% elseif vista == 3 %}             
-              
-                        <tr {{ coloreriga }}>
-                         <td>{{ entity.id }}</td>
-                          <td>{{ entity.cognome }}</td>
-                          <td>{{ entity.nome }}</td>
-                          <td>{{ entity.codiceFiscale }}</td>
-                          <td>Non ha superato i quiz </td>
-                        
-                        {% if entity.abilitaStampa==0 %}   
-                              <td>non abilitato </td>
-                          {% else %}       
-                               <td>abilitato</td>
-                          {% endif %}
-                          <td> <a href="{{ path('anagrafica_edit', { 'id': entity.id, 'accreditamento_id': entity.getAccreditamento.id }) }}"><span class="icon-edit"></span></a><br />
-                          </td>
-                        </tr>
-                  
-                        
-                        
-                        
+
    {% endif %}    
 
  {% endfor %}
