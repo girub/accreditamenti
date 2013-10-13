@@ -24,23 +24,23 @@
         {% block topmenu %}
         {% endblock %}
         
-        <div class="container" style="border:0px solid red;width:900px;background-image: url(/resource/img/sfondo_top.jpg); background-repeat:no-repeat">
-        
-        <div class="container" style="width:400px;height: 60px">
-            {% if app.session.hasFlash('notice') %}
-                <div class="alert">
-                    <button class="close" data-dismiss="alert">×</button>
-                    {{ app.session.flash('notice') }}
-                </div>
-            {% endif %}
-        </div>
+        <div class="container"  style="border:0px solid blue;">
+            <div class="container" style="width:400px;height: 60px">
+                {% if app.session.hasFlash('notice') %}
+                    <div class="alert">
+                        <button class="close" data-dismiss="alert">×</button>
+                        {{ app.session.flash('notice') }}
+                    </div>
+                {% endif %}
+            </div>
 
-         
+            <h1 style="font-size:42px;text-align: center">18° Convegno Pediatrico dei Pinguini</h1>
+            <h3 style="text-align: center">  Firenze, 8-9 Novembre 2013 - Hotel Sheraton Firenze</h3>
             
             
-            <div class="container-fluid">
+            <div class="container-fluid" style="border:0px solid red;">
                 <div class="row-fluid">
-                    <div class="span4" style="width:120px;border:0px solid red;">
+                    <div class="span4" style="width:150px;border:0px solid red;">
                            
                         {% block sidebar %}
                            <!--

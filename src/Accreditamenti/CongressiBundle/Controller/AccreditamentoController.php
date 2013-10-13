@@ -1043,7 +1043,7 @@ class AccreditamentoController extends Controller {
         //die($anagrafica->getNome());
 
         $certificato = $accreditamento->getCertificatoEcm();
-
+        //die($certificato);
         $dir = $_SERVER['DOCUMENT_ROOT'] . "/resource/img/" . $accreditamento->getCongresso()->getId();
         $certificato = $dir . "/" . $certificato;
         $html = $this->renderView('AccreditamentiCongressiBundle:Accreditamento:certificato_crea.pdf.twig', array(
@@ -1112,13 +1112,21 @@ class AccreditamentoController extends Controller {
         }
 
         $percentuale_risposte_esatte = $questionario[0]->getPercentualeRisposteEsatte();
+        
         $percentuale_da_superare = ($totale_domande_ecm * $percentuale_risposte_esatte) / 100;
 
-        die($percentuale_da_superare);
+        
+        
+        echo "Percentuale da superare: " . $percentuale_da_superare . "<BR>";
+        echo "totale domande ecm: " .$totale_domande_ecm . "<BR>";
+        echo "Percentuale risposte esatte " .$percentuale_risposte_esatte . "<BR>";
+        echo "totale risposte esatte " . $totale_risposte_esatte. "<BR>";
+        echo "totale domande ecm" . $totale_domande_ecm. "<BR>";
 
+        
+        
 
-
-        if ($totale_risposte_esatte > $percentuale_da_superare) {
+        if ($totale_risposte_esatte >= $percentuale_da_superare) {
             $esito = "ok";
         } else {
          $esito = "ko";

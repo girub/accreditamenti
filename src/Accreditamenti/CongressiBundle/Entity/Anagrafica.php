@@ -264,6 +264,23 @@ class Anagrafica {
     private $abilita_stampa=0;
     
     
+    /**
+     * @var datetime $data_primo_accesso
+     *
+     * @ORM\Column(name="data_primo_accesso", type="datetime")
+     */
+    private $data_primo_accesso;
+
+    
+    /**
+     * @var datetime $data_stampa
+     *
+     * @ORM\Column(name="data_stampa", type="datetime")
+     */
+    private $data_stampa;
+    
+    
+    
     
     
     /**
@@ -984,5 +1001,46 @@ class Anagrafica {
     public function getAbilitaStampa()
     {
         return $this->abilita_stampa;
+    }
+    
+    
+    
+    
+    
+    /**
+     * Set data_primo_accesso
+     *
+     * @param datetime $dataPrimoAccesso
+     */
+    public function setDataPrimoAccesso($dataPrimoAccesso) {
+        $this->data_primo_accesso = $dataPrimoAccesso;
+    }
+
+    /**
+     * Get data_primo_accesso
+     *
+     * @return datetime 
+     */
+    public function getDataPrimoAccesso() {
+        return $this->data_primo_accesso;
+    }
+
+    
+    /**
+     * Set data_stampa
+     *
+     * @param datetime $dataStampa
+     */
+    public function setDataStampa($dataStampa) {
+        $this->data_stampa = $dataStampa;
+    }
+
+    /**
+     * Get data_stampa
+     *
+     * @return datetime 
+     */
+    public function getDataStampa() {
+        return $this->data_stampa;
     }
 }
