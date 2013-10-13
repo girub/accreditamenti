@@ -228,7 +228,7 @@ class AccreditamentoController extends Controller {
     public function formLoginIscrittoAction($id) {
 
         $form = $this->createFormBuilder(null)
-                ->add('codice_fiscale', 'text')
+                ->add('codice_accesso', 'text')
                 ->getForm()
                 ->createView();
 
@@ -256,22 +256,22 @@ class AccreditamentoController extends Controller {
      */
     public function loginIscrittoAction($accreditamento_id) {
         $form = $this->createFormBuilder(null)
-                ->add('codice_fiscale', 'text')
+                ->add('codice_accesso', 'text')
                 ->getForm();
 
         $form->bindRequest($this->getRequest());
 
-        $codice_fiscale = $form['codice_fiscale']->getData();
+        $codice_accesso = $form['codice_accesso']->getData();
+        
+        
+        
         $em = $this->getDoctrine()->getEntityManager();
         $query = $em->createQuery(
-                        'SELECT p.cognome, p.nome,p.codice_fiscale FROM AccreditamentiCongressiBundle:Iscritti p 
-                         WHERE p.codice_fiscale = :codice_fiscale and p.accreditamento_id = :id'
-                )->setParameter('codice_fiscale', $codice_fiscale)
+                        'SELECT p.cognome, p.nome,p.codice_accesso FROM AccreditamentiCongressiBundle:Iscritti p 
+                         WHERE p.codice_accesso = :codice_accesso and p.accreditamento_id = :id'
+                )->setParameter('codice_accesso', $codice_accesso)
                 ->setParameter('id', $accreditamento_id);
         $iscritto = $query->getResult();
-
-
-
 
         // codice fiscale non caricato per questo accreditamento
         if (!isset($iscritto[0]['nome'])) {
@@ -284,17 +284,15 @@ class AccreditamentoController extends Controller {
             // $user->addRole('ROLE_ISCRITTO');
         }
 
-
         // controllo se l'utente ha già compilato l'anagrafica per questo accreditamento
         // se trovo un record vado alla pagina successiva
         $query = $em->createQuery(
                         'SELECT a.id, a.codice_fiscale FROM AccreditamentiCongressiBundle:Anagrafica a
-                         WHERE a.codice_fiscale = :codice_fiscale and a.accreditamento = :id'
-                )->setParameter('codice_fiscale', $codice_fiscale)
+                         WHERE a.codice_accesso = :codice_accesso and a.accreditamento = :id'
+                )->setParameter('codice_accesso', $codice_accesso)  
                 ->setParameter('id', $accreditamento_id);
 
         $anagrafica = $query->getResult();
-
 
         //############################# INIZIO ##################
         // Se il tempo per la compilazione ecm e termiato,
@@ -328,20 +326,13 @@ class AccreditamentoController extends Controller {
                 )));
 
             }
-
-
-
         }
-
-
-
-
-
-
 
         //############################ FINE ################
         // se ha giaà compilato l'anagrafica, vado nella pagina compila ecm
         if (isset($anagrafica[0]['codice_fiscale'])) {
+
+            //die("kkkkkkk");
 
             $this->get('session')->setFlash('notice', 'Ben tornato ' . $iscritto[0]['nome'] . ' ' . $iscritto[0]['cognome'] . ' continua a compilare il questionario!');
             return $this->redirect($this->generateUrl('compila_ecm', array(
@@ -355,17 +346,17 @@ class AccreditamentoController extends Controller {
                             'accreditamento_id' => $accreditamento_id,
                             'nome' => $iscritto[0]['nome'],
                             'cognome' => $iscritto[0]['cognome'],
-                            'codice_fiscale' => $iscritto[0]['codice_fiscale'],
+                            'codice_accesso' => $iscritto[0]['codice_accesso'],
                         )));
     }
 
     /**
      * Pagina dove iscritto una volta entrato compila angrafica.
      *
-     * @Route("/{accreditamento_id}/compila/anagrafica/{nome}/{cognome}/{codice_fiscale}", name="compila_anagrafica")
+     * @Route("/{accreditamento_id}/compila/anagrafica/{nome}/{cognome}/{codice_accesso}", name="compila_anagrafica")
      * @Template()
      */
-    public function compilaAnagraficaAction($accreditamento_id, $nome, $cognome, $codice_fiscale) {
+    public function compilaAnagraficaAction($accreditamento_id, $nome, $cognome, $codice_accesso) {
 
         $entityManager = $this->getDoctrine()->getEntityManager();
         $accreditamento = $entityManager->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($accreditamento_id);
@@ -374,7 +365,8 @@ class AccreditamentoController extends Controller {
 
         $anagrafica->setNome($nome);
         $anagrafica->setCognome($cognome);
-        $anagrafica->setCodiceFiscale($codice_fiscale);
+        //$anagrafica->setCodiceFiscale($codice_fiscale);
+        $anagrafica->setCodiceAccesso($codice_accesso);
 
         $form = $this->createForm(new AnagraficaType(), $anagrafica);
 
@@ -405,8 +397,10 @@ class AccreditamentoController extends Controller {
                 )->setParameter('id', $anagrafica_id);
 
         $risposteEcm = $query->getResult();
-        //  die($risposteEcm[0]['anagrafica_id']);
-        if (isset($risposteEcm[0]['anagrafica_id'])) {
+         // die($risposteEcm[0]['anagrafica_id']);
+        
+          
+          if (isset($risposteEcm[0]['anagrafica_id'])) {
 
             // aggiungere nome e cognome
             $this->get('session')->setFlash('notice', 'Ben tornato continua a compilare il questionario!');

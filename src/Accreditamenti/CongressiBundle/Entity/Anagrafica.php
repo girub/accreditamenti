@@ -279,6 +279,15 @@ class Anagrafica {
      */
     private $data_stampa;
     
+     /**
+     * @var string $codice_accesso
+     * @Assert\NotNull()
+     * @ORM\Column(name="codice_accesso", type="string", length=255)
+     */
+    private $codice_accesso;
+    
+    
+    
     
     
     
@@ -1042,5 +1051,25 @@ class Anagrafica {
      */
     public function getDataStampa() {
         return $this->data_stampa;
+    }
+    
+    
+    
+     /**
+     * Set codice_accesso
+     *
+     * @param string $codiceAccesso
+     */
+    public function setCodiceAccesso($codiceAccesso) {
+        $this->codice_accesso = $codiceAccesso;
+    }
+
+    /**
+     * Get codice_accesso
+     *
+     * @return string 
+     */
+    public function getCodiceAccesso() {
+        return $this->codice_accesso;
     }
 }

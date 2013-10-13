@@ -46,6 +46,7 @@ class Iscritti {
      */
     private $codice_fiscale;
 
+    
     /**
      * @var string $tipologia_iscritto
      *
@@ -53,7 +54,14 @@ class Iscritti {
      */
     private $tipologia_iscritto;
 
-   
+    /**
+     * @var string $codice_accesso
+     *
+     * @ORM\Column(name="codice_accesso", type="string", length=255)
+     */
+    private $codice_accesso;
+    
+    
     /**
      * @var integer $accreditamento_id
      *
@@ -149,7 +157,31 @@ class Iscritti {
         return $this->tipologia_iscritto;
     }
 
+    
+    
+    /**
+     * Set codice_accesso
+     *
+     * @param string $codiceAccesso
+     */
+    public function setCodiceAccesso($codiceAccesso) {
+        $this->codice_accesso = $codiceAccesso;
+    }
 
+    /**
+     * Get codice_accesso
+     *
+     * @return string 
+     */
+    public function getCodiceAccesso() {
+        return $this->codice_accesso;
+    }
+    
+    
+    
+    
+    
+    
     /**
      * Set accreditamento
      *

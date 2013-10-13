@@ -9,7 +9,7 @@ class LoginIscrittiType extends AbstractType {
 
     public function buildForm(FormBuilder $builder, array $options) {
         $builder
-                ->add('codice_fiscale', 'text', array('required' => true))
+                ->add('codice_accesso', 'text', array('required' => true))
 
         ;
     }

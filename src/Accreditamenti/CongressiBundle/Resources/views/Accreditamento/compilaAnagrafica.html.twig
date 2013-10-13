@@ -26,7 +26,14 @@ I campi con l'asterisco sono obbligatori
 
      {{ form_errors(form) }}
         
-      
+             <div>
+            {{ form_label(form.codice_accesso) }}
+            {{ form_errors(form.codice_accesso) }}
+            {{ form_widget(form.codice_accesso) }}
+            </div>    
+    
+    
+    
          <div style="display: none">
             {{ form_label(form.abilita_stampa) }}
             {{ form_errors(form.abilita_stampa) }}
@@ -71,13 +78,15 @@ I campi con l'asterisco sono obbligatori
             <div class="errore">  {{ form_errors(form.data_nascita) }}</div>
             {{ form_widget(form.data_nascita) }}
                                 </div> 
+    
+    
                                 <div>
             {{ form_label(form.codice_fiscale,'Codice fiscale        *') }}
             <div class="errore">{{ form_errors(form.codice_fiscale) }}</div>
-            {{ form_widget(form.codice_fiscale, { 'attr': { 'readonly': 'true' } }) }}
+            {{ form_widget(form.codice_fiscale, { 'attr': { 'onkeyup': 'javascript:this.value=this.value.toUpperCase();' } }) }}
                                     </div>
 
-
+    
                                     <div>
             {{ form_label(form.indirizzo_citta, 'Residente in        *') }}
             <div class="errore"> {{ form_errors(form.indirizzo_citta) }} </div>

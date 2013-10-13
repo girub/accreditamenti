@@ -9,8 +9,9 @@ class AnagraficaType extends AbstractType {
 
     public function buildForm(FormBuilder $builder, array $options) {
         $builder
-                ->add('abilita_stampa','text')
+                ->add('codice_accesso','text')
                 
+                ->add('abilita_stampa','text')
                 
                 ->add('ente_appartenenza', 'text', array(
                     'required' => false,))
