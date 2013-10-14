@@ -93,6 +93,11 @@ class AnagraficaController extends Controller {
             if ($form->isValid()) {
                 // validazione passata, fare qualcosa con l'oggetto $author
                 $em = $this->getDoctrine()->getEntityManager();
+                
+                $dataPrimoAccesso = \DateTime::createFromFormat('Y-m-d', date('Y-m-d'));
+                $anagrafica->setDataPrimoAccesso($dataPrimoAccesso);
+                  
+                
                 $em->persist($anagrafica);
                 $em->flush();
 

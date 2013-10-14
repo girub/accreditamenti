@@ -1034,8 +1034,20 @@ class AccreditamentoController extends Controller {
         $em = $this->getDoctrine()->getEntityManager();
         $accreditamento = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($accreditamento_id);
         $anagrafica = $em->getRepository('AccreditamentiCongressiBundle:Anagrafica')->find($anagrafica_id);
-        //die($anagrafica->getNome());
 
+        
+        echo "Nome: " . $anagrafica->getNome() . "<br>";        
+        //echo "data: " . $dataStampaCertiticato . date('Y-m-d') . "<br> ";
+        $dataStampaCertiticato_1 = \DateTime::createFromFormat('Y-m-d', date('Y-m-d'));
+        $anagrafica->setDataStampa($dataStampaCertiticato_1);
+        
+        $anagrafica->setNome("ttttt");
+        $em->persist($anagrafica);
+        $em->flush();
+        
+        
+        
+        
         $certificato = $accreditamento->getCertificatoEcm();
         //die($certificato);
         $dir = $_SERVER['DOCUMENT_ROOT'] . "/resource/img/" . $accreditamento->getCongresso()->getId();
