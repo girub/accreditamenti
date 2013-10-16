@@ -271,6 +271,21 @@ class Anagrafica {
      */
     private $data_primo_accesso;
 
+     /**
+     * @var datetime $data_comp_ecm
+     *
+     * @ORM\Column(name="data_comp_ecm", type="datetime")
+     */
+    private $data_comp_ecm;
+    
+    
+    /**
+     * @var datetime $data_comp_valutazione
+     *
+     * @ORM\Column(name="data_comp_valutazione", type="datetime")
+     */
+    private $data_comp_valutazione;
+    
     
     /**
      * @var datetime $data_stampa
@@ -1034,6 +1049,46 @@ class Anagrafica {
         return $this->data_primo_accesso;
     }
 
+    
+    
+     /**
+     * Set data_comp_ecm
+     *
+     * @param datetime $dataCompEcm
+     */
+    public function setDataCompEcm($dataCompEcm) {
+        $this->data_comp_ecm = $dataCompEcm;
+    }
+
+    /**
+     * Get data_comp_ecm
+     *
+     * @return datetime 
+     */
+    public function getDataCompEcm() {
+        return $this->data_comp_ecm;
+    }
+    
+    
+     /**
+     * Set data_comp_valutazione
+     *
+     * @param datetime $dataCompValutazione
+     */
+    public function setDataCompValutazione($dataCompValutazione) {
+        $this->data_comp_valutazione = $dataCompValutazione;
+    }
+
+    /**
+     * Get data_comp_valutazione
+     *
+     * @return datetime 
+     */
+    public function getDataCompValutazione() {
+        return $this->data_comp_valutazione;
+    }
+    
+    
     
     /**
      * Set data_stampa

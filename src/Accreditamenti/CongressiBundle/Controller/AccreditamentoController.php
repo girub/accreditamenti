@@ -14,6 +14,8 @@ use Accreditamenti\CongressiBundle\Entity\Anagrafica;
 use Accreditamenti\CongressiBundle\Form\AnagraficaType;
 use Accreditamenti\CongressiBundle\Entity\RispostaRepository;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+
 /**
  * Accreditamento controller
  *
@@ -461,6 +463,7 @@ class AccreditamentoController extends Controller {
                             $iscritti->setCognome($riga[1]);
                             $iscritti->setCodiceFiscale($riga[2]);
                             $iscritti->setTipologiaIscritto($riga[3]);
+                            $iscritti->setCodiceAccesso($riga[4]);
                             $iscritti->setAccreditamento($accreditamento);
                             $em->persist($iscritti);
                         }
@@ -794,6 +797,11 @@ class AccreditamentoController extends Controller {
                 ->getRepository('AccreditamentiCongressiBundle:Domanda')
                 ->findDomandeDelQuestionario($questionario[0]);
 
+        $anagrafica = $entityManager
+                ->getRepository('AccreditamentiCongressiBundle:Anagrafica')
+                ->find($anagrafica_id);
+        
+        
         foreach ($domande as $domanda) {
 
             if (!isset($_POST['form']['domanda_' . $domanda->getId()])) {
@@ -822,6 +830,11 @@ class AccreditamentoController extends Controller {
             $risposteUtenti->setRispostaId($idRispostaRicevuta);
             $entityManager->persist($risposteUtenti);
         }
+        
+        //aggiungiamo una data di compilazione 
+        $dataCompilazione = \DateTime::createFromFormat('Y-m-d', date('Y-m-d'));
+        $anagrafica->setDataCompEcm($dataCompilazione);
+        
         //effettuo salvataggio risposte ecm 
         $entityManager->flush();
 
@@ -994,6 +1007,15 @@ class AccreditamentoController extends Controller {
         $risposteValutazione->setInfluenzaSponsor($data['influenza_sponsor']);
         $risposteValutazione->setEsempioInfluenzaSponsor($data['esempio_influenza_sponsor']);
         $entityManager->persist($risposteValutazione);
+        
+       $anagrafica = $entityManager
+                ->getRepository('AccreditamentiCongressiBundle:Anagrafica')
+                ->find($anagrafica_id);
+        
+        //aggiungiamo una data di compilazione del questionario di valutazione
+        $dataCompilazione = \DateTime::createFromFormat('Y-m-d', date('Y-m-d'));
+        $anagrafica->setDataCompValutazione($dataCompilazione);
+        
         $entityManager->flush();
         $entityManager->persist($risposteValutazione);
 
@@ -1023,30 +1045,23 @@ class AccreditamentoController extends Controller {
             'accreditamento_id' => $accreditamento_id,
             'anagrafica_id' => $anagrafica_id,);
     }
-
-    /**
+  
+     /**
      * Creo certificato pdf.
      *
      * @Route("/{accreditamento_id}/{anagrafica_id}/crea/pdf/", name="pdf_create")
      * @Template()
+     * 
      */
-    public function creaPdfCertificatoAction($accreditamento_id, $anagrafica_id) {
+public function creaPdfCertificatoAction($accreditamento_id, $anagrafica_id) {     
         $em = $this->getDoctrine()->getEntityManager();
         $accreditamento = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($accreditamento_id);
         $anagrafica = $em->getRepository('AccreditamentiCongressiBundle:Anagrafica')->find($anagrafica_id);
-
         
-        echo "Nome: " . $anagrafica->getNome() . "<br>";        
-        //echo "data: " . $dataStampaCertiticato . date('Y-m-d') . "<br> ";
-        $dataStampaCertiticato_1 = \DateTime::createFromFormat('Y-m-d', date('Y-m-d'));
-        $anagrafica->setDataStampa($dataStampaCertiticato_1);
+        $dataStampaCertiticato = \DateTime::createFromFormat('Y-m-d', date('Y-m-d'));
+        $anagrafica->setDataStampa($dataStampaCertiticato);
         
-        $anagrafica->setNome("ttttt");
-        $em->persist($anagrafica);
         $em->flush();
-        
-        
-        
         
         $certificato = $accreditamento->getCertificatoEcm();
         //die($certificato);
@@ -1057,8 +1072,40 @@ class AccreditamentoController extends Controller {
         //io_tcpdf will returns Response object
         return $this->get('io_tcpdf')
                         ->quick_pdf($html, $file = "html.pdf", $format = "S", $certificato);
-    }
+    }  
+    
+    
+/**
+* @Route("/{accreditamento_id}/{anagrafica_id}/crea/pdf/", name="pdf_create")
+* @ParamConverter("accreditamento", class="AccreditamentiCongressiBundle:Accreditamento", options={"id" = "accreditamento_id"})
+* @ParamConverter("anagrafica", class="AccreditamentiCongressiBundle:Anagrafica", options={"id" = "anagrafica_id"})
+*/
+//public function creaPdfCertificatoAction(Accreditamento $accreditamento, Anagrafica $anagrafica) {
+//      
+//        $em = $this->getDoctrine()->getEntityManager();
+//        //$accreditamento = $em->getRepository('AccreditamentiCongressiBundle:Accreditamento')->find($accreditamento_id);
+//        //$anagrafica = $em->getRepository('AccreditamentiCongressiBundle:Anagrafica')->find($anagrafica_id);
+//        
+//        $dataStampaCertiticato = \DateTime::createFromFormat('Y-m-d', date('Y-m-d'));
+//        $anagrafica->setDataStampa($dataStampaCertiticato);
+//        
+//        $em->flush();
+//        
+//        $certificato = $accreditamento->getCertificatoEcm();
+//        //die($certificato);
+//        $dir = $_SERVER['DOCUMENT_ROOT'] . "/resource/img/" . $accreditamento->getCongresso()->getId();
+//        $certificato = $dir . "/" . $certificato;
+//        $html = $this->renderView('AccreditamentiCongressiBundle:Accreditamento:certificato_crea.pdf.twig', array(
+//            'anagrafica' => $anagrafica));
+//        //io_tcpdf will returns Response object
+//        return $this->get('io_tcpdf')
+//                        ->quick_pdf($html, $file = "html.pdf", $format = "S", $certificato);
+//    }
 
+    
+    
+    
+    
     /**
      * Creo certificato pdf.
      *
@@ -1120,15 +1167,13 @@ class AccreditamentoController extends Controller {
         $percentuale_risposte_esatte = $questionario[0]->getPercentualeRisposteEsatte();
         
         $percentuale_da_superare = ($totale_domande_ecm * $percentuale_risposte_esatte) / 100;
-
         
+//        echo "Percentuale da superare: " . $percentuale_da_superare . "<BR>";
+//        echo "totale domande ecm: " .$totale_domande_ecm . "<BR>";
+//        echo "Percentuale risposte esatte " .$percentuale_risposte_esatte . "<BR>";
+//        echo "totale risposte esatte " . $totale_risposte_esatte. "<BR>";
+//        echo "totale domande ecm" . $totale_domande_ecm. "<BR>";
         
-        echo "Percentuale da superare: " . $percentuale_da_superare . "<BR>";
-        echo "totale domande ecm: " .$totale_domande_ecm . "<BR>";
-        echo "Percentuale risposte esatte " .$percentuale_risposte_esatte . "<BR>";
-        echo "totale risposte esatte " . $totale_risposte_esatte. "<BR>";
-        echo "totale domande ecm" . $totale_domande_ecm. "<BR>";
-
         
         
 

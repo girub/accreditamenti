@@ -12,4 +12,34 @@ use Doctrine\ORM\EntityRepository;
  */
 class AnagraficaRepository extends EntityRepository
 {
+    
+//    	public function ricercaByCodiceFiscale($param) {
+//		$q = $this->getEntityManager()
+//				->createQuery("SELECT de FROM AnagraficheBundle:DominioEmail de WHERE de.dominio = '{$param}'");
+//		return $q->getResult();
+//	}
+
+//	public function verificaPec($param) {
+//		$conn = $this->getEntityManager()->getConnection();
+//		$sql = "select count(de.dominio) as conteggio from domini_email de where '{$param}' like de.dominio;";
+//		$result = $conn->fetchAssoc($sql);
+//		return $result["conteggio"];
+//	}
+    
+
+public function ricercaCF($codice_fiscale){
+    
+    	$q = $this->getEntityManager()
+	->createQuery('SELECT a.codice_fiscale FROM AccreditamentiCongressiBundle:Anagrafica a 
+                         WHERE a.codice_fiscale = :codice_fiscale'
+                )->setParameter('codice_fiscale', $codice_fiscale);
+		return $q->getResult();
+    
+    
 }
+    
+    
+}
+
+
+

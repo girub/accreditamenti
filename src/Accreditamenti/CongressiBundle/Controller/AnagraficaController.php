@@ -82,29 +82,41 @@ class AnagraficaController extends Controller {
         $anagrafica = new Anagrafica();
         $request = $this->getRequest();
         $form = $this->createForm(new AnagraficaType(), $anagrafica);
-        
-        
-       //if ($request->isMethod('POST')) {
-       // $form->bind($request);    
-        
-        if('POST' === $request->getMethod()) {
-             $form->bindRequest($request);
+
+        if ('POST' === $request->getMethod()) {
+            $form->bindRequest($request);
+
+            //era nel if del form isvalid
+            // validazione passata, fare qualcosa con l'oggetto $author
+            $em = $this->getDoctrine()->getEntityManager();
+
+            //controllo se sto cercando di inserire un cf già presente nel sistema
+            $codice_fiscale = $form['codice_fiscale']->getData();
+
+            if ($this->controlloCodiceFiscale($codice_fiscale)) {
+               $this->get('session')->setFlash('notice', "Attenzione il codice fiscale:" . $codice_fiscale . " è già presente nel sistema");
+               
+               // qui devo svuotare il campo codice fiscale
+               
+                return $this->render('AccreditamentiCongressiBundle:Accreditamento:compilaAnagrafica.html.twig', array(
+                            'entity' => $anagrafica,
+                            'accreditamento_id' => $accreditamento_id,
+                            'form' => $form->createView()
+                ));
+            }
+
+
 
             if ($form->isValid()) {
-                // validazione passata, fare qualcosa con l'oggetto $author
-                $em = $this->getDoctrine()->getEntityManager();
-                
                 $dataPrimoAccesso = \DateTime::createFromFormat('Y-m-d', date('Y-m-d'));
                 $anagrafica->setDataPrimoAccesso($dataPrimoAccesso);
-                  
-                
                 $em->persist($anagrafica);
                 $em->flush();
 
                 return $this->redirect($this->generateUrl('compila_ecm', array(
                                     'anagrafica_id' => $anagrafica->getId(),
                                     'accreditamento_id' => $accreditamento_id,
-                                )));
+                )));
             }
         }
 
@@ -112,62 +124,60 @@ class AnagraficaController extends Controller {
                     'entity' => $anagrafica,
                     'accreditamento_id' => $accreditamento_id,
                     'form' => $form->createView()
-                ));
-
+        ));
     }
 
+    /*
+      $anagrafica = new Anagrafica();
+      $request = $this->getRequest();
+      $form = $this->createForm(new AnagraficaType(), $anagrafica);
 
-        /*
-          $anagrafica = new Anagrafica();
-          $request = $this->getRequest();
-          $form = $this->createForm(new AnagraficaType(), $anagrafica);
+      $form->bindRequest($request);
 
-          $form->bindRequest($request);
+      //cotrollo lato server dei dati compilati in anagrafica
+      $data_nascita = $form['data_nascita']->getData();
+      $luogo_nascita = $form['luogo_nascita']->getData();
+      $ordine_numero = $form['ordine_numero']->getData();
+      $ordine_citta = $form['ordine_citta']->getData();
+      $indirizzo_via = $form['indirizzo_via']->getData();
+      $indirizzo_numero_civico = $form['indirizzo_numero_civico']->getData();
+      $indirizzo_cap = $form['indirizzo_cap']->getData();
+      $indirizzo_citta = $form['indirizzo_citta']->getData();
+      $indirizzo_provincia = $form['indirizzo_provincia']->getData();
+      $telefono = $form['telefono']->getData();
+      $email = $form['email']->getData();
+      $informazioni_veritiere = $form['informazioni_veritiere']->getData();
+      $privacy = $form['privacy']->getData();
 
-          //cotrollo lato server dei dati compilati in anagrafica
-          $data_nascita = $form['data_nascita']->getData();
-          $luogo_nascita = $form['luogo_nascita']->getData();
-          $ordine_numero = $form['ordine_numero']->getData();
-          $ordine_citta = $form['ordine_citta']->getData();
-          $indirizzo_via = $form['indirizzo_via']->getData();
-          $indirizzo_numero_civico = $form['indirizzo_numero_civico']->getData();
-          $indirizzo_cap = $form['indirizzo_cap']->getData();
-          $indirizzo_citta = $form['indirizzo_citta']->getData();
-          $indirizzo_provincia = $form['indirizzo_provincia']->getData();
-          $telefono = $form['telefono']->getData();
-          $email = $form['email']->getData();
-          $informazioni_veritiere = $form['informazioni_veritiere']->getData();
-          $privacy = $form['privacy']->getData();
+      // In caso di campi lasciati vuoti (con Internet Explorer) faccio il render di
+      // una pagina che mi fa tornare indietro con  history.go(-1)
+      if ($data_nascita == null || $luogo_nascita == null || $ordine_numero == null || $ordine_citta == null ||
+      $indirizzo_via == null || $indirizzo_numero_civico == null || $indirizzo_cap == null || $indirizzo_citta == null
+      || $indirizzo_provincia == null || $telefono == null || $email == null || $privacy == null || $informazioni_veritiere==null) {
 
-          // In caso di campi lasciati vuoti (con Internet Explorer) faccio il render di
-          // una pagina che mi fa tornare indietro con  history.go(-1)
-          if ($data_nascita == null || $luogo_nascita == null || $ordine_numero == null || $ordine_citta == null ||
-          $indirizzo_via == null || $indirizzo_numero_civico == null || $indirizzo_cap == null || $indirizzo_citta == null
-          || $indirizzo_provincia == null || $telefono == null || $email == null || $privacy == null || $informazioni_veritiere==null) {
+      return $this->render('AccreditamentiCongressiBundle:Accreditamento:compilaAnagraficaError.html.twig');
 
-          return $this->render('AccreditamentiCongressiBundle:Accreditamento:compilaAnagraficaError.html.twig');
-
-          }
+      }
 
 
-          if ($form->isValid()) {
-          $em = $this->getDoctrine()->getEntityManager();
-          $em->persist($anagrafica);
-          $em->flush();
+      if ($form->isValid()) {
+      $em = $this->getDoctrine()->getEntityManager();
+      $em->persist($anagrafica);
+      $em->flush();
 
-          return $this->redirect($this->generateUrl('compila_ecm', array(
-          'anagrafica_id' => $anagrafica->getId(),
-          'accreditamento_id' => $accreditamento_id,
-          )));
-          }
+      return $this->redirect($this->generateUrl('compila_ecm', array(
+      'anagrafica_id' => $anagrafica->getId(),
+      'accreditamento_id' => $accreditamento_id,
+      )));
+      }
 
-          return array(
-          'entity' => $anagrafica,
-          'form' => $form->createView()
-          );
+      return array(
+      'entity' => $anagrafica,
+      'form' => $form->createView()
+      );
 
-         */
-       //} fine
+     */
+    //} fine
 
     /**
      * Displays a form to edit an existing Anagrafica entity.
@@ -225,7 +235,7 @@ class AnagraficaController extends Controller {
             return $this->redirect($this->generateUrl('anagrafica_edit', array(
                                 'id' => $id,
                                 'accreditamento_id' => $accreditamento_id,
-                            )));
+            )));
         }
 
         return array(
@@ -267,6 +277,12 @@ class AnagraficaController extends Controller {
                         ->add('id', 'hidden')
                         ->getForm()
         ;
+    }
+
+    public function controlloCodiceFiscale($codiceFiscale) {
+        $em = $this->getDoctrine()->getEntityManager();
+        $verifica = $em->getRepository("Accreditamenti\CongressiBundle\Entity\Anagrafica")->ricercaCF($codiceFiscale);
+        return $verifica;
     }
 
 }
