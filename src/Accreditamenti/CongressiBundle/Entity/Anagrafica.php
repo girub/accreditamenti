@@ -32,42 +32,42 @@ class Anagrafica {
 
     /**
      * @var string $nome
-     *
+     * @Assert\NotNull(message="Attenzione campo obbligatorio!!!")
      * @ORM\Column(name="nome", type="string", length=255)
      */
     private $nome;
 
     /**
      * @var string $cognome
-     *
+     * @Assert\NotNull(message="Attenzione campo obbligatorio!!!")
      * @ORM\Column(name="cognome", type="string", length=255)
      */
     private $cognome;
 
     /**
      * @var string $luogo_nascita
-     * @Assert\NotNull()
+     * @Assert\NotNull(message="Attenzione campo obbligatorio!!!")
      * @ORM\Column(name="luogo_nascita", type="string", length=255)
      */
     private $luogo_nascita;
 
     /**
      * @var date $data_nascita
-     * @Assert\NotNull()
+     * @Assert\NotNull(message="Attenzione campo obbligatorio!!!")
      * @ORM\Column(name="data_nascita", type="date")
      */
     private $data_nascita;
 
     /**
      * @var string $codice_fiscale
-     * @Assert\NotNull()
+     * @Assert\NotNull(message="Attenzione campo obbligatorio!!!")
      * @ORM\Column(name="codice_fiscale", type="string", length=255)
      */
     private $codice_fiscale;
 
      /**
      * @var string $indirizzo_citta
-     * @Assert\NotNull()
+     * @Assert\NotNull(message="Attenzione campo obbligatorio!!!")
      * @ORM\Column(name="indirizzo_citta", type="string", length=255)
      */
     private $indirizzo_citta;
@@ -75,14 +75,14 @@ class Anagrafica {
     
     /**
      * @var string $indirizzo_provincia
-     * @Assert\NotNull()
+     * @Assert\NotNull(message="Attenzione campo obbligatorio!!!")
      * @ORM\Column(name="indirizzo_provincia", type="string", length=255)
      */
     private $indirizzo_provincia;
     
     /**
      * @var string $indirizzo_cap
-     * @Assert\NotNull()
+     * @Assert\NotNull(message="Attenzione campo obbligatorio!!!")
      * @ORM\Column(name="indirizzo_cap", type="string", length=255)
      */
     private $indirizzo_cap;
@@ -90,21 +90,21 @@ class Anagrafica {
     
     /**
      * @var string $indirizzo_via
-     * @Assert\NotNull()
+     * @Assert\NotNull(message="Attenzione campo obbligatorio!!!")
      * @ORM\Column(name="indirizzo_via", type="string", length=255)
      */
     private $indirizzo_via;
 
     /**
      * @var string $indirizzo_numero_civico
-     * @Assert\NotNull()
+     * @Assert\NotNull(message="Attenzione campo obbligatorio!!!")
      * @ORM\Column(name="indirizzo_numero_civico", type="string", length=255)
      */
     private $indirizzo_numero_civico;
 
     /**
      * @var string $telefono
-     * @Assert\NotNull()
+     * @Assert\NotNull(message="Attenzione campo obbligatorio!!!")
      * @ORM\Column(name="telefono", type="string", length=255)
      */
     private $telefono;
@@ -118,21 +118,21 @@ class Anagrafica {
 
     /**
      * @var string $email
-     * @Assert\NotNull()
+     * @Assert\NotNull(message="Attenzione campo obbligatorio!!!")
      * @ORM\Column(name="email", type="string", length=255)
      */
     private $email;
 
     /**
      * @var string $professione
-     * @Assert\NotNull()
+     * @Assert\NotNull(message="Attenzione campo obbligatorio!!!")
      * @ORM\Column(name="professione", type="integer")
      */
     private $professione;
 
     /**
      * @var string $disciplina
-     * @Assert\NotNull()
+     * @Assert\NotBlank(message="Attenzione campo obbligatorio!!!")
      * @ORM\Column(name="disciplina", type="integer")
      */
     private $disciplina;
@@ -140,14 +140,14 @@ class Anagrafica {
     
      /**
      * @var string $ordine_numero
-     * @Assert\NotNull()
+     * @Assert\NotNull(message="Attenzione campo obbligatorio!!!")
      * @ORM\Column(name="ordine_numero", type="string", length=255)
      */
     private $ordine_numero;
 
     /**
      * @var string $ordine_citta
-     * @Assert\NotNull()
+     * @Assert\NotNull(message="Attenzione campo obbligatorio!!!")
      * @ORM\Column(name="ordine_citta", type="string", length=255)
      */
     private $ordine_citta;
@@ -155,7 +155,7 @@ class Anagrafica {
     
     /**
      * @var string $qualifica
-     *
+     * @Assert\NotBlank(message="Attenzione campo obbligatorio!!!")
      * @ORM\Column(name="qualifica", type="string", length=255)
      */
     private $qualifica;
@@ -213,7 +213,7 @@ class Anagrafica {
     
     /**
      * @var boolean $informazioni_veritiere
-     * 
+     * @Assert\NotBlank(message="Attenzione campo obbligatorio!!!")
      * @ORM\Column(name="informazioni_veritiere", type="boolean")
      */
     private $informazioni_veritiere;
@@ -244,7 +244,7 @@ class Anagrafica {
 
     /**
      * @var boolean $privacy
-     *
+     * @Assert\NotBlank(message="Attenzione campo obbligatorio!!!")
      * @ORM\Column(name="privacy", type="boolean")
      */
     private $privacy;

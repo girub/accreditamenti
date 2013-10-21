@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping\JoinColumn;
  * @ORM\Entity(repositoryClass="Accreditamenti\CongressiBundle\Entity\IscrittiRepository")
  */
 class Iscritti {
-    
+
     const PARTECIPANTE = 'PAR';
 
     /**
@@ -46,7 +46,6 @@ class Iscritti {
      */
     private $codice_fiscale;
 
-    
     /**
      * @var string $tipologia_iscritto
      *
@@ -60,8 +59,7 @@ class Iscritti {
      * @ORM\Column(name="codice_accesso", type="string", length=255)
      */
     private $codice_accesso;
-    
-    
+
     /**
      * @var integer $accreditamento_id
      *
@@ -69,7 +67,6 @@ class Iscritti {
      */
     protected $accreditamento_id;
 
-    
     /**
      * @ManyToOne(targetEntity="Accreditamento", inversedBy="iscritti")
      * @JoinColumn(name="accreditamento_id", referencedColumnName="id")
@@ -157,15 +154,13 @@ class Iscritti {
         return $this->tipologia_iscritto;
     }
 
-    
-    
     /**
      * Set codice_accesso
      *
      * @param string $codiceAccesso
      */
     public function setCodiceAccesso($codiceAccesso) {
-        $this->codice_accesso = $codiceAccesso;
+        $this->codice_accesso = trim($codiceAccesso);
     }
 
     /**
@@ -176,19 +171,13 @@ class Iscritti {
     public function getCodiceAccesso() {
         return $this->codice_accesso;
     }
-    
-    
-    
-    
-    
-    
+
     /**
      * Set accreditamento
      *
      * @param Accreditamenti\CongressiBundle\Entity\Accreditamento $accreditamento
      */
-    public function setAccreditamento(\Accreditamenti\CongressiBundle\Entity\Accreditamento $accreditamento)
-    {
+    public function setAccreditamento(\Accreditamenti\CongressiBundle\Entity\Accreditamento $accreditamento) {
         $this->accreditamento = $accreditamento;
     }
 
@@ -197,8 +186,8 @@ class Iscritti {
      *
      * @return Accreditamenti\CongressiBundle\Entity\Accreditamento 
      */
-    public function getAccreditamento()
-    {
+    public function getAccreditamento() {
         return $this->accreditamento;
     }
+
 }
