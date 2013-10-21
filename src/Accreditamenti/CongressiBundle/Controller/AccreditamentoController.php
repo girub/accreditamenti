@@ -394,7 +394,6 @@ class AccreditamentoController extends Controller {
 
 
         if (isset($risposteEcm[0]['anagrafica_id'])) {
-
             // aggiungere nome e cognome
             $this->get('session')->setFlash('notice', 'Ben tornato continua a compilare il questionario!');
             return $this->redirect($this->generateUrl('compila_valutazione', array(
@@ -826,6 +825,30 @@ class AccreditamentoController extends Controller {
         $dataCompilazione = \DateTime::createFromFormat('Y-m-d', date('Y-m-d'));
         $anagrafica->setDataCompEcm($dataCompilazione);
 
+        //##################### INIZIO ###################################
+        //controllo se già ha compilato il questionario ecm o magari è tornato indietro con il back del browser,
+        // se si ridirigo l'utente direttamente alla pagina questionaio di valutazione
+       $query = $entityManager->createQuery(
+                        'SELECT a.anagrafica_id FROM AccreditamentiCongressiBundle:RisposteUtentiQuestionarioEcm a 
+                         WHERE a.anagrafica_id = :id'
+                )->setParameter('id', $anagrafica_id);
+
+        $risposteEcm = $query->getResult();
+        // die($risposteEcm[0]['anagrafica_id']);
+        if (isset($risposteEcm[0]['anagrafica_id'])) {
+            // aggiungere nome e cognome
+            $this->get('session')->setFlash('notice', 'Ben tornato continua a compilare il questionario!');
+            return $this->redirect($this->generateUrl('compila_valutazione', array(
+                                'accreditamento_id' => $accreditamento_id,
+                                'anagrafica_id' => $anagrafica_id,
+            )));
+        }
+        //######################## fine ################################
+
+        
+        
+        
+        
         //effettuo salvataggio risposte ecm 
         $entityManager->flush();
 
@@ -860,9 +883,6 @@ class AccreditamentoController extends Controller {
         $risposteEcm = $query->getResult();
         //  die($risposteEcm[0]['anagrafica_id']);
         if (isset($risposteEcm[0]['anagrafica_id'])) {
-
-            // aggiungere nome e cognome
-            $this->get('session')->setFlash('notice', 'Ben tornato continua a compilare il questionario!');
             return $this->redirect($this->generateUrl('certificato', array(
                                 'accreditamento_id' => $accreditamento_id,
                                 'anagrafica_id' => $anagrafica_id,
@@ -1007,6 +1027,36 @@ class AccreditamentoController extends Controller {
         $dataCompilazione = \DateTime::createFromFormat('Y-m-d', date('Y-m-d'));
         $anagrafica->setDataCompValutazione($dataCompilazione);
 
+                    //##################### INIZIO ###################################
+                    //controllo se già ha compilato il questionario di valutazion, se magari è tornato con
+                    // il tasto back del browser, se si ridirigo l'utente direttamente alla pagina di stampa
+                    $query = $entityManager->createQuery(
+                                    'SELECT a.anagrafica_id FROM AccreditamentiCongressiBundle:RisposteUtentiQuestionarioValutazione a 
+                                     WHERE a.anagrafica_id = :id'
+                            )->setParameter('id', $anagrafica_id);
+
+                    $risposteEcm = $query->getResult();
+                    //  die($risposteEcm[0]['anagrafica_id']);
+                    if (isset($risposteEcm[0]['anagrafica_id'])) {
+                        return $this->redirect($this->generateUrl('certificato', array(
+                                            'accreditamento_id' => $accreditamento_id,
+                                            'anagrafica_id' => $anagrafica_id,
+                        )));
+                    }
+                    //######################## fine ################################
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         $entityManager->flush();
         $entityManager->persist($risposteValutazione);
 
