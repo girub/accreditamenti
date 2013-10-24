@@ -271,7 +271,7 @@ class AccreditamentoController extends Controller {
 //        $iscritto = $query->getResult();
         // codice fiscale non caricato per questo accreditamento
         if (!isset($iscritto[0]['nome'])) {
-            $this->get('session')->setFlash('notice', "Utente non riconosciuto. Contattare la segreteria organizzativa all’indirizzo e-mail f.prayer@aimgroup.eu o chiamare il numero 055.2338823. Grazie");
+            $this->get('session')->setFlash('notice', "Utente non riconosciuto. Contattare la segreteria organizzativa all’indirizzo e-mail c.pizzo@aimgroup.eu o chiamare il numero 055.2338827. Grazie");
             return $this->redirect($this->generateUrl('form_login_iscritto', array('id' => $accreditamento_id)));
         }
 
