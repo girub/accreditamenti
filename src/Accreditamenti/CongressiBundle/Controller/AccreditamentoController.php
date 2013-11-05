@@ -325,8 +325,6 @@ class AccreditamentoController extends Controller {
         // se ha giaà compilato l'anagrafica, vado nella pagina compila ecm
         if (isset($anagrafica[0]['codice_fiscale'])) {
 
-            //die("kkkkkkk");
-
             $this->get('session')->setFlash('notice', 'Ben tornato ' . $iscritto[0]['nome'] . ' ' . $iscritto[0]['cognome'] . ' continua a compilare il questionario!');
             return $this->redirect($this->generateUrl('compila_ecm', array(
                                 'accreditamento_id' => $accreditamento_id,
@@ -837,7 +835,7 @@ class AccreditamentoController extends Controller {
         // die($risposteEcm[0]['anagrafica_id']);
         if (isset($risposteEcm[0]['anagrafica_id'])) {
             // aggiungere nome e cognome
-            $this->get('session')->setFlash('notice', 'Ben tornato continua a compilare il questionario!');
+            $this->get('session')->setFlash('notice', 'Attenzione quest\'ultimo salvataggio non è stato considerato valido perchè avevi già inviato il questionario ecm!');
             return $this->redirect($this->generateUrl('compila_valutazione', array(
                                 'accreditamento_id' => $accreditamento_id,
                                 'anagrafica_id' => $anagrafica_id,
@@ -1038,6 +1036,8 @@ class AccreditamentoController extends Controller {
                     $risposteEcm = $query->getResult();
                     //  die($risposteEcm[0]['anagrafica_id']);
                     if (isset($risposteEcm[0]['anagrafica_id'])) {
+                        $this->get('session')->setFlash('notice', 'Attenzione quest\'ultimo salvataggio non è stato considerato valido perchè avevi già inviato il questionario di valutazione!');
+
                         return $this->redirect($this->generateUrl('certificato', array(
                                             'accreditamento_id' => $accreditamento_id,
                                             'anagrafica_id' => $anagrafica_id,
@@ -1045,17 +1045,6 @@ class AccreditamentoController extends Controller {
                     }
                     //######################## fine ################################
 
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
         $entityManager->flush();
         $entityManager->persist($risposteValutazione);
@@ -1086,6 +1075,50 @@ class AccreditamentoController extends Controller {
             'accreditamento_id' => $accreditamento_id,
             'anagrafica_id' => $anagrafica_id,);
     }
+
+    /**
+     * Creo certificato pdf.
+     *
+     * @Route("/{accreditamento_id}/{anagrafica_id}/stampaecm/", name="stampa_ecm")
+     * @Template()
+     */
+
+   /*
+    public function stampaEcmAction($accreditamento_id, $anagrafica_id) {
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $anagrafica = $em->getRepository('AccreditamentiCongressiBundle:Anagrafica')->find($anagrafica_id);
+        if (!$anagrafica) {
+            throw $this->createNotFoundException('Unable to find Anagrafica entity.');
+        }
+
+
+         $query = $em->createQuery('select c.descrizione as domanda, b.descrizione as risposta
+                        from AccreditamentiCongressiBundle:RisposteUtentiQuestionarioEcm a
+                        inner join AccreditamentiCongressiBundle:Risposta b ON a.risposta_id= b.id
+                        inner join AccreditamentiCongressiBundle:Domanda c on b.domanda_id = c.id
+        where a.anagrafica_id = :id')->setParameter('id', $anagrafica_id);
+        $risposteEcm = $query->getResult();
+
+
+
+        return array(
+            'anagrafica' => $anagrafica,
+            'accreditamento_id' => $accreditamento_id,
+            'anagrafica_id' => $anagrafica_id,);
+    }
+
+*/
+
+
+
+
+
+
+
+
+
+
 
     /**
      * Creo certificato pdf.

@@ -95,6 +95,7 @@ class AnagraficaType extends AbstractType {
                         '39' => 'Ortopedia e traumatologia',
                         '40' => 'Otorinolaringoiatria',
                         '41' => 'Urologia',
+                        '41' => 'Anestesia e rianimazione',
                         '45' => 'Farmacologia e tossicologia clinica',
                         '55' => 'Igiene, epidemiologia e sanità pubblica',
                         '56' => 'Igiene degli alimenti e della nutrizione',

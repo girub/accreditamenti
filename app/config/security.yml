@@ -34,6 +34,8 @@ security:
       
         # Gli utenti possono accedere all'area amministrativa se e solo se
         # possiedono il ruolo di amministratore
+        #- { path: ^/accreditamento/1/form/iscritto, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        #- { path: ^/accreditamento/1/compila/anagrafica/([A-Z]+), role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/congresso/new, role: ROLE_USER }
         - { path: ^/congresso/mostraTutti, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/congresso/mostra/([0-9]+), role: ROLE_USER }
@@ -41,7 +43,19 @@ security:
         - { path: ^/congresso/([0-9]+)/edit, role: ROLE_USER }
         - { path: ^/congresso, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: accreditamento/1/elenco/utenti, role: ROLE_USER }
-        
+        #- { path: ^/accreditamento, role: ROLE_USER }
+        - { path: ^/questionarioecm/1/show, role: ROLE_USER }
+        - { path: ^/accreditamento/1/carica/iscritti, role: ROLE_USER }
+        - { path: ^/accreditamento/1/edit, role: ROLE_USER }
+        - { path: ^/accreditamento/1/show, role: ROLE_USER }
+        - { path: ^/accreditamento/1/delete, role: ROLE_USER }
+        - { path: ^/questionarioecm/new/1, role: ROLE_USER }
+
+
+
+
+
+
         
         # PER ISCRITTI CHE ENTRANO CON CODICE FISCALE
         #- { path: ^/accreditamento/([0-9]+)/compila/(anagrafica), role: ROLE_ISCRITTO }
