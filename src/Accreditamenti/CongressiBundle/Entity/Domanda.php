@@ -50,9 +50,9 @@ class Domanda {
      */
     private $questionarioValutazione;
 
-    
-    
-    
+
+
+
     
     /**
      * @OneToMany(targetEntity="Risposta", mappedBy="domanda")

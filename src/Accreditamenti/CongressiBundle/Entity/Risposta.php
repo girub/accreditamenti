@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\JoinColumn;
 
+
 /**
  * Accreditamenti\CongressiBundle\Entity\Risposta
  *
@@ -56,6 +57,17 @@ class Risposta {
      * @JoinColumn(name="domanda_id", referencedColumnName="id")
      */
     private $domanda;
+
+
+    /**
+     * @ManyToOne(targetEntity="RisposteUtentiQuestionarioEcm", inversedBy="rispostaute")
+     * @JoinColumn(name="id", referencedColumnName="risposta_id")
+     */
+    private $rispo;
+
+
+
+
 
     /**
      * Get id

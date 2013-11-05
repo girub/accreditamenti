@@ -21,8 +21,8 @@
     <div class="container" style="width:400px;height: 60px">
     </div>
 
-    <h1 style="font-size:42px;text-align: center">18° Convegno Pediatrico dei Pinguini</h1>
-    <h3 style="text-align: center">  Firenze, 8-9 Novembre 2013 - Hotel Sheraton Firenze</h3>
+    <h1 style="font-size:23px;text-align: center">18° CONVEGNO PEDIATRICO - CONGRESSO NAZIONALE DI PEDIATRIA PRATICA</h1>
+
 
 
     <div class="container-fluid" style="border:0px solid red;">
@@ -35,24 +35,27 @@
             <div class="span8" style="width:710px;border:0px solid blue;">
 
 
-
-
-
-                <h2></h2>
-
-
-
-
-
-
-
-
-                <h2>Stampa questionario ECM</h2>
+                <h2 style="text-align: center">Stampa ECM</h2>
                 <br>
                 Gentile {{ anagrafica.nome  }} {{ anagrafica.cognome  }} di seguito il questionario ecm memorizzato
 
 
 
+                <table class="table table-striped table-bordered">
+                    <thead>
+
+                <tr><td style="width: 60%;font-size:20px;"><strong>Domanda</strong></td><td style="font-size:20px;"><strong>Risposta</strong></td></tr>
+                    </thead>
+
+                    {% for item in risposte %}
+
+
+
+                    <tr><td> {{ item.descrizione }}</td><td> {{ item.des }}</td></tr>
+
+
+                {% endfor %}
+                </table>
 
 
 
@@ -62,10 +65,7 @@
 
 
 
-
-
-
-
+                <br><br>
 
 
                 Aim Group International

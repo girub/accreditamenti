@@ -4,6 +4,10 @@ namespace Accreditamenti\CongressiBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
+use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\JoinColumn;
+
 /**
  * Accreditamenti\CongressiBundle\Entity\RisposteUtentiQuestionarioEcm
  *
@@ -34,6 +38,15 @@ class RisposteUtentiQuestionarioEcm
      * @ORM\Column(name="risposta_id", type="integer")
      */
     private $risposta_id;
+
+
+
+    /**
+     * @ManyToOne(targetEntity="Risposta", inversedBy="rispostautente")
+     * @JoinColumn(name="risposta_id", referencedColumnName="id")
+     */
+    //private $risposta;
+
 
 
     /**

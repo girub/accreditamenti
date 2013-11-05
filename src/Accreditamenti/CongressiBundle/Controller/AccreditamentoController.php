@@ -1082,8 +1082,6 @@ class AccreditamentoController extends Controller {
      * @Route("/{accreditamento_id}/{anagrafica_id}/stampaecm/", name="stampa_ecm")
      * @Template()
      */
-
-   /*
     public function stampaEcmAction($accreditamento_id, $anagrafica_id) {
 
         $em = $this->getDoctrine()->getEntityManager();
@@ -1092,23 +1090,38 @@ class AccreditamentoController extends Controller {
             throw $this->createNotFoundException('Unable to find Anagrafica entity.');
         }
 
+        $query = $em->createQuery("SELECT a.descrizione, u.descrizione des FROM AccreditamentiCongressiBundle:Risposta u
+                                                        JOIN u.domanda a
+                                                        JOIN u.rispo b where b.anagrafica_id=:id")->setParameter('id', $anagrafica_id);
 
-         $query = $em->createQuery('select c.descrizione as domanda, b.descrizione as risposta
-                        from AccreditamentiCongressiBundle:RisposteUtentiQuestionarioEcm a
-                        inner join AccreditamentiCongressiBundle:Risposta b ON a.risposta_id= b.id
-                        inner join AccreditamentiCongressiBundle:Domanda c on b.domanda_id = c.id
-        where a.anagrafica_id = :id')->setParameter('id', $anagrafica_id);
+
         $risposteEcm = $query->getResult();
 
+       // print "<pre>";
+       // print_r($risposteEcm);die();
 
+/*
+        foreach ($risposteEcm as $rispostaEcmUtente) {
+           echo $rispostaEcmUtente["des"]  . "<br>";
+            }
+
+select c.descrizione as domanda, b.descrizione as risposta
+                        from aim_risposte_utenti_questionario_ecm a
+                        inner join aim_risposta b ON a.risposta_id= b.id
+                        inner join aim_domanda c on b.domanda_id = c.id
+        where a.anagrafica_id =4
+            */
 
         return array(
             'anagrafica' => $anagrafica,
             'accreditamento_id' => $accreditamento_id,
-            'anagrafica_id' => $anagrafica_id,);
+            'anagrafica_id' => $anagrafica_id,
+            'risposte' => $risposteEcm,
+
+        );
     }
 
-*/
+
 
 
 
