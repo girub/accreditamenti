@@ -1127,12 +1127,6 @@ select c.descrizione as domanda, b.descrizione as risposta
 
 
 
-
-
-
-
-
-
     /**
      * Creo certificato pdf.
      *

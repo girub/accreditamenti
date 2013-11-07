@@ -218,7 +218,12 @@ class Anagrafica {
      */
     private $informazioni_veritiere;
 
-    
+    /**
+     * @var string $dichiara_sponsor_azienda_flag
+     * @Assert\NotBlank(message="Attenzione campo obbligatorio!!!")
+     * @ORM\Column(name="dichiara_sponsor_azienda_flag", nullable=true, type="string", length=255)
+     */
+    private $dichiara_sponsor_azienda_flag;
 
     
     /**
@@ -233,14 +238,14 @@ class Anagrafica {
      *
      * @ORM\Column(name="dichiara_autorizzazione_struttura",  nullable=true, type="string", length=255))
      */
-    private $dichiara_autorizzazione_struttura;
+    //private $dichiara_autorizzazione_struttura;
 
     /**
      * @var boolean $dichiara_informato_dal_provider
-     *
-     * @ORM\Column(name="dichiara_informato_dal_provider", nullable=true, type="string", length=255))
+     * @Assert\NotBlank(message="Attenzione campo obbligatorio!!!")
+     * @ORM\Column(name="dichiara_informato_dal_provider", type="boolean")
      */
-    private $dichiara_informato_dal_provider;
+    //private $dichiara_informato_dal_provider;
 
     /**
      * @var boolean $privacy
@@ -931,6 +936,37 @@ class Anagrafica {
     public function getIndirizzoNumeroCivico() {
         return $this->indirizzo_numero_civico;
     }
+
+
+
+    /**
+     * Set dichiara_sponsor_azienda_flag
+     *
+     * @param string $dichiaraSponsorAziendaFlag
+     */
+    public function setDichiaraSponsorAziendaFlag($dichiaraSponsorAziendaFlag) {
+        $this->dichiara_sponsor_azienda_flag = $dichiaraSponsorAziendaFlag;
+    }
+
+    /**
+     * Get dichiara_sponsor_azienda_flag
+     *
+     * @return string
+     */
+    public function getDichiaraSponsorAziendaFlag() {
+        return $this->dichiara_sponsor_azienda_flag;
+    }
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * Set dichiara_sponsor_azienda

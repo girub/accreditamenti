@@ -110,6 +110,31 @@ class AnagraficaController extends Controller {
             }
 
 
+            // controllo se dichiaro si
+            //AUTOCERTIFICAZIONE
+            //(ART. 46 D.P.R. 445 del 28.12.2000)
+            //a conoscenza di quanto prescritto dall’art. 76 del D.P.R. 445 del 28.12.2000 sulla responsabilità penale cui può andare incontro in caso di dichiarazioni mendaci, sotto la propria personale responsabilità
+            //il campo siccessivo "inviato da" deve essere pieno
+            $dichiara_sponsor_azienda_flag = $form['dichiara_sponsor_azienda_flag']->getData();
+            $dichiara_sponsor_azienda  = $form['dichiara_sponsor_azienda']->getData();
+
+           // exit($dichiara_sponsor_azienda_flag . "--" . $dichiara_sponsor_azienda);
+            if($dichiara_sponsor_azienda_flag == "Si" and !isset($dichiara_sponsor_azienda)){
+
+               $this->get('session')->setFlash('notice', 'Attenzione: il campo "Di esserre stato inviato" è vuoto');
+
+
+
+                return $this->render('AccreditamentiCongressiBundle:Accreditamento:compilaAnagrafica.html.twig', array(
+                    'entity' => $anagrafica,
+                    'accreditamento_id' => $accreditamento_id,
+                    'form' => $form->createView()
+                ));
+            }
+
+
+
+
 
 
 

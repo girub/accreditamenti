@@ -56,14 +56,17 @@ I campi con l'asterisco sono obbligatori
 
                 <div>
             {{ form_label(form.nome, 'Nome       *') }}
-            {{ form_errors(form.nome) }}
+            <div class="errore">
+            {{ form_errors(form.nome) }}</div>
             {{ form_widget(form.nome) }}
 
                     </div>  
 
                     <div>
             {{ form_label(form.cognome, 'Cognome        *') }}
-            {{ form_errors(form.cognome) }}
+            <div class="errore">
+                        {{ form_errors(form.cognome) }}
+                </div>
             {{ form_widget(form.cognome) }}
                         </div>  
 
@@ -86,92 +89,92 @@ I campi con l'asterisco sono obbligatori
             {{ form_widget(form.codice_fiscale, { 'attr': { 'onkeyup': 'javascript:this.value=this.value.toUpperCase();' } }) }}
                                     </div>
 
-    
+
                                     <div>
             {{ form_label(form.indirizzo_citta, 'Residente in        *') }}
             <div class="errore"> {{ form_errors(form.indirizzo_citta) }} </div>
             {{ form_widget(form.indirizzo_citta) }}
-                                        </div> 
+                                        </div>
 
                                         <div>
             {{ form_label(form.indirizzo_provincia, 'Provincia        *') }}
              <div class="errore"> {{ form_errors(form.indirizzo_provincia) }}</div>
             {{ form_widget(form.indirizzo_provincia) }}
-                                            </div> 
+                                            </div>
 
                                             <div>
             {{ form_label(form.indirizzo_cap, 'Cap        *') }}
              <div class="errore"> {{ form_errors(form.indirizzo_cap) }} </div>
             {{ form_widget(form.indirizzo_cap) }}
-                                                </div> 
+                                                </div>
 
                                                 <div>
             {{ form_label(form.indirizzo_via, 'Via        *') }}
           <div class="errore">   {{ form_errors(form.indirizzo_via) }} </div>
             {{ form_widget(form.indirizzo_via) }}
-                                                    </div> 
+                                                    </div>
 
 
                                                     <div>
             {{ form_label(form.indirizzo_numero_civico, 'N° civico        *') }}
              <div class="errore"> {{ form_errors(form.indirizzo_numero_civico) }} </div>
             {{ form_widget(form.indirizzo_numero_civico) }}
-                                                        </div> 
+                                                        </div>
 
 
                                                         <div>
             {{ form_label(form.telefono,'Telefono        *') }}
-            <div class="errore"> {{ form_errors(form.telefono) }}</div>
+            <div class="error"> {{ form_errors(form.telefono) }}</div>
             {{ form_widget(form.telefono) }}
-                                                            </div> 
+                                                            </div>
 
                                                             <div>
             {{ form_label(form.cellulare) }}
             {{ form_errors(form.cellulare) }}
             {{ form_widget(form.cellulare) }}
-                                                                </div> 
+                                                                </div>
                                                                 <div>
             {{ form_label(form.email,'email        *') }}
            <div class="errore">  {{ form_errors(form.email) }}</div>
             {{ form_widget(form.email) }}
-                                                                    </div> 
+                                                                    </div>
 
 
                                                                     <div>
             {{ form_label(form.professione,'Professione        *') }}
-            {{ form_errors(form.professione) }}
+          <div class="errore"> {{ form_errors(form.professione) }}</div>
             {{ form_widget(form.professione) }}
-                                                                        </div> 
+                                                                        </div>
 
                                                                         <div>
             {{ form_label(form.disciplina,'Disciplina        *') }}
-            {{ form_errors(form.disciplina) }}
+         <div class="errore">  {{ form_errors(form.disciplina) }}</div>
             {{ form_widget(form.disciplina) }}
-                                                                            </div> 
+                                                                            </div>
                                                                             <div>
             {{ form_label(form.ordine_numero,'Nr. Iscrizione Ordine/Collegio Ass. prof.le        *') }}
             <div class="errore"> {{ form_errors(form.ordine_numero) }}</div>
             {{ form_widget(form.ordine_numero) }}
-                                                                                </div> 
+                                                                                </div>
                                                                                 <div>
             {{ form_label(form.ordine_citta,'di        *') }}
             <div class="errore">{{ form_errors(form.ordine_citta) }}</div>
             {{ form_widget(form.ordine_citta) }}
-                                                                                    </div> 
+                                                                                    </div>
 
                                                                                     <div>
             {{ form_label(form.qualifica,'Qualifica        *') }}
-            {{ form_errors(form.qualifica) }}
+           <div class="errore">{{ form_errors(form.qualifica) }}</div>
             {{ form_widget(form.qualifica) }}
-                                                                                        </div> 
+                                                                                        </div>
 
                                                                                         <br>
-                                                                                        <h3>Dati Ente di appartenenza</h3> 
+                                                                                        <h3>Dati Ente di appartenenza</h3>
                                                                                         <div>
             {{ form_label(form.ente_appartenenza) }}
             {{ form_errors(form.ente_appartenenza) }}
             {{ form_widget(form.ente_appartenenza) }}
-                                                                                            </div> 
+                                                                                            </div>
 
 
                                                                                             <div>
@@ -207,78 +210,97 @@ I campi con l'asterisco sono obbligatori
 
                                                                                                                 <div>
             {{ form_label(form.ente_telefono) }}
-            {{ form_errors(form.ente_telefono) }} 
+            {{ form_errors(form.ente_telefono) }}
             {{ form_widget(form.ente_telefono) }}
                                                                                                                     </div>
                                                                                                                     <br>
                                                                                                                     il sottoscritto, consapevole che le dichiarazioni mendaci sono punite dalla legge dello Stato Italiano, sotto la propria responsabilità DICHIARA che le suddette informazioni sono veritiere.
                                                                                                                     <div>
             {{ form_label(form.informazioni_veritiere, 'Si        *') }}
-            {{ form_errors(form.informazioni_veritiere) }}
-            {{ form_widget(form.informazioni_veritiere) }}
-                                                                                                                        </div>
+         <div class="errore"> {{ form_errors(form.informazioni_veritiere) }}</div>
+                    {{ form_widget(form.informazioni_veritiere) }}
+                                                                                                                                </div>
 
 
 
 
-                                                                                                                        <BR>
-                                                                                                                        <BR> 
-                                                                                                                        <br>
-                                                                                                                        <h3>Reclutamento diretto da parte di azienda sponsor</h3>
-                                                                                                                        <br>
-                                                                                                                        La Commissione Nazionale per la Formazione Continua intende per “reclutamento” il rapporto diretto tra lo sponsor e il partecipante all’evento formativo che si traduce nell’invito, da parte dello sponsor al professionista sanitario, a partecipare come discente ad un evento con crediti ECM.
-                                                                                                                        <br>
+            <BR>
+            <BR>
+            <br>
+            <h3>Reclutamento diretto da parte di azienda sponsor</h3>
+            <br>
+            La Commissione Nazionale per la Formazione Continua intende per “reclutamento” il rapporto diretto tra lo sponsor e il partecipante all’evento formativo che si traduce nell’invito, da parte dello sponsor al professionista sanitario, a partecipare come discente ad un evento con crediti ECM.
+            <br>
 
 
-                                                                                                                        <B>AUTOCERTIFICAZIONE</B>
-                                                                                                                        <br>
-                                                                                                                        (ART. 46 D.P.R. 445 del 28.12.2000)
-                                                                                                                        <br>
-                                                                                                                        a conoscenza di quanto prescritto dall’art. 76 del D.P.R. 445 del 28.12.2000 sulla responsabilità penale cui può andare incontro in caso di dichiarazioni mendaci, sotto la propria personale responsabilità
+            <B>AUTOCERTIFICAZIONE</B>
+            <br>
+            (ART. 46 D.P.R. 445 del 28.12.2000)
+            <br>
+            a conoscenza di quanto prescritto dall’art. 76 del D.P.R. 445 del 28.12.2000 sulla responsabilità penale cui può andare incontro in caso di dichiarazioni mendaci, sotto la propria personale responsabilità
 
-                                                                                                                        <br>
+    <br><br>
 
-                                                                                                                        DICHIARA
-                                                                                                                        <div>
-            {{ form_label(form.dichiara_sponsor_azienda,'Di essere stato Invitato da') }}
-            {{ form_errors(form.dichiara_sponsor_azienda) }}
-            {{ form_widget(form.dichiara_sponsor_azienda) }}
-                                                                                                                            </div>
-
-                                                                                                                            <div>
-            {{ form_label(form.dichiara_autorizzazione_struttura,'Di aver ottenuto, se necessario, regolare autorizzazione a partecipare all\’evento di cui sopra dalla Struttura dove svolge la propria attività professionale') }}
-            {{ form_errors(form.dichiara_autorizzazione_struttura) }}
-            {{ form_widget(form.dichiara_autorizzazione_struttura) }}
-                                                                                                                                </div>    
+    <b>DICHIARA</b> (rispondendo “SI” dichiara anche quanto riportato nei punti <strong>A</strong>  e <strong>B</strong> sottostanti)
+    <div>
+    {{ form_label(form.dichiara_sponsor_azienda_flag,'') }}
+        <div class="errore">
+    {{ form_errors(form.dichiara_sponsor_azienda_flag) }}</div>
+    {{ form_widget(form.dichiara_sponsor_azienda_flag) }}
+    </div>
 
 
-                                                                                                                                <div>
-            {{ form_label(form.dichiara_informato_dal_provider,'Di essere stato informato dal Provider del limite massimo di 1/3 (50 crediti) dei crediti formativi ricondotti al triennio 2011-2013 acquisibili mediante reclutamento diretto') }}
-            {{ form_errors(form.dichiara_informato_dal_provider) }}
-            {{ form_widget(form.dichiara_informato_dal_provider) }}
-                                                                                                                                    </div>
+    <br>
+    <div>
+        {{ form_label(form.dichiara_sponsor_azienda,'Di essere stato Invitato da') }}
+
+
+        {{ form_errors(form.dichiara_sponsor_azienda) }}
+
+
+        {{ form_widget(form.dichiara_sponsor_azienda) }}
+    </div>
+
+
+    <div>
+        <br>
+        <strong>A</strong> - di aver ottenuto, se necessario, regolare autorizzazione a partecipare all’evento di cui sopra dalla
+        Struttura dove svolge la propria attività professionale
+
+        </div>
+
+<div>
+<br>
+
+    <strong>B</strong> - di essere stato informato dal Provider del limite massimo di 1/3 (50 crediti) dei crediti formativi ricondotti
+    al triennio 2011-2013 acquisibili mediante reclutamento diretto
+
+
+
+</div>
 
                                                                                                                                     <BR>
                                                                                                                                     Informativa ai sensi del D. Lgs. 30 giugno 2003, n. 196.
                                                                                                                                     <textarea name="textarea2" cols="100" style="width: 700px" rows="5" wrap="VIRTUAL" readonly>
- AIM GROUP INTERNATIONAL -  AIM Education Srl, in qualità di Titolare del trattamento, La informa che i dati personali da Lei forniti ovvero acquisiti da terzi, sono trattati per finalità connesse all’esecuzione degli adempimenti relativi alla Sua partecipazione all’evento, nonché per l’invio 
+ AIM GROUP INTERNATIONAL -  AIM Education Srl, in qualità di Titolare del trattamento, La informa che i dati personali da Lei forniti ovvero acquisiti da terzi, sono trattati per finalità connesse all’esecuzione degli adempimenti relativi alla Sua partecipazione all’evento, nonché per l’invio
 gratuito di documentazione relativa ad altre sue iniziative o di altre società del gruppo AIM nell’ambito ECM.
-I trattamenti sono effettuati mediante elaborazioni manuali o strumenti elettronici o automatizzati, in modo da garantire la riservatezza e la sicurezza dei dati personali.  Il Titolare del trattamento può avvalersi di altre società del gruppo e/o di altri soggetti quali associazioni scientifiche, 
+I trattamenti sono effettuati mediante elaborazioni manuali o strumenti elettronici o automatizzati, in modo da garantire la riservatezza e la sicurezza dei dati personali.  Il Titolare del trattamento può avvalersi di altre società del gruppo e/o di altri soggetti quali associazioni scientifiche,
 enti pubblici o privati preposti alle attività formative ECM,  sempre in relazione all’espletamento delle attività relative alla formazione.
-Il conferimento dei Suoi dati personali è facoltativo ma in difetto Le sarà preclusa la partecipazione all’evento.  
-Lei potrà esercitare i diritti di cui all’articolo 7 del D. Lgs. n. 196 del 2003 e di opporsi sia al trattamento dei Suoi dati personali, ancorché pertinenti allo scopo della raccolta, sia al trattamento degli stessi ai fini di invio di materiale pubblicitario, di vendita diretta o di ricerche di mercato, inoltrando 
+Il conferimento dei Suoi dati personali è facoltativo ma in difetto Le sarà preclusa la partecipazione all’evento.
+Lei potrà esercitare i diritti di cui all’articolo 7 del D. Lgs. n. 196 del 2003 e di opporsi sia al trattamento dei Suoi dati personali, ancorché pertinenti allo scopo della raccolta, sia al trattamento degli stessi ai fini di invio di materiale pubblicitario, di vendita diretta o di ricerche di mercato, inoltrando
 apposita istanza a: AIM GROUP INTERNATIONAL -  AIM Education Srl - Via G. Ripamonti, 129  20141  Milano.
 Per il consenso ai trattamenti e alle comunicazioni descritte nell’informativa.</textarea>
                                                                                                                                     <div>
             {{ form_label(form.privacy, 'Accetto si/no        *') }}
-            {{ form_errors(form.privacy) }}
+<div class="errore">
+            {{ form_errors(form.privacy) }}</div>
             {{ form_widget(form.privacy) }}
                                                                                                                                         </div>
 
                                                                <div>
-           
-                                                                                          
-                                                                                                                                    
+
+
+
 
 
         {{ form_rest(form) }}
@@ -299,13 +321,13 @@ Per il consenso ai trattamenti e alle comunicazioni descritte nell’informativa
                                                                                                                                         changeYear: 'true',
                                                                                                                                         yearRange: "-80:+0",
                                                                                                                                         monthNamesShort: ['Gen','Feb','Mar','Apr','Mag','Giu','Lug','Ago','Set','Ott','Nov','Dic'],
-                                                                                                                                        dayNamesShort: ['Dom','Lun','Mar','Mer','Gio','Ven','Sab'],	
+                                                                                                                                        dayNamesShort: ['Dom','Lun','Mar','Mer','Gio','Ven','Sab'],
                                                                                                                                         dayNamesMin: ['Dom','Lun','Mar','Mer','Gio','Ven','Sab'],
                                                                                                                                         constrainInput:'false',
                                                                                                                                         showAnim: 'slideDown',
                                                                                                                                         firstDay:1
                                                                                                                                     });
-   
+
                                                                                                                                     });
                                                                                                                                     })(jQuery);
 

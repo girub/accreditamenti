@@ -119,6 +119,7 @@ class AnagraficaType extends AbstractType {
 //                    }
 //                        )
 //                )
+
                 ->add('qualifica', 'choice', array(
                     'choices' => array(
                         '' => 'Seleziona',
@@ -127,11 +128,30 @@ class AnagraficaType extends AbstractType {
                         'C' => 'Convenzionato',
                     )
                 ))
+
+
+
                 ->add('informazioni_veritiere')
-                ->add('dichiara_sponsor_azienda', 'text', array(
+
+
+            //   si/no dichiara
+            ->add('dichiara_sponsor_azienda_flag', 'choice', array(
+            'choices' => array(
+                '' => 'Seleziona',
+                'Si' => 'Si',
+                'No' => 'No',
+                    )
+                ))
+
+
+
+           ->add('dichiara_sponsor_azienda', 'text', array(
                     'required' => false,)
                 )
-                ->add('dichiara_autorizzazione_struttura', 'choice', array(
+
+      /*
+
+          ->add('dichiara_autorizzazione_struttura', 'choice', array(
                     'required' => false,
                     'choices' => array(
                         '' => 'Seleziona',
@@ -139,6 +159,9 @@ class AnagraficaType extends AbstractType {
                         'No' => 'No',
                     )
                 ))
+        */
+
+        /*
                 ->add('dichiara_informato_dal_provider', 'choice', array(
                     'required' => false,
                     'choices' => array(
@@ -147,6 +170,10 @@ class AnagraficaType extends AbstractType {
                         'No' => 'No',
                     )
                 ))
+            ->add('dichiara_informato_dal_provider')
+*/
+
+
                 ->add('privacy')
 
 
