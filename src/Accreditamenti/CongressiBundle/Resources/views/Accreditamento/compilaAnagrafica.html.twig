@@ -224,6 +224,25 @@ I campi con l'asterisco sono obbligatori
 
 
 
+
+    <BR>
+    Informativa ai sensi del D. Lgs. 30 giugno 2003, n. 196.
+    <textarea name="textarea2" cols="100" style="width: 700px" rows="5" wrap="VIRTUAL" readonly>
+AIM GROUP INTERNATIONAL -  AIM Education Srl, in qualità di Titolare del trattamento, La informa che i dati personali da Lei forniti ovvero acquisiti da terzi, sono trattati per finalità connesse all’esecuzione degli adempimenti relativi alla Sua partecipazione all’evento, nonché per l’invio gratuito di documentazione relativa ad altre sue iniziative o di altre società del gruppo AIM nell’ambito ECM.
+I trattamenti sono effettuati mediante elaborazioni manuali o strumenti elettronici o automatizzati, in modo da garantire la riservatezza e la sicurezza dei dati personali.  Il Titolare del trattamento può avvalersi di altre società del gruppo e/o di altri soggetti quali associazioni scientifiche, enti pubblici o privati preposti alle attività formative ECM,  sempre in relazione all’espletamento delle attività relative alla formazione.
+Il conferimento dei Suoi dati personali è facoltativo ma in difetto Le sarà preclusa la partecipazione all’evento.
+Lei potrà esercitare i diritti di cui all’articolo 7 del D. Lgs. n. 196 del 2003 e di opporsi sia al trattamento dei Suoi dati personali, ancorché pertinenti allo scopo della raccolta, sia al trattamento degli stessi ai fini di invio di materiale pubblicitario, di vendita diretta o di ricerche di mercato, inoltrando apposita istanza a: AIM GROUP INTERNATIONAL -  AIM Education Srl - Via G. Ripamonti, 129  20141  Milano.
+Per il consenso ai trattamenti e alle comunicazioni descritte nell’informativa.</textarea>
+<div>
+        {{ form_label(form.privacy, 'Accetto si/no        *') }}
+        <div class="errore">{{ form_errors(form.privacy) }}</div>
+        {{ form_widget(form.privacy) }}
+    </div>
+
+
+
+
+
             <BR>
             <BR>
             <br>
@@ -253,9 +272,9 @@ I campi con l'asterisco sono obbligatori
     <br>
     <div>
         {{ form_label(form.dichiara_sponsor_azienda,'Di essere stato Invitato da') }}
-
-
+        <div class="errore">
         {{ form_errors(form.dichiara_sponsor_azienda) }}
+        </div>
 
 
         {{ form_widget(form.dichiara_sponsor_azienda) }}
@@ -279,54 +298,40 @@ I campi con l'asterisco sono obbligatori
 
 </div>
 
-                                                                                                                                    <BR>
-                                                                                                                                    Informativa ai sensi del D. Lgs. 30 giugno 2003, n. 196.
-                                                                                                                                    <textarea name="textarea2" cols="100" style="width: 700px" rows="5" wrap="VIRTUAL" readonly>
- AIM GROUP INTERNATIONAL -  AIM Education Srl, in qualità di Titolare del trattamento, La informa che i dati personali da Lei forniti ovvero acquisiti da terzi, sono trattati per finalità connesse all’esecuzione degli adempimenti relativi alla Sua partecipazione all’evento, nonché per l’invio
-gratuito di documentazione relativa ad altre sue iniziative o di altre società del gruppo AIM nell’ambito ECM.
-I trattamenti sono effettuati mediante elaborazioni manuali o strumenti elettronici o automatizzati, in modo da garantire la riservatezza e la sicurezza dei dati personali.  Il Titolare del trattamento può avvalersi di altre società del gruppo e/o di altri soggetti quali associazioni scientifiche,
-enti pubblici o privati preposti alle attività formative ECM,  sempre in relazione all’espletamento delle attività relative alla formazione.
-Il conferimento dei Suoi dati personali è facoltativo ma in difetto Le sarà preclusa la partecipazione all’evento.
-Lei potrà esercitare i diritti di cui all’articolo 7 del D. Lgs. n. 196 del 2003 e di opporsi sia al trattamento dei Suoi dati personali, ancorché pertinenti allo scopo della raccolta, sia al trattamento degli stessi ai fini di invio di materiale pubblicitario, di vendita diretta o di ricerche di mercato, inoltrando
-apposita istanza a: AIM GROUP INTERNATIONAL -  AIM Education Srl - Via G. Ripamonti, 129  20141  Milano.
-Per il consenso ai trattamenti e alle comunicazioni descritte nell’informativa.</textarea>
-                                                                                                                                    <div>
-            {{ form_label(form.privacy, 'Accetto si/no        *') }}
-<div class="errore">
-            {{ form_errors(form.privacy) }}</div>
-            {{ form_widget(form.privacy) }}
-                                                                                                                                        </div>
+<br><br>
 
-                                                               <div>
+<div>
+
+{{ form_rest(form) }}
+
+            <p>
+                <button type="submit">Continua</button>
+            </p>
+
+    </div>
 
 
 
 
-
-        {{ form_rest(form) }}
-
-                                                                                                                                        <p>
-                                                                                                                                            <button type="submit">Continua</button>
-                                                                                                                                        </p>
-                                                                                                                                    </form>
+        </form>
 
 
-                                                                                                                                    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/ui-lightness/jquery-ui.css" type="text/css" media="all"/>
-                                                                                                                                    <script type="text/javascript">
-                                                                                                                                    (function($) {
-                                                                                                                                    $(document).ready(function(){
-                                                                                                                                       $( "#accreditamenti_congressibundle_anagraficatype_data_nascita" ).datepicker({
-                                                                                                                                        dateFormat: 'dd-mm-yy',
-                                                                                                                                        changeMonth: 'true',
-                                                                                                                                        changeYear: 'true',
-                                                                                                                                        yearRange: "-80:+0",
-                                                                                                                                        monthNamesShort: ['Gen','Feb','Mar','Apr','Mag','Giu','Lug','Ago','Set','Ott','Nov','Dic'],
-                                                                                                                                        dayNamesShort: ['Dom','Lun','Mar','Mer','Gio','Ven','Sab'],
-                                                                                                                                        dayNamesMin: ['Dom','Lun','Mar','Mer','Gio','Ven','Sab'],
-                                                                                                                                        constrainInput:'false',
-                                                                                                                                        showAnim: 'slideDown',
-                                                                                                                                        firstDay:1
-                                                                                                                                    });
+        <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/ui-lightness/jquery-ui.css" type="text/css" media="all"/>
+        <script type="text/javascript">
+        (function($) {
+        $(document).ready(function(){
+           $( "#accreditamenti_congressibundle_anagraficatype_data_nascita" ).datepicker({
+            dateFormat: 'dd-mm-yy',
+            changeMonth: 'true',
+            changeYear: 'true',
+            yearRange: "-80:+0",
+            monthNamesShort: ['Gen','Feb','Mar','Apr','Mag','Giu','Lug','Ago','Set','Ott','Nov','Dic'],
+            dayNamesShort: ['Dom','Lun','Mar','Mer','Gio','Ven','Sab'],
+            dayNamesMin: ['Dom','Lun','Mar','Mer','Gio','Ven','Sab'],
+            constrainInput:'false',
+            showAnim: 'slideDown',
+            firstDay:1
+        });
 
                                                                                                                                     });
                                                                                                                                     })(jQuery);

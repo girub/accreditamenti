@@ -11,6 +11,9 @@
     </tr>
 </table>
 
+
+    <!--
+
     ID ECM : <strong>93-71565 ED.1</strong><br><br>
     OBIETTIVO FORMATIVO: <strong>LINEE GUIDA - PROTOCOLLI - PROCEDURE</strong>
 
@@ -33,24 +36,7 @@ L’evento è inserito nel Piano Formativo anno 2013 AIM Education – Provider 
    <strong>L'evento è stato accreditato per un numero massimo di 800 partecipanti.
 </strong>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<br>
+    <br>
 <br>
 Oltre tale numero e per professioni/discipline differenti da quelle accreditate non sarà possibile rilasciare i crediti formativi. 
 <br><br>
@@ -69,15 +55,31 @@ La rilevazione delle presenze è stata effettuata tramite Sistema Elettronico a 
 Per qualsiasi necessità o informazione, le ricordiamo che la segreteria organizzativa è a sua 
 completa disposizione. Può scrivere a c.pizzo@aimgroup.eu o chiamare il numero 055.2338827.
 </span>
+-->
 
-<br><br>
+<br>
+
+    <strong>Si ricorda che è possibile completare il questionario una sola volta.<br><br>
+
+        Lo stesso verrà considerato superato con almeno il 75% delle risposte corrette.
+    </strong>
+
+
+
+
+    <br><br>
 
 <h3>Compila il questionario ECM</h3><BR>
-Si ricorda che è possibile compilare il questionario ECM solo una volta<BR>
 <BR>
 <form action="{{ path('controlla_questionario_ecm', {'accreditamento_id': accreditamento_id,'anagrafica_id': anagrafica_id}) }}" method="post">
         {{form_widget(formDomande, { 'attr' : { 'class' : 'myForm' } })}}
-        <button type="submit">Continua</button>
+    
+    
+    
+    <br>
+    IL QUESTIONARIO TERMINA QUI<br>
+    SE SEI SICURO/A<br>
+    <button type="submit">Continua</button>
  </form>
 
 

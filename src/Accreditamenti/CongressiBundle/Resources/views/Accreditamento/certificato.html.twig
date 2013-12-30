@@ -1,8 +1,8 @@
 {% extends '::frontEnd/base.html.twig' %}
 
 {% block body %}
-      
-                <h2>Grazie per aver compilato il kit ECM.</h2>
+      <br><br>
+                <h2 style="font-size: 23px;">Grazie per aver compilato il kit ECM.</h2>
                 <br>
                 Sarà possibile stampare il proprio attestato ECM da questo stesso portale. 
                 I partecipanti riceveranno una e-mail con tutte le informazioni su quando e come stampare l’attestato. 
@@ -18,12 +18,17 @@
 
 
 
-Puoi stampare il tuo cquestionario ecm che hai appena compilato:
+Puoi stampare il tuo questionario ecm che hai appena compilato:
     <a href="{{ path('stampa_ecm', {'accreditamento_id': accreditamento_id,'anagrafica_id': anagrafica_id})  }}" target="_blank"><strong>Stampa questionario Ecm</strong></a>
 <br><br>
 
 
-                Aim Group International
+    “ATTENZIONE, le risposte sono state memorizzate dal sistema e LA STAMPA DEL QUESTIONARIO HA
+    SOLAMENTE UNA FUNZIONE DI PROMEMORIA”.<br><br>
+
+
+
+    Aim Group International
     
 {% endblock %}
 

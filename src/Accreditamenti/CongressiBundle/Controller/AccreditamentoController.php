@@ -238,9 +238,12 @@ class AccreditamentoController extends Controller {
         $data_oggi = \DateTime::createFromFormat('Y-m-d', date('Y-m-d'));
 
 
-//        if ($data_oggi->format('Ymd') > $data_fine->format('Ymd')) {
-//            return $this->render('AccreditamentiCongressiBundle:Accreditamento:formLoginIscrittoChiuso.html.twig');
-//        }
+        $ora = date("H");
+        //echo $ora;
+
+        if ($data_oggi->format('Ymd') > $data_fine->format('Ymd')) {
+            return $this->render('AccreditamentiCongressiBundle:Accreditamento:formLoginIscrittoChiuso.html.twig');
+        }
 
 
         return array('form' => $form, 'id' => $id);
@@ -304,8 +307,8 @@ class AccreditamentoController extends Controller {
 
 
         //commento - devo verificare perche da errore
+        /*
         if ($data_oggi->format('Ymd') > $data_fine->format('Ymd')) {
-
             //Puo succedere che sia oltrepasssata la data
             //compilazione ma che l'utente sia presente nella tabella iscritti
             if (!isset($anagrafica[0]['id']) && $iscritto[0]['nome'] != "") {
@@ -320,6 +323,11 @@ class AccreditamentoController extends Controller {
                 )));
             }
         }
+        */
+
+
+
+
 
         //############################ FINE ################
         // se ha giaà compilato l'anagrafica, vado nella pagina compila ecm

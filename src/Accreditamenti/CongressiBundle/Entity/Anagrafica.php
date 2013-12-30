@@ -6,13 +6,39 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\ExecutionContext;
+
 /**
  * Accreditamenti\CongressiBundle\Entity\Anagrafica
  *
  * @ORM\Table(name="aim_anagrafica")
  * @ORM\Entity(repositoryClass="Accreditamenti\CongressiBundle\Entity\AnagraficaRepository")
+ * @Assert\Callback(methods={"isDichiarazione"})
  */
 class Anagrafica {
+
+
+
+    public function isDichiarazione(ExecutionContext $context)
+    {
+        // verifica se il nome è in effetti un nome fasullo
+            if ($this->getDichiaraSponsorAziendaFlag()=="Si" && $this->getDichiaraSponsorAzienda()=="") {
+               
+                       // && !$this->getDichiaraSponsorAzienda()
+                        $property_path = $context->getPropertyPath() . '.dichiara_sponsor_azienda';
+                        $context->setPropertyPath($property_path);
+                        $context->addViolation('Attenzione se hai selezionato SI nella precedente scelta, questo campo è obbligatorio!!!', array(), null);
+            }
+    }
+
+/*
+    public function checkNota(ExecutionContext $context) {
+        if ($this->getEsito() && !empty($this->nota)){
+            $property_path = $context->getPropertyPath() . '.nota';
+            $context->addViolationAtPath($property_path, "Non è possibile inserire un valore in questo campo se l'esito è positivo", array(), null);
+            return;
+        }
+*/
 
     /**
      * @var integer $id
@@ -957,17 +983,6 @@ class Anagrafica {
         return $this->dichiara_sponsor_azienda_flag;
     }
 
-
-
-
-
-
-
-
-
-
-
-
     /**
      * Set dichiara_sponsor_azienda
      *
@@ -982,45 +997,45 @@ class Anagrafica {
      *
      * @return string 
      */
-    public function getDichiaraSponsorAzienda() {
+   public function getDichiaraSponsorAzienda() {
         return $this->dichiara_sponsor_azienda;
-    }
+   }
 
     /**
      * Set dichiara_autorizzazione_struttura
      *
      * @param string $dichiaraAutorizzazioneStruttura
      */
-    public function setDichiaraAutorizzazioneStruttura($dichiaraAutorizzazioneStruttura) {
-        $this->dichiara_autorizzazione_struttura = $dichiaraAutorizzazioneStruttura;
-    }
+   // public function setDichiaraAutorizzazioneStruttura($dichiaraAutorizzazioneStruttura) {
+   //     $this->dichiara_autorizzazione_struttura = $dichiaraAutorizzazioneStruttura;
+   // }
 
     /**
      * Get dichiara_autorizzazione_struttura
      *
      * @return string 
      */
-    public function getDichiaraAutorizzazioneStruttura() {
-        return $this->dichiara_autorizzazione_struttura;
-    }
+   // public function getDichiaraAutorizzazioneStruttura() {
+   //     return $this->dichiara_autorizzazione_struttura;
+   // }
 
     /**
      * Set dichiara_informato_dal_provider
      *
      * @param string $dichiaraInformatoDalProvider
      */
-    public function setDichiaraInformatoDalProvider($dichiaraInformatoDalProvider) {
-        $this->dichiara_informato_dal_provider = $dichiaraInformatoDalProvider;
-    }
+  //  public function setDichiaraInformatoDalProvider($dichiaraInformatoDalProvider) {
+  //      $this->dichiara_informato_dal_provider = $dichiaraInformatoDalProvider;
+  //  }
 
     /**
      * Get dichiara_informato_dal_provider
      *
      * @return string 
      */
-    public function getDichiaraInformatoDalProvider() {
-        return $this->dichiara_informato_dal_provider;
-    }
+  //  public function getDichiaraInformatoDalProvider() {
+  //      return $this->dichiara_informato_dal_provider;
+  //  }
 
 
     /**

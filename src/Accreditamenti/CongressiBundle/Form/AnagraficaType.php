@@ -122,10 +122,11 @@ class AnagraficaType extends AbstractType {
 
                 ->add('qualifica', 'choice', array(
                     'choices' => array(
-                        '' => 'Seleziona',
+                        ''  => 'Seleziona',
                         'D' => 'Dipendente',
                         'L' => 'Libero Professionista',
                         'C' => 'Convenzionato',
+                        'P' =>  'Privo di occupazione',
                     )
                 ))
 
